@@ -14,7 +14,7 @@ import javax.swing.JFrame;
  *
  * @author luisf
  */
-public class juegoPOO extends Canvas{
+public class juegoPOO extends Canvas implements Runnable{
 
     private static final int ANCHO = 800;
     private static final int ALTO = 600;
@@ -22,7 +22,8 @@ public class juegoPOO extends Canvas{
     private static final String NOMBRE = "Forgotten History";
 
     private static JFrame ventana;
-
+    private static Thread thread;
+    
     public juegoPOO() {
         ventana.setPreferredSize(new Dimension(ANCHO, ALTO));
 
@@ -38,5 +39,22 @@ public class juegoPOO extends Canvas{
 
     public static void main(String[] args) {
         juegoPOO app = new juegoPOO();
+        app.start();
     }
+
+    private void start() {
+        this.thread = new Thread(this, "Graficos");
+        thread.start();
+    }
+    
+    private void stop() {
+        
+    }
+    
+    
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
