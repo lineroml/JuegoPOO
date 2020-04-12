@@ -21,18 +21,22 @@ public class juegoPOO extends Canvas implements Runnable{
 
     private static final String NOMBRE = "Forgotten History";
 
+    // con la palabra volatile esta variable no puede ser utilizada al mismo timepo por los dos hilos(thread)
+    private volatile static boolean running = false;
+    
     private static JFrame ventana;
     private static Thread thread;
     
-    public juegoPOO() {
-        ventana.setPreferredSize(new Dimension(ANCHO, ALTO));
+    private juegoPOO() {
+        setPreferredSize(new Dimension(ANCHO, ALTO));
 
+        ventana = new JFrame(NOMBRE);
         ventana.setTitle(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setResizable(false);
         ventana.setLayout(new BorderLayout());
-        ventana.add(this, BorderLayout.CENTER);
-        ventana.pack();
+        ventana.add(this, BorderLayout.CENTER); //añadir el canvas a la ventana
+        ventana.pack(); // la ventana se autorrellenara con los elementos dentro de ella
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -41,20 +45,32 @@ public class juegoPOO extends Canvas implements Runnable{
         juegoPOO app = new juegoPOO();
         app.start();
     }
-
-    private void start() {
-        this.thread = new Thread(this, "Graficos");
+    
+    // con synchronized los dos metodos no seran capaces de ejecutarse al mismo timepo
+    private synchronized void start() {
+        running = true;
+        
+        thread = new Thread(this, "Graficos");
         thread.start();
     }
     
     private void stop() {
-        
+        running = false;
+    
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Este metodo sera llamado cada vez que un nuevo hilo sea creado
+        while(running) {
+            
+        }
     }
     
 }
