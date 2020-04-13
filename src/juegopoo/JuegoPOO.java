@@ -16,6 +16,7 @@ public class JuegoPOO {
      */
     public static void main(String[] args) {
         /*
+        TESTING.. . . . .
         Holi, porfa cada que necesiten trabajar trabajen
         sobre sus propias ramas (si no existe, creela).
         En caso tal de dañar todo en la rama en la que 
