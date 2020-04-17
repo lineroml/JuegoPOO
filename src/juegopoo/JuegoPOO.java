@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package juegoPOO;
 
+
+import control.Teclado;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-/**
- *
- * @author luisf
- */
 public class juegoPOO extends Canvas implements Runnable{
 
     private static final int ANCHO = 800;
@@ -29,10 +23,14 @@ public class juegoPOO extends Canvas implements Runnable{
     
     private static JFrame ventana;
     private static Thread thread;
+    private Teclado teclado;
     
     private juegoPOO() {
         setPreferredSize(new Dimension(ANCHO, ALTO));
 
+        teclado = new Teclado();
+        addKeyListener(teclado);
+        
         ventana = new JFrame(NOMBRE);
         ventana.setTitle(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +40,8 @@ public class juegoPOO extends Canvas implements Runnable{
         ventana.pack(); // la ventana se autorrellenara con los elementos dentro de ella
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        
+        requestFocus();
     }
 
     public static void main(String[] args) {
@@ -68,6 +68,21 @@ public class juegoPOO extends Canvas implements Runnable{
     }
     
     private void actualizar() {
+        teclado.actualizar();
+        
+        if (teclado.arriba) {
+            System.out.println("Arriba");
+        }
+        if (teclado.abajo) {
+            System.out.println("Abajo");
+        }
+        if (teclado.izquierda) {
+            System.out.println("Izquierda");
+        }
+        if (teclado.derecha) {
+            System.out.println("Derecha");
+        }
+        
         aps++;
     }
     

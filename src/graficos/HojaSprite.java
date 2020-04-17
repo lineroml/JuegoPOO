@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class HojaSprite {
     private final int ANCHO;
     private final int ALTO;
-    private final int[] pixeles;
+    public final int[] pixeles;
 
     public HojaSprite(final String ruta, final int ANCHO, final int ALTO) {
         this.ANCHO = ANCHO;
