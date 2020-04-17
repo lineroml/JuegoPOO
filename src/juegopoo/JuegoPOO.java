@@ -3,9 +3,14 @@ package juegoPOO;
 
 
 import control.Teclado;
+import graficos.Pantalla;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 public class juegoPOO extends Canvas implements Runnable{
@@ -18,16 +23,25 @@ public class juegoPOO extends Canvas implements Runnable{
     private static int aps = 0; // actualizaciones por segundo
     private static int fps = 0;  // cuadros por segundo
     
+    private static int x = 0;
+    private static int y = 0;
+    
     // con la palabra volatile esta variable no puede ser utilizada al mismo timepo por los dos hilos(thread)
     private volatile static boolean running = false;
     
     private static JFrame ventana;
     private static Thread thread;
     private Teclado teclado;
+    private Pantalla pantalla;
+    
+    private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
+    private static int[] pixels = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
     
     private juegoPOO() {
         setPreferredSize(new Dimension(ANCHO, ALTO));
 
+        pantalla = new Pantalla(ANCHO, ALTO);
+        
         teclado = new Teclado();
         addKeyListener(teclado);
         
@@ -71,22 +85,41 @@ public class juegoPOO extends Canvas implements Runnable{
         teclado.actualizar();
         
         if (teclado.arriba) {
-            System.out.println("Arriba");
+            y++;
         }
         if (teclado.abajo) {
-            System.out.println("Abajo");
+            y--;
         }
         if (teclado.izquierda) {
-            System.out.println("Izquierda");
+            x--;
         }
         if (teclado.derecha) {
-            System.out.println("Derecha");
+            x++;
         }
         
         aps++;
     }
     
-    private void dibujar() {
+    private void mostrar() {
+        BufferStrategy strategy = getBufferStrategy();
+        
+        if (strategy == null) {
+            createBufferStrategy(3);
+            return;
+        }
+        
+        System.arraycopy(pantalla.pixeles, 0, pixels, 0, pixels.length);
+        
+        pantalla.limpiar();
+        pantalla.mostrar(x, y);
+         
+        Graphics g = strategy.getDrawGraphics();
+        g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
+        g.dispose();
+        
+        strategy.show();
+        
+        
         fps++;
     }
 
@@ -118,7 +151,7 @@ public class juegoPOO extends Canvas implements Runnable{
                     delta--;
                 }
                 
-                dibujar();
+                mostrar();
                 
                 if (System.nanoTime() - contadorReferencia > NS_POR_SEGUNDO) {
                     ventana.setTitle(NOMBRE + " || aps: " + aps + " || FPS: " + fps);

@@ -10,6 +10,11 @@ public final class Sprite {
     public int[] pixeles;
     private final HojaSprite hoja;
     
+   // coleccion Sprites
+    public static Sprite asfalto = new Sprite(32, 0, 0, HojaSprite.desierto);
+    
+   //fin de la coleccion
+    
     public Sprite(final int lado, final int col, final int fil, final HojaSprite hoja) {
         this.lado = lado;
         
