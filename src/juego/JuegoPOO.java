@@ -1,5 +1,5 @@
 
-package juegoPOO;
+package juego;
 
 
 import control.Teclado;
@@ -11,9 +11,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-public class juegoPOO extends Canvas implements Runnable{
+public class JuegoPOO extends Canvas implements Runnable{
 
     private static final int ANCHO = 800;
     private static final int ALTO = 600;
@@ -36,8 +37,9 @@ public class juegoPOO extends Canvas implements Runnable{
     
     private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
     private static int[] pixels = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
+    private static final ImageIcon icono =  new ImageIcon(JuegoPOO.class.getResource("/iconos/iconoPrincipal.png"));
     
-    private juegoPOO() {
+    private JuegoPOO() {
         setPreferredSize(new Dimension(ANCHO, ALTO));
 
         pantalla = new Pantalla(ANCHO, ALTO);
@@ -49,6 +51,7 @@ public class juegoPOO extends Canvas implements Runnable{
         ventana.setTitle(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setResizable(false);
+        ventana.setIconImage(icono.getImage());
         ventana.setLayout(new BorderLayout());
         ventana.add(this, BorderLayout.CENTER); //añadir el canvas a la ventana
         ventana.pack(); // la ventana se autorrellenara con los elementos dentro de ella
@@ -59,7 +62,7 @@ public class juegoPOO extends Canvas implements Runnable{
     }
 
     public static void main(String[] args) {
-        juegoPOO app = new juegoPOO();
+        JuegoPOO app = new JuegoPOO();
         app.start();
     }
     

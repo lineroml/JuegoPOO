@@ -25,6 +25,7 @@ public class Pantalla {
         }
     }
     
+    // las compensaciones x e son el movimiento(x, y) del jugador
     public void mostrar(final int compensacionX, final int  compensacionY) {
         for (int y = 0; y < ALTO; y++) {
                 int posicionY = y + compensacionY;
