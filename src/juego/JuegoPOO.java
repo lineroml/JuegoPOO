@@ -4,6 +4,7 @@ package juego;
 
 import control.Teclado;
 import graficos.Pantalla;
+import graficos.Sprite;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -11,13 +12,15 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.awt.image.ImagingOpException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class JuegoPOO extends Canvas implements Runnable{
 
-    private static final int ANCHO = 800;
-    private static final int ALTO = 600;
+    private static final int ANCHO = 400;
+    private static final int ALTO = 300;
 
     private static final String NOMBRE = "Forgotten History";
 
@@ -39,10 +42,19 @@ public class JuegoPOO extends Canvas implements Runnable{
     private static int[] pixels = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
     private static final ImageIcon icono =  new ImageIcon(JuegoPOO.class.getResource("/iconos/iconoPrincipal.png"));
     
+    private static BufferedImage personaje ; // temporal para el dibujo del personaje
+    
     private JuegoPOO() {
         setPreferredSize(new Dimension(ANCHO, ALTO));
 
         pantalla = new Pantalla(ANCHO, ALTO);
+        
+        // temporal para el dibujo del personaje
+        try {
+            personaje = ImageIO.read(JuegoPOO.class.getResource("/personajes/pidgeTemporal.png"));
+        } catch (Exception e) {
+            System.out.println("error");
+        }
         
         teclado = new Teclado();
         addKeyListener(teclado);
@@ -51,7 +63,7 @@ public class JuegoPOO extends Canvas implements Runnable{
         ventana.setTitle(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setResizable(false);
-        ventana.setIconImage(icono.getImage());
+        ventana.setIconImage(icono.getImage()); // icono de la ventana
         ventana.setLayout(new BorderLayout());
         ventana.add(this, BorderLayout.CENTER); //añadir el canvas a la ventana
         ventana.pack(); // la ventana se autorrellenara con los elementos dentro de ella
@@ -94,10 +106,10 @@ public class JuegoPOO extends Canvas implements Runnable{
             y--;
         }
         if (teclado.izquierda) {
-            x--;
+            x++;
         }
         if (teclado.derecha) {
-            x++;
+            x--;
         }
         
         aps++;
@@ -118,6 +130,7 @@ public class JuegoPOO extends Canvas implements Runnable{
          
         Graphics g = strategy.getDrawGraphics();
         g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(personaje, ANCHO/2, ALTO/2, this); // temporal para el dibujo del personaje
         g.dispose();
         
         strategy.show();
@@ -164,6 +177,16 @@ public class JuegoPOO extends Canvas implements Runnable{
                 }
             }
         }
+        
+        
+    }
+
+    public static int getANCHO() {
+        return ANCHO;
+    }
+
+    public static int getALTO() {
+        return ALTO;
     }
     
 }

@@ -11,8 +11,9 @@ public final class Sprite {
     private final HojaSprite hoja;
     
    // coleccion Sprites
-    public static Sprite asfalto = new Sprite(32, 0, 0, HojaSprite.desierto);
-    
+    public static final Sprite VACIO = new Sprite(32,0);
+    public static Sprite ASFALTO = new Sprite(32, 0, 0, HojaSprite.DESIERTO);
+    public static Sprite LOGAN = new Sprite(32, 0, 0, HojaSprite.LOGAN);
    //fin de la coleccion
     
     public Sprite(final int lado, final int col, final int fil, final HojaSprite hoja) {
@@ -29,5 +30,20 @@ public final class Sprite {
                 pixeles[x + y * lado] = hoja.pixeles[(x + this.x) + (y + this.y) * hoja.getANCHO()];
             }
         }
+    }
+    
+    public Sprite(final int lado, final int color) {
+        this.lado = lado;
+        this.hoja = null;
+        
+        pixeles = new int[lado * lado];
+        
+        for (int i = 0; i < pixeles.length; i++) {
+            pixeles[i] = color;
+        }
+    }
+
+    public int getLado() {
+        return lado;
     }
 }

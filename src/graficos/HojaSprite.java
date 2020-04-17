@@ -14,8 +14,8 @@ public class HojaSprite {
     public final int[] pixeles;
     
     // collecion hojas de sprites
-        public static HojaSprite desierto = new HojaSprite("/texturas/desierto.png", 320, 320);
-    
+        public static HojaSprite DESIERTO = new HojaSprite("/texturas/desierto.png", 320, 320);
+        public static HojaSprite LOGAN = new HojaSprite("/personajes/logan.png", 320, 320);
     // fin de la coleccion   
         
     public HojaSprite(final String ruta, final int ANCHO, final int ALTO) {
