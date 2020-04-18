@@ -13,6 +13,7 @@ public final class Teclado implements KeyListener {
     public boolean abajo;
     public boolean izquierda;
     public boolean derecha;
+    public boolean escape;
     
     public void actualizar() {
         arriba = teclas[KeyEvent.VK_W];
@@ -28,11 +29,12 @@ public final class Teclado implements KeyListener {
         left = teclas[KeyEvent.VK_LEFT];
         rigth = teclas[KeyEvent.VK_RIGTH]; 
         */
+        escape = teclas[KeyEvent.VK_ESCAPE];
     }
     
     @Override
     public void keyTyped(KeyEvent e) {}
-
+        
     @Override
     public void keyPressed(KeyEvent e) {
         teclas[e.getKeyCode()] = true;

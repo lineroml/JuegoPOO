@@ -7,6 +7,7 @@ import graficos.Pantalla;
 import graficos.Sprite;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -28,6 +29,9 @@ public class JuegoPOO extends Canvas implements Runnable{
 
     private static int aps = 0; // actualizaciones por segundo
     private static int fps = 0;  // cuadros por segundo
+    
+    private static String contadorAps = "";
+    private static String contadorFps = "";
     
     private static int x = 0;
     private static int y = 0;
@@ -72,6 +76,7 @@ public class JuegoPOO extends Canvas implements Runnable{
         ventana.setIconImage(icono.getImage()); // icono de la ventana
         ventana.setLayout(new BorderLayout());
         ventana.add(this, BorderLayout.CENTER); //añadir el canvas a la ventana
+        ventana.setUndecorated(true);
         ventana.pack(); // la ventana se autorrellenara con los elementos dentro de ella
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
@@ -117,6 +122,9 @@ public class JuegoPOO extends Canvas implements Runnable{
         if (teclado.derecha) {
             x--;
         }
+        if (teclado.escape) {
+            System.exit(0);
+        }
         
         aps++;
     }
@@ -137,6 +145,9 @@ public class JuegoPOO extends Canvas implements Runnable{
         Graphics g = strategy.getDrawGraphics();
         g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
         g.drawImage(personaje, ANCHO/2, ALTO/2, this); // temporal para el dibujo del personaje
+        g.setColor(Color.white);
+        g.drawString(contadorAps, 10, 20);
+        g.drawString(contadorFps, 10, 35);
         g.dispose();
         
         strategy.show();
@@ -176,7 +187,8 @@ public class JuegoPOO extends Canvas implements Runnable{
                 mostrar();
                 
                 if (System.nanoTime() - contadorReferencia > NS_POR_SEGUNDO) {
-                    ventana.setTitle(NOMBRE + " || aps: " + aps + " || FPS: " + fps);
+                    contadorAps = "APS: " + aps;
+                    contadorFps = "FPS: " + fps; 
                     aps = 0;
                     fps = 0;
                     contadorReferencia = System.nanoTime();
