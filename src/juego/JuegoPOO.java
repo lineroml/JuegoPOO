@@ -16,11 +16,13 @@ import java.awt.image.ImagingOpException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import mapa.Mapa;
+import mapa.MapaGenerado;
 
 public class JuegoPOO extends Canvas implements Runnable{
 
-    private static final int ANCHO = 400;
-    private static final int ALTO = 300;
+    private static final int ANCHO = 800;
+    private static final int ALTO = 600;
 
     private static final String NOMBRE = "Forgotten History";
 
@@ -38,6 +40,8 @@ public class JuegoPOO extends Canvas implements Runnable{
     private Teclado teclado;
     private Pantalla pantalla;
     
+    private static Mapa mapa;
+    
     private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
     private static int[] pixels = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
     private static final ImageIcon icono =  new ImageIcon(JuegoPOO.class.getResource("/iconos/iconoPrincipal.png"));
@@ -48,6 +52,8 @@ public class JuegoPOO extends Canvas implements Runnable{
         setPreferredSize(new Dimension(ANCHO, ALTO));
 
         pantalla = new Pantalla(ANCHO, ALTO);
+        
+        mapa = new MapaGenerado(128, 128);
         
         // temporal para el dibujo del personaje
         try {
@@ -100,10 +106,10 @@ public class JuegoPOO extends Canvas implements Runnable{
         teclado.actualizar();
         
         if (teclado.arriba) {
-            y++;
+            y--;
         }
         if (teclado.abajo) {
-            y--;
+            y++;
         }
         if (teclado.izquierda) {
             x++;
@@ -126,7 +132,7 @@ public class JuegoPOO extends Canvas implements Runnable{
         System.arraycopy(pantalla.pixeles, 0, pixels, 0, pixels.length);
         
         pantalla.limpiar();
-        pantalla.mostrar(x, y);
+        mapa.mostrar(x, y, pantalla);
          
         Graphics g = strategy.getDrawGraphics();
         g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);

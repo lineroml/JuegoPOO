@@ -6,6 +6,9 @@ public class Pantalla {
 
     private final int ANCHO;
     private final int ALTO;
+    
+    private int diferenciaX;
+    private int diferenciaY;
 
     public final int[] pixeles;
 
@@ -49,17 +52,28 @@ public class Pantalla {
     }
 
     public void mostrarCuadro(int compensacionX, int compensacionY, Cuadro cuadro) {
+        compensacionX -= diferenciaX;
+        compensacionY -= diferenciaY;
+        
         for (int y = 0; y < cuadro.sprite.getLado(); y++) {
             int posicionY = y + compensacionY;
             for (int x = 0; x < cuadro.sprite.getLado(); x++) {
                 int posicionX = x + compensacionX;
-                if (posicionX < 0 || posicionX > ANCHO || posicionY < 0 || posicionY > ALTO) {
+                if (posicionX < -cuadro.sprite.getLado() || posicionX >= ANCHO || posicionY < 0 || posicionY >= ALTO) {
                     break;
+                }
+                if (posicionX < 0) {
+                    posicionX = 0;
                 }
                 pixeles[posicionX + posicionY * ANCHO] = cuadro.sprite.pixeles[x + y * cuadro.sprite.getLado()];
 
             }
         }
+    }
+    
+    public void establecerDiferencia(final int diferenciaX, final int diferenciaY) {
+        this.diferenciaX = diferenciaX;
+        this.diferenciaY = diferenciaY;
     }
 
     public int getANCHO() {

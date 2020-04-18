@@ -8,6 +8,8 @@ public class Cuadro {
     public int ancho;
     public int alto;
     
+    public static final int LADO = 32;
+    
     public Sprite sprite;
     
     // coleccion de cuadros
@@ -21,7 +23,7 @@ public class Cuadro {
     }
     
     public void mostrar(int x, int y, Pantalla pantalla) {
-        
+        pantalla.mostrarCuadro(x << 5, y << 5, this);
     }
     
     public boolean solid() {

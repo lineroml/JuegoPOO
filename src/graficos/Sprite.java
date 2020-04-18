@@ -11,10 +11,9 @@ public final class Sprite {
     private final HojaSprite hoja;
     
    // coleccion Sprites
-    public static final Sprite VACIO = new Sprite(32,0);
+    public static final Sprite VACIO = new Sprite(32,0);    
     public static Sprite ASFALTO = new Sprite(32, 0, 0, HojaSprite.DESIERTO);
     public static Sprite LOGAN = new Sprite(32, 0, 0, HojaSprite.LOGAN);
-   //fin de la coleccion
     
     public Sprite(final int lado, final int col, final int fil, final HojaSprite hoja) {
         this.lado = lado;

@@ -37,20 +37,36 @@ public class Mapa {
         
     }
     
-    public void dibujar(int compensacionX, int compensacionY, Pantalla pantalla) {
+    public void mostrar(int compensacionX, int compensacionY, Pantalla pantalla) {
+        
+        pantalla.establecerDiferencia(compensacionX, compensacionY);
+
         // norte, sur, este, oeste
         int n = compensacionY >> 5; // "/32" bit shifting
-        int s = (compensacionY + pantalla.getALTO());
+        int s = (compensacionY + pantalla.getALTO() + Cuadro.LADO) >> 5;
         int o = compensacionX >> 5; // "/32" bit shifting
-        int e = (compensacionX + pantalla.getANCHO())/32;
+        int e = (compensacionX + pantalla.getANCHO() + Cuadro.LADO) >> 5;
+    
+        for(int y = n; y < s; y++) {
+            for (int x = o; x < e; x++) {
+                getCuadro(x, y).mostrar(x,y, pantalla);
+            }
+        }
     }
     
     public Cuadro getCuadro(final int x, final int y) {
+        if (x < 0 || x >= ancho || y < 0 || y >= alto) {
+            return Cuadro.VACIO;
+        }
         switch (cuadros[x + y * ancho]) {
             case 0:
                 return Cuadro.ASFALTO;
+            case 1:
+            case 2:
+            case 3:
+                
             default:
-                return null;
+                return Cuadro.VACIO;
         }
     }
 }
