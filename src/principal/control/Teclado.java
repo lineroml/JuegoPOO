@@ -1,40 +1,39 @@
-
-package control;
+package principal.control;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public final class Teclado implements KeyListener {
-    
-    private final static byte NUMEROTECLAS = 120;
+public class Teclado implements KeyListener {
+
+    private final static int NUMEROTECLAS = 256;
     private final boolean[] teclas = new boolean[NUMEROTECLAS];
-    
+
     public boolean arriba;
     public boolean abajo;
     public boolean izquierda;
     public boolean derecha;
     public boolean escape;
-    
+
     public void actualizar() {
         arriba = teclas[KeyEvent.VK_W];
         abajo = teclas[KeyEvent.VK_S];
         izquierda = teclas[KeyEvent.VK_A];
         derecha = teclas[KeyEvent.VK_D];
-        
-        /** si queremos movernos con los viejos controles de telcas: flechas arriba, abajo, izquierda, derehca
-         * solo descomentamos este bloque codigo y comentamos el de arriba
-         
-        up = teclas[KeyEvent.VK_UP];
-        down = teclas[KeyEvent.VK_DOWN];
-        left = teclas[KeyEvent.VK_LEFT];
-        rigth = teclas[KeyEvent.VK_RIGTH]; 
-        */
+
+        /**
+         * si queremos movernos con los viejos controles de telcas: flechas
+         * arriba, abajo, izquierda, derehca solo descomentamos este bloque
+         * codigo y comentamos el de arriba
+         *
+         * up = teclas[KeyEvent.VK_UP]; down = teclas[KeyEvent.VK_DOWN]; left =
+         * teclas[KeyEvent.VK_LEFT]; rigth = teclas[KeyEvent.VK_RIGTH];
+         */
         escape = teclas[KeyEvent.VK_ESCAPE];
     }
-    
+
     @Override
     public void keyTyped(KeyEvent e) {}
-        
+
     @Override
     public void keyPressed(KeyEvent e) {
         teclas[e.getKeyCode()] = true;
@@ -42,7 +41,7 @@ public final class Teclado implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        teclas[e.getKeyCode()] = false; 
+        teclas[e.getKeyCode()] = false;
     }
-    
+
 }
