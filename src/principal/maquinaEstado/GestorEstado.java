@@ -1,7 +1,7 @@
 package principal.maquinaEstado;
 
 import java.awt.Graphics;
-import principal.maquinaestado.estado.juego.GestorJuego;
+import principal.maquinaEstado.estado.juego.GestorJuego;
 
 public class GestorEstado {
 
