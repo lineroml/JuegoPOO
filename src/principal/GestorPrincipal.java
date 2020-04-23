@@ -2,7 +2,7 @@ package principal;
 
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
-import principal.maquinaestado.GestorEstado;
+import principal.maquinaEstado.GestorEstado;
 
 public class GestorPrincipal {
 

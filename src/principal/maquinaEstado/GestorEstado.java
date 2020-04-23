@@ -1,13 +1,13 @@
-
 package principal.maquinaEstado;
 
 import java.awt.Graphics;
-import principal.maquinaEstado.estados.juego.GestorJuego;
+import principal.maquinaestado.estado.juego.GestorJuego;
 
 public class GestorEstado {
+
     private EstadoJuego[] estados;
     private EstadoJuego estadoActual;
-    
+
     public GestorEstado() {
         iniciarEstado();
         iniciarEstadoActual();
@@ -22,15 +22,15 @@ public class GestorEstado {
     private void iniciarEstadoActual() {
         estadoActual = estados[0];
     }
-    
+
     public void actualizar() {
         estadoActual.actualizar();
     }
-    
+
     public void dibujar(Graphics g) {
         estadoActual.dibujar(g);
     }
-    
+
     private void cambiarEstadoActual(final int nuevoEstado) {
         estadoActual = estados[nuevoEstado];
     }
@@ -38,6 +38,5 @@ public class GestorEstado {
     public EstadoJuego getEstadoActual() {
         return estadoActual;
     }
-    
-    
+
 }
