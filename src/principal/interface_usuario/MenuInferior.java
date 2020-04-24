@@ -9,13 +9,13 @@ import principal.herramientas.DibujoOpciones;
 
 public class MenuInferior {
 
-    private Rectangle areaInventario;
-    private Rectangle bordeSeparacion;
-    private Color grisOscuro;
-    private Color rojoClaro;
-    private Color rojoOscuro;
-    private Color azulClaro;
-    private Color azulOscuro;
+    private final Rectangle areaInventario;
+    private final Rectangle bordeSeparacion;
+    private final Color grisOscuro;
+    private final Color rojoClaro;
+    private final Color rojoOscuro;
+    private final Color azulClaro;
+    private final Color azulOscuro;
 
     public MenuInferior(final Jugador jugador) {
 
@@ -34,6 +34,7 @@ public class MenuInferior {
         dibujarAreaInventario(g);
         dibujarBarraVida(g);
         dibujarBarraResistencia(g, jugador.resistencia);
+        dibujarRanurasObjetos(g);
     }
 
     private void dibujarAreaInventario(final Graphics g) {
@@ -67,5 +68,25 @@ public class MenuInferior {
         g.setColor(Color.WHITE);
         DibujoOpciones.dibujarString(g, "RES", areaInventario.x + 15, areaInventario.y + medidaVertical * 6 - 2);
         DibujoOpciones.dibujarString(g, resistencia + "", areaInventario.x + anchoTotal + 45, areaInventario.y + medidaVertical * 6 - 2);
+    }
+
+    private void dibujarRanurasObjetos(final Graphics g) {
+
+        final int anchoRanura = 32;
+        final int numeroRanuras = 10;
+        final int espacioEntreRanuras = 10;
+        final int anchoTotal = anchoRanura * numeroRanuras + espacioEntreRanuras * numeroRanuras;
+        final int xInicial = Constantes.ANCHO_JUEGO - anchoTotal;
+        final int anchoRanurasYespacio = anchoRanura + espacioEntreRanuras;
+
+        g.setColor(Color.WHITE);
+
+        for (int i = 0; i < numeroRanuras; i++) {
+
+            int xActual = xInicial + anchoRanurasYespacio * i;
+            Rectangle ranura = new Rectangle(xActual, areaInventario.y + 4, anchoRanura, anchoRanura);
+            DibujoOpciones.dibujarRectRelleno(g, ranura);
+            DibujoOpciones.dibujarString(g, (i + 1) + "", xActual + 13, areaInventario.y + 48);
+        }
     }
 }
