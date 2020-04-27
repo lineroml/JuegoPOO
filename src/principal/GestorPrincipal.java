@@ -31,7 +31,7 @@ public class GestorPrincipal {
     public static void main(String[] args) {
 
         //Creamos un gestor principal
-        GestorPrincipal gp = new GestorPrincipal("Dysaca", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
+        GestorPrincipal gp = new GestorPrincipal("Forgotten History", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
 
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
