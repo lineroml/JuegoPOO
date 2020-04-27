@@ -5,43 +5,68 @@ import java.awt.event.KeyListener;
 
 public class Teclado implements KeyListener {
 
-    private final static int NUMEROTECLAS = 256;
-    private final boolean[] teclas = new boolean[NUMEROTECLAS];
-
-    public boolean arriba;
-    public boolean abajo;
-    public boolean izquierda;
-    public boolean derecha;
-    public boolean escape;
-
-    public void actualizar() {
-        arriba = teclas[KeyEvent.VK_W];
-        abajo = teclas[KeyEvent.VK_S];
-        izquierda = teclas[KeyEvent.VK_A];
-        derecha = teclas[KeyEvent.VK_D];
-
-        /**
-         * si queremos movernos con los viejos controles de telcas: flechas
-         * arriba, abajo, izquierda, derehca solo descomentamos este bloque
-         * codigo y comentamos el de arriba
-         *
-         * up = teclas[KeyEvent.VK_UP]; down = teclas[KeyEvent.VK_DOWN]; left =
-         * teclas[KeyEvent.VK_LEFT]; rigth = teclas[KeyEvent.VK_RIGTH];
-         */
-        escape = teclas[KeyEvent.VK_ESCAPE];
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {}
+    public Tecla up = new Tecla();
+    public Tecla down = new Tecla();
+    public Tecla left = new Tecla();
+    public Tecla right = new Tecla();
+    public boolean run = false;
+    public boolean opciones = false;
+    public boolean dance = false;
 
     @Override
     public void keyPressed(KeyEvent e) {
-        teclas[e.getKeyCode()] = true;
+
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                up.teclaPulsada();
+                break;
+            case KeyEvent.VK_S:
+                down.teclaPulsada();
+                break;
+            case KeyEvent.VK_A:
+                left.teclaPulsada();
+                break;
+            case KeyEvent.VK_D:
+                right.teclaPulsada();
+                break;
+            case KeyEvent.VK_ESCAPE:
+                System.exit(0);
+                break;
+            case KeyEvent.VK_SHIFT:
+                run = true;
+                break;
+            case KeyEvent.VK_O:
+                opciones = !opciones;
+                break;
+            case KeyEvent.VK_ENTER:
+                dance = !dance;
+                break;
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        teclas[e.getKeyCode()] = false;
+
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                up.teclaLiberada();
+                break;
+            case KeyEvent.VK_S:
+                down.teclaLiberada();
+                break;
+            case KeyEvent.VK_A:
+                left.teclaLiberada();
+                break;
+            case KeyEvent.VK_D:
+                right.teclaLiberada();
+                break;
+            case KeyEvent.VK_SHIFT:
+                run = false;
+                break;
+        }
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
 }

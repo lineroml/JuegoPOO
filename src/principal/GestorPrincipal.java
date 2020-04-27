@@ -1,90 +1,123 @@
 package principal;
 
-import java.awt.Graphics;
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaEstado.GestorEstado;
 
 public class GestorPrincipal {
+
+    //Indicara si el bucle principal esta funcionando
     private boolean enFuncionamiento = false;
-    private String TITULO;
-    private int ancho;
-    private int alto;
-    
+    //Titulo de nuestro juego
+    private final String titulo;
+    //Dimensiones de la ventana
+    private final int ancho;
+    private final int alto;
+
     private SuperficieDibujo sd;
     private Ventana ventana;
     private GestorEstado ge;
-    
-    private GestorPrincipal(final String TITULo, final int ancho, final int alto) {
-        this.TITULO = TITULO;
-        this.alto = alto;
+
+    private static int aps = 0;
+    private static int fps = 0;
+
+    private GestorPrincipal(final String titulo, final int ancho, final int alto) {
+
+        this.titulo = titulo;
         this.ancho = ancho;
+        this.alto = alto;
     }
-    
+
     public static void main(String[] args) {
-        GestorPrincipal gp = new GestorPrincipal("ForgottenHistory", 640, 360);
-        
+
+        //Creamos un gestor principal
+        GestorPrincipal gp = new GestorPrincipal("Dysaca", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
+
         gp.iniciarJuego();
-        gp.inciciarBuclePrincipal();
+        gp.iniciarBuclePrincipal();
     }
 
     private void iniciarJuego() {
+
         enFuncionamiento = true;
         inicializar();
     }
-    
+
     private void inicializar() {
-        sd = new SuperficieDibujo();
-        ventana = new Ventana(TITULO, sd);
+
+        sd = new SuperficieDibujo(ancho, alto);
+        ventana = new Ventana(titulo, sd);
         ge = new GestorEstado();
     }
 
-    private void inciciarBuclePrincipal() {
-        int aps = 0;
-        int fps = 0;
-        
+    private void iniciarBuclePrincipal() {
+
+        int actualizacionesAcumuladas = 0, framesAcumulados = 0;
+
+        //Equivalencia nanosegundos en un segundo
         final int NS_POR_SEGUNDO = 1000000000;
-        final int APS_OBJETIVO = 60;
-        final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
-        
+        //Cuantas actualizaciones queremos hacer por segundo
+        final byte APS_OBJETO = 60;
+        //Cuantos nanosegundos transcurren por actualizacion
+        final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETO;
+
+        //Atribuir una cantidad de nanosegundos en tiempo exacto, de lo que ha pasado en el tiempo de inicio de juego
         long referenciaActualizacion = System.nanoTime();
         long referenciaContador = System.nanoTime();
-        
+
         double tiempoTranscurrido;
+        //Cantidad de tiempo que a ocurrido hasta una actualizacion
         double delta = 0;
-        
+
         while (enFuncionamiento) {
+
             final long inicioBucle = System.nanoTime();
-            
+
+            //Cuanto tiempo a transcurrido
             tiempoTranscurrido = inicioBucle - referenciaActualizacion;
             referenciaActualizacion = inicioBucle;
-            
+
             delta += tiempoTranscurrido / NS_POR_ACTUALIZACION;
-            
+
             while (delta >= 1) {
+
+                //Actualizar se ejecutara 60 veces por segundo
                 actualizar();
-                aps++;
+                actualizacionesAcumuladas++;
                 delta--;
             }
-            
+
             dibujar();
-            fps++;
-            
+            framesAcumulados++;
+
             if (System.nanoTime() - referenciaContador > NS_POR_SEGUNDO) {
-                System.out.println("FPS: " + fps + " APS: " + aps);
-                
-                aps = 0;
-                fps = 0;
+
+                aps = actualizacionesAcumuladas;
+                fps = framesAcumulados;
+                //Escribir en pantalla los APS y FPS
+                actualizacionesAcumuladas = 0;
+                framesAcumulados = 0;
                 referenciaContador = System.nanoTime();
             }
         }
     }
-    
+
     private void actualizar() {
-        //ge.actualizar();
+
+        ge.actualizar();
+        sd.actualizar();
     }
-    
+
     private void dibujar() {
-        //ge.dibujar(g);
+
+        sd.dibujar(ge);
+    }
+
+    public static int getAps() {
+        return aps;
+    }
+
+    public static int getFps() {
+        return fps;
     }
 }
