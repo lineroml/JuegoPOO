@@ -1,4 +1,4 @@
-package principal.maquinaEstado.estado.juego;
+package principal.maquinaestado.estado.juego;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
