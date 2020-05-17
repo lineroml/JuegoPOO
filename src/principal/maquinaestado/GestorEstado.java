@@ -2,8 +2,8 @@
 package principal.maquinaestado;
 
 import java.awt.Graphics;
-import principal.maquinaestado.estado.juego.GestorJuego;
-import principal.maquinaestado.estado.menujuego.GestorMenu;
+import principal.maquinaestado.estado.juego.GestorDeJuego;
+import principal.maquinaestado.estado.menujuego.itemsMenu.GestorMenu;
 
 public class GestorEstado {
 
@@ -19,7 +19,7 @@ public class GestorEstado {
     private void iniciarEstados() {
 
         estados = new EstadoJuego[2];
-        estados[0] = new GestorJuego();
+        estados[0] = new GestorDeJuego();
         estados[1] = new GestorMenu();
         //Añadir e iniciar los demas estados a medida que los creemos
     }

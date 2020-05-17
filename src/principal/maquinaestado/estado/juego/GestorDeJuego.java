@@ -11,14 +11,14 @@ import principal.interface_usuario.MenuInferior;
 import principal.mapas.Mapa;
 import principal.maquinaestado.EstadoJuego;
 
-public class GestorJuego implements EstadoJuego {
+public class GestorDeJuego implements EstadoJuego {
 
     Mapa mapa;
     Jugador jugador;
     BufferedImage Logotipo;
     MenuInferior menuInferior;
 
-    public GestorJuego() {
+    public GestorDeJuego() {
 
         iniciarMapa("/mapas/mapa1");
         iniciarJugador();
