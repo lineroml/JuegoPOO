@@ -3,7 +3,7 @@ package principal;
 import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
-import principal.maquinaEstado.GestorEstado;
+import principal.maquinaestado.GestorEstado;
 
 public class GestorPrincipal {
 
@@ -32,7 +32,7 @@ public class GestorPrincipal {
     public static void main(String[] args) {
 
         //Creamos un gestor principal
-        GestorPrincipal gp = new GestorPrincipal("Forgotten History", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
+        GestorPrincipal gp = new GestorPrincipal("Dysaca", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
 
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();

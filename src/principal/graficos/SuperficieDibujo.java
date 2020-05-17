@@ -13,7 +13,7 @@ import principal.control.GestorControles;
 import principal.control.Raton;
 import principal.herramientas.DatoOpcion;
 import principal.herramientas.DibujoOpciones;
-import principal.maquinaEstado.GestorEstado;
+import principal.maquinaestado.GestorEstado;
 
 public class SuperficieDibujo extends Canvas {
 

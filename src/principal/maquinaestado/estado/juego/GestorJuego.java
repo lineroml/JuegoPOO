@@ -9,7 +9,7 @@ import principal.herramientas.DatoOpcion;
 import principal.herramientas.DibujoOpciones;
 import principal.interface_usuario.MenuInferior;
 import principal.mapas.Mapa;
-import principal.maquinaEstado.EstadoJuego;
+import principal.maquinaestado.EstadoJuego;
 
 public class GestorJuego implements EstadoJuego {
 
