@@ -9,9 +9,11 @@ public class Teclado implements KeyListener {
     public Tecla down = new Tecla();
     public Tecla left = new Tecla();
     public Tecla right = new Tecla();
+
     public boolean run = false;
     public boolean opciones = false;
     public boolean dance = false;
+    public boolean inventario = false;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -40,6 +42,9 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_ENTER:
                 dance = !dance;
+                break;
+            case KeyEvent.VK_I:
+                inventario = !inventario;
                 break;
         }
     }

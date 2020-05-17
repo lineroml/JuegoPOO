@@ -14,8 +14,9 @@ public class GestorEstado {
     }
 
     private void iniciarEstado() {
-        estados = new EstadoJuego[1];
+        estados = new EstadoJuego[2];
         estados[0] = new GestorJuego();
+        estados[1] = new GestorJuego();
         // añadir e iniciar los demas estados a medida que los creemos
     }
 
@@ -31,7 +32,7 @@ public class GestorEstado {
         estadoActual.dibujar(g);
     }
 
-    private void cambiarEstadoActual(final int nuevoEstado) {
+    public void cambiarEstadoActual(final int nuevoEstado) {
         estadoActual = estados[nuevoEstado];
     }
 
