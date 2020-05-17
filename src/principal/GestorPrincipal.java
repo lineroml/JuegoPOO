@@ -48,7 +48,7 @@ public class GestorPrincipal {
 
         sd = new SuperficieDibujo(ancho, alto);
         ventana = new Ventana(titulo, sd);
-        ge = new GestorEstado();
+        ge = new GestorEstado(sd);
     }
 
     private void iniciarBuclePrincipal() {

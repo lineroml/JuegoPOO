@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
@@ -56,5 +57,14 @@ public class Raton extends MouseAdapter {
         SwingUtilities.convertPointFromScreen(posicionRatonInicial, sd);
         //Darle a posicion el valor de la posicion del raton
         posicion.setLocation(posicionRatonInicial.getX(), posicionRatonInicial.getY());
+    }
+
+    public Rectangle getPosicionRectangulo() {
+        final Rectangle area = new Rectangle(posicion.x, posicion.y, 1, 1);
+        return area;
+    }
+
+    public Point getPosicion() {
+        return posicion;
     }
 }

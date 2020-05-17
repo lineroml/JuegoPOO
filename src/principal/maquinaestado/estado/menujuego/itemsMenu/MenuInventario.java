@@ -1,8 +1,7 @@
-package principal.maquinaestado.estado.menujuego;
+package principal.maquinaestado.estado.menujuego.itemsMenu;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import principal.maquinaestado.estado.menujuego.itemsMenu.EtiquetaMenu;
 
 public class MenuInventario extends EtiquetaMenu {
 

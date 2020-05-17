@@ -72,8 +72,8 @@ public class SuperficieDibujo extends Canvas {
         ge.dibujar(g);
 
         g.setColor(Color.GRAY);
-        DibujoOpciones.dibujarString(g, GestorPrincipal.getAps() + "", 20, 20);
-        DibujoOpciones.dibujarString(g, GestorPrincipal.getFps() + "", 20, 30);
+        DatoOpcion.enviarDato("APS  " + GestorPrincipal.getAps());
+        DatoOpcion.enviarDato("FPS  " + GestorPrincipal.getFps());
 
         if (GestorControles.teclado.opciones) {
             DatoOpcion.dibujarDatos(g);
@@ -97,5 +97,9 @@ public class SuperficieDibujo extends Canvas {
 
     public int getAlto() {
         return alto;
+    }
+
+    public Raton getRaton() {
+        return raton;
     }
 }

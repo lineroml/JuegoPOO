@@ -23,7 +23,7 @@ public class FormaMenu {
 
     public FormaMenu() {
 
-        COLOR_SUPERIOR = Color.ORANGE;
+        COLOR_SUPERIOR = new Color(0x2ff40a);
         COLOR_LATERAL = Color.DARK_GRAY;
         COLOR_CENTRAL = Color.LIGHT_GRAY;
 
