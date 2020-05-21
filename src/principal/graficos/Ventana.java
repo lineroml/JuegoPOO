@@ -17,7 +17,7 @@ public class Ventana extends JFrame {
 
         this.titulo = titulo;
 
-        BufferedImage imagen = CargadorRecursos.cargarImagenCompatibleTranslicida("/imagenes/iconos/iconoVentana.png");
+        BufferedImage imagen = CargadorRecursos.cargarImagenCompatibleTranslicida("/imagenes/iconos/iconoVentana.jpeg");
         this.icono = new ImageIcon(imagen);
 
         configurarVentana(sd);
