@@ -7,8 +7,10 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.SwingUtilities;
+import principal.Constantes;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DatoOpcion;
@@ -17,12 +19,14 @@ public class Raton extends MouseAdapter {
 
     private final Cursor cursor;
     private Point posicion;
+    private boolean clickIzquierdo;
+    private boolean clickDerecho;
 
     public Raton(final SuperficieDibujo sd) {
 
         Toolkit configuracion = Toolkit.getDefaultToolkit();
 
-        BufferedImage icono = CargadorRecursos.cargarImagenCompatibleTranslicida("/imagenes/iconos/iconoCursor.png");
+        BufferedImage icono = CargadorRecursos.cargarImagenCompatibleTranslicida(Constantes.RUTA_ICONO_RATON);
 
         Point punta = new Point(0, 0);
 
@@ -30,6 +34,10 @@ public class Raton extends MouseAdapter {
 
         this.posicion = new Point();
         actualizarPosicion(sd);
+
+        clickIzquierdo = false;
+        clickDerecho = false;
+        Constantes.LADO_CURSOR = icono.getHeight();
     }
 
     public void actualizar(final SuperficieDibujo sd) {
@@ -67,4 +75,32 @@ public class Raton extends MouseAdapter {
     public Point getPosicion() {
         return posicion;
     }
+
+    //Cuando se ha clicado el raton
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            clickIzquierdo = true;
+        } else if (SwingUtilities.isRightMouseButton(e)) {
+            clickDerecho = true;
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            clickIzquierdo = false;
+        } else if (SwingUtilities.isRightMouseButton(e)) {
+            clickDerecho = false;
+        }
+    }
+
+    public boolean isClickIzquierdo() {
+        return clickIzquierdo;
+    }
+
+    public boolean isClickDerecho() {
+        return clickDerecho;
+    }
+
 }

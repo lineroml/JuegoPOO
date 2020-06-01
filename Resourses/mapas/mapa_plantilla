@@ -83,3 +83,11 @@
 15-15 // la posicion en la que aparece el personaje, son coordenadas (x,y)
 *
 15-0-1 // Los dos primeros son las coordenadas donde esta el punto donde se teletrasnporta al otro mapa y el tercero es el mapa al que se teletransporta
+*
+14,14:1-1/2-1 // Los dos primeros separados por coma son las coordenadas (x,y) de donde se situa el conetendor de objetos despues esta el id del objeto y su cantidad, separamos los objetos por "/"
+#
+13,13:1-39/3-8 // x, y : objeto - cantidad / objeto - cantidad
+*
+15,14:1 // Agregamos los enemigos al mapa, sus coordenadas (x, y) y el id del enemigo que es el mismo nombre de la imagen (hoja de Sprites) del enemigo
+#
+14,13:1

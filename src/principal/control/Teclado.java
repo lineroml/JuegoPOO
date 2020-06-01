@@ -2,6 +2,8 @@ package principal.control;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.sound.sampled.Clip;
+import principal.herramientas.CargadorRecursos;
 
 public class Teclado implements KeyListener {
 
@@ -10,10 +12,13 @@ public class Teclado implements KeyListener {
     public Tecla left = new Tecla();
     public Tecla right = new Tecla();
 
+    public boolean recoger = false;
     public boolean run = false;
     public boolean opciones = false;
     public boolean dance = false;
     public boolean inventario = false;
+
+    public boolean ataque = false;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -36,6 +41,12 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_SHIFT:
                 run = true;
+                break;
+            case KeyEvent.VK_E:
+                recoger = true;
+                break;
+            case KeyEvent.VK_SPACE:
+                ataque = true;
                 break;
             case KeyEvent.VK_O:
                 opciones = !opciones;
@@ -67,6 +78,9 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_SHIFT:
                 run = false;
+                break;
+            case KeyEvent.VK_SPACE:
+                ataque = false;
                 break;
         }
     }

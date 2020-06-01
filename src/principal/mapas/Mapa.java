@@ -6,8 +6,13 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import principal.Constantes;
+import principal.ElementosPrincipales;
+import principal.control.GestorControles;
+import principal.entes.Enemigo;
+import principal.entes.RegistroEnemigos;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
+import principal.inventario.ContenedorObjetos;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
@@ -31,6 +36,8 @@ public class Mapa {
     private final boolean[] COLISIONES;
 
     public ArrayList<Rectangle> areasColision = new ArrayList<Rectangle>();
+    public ArrayList<ContenedorObjetos> objetosMapa;
+    public final ArrayList<Enemigo> enemigos;
 
     private final int[] SPRITES;
 
@@ -76,6 +83,31 @@ public class Mapa {
         coordenadaSalida.y = Integer.parseInt(datosSalida[1]);
         mapaSiguiente = datosSalida[2];
         ZonaSalida = new Rectangle();
+
+        if (partes.length > 7) {
+            String infoContenedorObjetos = partes[8];
+            objetosMapa = informacionObjetos(infoContenedorObjetos);
+        }
+
+        String infoEnemigos = partes[9];
+        enemigos = asignarEnemigos(infoEnemigos);
+    }
+
+    private ArrayList<Enemigo> asignarEnemigos(final String infoEnemigos) {
+        ArrayList<Enemigo> enemigosTemp = new ArrayList();
+        String[] enem = infoEnemigos.split("#");
+        for (int i = 0; i < enem.length; i++) {
+            String[] separado = enem[i].split(":");
+            String[] coordenada = separado[0].split(",");
+            String idEnemigo = separado[1];
+
+            Enemigo enemigo = RegistroEnemigos.getEnemigo(Integer.parseInt(idEnemigo));
+            enemigo.setPosicion(Double.parseDouble(coordenada[0]), Double.parseDouble(coordenada[1]));
+
+            enemigosTemp.add(enemigo);
+        }
+
+        return enemigosTemp;
     }
 
     private Sprite[] asignarSprite(final String[] partesPaleta, final String[] HojasSeparadas) {
@@ -140,21 +172,52 @@ public class Mapa {
         return vectorSprites;
     }
 
-    public void actualizar(final int posicionX, final int posicionY) {
+    private ArrayList<ContenedorObjetos> informacionObjetos(final String infoContenedorObjetos) {
+        final ArrayList<ContenedorObjetos> objetos = new ArrayList();
+        final String[] contenedores = infoContenedorObjetos.split("#");
+        for (String contenedor : contenedores) {
+            final ArrayList<Integer> idObjetos = new ArrayList();
+            final ArrayList<Integer> cantidades = new ArrayList();
 
-        actualizarAreasColision(posicionX, posicionY);
-        actualizarZonaSalida(posicionX, posicionY);
+            final String[] info = contenedor.split(":");
+            final String[] coordenada = info[0].split(",");
+            final int x = Integer.parseInt(coordenada[0]);
+            final int y = Integer.parseInt(coordenada[1]);
+            final String[] ob = info[1].split("/");
+            for (String o : ob) {
+                final String[] datosObjeto = o.split("-");
+                idObjetos.add(Integer.parseInt(datosObjeto[0]));
+                cantidades.add(Integer.parseInt(datosObjeto[1]));
+            }
+
+            final int[] idOb = new int[idObjetos.size()];
+            final int[] cantiOb = new int[cantidades.size()];
+
+            for (int i = 0; i < idOb.length; i++) {
+                idOb[i] = idObjetos.get(i);
+                cantiOb[i] = cantidades.get(i);
+            }
+            objetos.add(new ContenedorObjetos(new Point(x, y), idOb, cantiOb));
+        }
+        return objetos;
     }
 
-    private void actualizarAreasColision(final int posicionX, final int posicionY) {
+    public void actualizar() {
+
+        actualizarAreasColision();
+        actualizarZonaSalida();
+        actualizarObjetosRecogidos();
+    }
+
+    private void actualizarAreasColision() {
 
         if (!areasColision.isEmpty()) {
             areasColision.clear();
         }
         for (int y = 0; y < this.ALTO; y++) {
             for (int x = 0; x < this.ANCHO; x++) {
-                int puntoX = x * Constantes.LADO_SPRITE - posicionX + margenX;
-                int puntoY = y * Constantes.LADO_SPRITE - posicionY + margenY;
+                int puntoX = x * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionXINT() + margenX;
+                int puntoY = y * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionYINT() + margenY;
 
                 if (COLISIONES[x + y * this.ANCHO]) {
                     final Rectangle r = new Rectangle(puntoX, puntoY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
@@ -164,36 +227,73 @@ public class Mapa {
         }
     }
 
-    private void actualizarZonaSalida(final int posicionX, final int posicionY) {
+    private void actualizarZonaSalida() {
 
-        int puntoX = ((int) coordenadaSalida.getX()) * Constantes.LADO_SPRITE - posicionX + margenX;
-        int puntoY = ((int) coordenadaSalida.getY()) * Constantes.LADO_SPRITE - posicionY + margenY;
+        int puntoX = ((int) coordenadaSalida.getX()) * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionXINT() + margenX;
+        int puntoY = ((int) coordenadaSalida.getY()) * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionYINT() + margenY;
 
         ZonaSalida = new Rectangle(puntoX, puntoY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
     }
 
-    public void dibujar(Graphics g, int posicionX, int posicionY) {
+    private void actualizarObjetosRecogidos() {
+        //Saber su en el mapa hay objetos por recoger
+        if (!objetosMapa.isEmpty()) {
+            //rectangulos que rodenan al contenedor y al jugador
+            final Rectangle areaJugador = new Rectangle(ElementosPrincipales.jugador.getPosicionXINT(), ElementosPrincipales.jugador.getPosicionYINT(), Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+            for (int i = 0; i < objetosMapa.size(); i++) {
+                final ContenedorObjetos contenedor = objetosMapa.get(i);
+                final Rectangle posicionContenedor = new Rectangle(contenedor.getPosicion().x * Constantes.LADO_SPRITE,
+                        contenedor.getPosicion().y * Constantes.LADO_SPRITE, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE / 2);
+
+                if (areaJugador.intersects(posicionContenedor) && GestorControles.teclado.recoger) {
+                    ElementosPrincipales.inventario.recogerObjetos(contenedor);
+                    objetosMapa.get(i).setCofre();
+                    GestorControles.teclado.recoger = false;
+                }
+            }
+        }
+    }
+
+    public void dibujar(Graphics g) {
 
         for (int y = 0; y < this.ALTO; y++) {
             for (int x = 0; x < this.ANCHO; x++) {
 
                 BufferedImage imagen = this.PALETA[this.SPRITES[x + y * this.ANCHO]].getImagen();
 
-                int puntoX = x * Constantes.LADO_SPRITE - posicionX + margenX;
-                int puntoY = y * Constantes.LADO_SPRITE - posicionY + margenY;
+                int puntoX = x * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionXINT() + margenX;
+                int puntoY = y * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionYINT() + margenY;
 
                 DibujoOpciones.dibujarImagen(g, imagen, puntoX, puntoY);
             }
         }
+
+        //dibujar los cofres o los contenedores de objetos
+        if (!objetosMapa.isEmpty()) {
+            for (ContenedorObjetos contenedorObjetos : objetosMapa) {
+                final int puntoX = contenedorObjetos.getPosicion().x * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionXINT() + margenX;
+                final int puntoY = contenedorObjetos.getPosicion().y * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionYINT() + margenY;
+
+                contenedorObjetos.dibujar(g, puntoX + 8, puntoY + 8);
+            }
+        }
+
+        if (!enemigos.isEmpty()) {
+            for (Enemigo enemigo : enemigos) {
+                final int puntoX = (int) enemigo.getPosicionX() * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionXINT() + margenX;
+                final int puntoY = (int) enemigo.getPosicionY() * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getPosicionYINT() + margenY;
+                enemigo.dibujar(g, puntoX, puntoY);
+            }
+        }
     }
 
-    public Rectangle getBordes(final int posicionX, final int posicionY, final int anchoJugador, final int altoJugador) {
+    public Rectangle getBordes(final int posicionX, final int posicionY) {
 
-        int x = margenX - posicionX + anchoJugador;
-        int y = margenY - posicionY + altoJugador;
+        int x = margenX - posicionX + ElementosPrincipales.jugador.getAnchoJugador();
+        int y = margenY - posicionY + ElementosPrincipales.jugador.getAltoJugador();
 
-        int anchoRectangulo = this.ANCHO * Constantes.LADO_SPRITE - anchoJugador * 2;
-        int altoRectangulo = this.ALTO * Constantes.LADO_SPRITE - altoJugador * 2;
+        int anchoRectangulo = this.ANCHO * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getAnchoJugador() * 2;
+        int altoRectangulo = this.ALTO * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getAltoJugador() * 2;
 
         return new Rectangle(x, y, anchoRectangulo, altoRectangulo);
     }

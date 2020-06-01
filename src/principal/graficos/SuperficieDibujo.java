@@ -4,6 +4,7 @@ package principal.graficos;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
@@ -24,6 +25,7 @@ public class SuperficieDibujo extends Canvas {
 
     private Raton raton;
 
+
     public SuperficieDibujo(final int ancho, final int alto) {
 
         this.ancho = ancho;
@@ -36,7 +38,10 @@ public class SuperficieDibujo extends Canvas {
         //Java no intente obligar a dibujarse el canvas, para versiones anteriores
         setIgnoreRepaint(true);
         setPreferredSize(new Dimension(ancho, alto));
+        //Permitir que el teclado detecte las interacciones con el canvas
         addKeyListener(GestorControles.teclado);
+        //Permitir que el mouse detecte las interacciones con el canvas
+        addMouseListener(raton);
         setFocusable(true);
         requestFocus();
     }
@@ -56,7 +61,7 @@ public class SuperficieDibujo extends Canvas {
             return;
         }
 
-        final Graphics2D g = (Graphics2D) buffer.getDrawGraphics();
+        Graphics2D g = (Graphics2D) buffer.getDrawGraphics();
 
         DibujoOpciones.reiniciarObjetosDibujados();
 
@@ -102,4 +107,5 @@ public class SuperficieDibujo extends Canvas {
     public Raton getRaton() {
         return raton;
     }
+
 }

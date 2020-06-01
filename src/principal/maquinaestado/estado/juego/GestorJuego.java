@@ -3,74 +3,54 @@ package principal.maquinaestado.estado.juego;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import principal.Constantes;
-import principal.entes.Jugador;
+import principal.ElementosPrincipales;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DatoOpcion;
 import principal.herramientas.DibujoOpciones;
 import principal.interface_usuario.MenuInferior;
-import principal.mapas.Mapa;
 import principal.maquinaestado.EstadoJuego;
 
 public class GestorJuego implements EstadoJuego {
 
-    Mapa mapa;
-    Jugador jugador;
-    BufferedImage Logotipo;
+    BufferedImage logotipo;
     MenuInferior menuInferior;
 
     public GestorJuego() {
 
-        iniciarMapa("/mapas/mapa1");
-        iniciarJugador();
-        menuInferior = new MenuInferior(jugador);
-        Logotipo = CargadorRecursos.cargarImagenCompatibleTranslicida("/imagenes/iconos/Logotipo.png");
+        menuInferior = new MenuInferior();
+        logotipo = CargadorRecursos.cargarImagenCompatibleTranslicida(Constantes.RUTA_LOGOTIPO);
     }
 
-    private void recargarJuego() {
-
-        //Darle la nueva ruta del nuevo mapa para que aparezca el jugador
-        final String ruta = "/mapas/mapa" + mapa.getMapaSiguiente();
-        iniciarMapa(ruta);
-        recargarJugador(mapa.getMapaSiguiente());
-    }
-
-    private void iniciarMapa(final String ruta) {
-
-        mapa = new Mapa(ruta);
-    }
-
-    private void iniciarJugador() {
-
-        jugador = new Jugador(mapa);
-    }
-
-    private void recargarJugador(final String jugadorNum) {
-
-        int jugadorNumFinal = Integer.parseInt(jugadorNum) + 1;
-        final String ruta = "/imagenes/hojas_personajes/Personaje" + jugadorNumFinal + ".png";
-        jugador = new Jugador(mapa, ruta);
-    }
-
+//    private void recargarJuego() {
+//
+//        //Darle la nueva ruta del nuevo mapa para que aparezca el jugador
+//        final String rutaMapa = "/mapas/mapa" + ElementosPrincipales.mapa.getMapaSiguiente();
+//        ElementosPrincipales.mapa = new Mapa(rutaMapa);
+//        ElementosPrincipales.jugador.setPosicionX(ElementosPrincipales.mapa.getCoordenadaInicial().x);
+//        ElementosPrincipales.jugador.setPosicionY(ElementosPrincipales.mapa.getCoordenadaInicial().y);
+////        final String rutaJugador = "/imagenes/hojas_personajes/" + ElementosPrincipales.mapa.getMapaSiguiente() + ".png";
+////        ElementosPrincipales.jugador = new Jugador(rutaJugador);
+//    }
     @Override
     public void actualizar() {
 
         //Detectar si colisiono con el rectangulo de la salida
-        if (jugador.getLIMITE_ARRIBA().intersects(mapa.getZonaSalida())) {
-            recargarJuego();
-        }
-        jugador.actualizar();
-        mapa.actualizar((int) jugador.getPosicionX(), (int) jugador.getPosicionY());
+//        if (ElementosPrincipales.jugador.getLIMITE_ARRIBA().intersects(ElementosPrincipales.mapa.getZonaSalida())) {
+//            recargarJuego();
+//        }
+        ElementosPrincipales.jugador.actualizar();
+        ElementosPrincipales.mapa.actualizar();
     }
 
     @Override
     public void dibujar(Graphics g) {
 
-        mapa.dibujar(g, (int) jugador.getPosicionX(), (int) jugador.getPosicionY());
-        jugador.dibujar(g);
-        menuInferior.dibujar(g, jugador);
-        DibujoOpciones.dibujarImagen(g, Logotipo, Constantes.ANCHO_JUEGO - Logotipo.getWidth() - 5, 5);
+        ElementosPrincipales.mapa.dibujar(g);
+        ElementosPrincipales.jugador.dibujar(g);
+        menuInferior.dibujar(g);
+        DibujoOpciones.dibujarImagen(g, logotipo, Constantes.ANCHO_JUEGO - logotipo.getWidth() - 5, 5);
 
-        DatoOpcion.enviarDato((int) jugador.getPosicionX() + " ");
-        DatoOpcion.enviarDato((int) jugador.getPosicionY() + " ");
+        DatoOpcion.enviarDato((int) ElementosPrincipales.jugador.getPosicionXINT() + " ");
+        DatoOpcion.enviarDato((int) ElementosPrincipales.jugador.getPosicionYINT() + " ");
     }
 }
