@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import principal.Constantes;
 import principal.herramientas.CargadorRecursos;
 
 public class Ventana extends JFrame {
@@ -17,7 +18,7 @@ public class Ventana extends JFrame {
 
         this.titulo = titulo;
 
-        BufferedImage imagen = CargadorRecursos.cargarImagenCompatibleTranslicida("/imagenes/iconos/iconoVentana.jpeg");
+        BufferedImage imagen = CargadorRecursos.cargarImagenCompatibleTranslicida(Constantes.RUTA_ICONO_VENTANA);
         this.icono = new ImageIcon(imagen);
 
         configurarVentana(sd);

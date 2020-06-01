@@ -22,7 +22,7 @@ public class DatoOpcion {
 
         g.setColor(Color.GRAY);
         for (int i = 0; i < datos.size(); i++) {
-            DibujoOpciones.dibujarString(g, datos.get(i), 20, 40 + i * 10);
+            DibujoOpciones.dibujarString(g, datos.get(i), 20, 10 + i * 10);
         }
         datos.clear();
     }

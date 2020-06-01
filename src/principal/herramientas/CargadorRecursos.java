@@ -10,10 +10,16 @@ import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class CargadorRecursos {
 
@@ -109,5 +115,18 @@ public class CargadorRecursos {
         //Tamaño de la fuente
         fuente = fuente.deriveFont(11f);
         return fuente;
+    }
+
+    public static Clip cargarSonido(final String ruta) {
+        Clip clip = null;
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(ruta).getAbsoluteFile());
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
+            ex.printStackTrace();
+        }
+        return clip;
     }
 }

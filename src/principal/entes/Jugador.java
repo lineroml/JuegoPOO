@@ -3,10 +3,14 @@ package principal.entes;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import principal.Constantes;
+import principal.ElementosPrincipales;
 import principal.control.GestorControles;
 import principal.herramientas.DibujoOpciones;
-import principal.mapas.Mapa;
+import principal.inventario.RegistroObjetos;
+import principal.inventario.armas.Arma;
+import principal.inventario.armas.DesArmado;
 import principal.sprites.HojaSprites;
 
 public class Jugador {
@@ -28,49 +32,57 @@ public class Jugador {
     private final int anchoJugador = 16;
     private final int altoJugador = 16;
 
-    private final Rectangle LIMITE_ARRIBA = new Rectangle(Constantes.CENTRO_VENTANA_X - 25, Constantes.CENTRO_VENTANA_Y - anchoJugador - 2, anchoJugador, 1);
+    private final Rectangle LIMITE_ARRIBA = new Rectangle(Constantes.CENTRO_VENTANA_X - 25, Constantes.CENTRO_VENTANA_Y - anchoJugador + 9, anchoJugador, 1);
     private final Rectangle LIMITE_ABAJO = new Rectangle(Constantes.CENTRO_VENTANA_X - 25, Constantes.CENTRO_VENTANA_Y - 2, anchoJugador, 1);
-    private final Rectangle LIMITE_IZQUIERDA = new Rectangle(Constantes.CENTRO_VENTANA_X - 25, Constantes.CENTRO_VENTANA_Y - altoJugador - 2, 1, altoJugador);
-    private final Rectangle LIMITE_DERECHA = new Rectangle(Constantes.CENTRO_VENTANA_X - 9, Constantes.CENTRO_VENTANA_Y - altoJugador - 2, 1, altoJugador);
+    private final Rectangle LIMITE_IZQUIERDA = new Rectangle(Constantes.CENTRO_VENTANA_X - 25, Constantes.CENTRO_VENTANA_Y - altoJugador - 2, 1, altoJugador - 7);
+    private final Rectangle LIMITE_DERECHA = new Rectangle(Constantes.CENTRO_VENTANA_X - 9, Constantes.CENTRO_VENTANA_Y - altoJugador - 2, 1, altoJugador - 7);
 
-    public int resistencia = 300;
+    private int resistencia = 300;
+    private int resistenciaTotal = 300;
     private int recuperacion = 100;
     private boolean recuperado = true;
 
-    private Mapa mapa;
+    public int limitePeso = 100;
+    public int pesoActual = 30;
 
-    public Jugador(Mapa mapa, String Ruta) {
+    private AlmacenEquipo ae;
+    private ArrayList<Rectangle> alcanceArma;
 
-        this.posicionX = mapa.getCoordenadaInicial().getX();
-        this.posicionY = mapa.getCoordenadaInicial().getY();
+    private int vida;
+//
+    //    public Jugador(String Ruta) {
+    //
+    //        this.posicionX = ElementosPrincipales.mapa.getCoordenadaInicial().getX();
+    //        this.posicionY = ElementosPrincipales.mapa.getCoordenadaInicial().getY();
+    //        this.enMovimiento = false;
+    //        direccion = 2;
+    //
+    //        this.hs = new HojaSprites(Ruta, Constantes.LADO_SPRITE, false);
+    //
+    //        imagenActual = hs.getSprite(direccion, 0).getImagen();
+    //        animacion = 0;
+    //        a = 0;
+    //        d = 3;
+    //    }
+
+    public Jugador() {
+
+        this.posicionX = ElementosPrincipales.mapa.getCoordenadaInicial().getX();
+        this.posicionY = ElementosPrincipales.mapa.getCoordenadaInicial().getY();
         this.enMovimiento = false;
         direccion = 2;
 
-        this.hs = new HojaSprites(Ruta, Constantes.LADO_SPRITE, false);
-
-        imagenActual = hs.getSprite(direccion, 0).getImagen();
-        animacion = 0;
-        a = 0;
-        d = 3;
-
-        this.mapa = mapa;
-    }
-
-    public Jugador(Mapa mapa) {
-
-        this.posicionX = mapa.getCoordenadaInicial().getX();
-        this.posicionY = mapa.getCoordenadaInicial().getY();
-        this.enMovimiento = false;
-        direccion = 2;
-
-        this.hs = new HojaSprites("/imagenes/hojas_personajes/Personaje4.png", Constantes.LADO_SPRITE, false);
+        this.hs = new HojaSprites(Constantes.RUTA_PERSONAJE, Constantes.LADO_SPRITE, false);
 
         imagenActual = hs.getSprite(direccion, 0).getImagen();
         animacion = 0;
         a = 0;
         d = 4;
 
-        this.mapa = mapa;
+        ae = new AlmacenEquipo((Arma) RegistroObjetos.getObjeto(599));
+        alcanceArma = new ArrayList();
+
+        vida = 1000;
     }
 
     public void actualizar() {
@@ -85,6 +97,27 @@ public class Jugador {
         enMovimiento = false;
         determinarDireccion();
         animar();
+        actualizarArma();
+        cambiarHojaSprite();
+    }
+
+    private void actualizarArma() {
+        if (!(ae.getArma() instanceof DesArmado)) {
+            calcularAlcance();
+            ae.getArma().actualizar();
+        }
+    }
+
+    private void calcularAlcance() {
+        if (!(ae.getArma() instanceof DesArmado)) {
+            alcanceArma = ae.getArma().getAlcance(this);
+        }
+    }
+
+    private void cambiarHojaSprite() {
+        if (ae.getArma() instanceof Arma && !(ae.getArma() instanceof DesArmado)) {
+            hs = new HojaSprites(Constantes.RUTA_PERSONAJEARMADO, Constantes.LADO_SPRITE, false);
+        }
     }
 
     private void gestionarVelocidadResistencia() {
@@ -98,7 +131,7 @@ public class Jugador {
             if (!recuperado && recuperacion < 100) {
                 recuperacion++;
             }
-            if (recuperacion == 100 && resistencia < 300) {
+            if (recuperacion == 100 && resistencia < resistenciaTotal) {
                 resistencia++;
             }
         }
@@ -207,13 +240,13 @@ public class Jugador {
 
     private boolean enColisionArriba(int velocidadY) {
 
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.getAreasColisionJugador().get(r);
 
             int origenX = area.x;
             int origenY = area.y + velocidadY * (int) (velocidadMovimiento + 0.6) + 3 * (int) (velocidadMovimiento + 0.6);
 
-            final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+            final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_ARRIBA.intersects(areaFutura)) {
                 return true;
@@ -224,13 +257,13 @@ public class Jugador {
 
     private boolean enColisionAbajo(int velocidadY) {
 
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.getAreasColisionJugador().get(r);
 
             int origenX = area.x;
             int origenY = area.y + velocidadY * (int) (velocidadMovimiento + 0.6) - 3 * (int) (velocidadMovimiento + 0.6);
 
-            final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+            final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_ABAJO.intersects(areaFutura)) {
                 return true;
@@ -241,13 +274,13 @@ public class Jugador {
 
     private boolean enColisionIzquierda(int velocidadX) {
 
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.getAreasColisionJugador().get(r);
 
             int origenX = area.x + velocidadX * (int) (velocidadMovimiento + 0.6) + 3 * (int) (velocidadMovimiento + 0.6);
             int origenY = area.y;
 
-            final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+            final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_IZQUIERDA.intersects(areaFutura)) {
                 return true;
@@ -258,13 +291,13 @@ public class Jugador {
 
     private boolean enColisionDerecha(int velocidadX) {
 
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.getAreasColisionJugador().get(r);
 
             int origenX = area.x + velocidadX * (int) (velocidadMovimiento + 0.6) - 3 * (int) (velocidadMovimiento + 0.6);
             int origenY = area.y;
 
-            final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+            final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_DERECHA.intersects(areaFutura)) {
                 return true;
@@ -278,7 +311,7 @@ public class Jugador {
         int posicionFuturaX = (int) posicionX + velocidadX * (int) (velocidadMovimiento + 0.6);
         int posicionFuturaY = (int) posicionY + velocidadY * (int) (velocidadMovimiento + 0.6);
 
-        final Rectangle bordesMapa = mapa.getBordes(posicionFuturaX, posicionFuturaY, altoJugador, anchoJugador);
+        final Rectangle bordesMapa = ElementosPrincipales.mapa.getBordes(posicionFuturaX, posicionFuturaY);
 
         final boolean FUERA;
 
@@ -410,6 +443,7 @@ public class Jugador {
         // Derecha e izquierda
 //        g.drawRect(centroX + 13, centroY, 6, 32);
         DibujoOpciones.dibujarImagen(g, imagenActual, centroX, centroY);
+//        DibujoOpciones.dibujarRectBorde(g, getArea(), Color.red);
 //        g.drawRect(LIMITE_ARRIBA.x, LIMITE_ARRIBA.y, LIMITE_ARRIBA.width, LIMITE_ARRIBA.height);
 //        g.drawRect(LIMITE_ABAJO.x, LIMITE_ABAJO.y, LIMITE_ABAJO.width, LIMITE_ABAJO.height);
 //        g.drawRect(LIMITE_IZQUIERDA.x, LIMITE_IZQUIERDA.y, LIMITE_IZQUIERDA.width, LIMITE_IZQUIERDA.height);
@@ -432,7 +466,56 @@ public class Jugador {
         return posicionY;
     }
 
+    public int getPosicionXINT() {
+        return (int) posicionX;
+    }
+
+    public int getPosicionYINT() {
+        return (int) posicionY;
+    }
+
     public Rectangle getLIMITE_ARRIBA() {
         return LIMITE_ARRIBA;
     }
+
+    public int getAnchoJugador() {
+        return anchoJugador;
+    }
+
+    public int getAltoJugador() {
+        return altoJugador;
+    }
+
+    public int getResistencia() {
+        return resistencia;
+    }
+
+    public int getResistenciaTotal() {
+        return resistenciaTotal;
+    }
+
+    public AlmacenEquipo getAlmacenEquipo() {
+        return ae;
+    }
+
+    public int getDireccion() {
+        return direccion;
+    }
+
+    public ArrayList<Rectangle> getAlcanceArma() {
+        return alcanceArma;
+    }
+
+    public Rectangle getArea() {
+        return new Rectangle(Constantes.CENTRO_VENTANA_X - Constantes.LADO_SPRITE + 8, Constantes.CENTRO_VENTANA_Y - Constantes.LADO_SPRITE + 10, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE - 10);
+    }
+
+    public void setVida(final int bajoVida) {
+        vida -= bajoVida;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
 }

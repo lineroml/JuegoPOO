@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import principal.Constantes;
-import principal.entes.Jugador;
+import principal.ElementosPrincipales;
 import principal.herramientas.DibujoOpciones;
 
 public class MenuInferior {
@@ -17,7 +17,7 @@ public class MenuInferior {
     private final Color azulClaro;
     private final Color azulOscuro;
 
-    public MenuInferior(final Jugador jugador) {
+    public MenuInferior() {
 
         int altoMenu = 55;
         grisOscuro = new Color(24, 23, 28);
@@ -29,11 +29,11 @@ public class MenuInferior {
         bordeSeparacion = new Rectangle(areaInventario.x, areaInventario.y - 1, areaInventario.width, 1);
     }
 
-    public void dibujar(final Graphics g, final Jugador jugador) {
+    public void dibujar(final Graphics g) {
 
         dibujarAreaInventario(g);
         dibujarBarraVida(g);
-        dibujarBarraResistencia(g, jugador.resistencia);
+        dibujarBarraResistencia(g);
         dibujarRanurasObjetos(g);
     }
 
@@ -47,27 +47,28 @@ public class MenuInferior {
 
         final int medidaVertical = 5;
         final int anchoTotal = 100;
+        final int ancho = 100 * ElementosPrincipales.jugador.getVida() / 1000;
 
-        DibujoOpciones.dibujarRectRelleno(g, areaInventario.x + 35, areaInventario.y + medidaVertical, anchoTotal, medidaVertical, rojoClaro);
-        DibujoOpciones.dibujarRectRelleno(g, areaInventario.x + 35, areaInventario.y + medidaVertical * 2, anchoTotal, medidaVertical, rojoOscuro);
+        DibujoOpciones.dibujarRectRelleno(g, areaInventario.x + 35, areaInventario.y + medidaVertical, ancho, medidaVertical, rojoClaro);
+        DibujoOpciones.dibujarRectRelleno(g, areaInventario.x + 35, areaInventario.y + medidaVertical * 2, ancho, medidaVertical, rojoOscuro);
 
         g.setColor(Color.WHITE);
         DibujoOpciones.dibujarString(g, "VIDA", areaInventario.x + 12, areaInventario.y + medidaVertical * 3 - 2);
-        DibujoOpciones.dibujarString(g, "1000", areaInventario.x + anchoTotal + 45, areaInventario.y + medidaVertical * 3 - 2);
+        DibujoOpciones.dibujarString(g, ElementosPrincipales.jugador.getVida() + "", areaInventario.x + anchoTotal + 45, areaInventario.y + medidaVertical * 3 - 2);
     }
 
-    private void dibujarBarraResistencia(final Graphics g, final int resistencia) {
+    private void dibujarBarraResistencia(final Graphics g) {
 
         final int medidaVertical = 5;
         final int anchoTotal = 100;
-        final int ancho = 100 * resistencia / 300;
+        final int ancho = 100 * ElementosPrincipales.jugador.getResistencia() / ElementosPrincipales.jugador.getResistenciaTotal();
 
         DibujoOpciones.dibujarRectRelleno(g, areaInventario.x + 35, areaInventario.y + medidaVertical * 4, ancho, medidaVertical, azulClaro);
         DibujoOpciones.dibujarRectRelleno(g, areaInventario.x + 35, areaInventario.y + medidaVertical * 5, ancho, medidaVertical, azulOscuro);
 
         g.setColor(Color.WHITE);
         DibujoOpciones.dibujarString(g, "RES", areaInventario.x + 15, areaInventario.y + medidaVertical * 6 - 2);
-        DibujoOpciones.dibujarString(g, resistencia + "", areaInventario.x + anchoTotal + 45, areaInventario.y + medidaVertical * 6 - 2);
+        DibujoOpciones.dibujarString(g, ElementosPrincipales.jugador.getResistencia() + "", areaInventario.x + anchoTotal + 45, areaInventario.y + medidaVertical * 6 - 2);
     }
 
     private void dibujarRanurasObjetos(final Graphics g) {

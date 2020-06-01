@@ -4,6 +4,7 @@ package principal.graficos;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
@@ -13,7 +14,7 @@ import principal.control.GestorControles;
 import principal.control.Raton;
 import principal.herramientas.DatoOpcion;
 import principal.herramientas.DibujoOpciones;
-import principal.maquinaEstado.GestorEstado;
+import principal.maquinaestado.GestorEstado;
 
 public class SuperficieDibujo extends Canvas {
 
@@ -23,6 +24,7 @@ public class SuperficieDibujo extends Canvas {
     private int alto;
 
     private Raton raton;
+
 
     public SuperficieDibujo(final int ancho, final int alto) {
 
@@ -36,7 +38,10 @@ public class SuperficieDibujo extends Canvas {
         //Java no intente obligar a dibujarse el canvas, para versiones anteriores
         setIgnoreRepaint(true);
         setPreferredSize(new Dimension(ancho, alto));
+        //Permitir que el teclado detecte las interacciones con el canvas
         addKeyListener(GestorControles.teclado);
+        //Permitir que el mouse detecte las interacciones con el canvas
+        addMouseListener(raton);
         setFocusable(true);
         requestFocus();
     }
@@ -56,7 +61,7 @@ public class SuperficieDibujo extends Canvas {
             return;
         }
 
-        final Graphics2D g = (Graphics2D) buffer.getDrawGraphics();
+        Graphics2D g = (Graphics2D) buffer.getDrawGraphics();
 
         DibujoOpciones.reiniciarObjetosDibujados();
 
@@ -72,8 +77,8 @@ public class SuperficieDibujo extends Canvas {
         ge.dibujar(g);
 
         g.setColor(Color.GRAY);
-        DibujoOpciones.dibujarString(g, GestorPrincipal.getAps() + "", 20, 20);
-        DibujoOpciones.dibujarString(g, GestorPrincipal.getFps() + "", 20, 30);
+        DatoOpcion.enviarDato("APS  " + GestorPrincipal.getAps());
+        DatoOpcion.enviarDato("FPS  " + GestorPrincipal.getFps());
 
         if (GestorControles.teclado.opciones) {
             DatoOpcion.dibujarDatos(g);
@@ -98,4 +103,9 @@ public class SuperficieDibujo extends Canvas {
     public int getAlto() {
         return alto;
     }
+
+    public Raton getRaton() {
+        return raton;
+    }
+
 }

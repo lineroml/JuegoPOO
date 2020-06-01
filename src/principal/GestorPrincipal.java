@@ -1,8 +1,9 @@
 package principal;
 
+import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
-import principal.maquinaEstado.GestorEstado;
+import principal.maquinaestado.GestorEstado;
 
 public class GestorPrincipal {
 
@@ -14,7 +15,7 @@ public class GestorPrincipal {
     private final int ancho;
     private final int alto;
 
-    private SuperficieDibujo sd;
+    public static SuperficieDibujo sd;
     private Ventana ventana;
     private GestorEstado ge;
 
@@ -29,9 +30,19 @@ public class GestorPrincipal {
     }
 
     public static void main(String[] args) {
+        //Usar la tarjeta grafica en vez de el procesador para dibujar
+        //Para OpenGl mac/linux
+       // System.setProperty("sun.java2d.opengl", "True");
+
+        //Para Windows
+//        System.setProperty("sun.java2d.d3d", "True");
+       // System.setProperty("sun.java2d.ddforcevram", "True");
+
+        //Mejora el rendimineto con graficos transparentes
+        //System.setProperty("sun.java2d.transaccel", "True");
 
         //Creamos un gestor principal
-        GestorPrincipal gp = new GestorPrincipal("Forgotten History", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
+        GestorPrincipal gp = new GestorPrincipal("Dysaca", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
 
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
@@ -47,7 +58,7 @@ public class GestorPrincipal {
 
         sd = new SuperficieDibujo(ancho, alto);
         ventana = new Ventana(titulo, sd);
-        ge = new GestorEstado();
+        ge = new GestorEstado(sd);
     }
 
     private void iniciarBuclePrincipal() {
@@ -104,6 +115,11 @@ public class GestorPrincipal {
 
     private void actualizar() {
 
+        if (GestorControles.teclado.inventario) {
+            ge.cambiarEstadoActual(1);
+        } else {
+            ge.cambiarEstadoActual(0);
+        }
         ge.actualizar();
         sd.actualizar();
     }
@@ -120,4 +136,5 @@ public class GestorPrincipal {
     public static int getFps() {
         return fps;
     }
+
 }
