@@ -34,7 +34,7 @@ public class RegistroObjetos {
                 break;
             //Armas
             case 500:
-                objeto = new Pistola(idObjeto, "Pistola", "Sin descripcion", 3, 6, false, true, 0.7);
+                objeto = new Pistola(idObjeto, "Pistola", "Sin descripcion", 12, 20, false, true, 0.7);
                 break;
             case 599:
                 objeto = new DesArmado(idObjeto, "manos", "Sin descripcion", 1, 1, false, false, 0);

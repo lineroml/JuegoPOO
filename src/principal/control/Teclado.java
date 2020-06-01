@@ -2,8 +2,6 @@ package principal.control;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.sound.sampled.Clip;
-import principal.herramientas.CargadorRecursos;
 
 public class Teclado implements KeyListener {
 
@@ -78,6 +76,9 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_SHIFT:
                 run = false;
+                break;
+            case KeyEvent.VK_E:
+                recoger = false;
                 break;
             case KeyEvent.VK_SPACE:
                 ataque = false;

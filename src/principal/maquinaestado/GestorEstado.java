@@ -20,15 +20,14 @@ public class GestorEstado {
 
     private void iniciarEstados(final SuperficieDibujo sd) {
 
-        estados = new EstadoJuego[2];
-        //estados[0] = new MenuInicio();
-        estados[0] = new GestorJuego();
-        estados[1] = new GestorMenu(sd);
+        estados = new EstadoJuego[3];
+        estados[0] = new MenuInicio();
+        estados[1] = new GestorJuego();
+        estados[2] = new GestorMenu(sd);
         //Añadir e iniciar los demas estados a medida que los creemos
     }
 
     private void iniciarEstadoActual() {
-
         estadoActual = estados[0];
     }
 

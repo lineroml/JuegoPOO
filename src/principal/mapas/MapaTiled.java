@@ -5,13 +5,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import principal.Constantes;
 import principal.ElementosPrincipales;
+import principal.GestorPrincipal;
 import principal.control.GestorControles;
 import principal.entes.Enemigo;
 import principal.entes.RegistroEnemigos;
@@ -22,6 +22,7 @@ import principal.inventario.Objeto;
 import principal.inventario.ObjetoSuelto;
 import principal.inventario.RegistroObjetos;
 import principal.inventario.armas.DesArmado;
+import principal.maquinaestado.estado.juego.GestorJuego;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
@@ -40,7 +41,6 @@ public class MapaTiled {
 
     private final ArrayList<ObjetoSuelto> objetoSueltos;
     private final ArrayList<Enemigo> enemigos;
-
 
     public MapaTiled(final String ruta) {
         //Leer archivo de texto
@@ -107,9 +107,9 @@ public class MapaTiled {
                 final Rectangle posicionObjetoActual = new Rectangle(objetoActual.getPosicion().x,
                         objetoActual.getPosicion().y, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE / 2);
 
-                if (areaJugador.intersects(posicionObjetoActual) && GestorControles.teclado.recoger) {
+                if (areaJugador.intersects(posicionObjetoActual) && GestorControles.teclado.recoger
+                        && GestorPrincipal.ge.getEstadoActual() instanceof GestorJuego) {
                     ElementosPrincipales.inventario.recogerObjetos(objetoActual);
-                    GestorControles.teclado.recoger = false;
                     objetoSueltos.remove(i);
                 }
             }

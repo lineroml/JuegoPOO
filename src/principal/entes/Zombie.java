@@ -54,7 +54,7 @@ public class Zombie extends Enemigo {
         }
         for (Enemigo enemigo : enemigos) {
             if (enemigo.getArea().intersects(ElementosPrincipales.jugador.getArea())) {
-                if (sonidoContador % 300 == 0) {
+                if (sonidoContador % 200 == 0) {
                     Random r = new Random();
                     int num = r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
                     ElementosPrincipales.jugador.setVida(num);
