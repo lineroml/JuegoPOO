@@ -18,7 +18,7 @@ public class GestorJuego implements EstadoJuego {
     public GestorJuego() {
 
         menuInferior = new MenuInferior();
-        logotipo = CargadorRecursos.cargarImagenCompatibleTranslicida(Constantes.RUTA_LOGOTIPO);
+        logotipo = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.RUTA_LOGOTIPO);
     }
 
 //    private void recargarJuego() {

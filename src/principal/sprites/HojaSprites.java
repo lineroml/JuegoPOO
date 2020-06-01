@@ -24,7 +24,7 @@ public class HojaSprites {
         if (hojaOpaca) {
             imagen = CargadorRecursos.cargarImagenCompatibleOpaca(ruta);
         } else {
-            imagen = CargadorRecursos.cargarImagenCompatibleTranslicida(ruta);
+            imagen = CargadorRecursos.cargarImagenCompatibleTranslucida(ruta);
         }
 
         anchoHojaEnPixeles = imagen.getWidth();
@@ -49,7 +49,7 @@ public class HojaSprites {
         if (hojaOpaca) {
             imagen = CargadorRecursos.cargarImagenCompatibleOpaca(ruta);
         } else {
-            imagen = CargadorRecursos.cargarImagenCompatibleTranslicida(ruta);
+            imagen = CargadorRecursos.cargarImagenCompatibleTranslucida(ruta);
         }
 
         anchoHojaEnPixeles = imagen.getWidth();

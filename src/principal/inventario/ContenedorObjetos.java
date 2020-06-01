@@ -8,7 +8,7 @@ import principal.herramientas.DibujoOpciones;
 
 public class ContenedorObjetos {
 
-    private BufferedImage sprite = CargadorRecursos.cargarImagenCompatibleTranslicida("/imagenes/CofreCerrado.png");
+    private BufferedImage sprite = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/CofreCerrado.png");
 
     private Point posicion;
     private Objeto[] objetos;
@@ -36,7 +36,7 @@ public class ContenedorObjetos {
     }
 
     public void setCofre() {
-        sprite = CargadorRecursos.cargarImagenCompatibleTranslicida("/imagenes/CofreAbierto.png");
+        sprite = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/CofreAbierto.png");
     }
 
 }

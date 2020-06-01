@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package principal.maquinaestado.estado.menuinicial.itemsMenu;
 
-/**
- *
- * @author dysac
- */
+import java.io.File;
+import java.util.ArrayList;
+
 public class CargarPartida {
+
+    private ArrayList<File> partidas;
+
+    public CargarPartida() {
+        partidas = new ArrayList();
+    }
+
+    public ArrayList<File> getPartidas() {
+        return partidas;
+    }
 
 }

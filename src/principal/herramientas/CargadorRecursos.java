@@ -47,7 +47,7 @@ public class CargadorRecursos {
         return imagenAcelerada;
     }
 
-    public static BufferedImage cargarImagenCompatibleTranslicida(final String ruta) {
+    public static BufferedImage cargarImagenCompatibleTranslucida(final String ruta) {
 
         Image imagen = null;
 

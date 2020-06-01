@@ -2,6 +2,8 @@ package principal.maquinaestado.estado.menujuego;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import static principal.GestorPrincipal.ge;
+import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.maquinaestado.EstadoJuego;
 import principal.maquinaestado.estado.menujuego.itemsMenu.FormaMenu;
@@ -36,6 +38,12 @@ public class GestorMenu implements EstadoJuego {
 
     @Override
     public void actualizar() {
+        if (GestorControles.teclado.inventario) {
+            ge.cambiarEstadoActual(2);
+        } else {
+            ge.cambiarEstadoActual(1);
+        }
+
         for (int i = 0; i < etiquetas.length; i++) {
             //Saber si el mouse hizo click
             if (sd.getRaton().isClickIzquierdo()) {
