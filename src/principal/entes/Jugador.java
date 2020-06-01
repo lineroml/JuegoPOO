@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import principal.Constantes;
 import principal.ElementosPrincipales;
+import principal.GestorPrincipal;
 import principal.control.GestorControles;
 import principal.herramientas.DibujoOpciones;
 import principal.inventario.RegistroObjetos;
@@ -48,7 +49,14 @@ public class Jugador {
     private AlmacenEquipo ae;
     private ArrayList<Rectangle> alcanceArma;
 
+    private boolean spawning;
+    private boolean visible;
+    private static int spawnTime = 0;
+    //Parpadear o titilar
+    private static int flickerTime = 0;
+
     private int vida;
+    private boolean muerto;
 //
     //    public Jugador(String Ruta) {
     //
@@ -70,7 +78,7 @@ public class Jugador {
         this.posicionX = ElementosPrincipales.mapa.getCoordenadaInicial().getX();
         this.posicionY = ElementosPrincipales.mapa.getCoordenadaInicial().getY();
         this.enMovimiento = false;
-        direccion = 2;
+        direccion = 0;
 
         this.hs = new HojaSprites(Constantes.RUTA_PERSONAJE, Constantes.LADO_SPRITE, false);
 
@@ -83,9 +91,35 @@ public class Jugador {
         alcanceArma = new ArrayList();
 
         vida = 1000;
+        visible = true;
+        muerto = false;
     }
 
     public void actualizar() {
+
+        if (vida == 0) {
+            muerto = true;
+            GestorPrincipal.ge.cambiarEstadoActual(3);
+        }
+        if (spawning) {
+
+            flickerTime++;
+            spawnTime++;
+
+            if (flickerTime > Constantes.FLICKER_TIME) {
+
+                visible = !visible;
+                flickerTime = 0;
+            }
+
+            if (spawnTime > Constantes.SPAWNING_TIME) {
+                spawning = false;
+                visible = true;
+                muerto = false;
+                spawnTime = 0;
+                flickerTime = 0;
+            }
+        }
 
         if (animacion < 32767) {
 
@@ -433,7 +467,18 @@ public class Jugador {
 //        }
     }
 
+    public void renacer() {
+        this.posicionX = ElementosPrincipales.mapa.getCoordenadaInicial().x;
+        this.posicionY = ElementosPrincipales.mapa.getCoordenadaInicial().y;
+        this.direccion = 0;
+        vida = 1000;
+        spawning = true;
+    }
+
     public void dibujar(Graphics g) {
+        if (!visible) {
+            return;
+        }
 
         final int centroX = Constantes.ANCHO_JUEGO / 2 - Constantes.LADO_SPRITE;
         final int centroY = Constantes.ALTO_JUEGO / 2 - Constantes.LADO_SPRITE;
@@ -511,11 +556,19 @@ public class Jugador {
     }
 
     public void setVida(final int bajoVida) {
-        vida -= bajoVida;
+        if (vida - bajoVida < 0) {
+            vida = 0;
+        } else {
+            vida -= bajoVida;
+        }
     }
 
     public int getVida() {
         return vida;
+    }
+
+    public boolean isMuerto() {
+        return muerto;
     }
 
 }

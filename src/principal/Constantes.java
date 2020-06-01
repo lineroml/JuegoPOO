@@ -41,4 +41,7 @@ public class Constantes {
 
     public static Color COLOR_VERDE_CLARO = new Color(0x2ff40a);
     public static Color COLOR_VERDE_OSCURO = new Color(0x2d572c);
+
+    public static final long SPAWNING_TIME = 300;
+    public static final long FLICKER_TIME = 20;
 }

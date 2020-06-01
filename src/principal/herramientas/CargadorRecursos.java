@@ -66,7 +66,6 @@ public class CargadorRecursos {
         Graphics g = imagenAcelerada.getGraphics();
         g.drawImage(imagen, 0, 0, null);
         g.dispose();
-
         return imagenAcelerada;
     }
 

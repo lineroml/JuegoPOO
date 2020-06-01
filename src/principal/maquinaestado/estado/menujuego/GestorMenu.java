@@ -38,12 +38,6 @@ public class GestorMenu implements EstadoJuego {
 
     @Override
     public void actualizar() {
-        if (GestorControles.teclado.inventario) {
-            ge.cambiarEstadoActual(2);
-        } else {
-            ge.cambiarEstadoActual(1);
-        }
-
         for (int i = 0; i < etiquetas.length; i++) {
             //Saber si el mouse hizo click
             if (sd.getRaton().isClickIzquierdo()) {
@@ -60,6 +54,14 @@ public class GestorMenu implements EstadoJuego {
             }
         }
         etiquetaActual.actualizar();
+
+        if (!GestorControles.teclado.inventario) {
+            if (etiquetaActual instanceof MenuEquipo) {
+                MenuEquipo me = (MenuEquipo) etiquetaActual;
+                me.setObjetoSeleccionado();
+            }
+            ge.cambiarEstadoActual(1);
+        }
     }
 
     @Override

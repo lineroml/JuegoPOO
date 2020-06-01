@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import principal.Constantes;
 import principal.ElementosPrincipales;
+import static principal.GestorPrincipal.ge;
+import principal.control.GestorControles;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DatoOpcion;
 import principal.herramientas.DibujoOpciones;
@@ -40,6 +42,10 @@ public class GestorJuego implements EstadoJuego {
 //        }
         ElementosPrincipales.jugador.actualizar();
         ElementosPrincipales.mapa.actualizar();
+
+        if (GestorControles.teclado.inventario) {
+            ge.cambiarEstadoActual(2);
+        }
     }
 
     @Override
