@@ -12,6 +12,7 @@ import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
 import principal.maquinaestado.estado.menuinicial.itemsMenu.CargarPartida;
+import principal.sonido.Sonido;
 
 public class MenuInicio implements EstadoJuego {
 
@@ -35,6 +36,8 @@ public class MenuInicio implements EstadoJuego {
     private BufferedImage configuracionActual;
 
     private CargarPartida partida;
+    private final Sonido sonidoIntro = new Sonido("Resourses/sonidos/MusicaIntro.wav");
+    private final Sonido boton = new Sonido("Resourses/sonidos/boton.wav");
 
     public MenuInicio(final SuperficieDibujo sd) {
         this.sd = sd;
@@ -47,6 +50,8 @@ public class MenuInicio implements EstadoJuego {
         inicioPartidaActual = inicioPartida;
         cargarSinPartidaActual = cargarSinPartida;
         configuracionActual = configuracion;
+
+        sonidoIntro.reproducirBucle();
     }
 
     @Override
@@ -55,9 +60,11 @@ public class MenuInicio implements EstadoJuego {
                 EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
 
         if (r.intersects(inicioPartidaR)) {
+            boton.reproducir();
             inicioPartidaActual = inicioPartidaConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
                 GestorPrincipal.ge.cambiarEstadoActual(1);
+                sonidoIntro.detenerSonido();
             }
         } else {
             inicioPartidaActual = inicioPartida;
@@ -65,11 +72,13 @@ public class MenuInicio implements EstadoJuego {
         if (partida.getPartidas().isEmpty()) {
             cargarSinPartidaActual = cargarSinPartida;
         } else if (r.intersects(cargarPartidaR)) {
+            boton.reproducir();
             cargarSinPartidaActual = cargarPartidaConMouse;
         } else {
             cargarSinPartidaActual = cargarPartida;
         }
         if (r.intersects(configuracionR)) {
+            boton.reproducir();
             configuracionActual = configuracionConMouse;
         } else {
             configuracionActual = configuracion;
