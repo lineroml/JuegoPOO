@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -41,6 +42,8 @@ public class MapaTiled {
 
     private final ArrayList<ObjetoSuelto> objetoSueltos;
     private final ArrayList<Enemigo> enemigos;
+
+    private int contZombies;
 
     public MapaTiled(final String ruta) {
         //Leer archivo de texto
@@ -83,8 +86,9 @@ public class MapaTiled {
 
         //Obtener enemigos en el mapa
         enemigos = new ArrayList();
-        JSONArray coleccionEnemigos = getArrayJSON(todoJSON.get("enemigos").toString());
-        getEnemigosMapa(coleccionEnemigos);
+        contZombies = 0;
+//        JSONArray coleccionEnemigos = getArrayJSON(todoJSON.get("enemigos").toString());
+//        getEnemigosMapa(coleccionEnemigos);
     }
 
     public void actualizar() {
@@ -92,9 +96,11 @@ public class MapaTiled {
         actualizarRecogidaObjetos();
         actualizarEnemigos();
         actualizarAtaques();
-
-//        Point punto = new Point(ElementosPrincipales.jugador.getPosicionXINT(), ElementosPrincipales.jugador.getPosicionYINT());
-//        Point coincidente = IA.obtenerCoordenadasNodoCoincidente(punto);
+        contZombies++;
+        if (contZombies == 180) {
+            contZombies = 0;
+            getZombiesMapa();
+        }
     }
 
     private void actualizarRecogidaObjetos() {
@@ -228,13 +234,23 @@ public class MapaTiled {
         }
     }
 
+    private void getZombiesMapa() {
+        Random num = new Random();
+        int xEnemigo = num.nextInt(2208) + 1;
+        int yEnemigo = num.nextInt(2208) + 1;
+        System.out.println(xEnemigo + ", " + yEnemigo);
+        Point posicionEnemigo = new Point(xEnemigo, yEnemigo);
+        Enemigo enemigo = RegistroEnemigos.getEnemigo(1);
+        enemigo.setPosicion(posicionEnemigo.x, posicionEnemigo.y);
+        enemigos.add(enemigo);
+    }
+
     private void getEnemigosMapa(JSONArray coleccionEnemigos) {
         for (int i = 0; i < coleccionEnemigos.size(); i++) {
             JSONObject datosEnemigo = getObjetoJSON(coleccionEnemigos.get(i).toString());
             int idEnemigo = getIntDelJSON(datosEnemigo, "id");
             int xEnemigo = getIntDelJSON(datosEnemigo, "x");
             int yEnemigo = getIntDelJSON(datosEnemigo, "y");
-
             Point posicionEnemigo = new Point(xEnemigo, yEnemigo);
             Enemigo enemigo = RegistroEnemigos.getEnemigo(idEnemigo);
             enemigo.setPosicion(posicionEnemigo.x, posicionEnemigo.y);

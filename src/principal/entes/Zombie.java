@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import principal.Constantes;
 import principal.ElementosPrincipales;
-import principal.control.GestorControles;
 import principal.herramientas.DibujoOpciones;
 import principal.sonido.Sonido;
 import principal.sprites.HojaSprites;
@@ -78,7 +77,6 @@ public class Zombie extends Enemigo {
     private void animar() {
 
         if (enMovimiento) {
-            GestorControles.teclado.dance = false;
             if (animacion % 10 == 0) {
                 a++;
                 if (a >= 4) {
