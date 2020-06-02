@@ -2,7 +2,9 @@ package principal;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 import principal.herramientas.CargadorRecursos;
+import principal.sonido.Sonido;
 
 public class Constantes {
 
@@ -44,4 +46,39 @@ public class Constantes {
 
     public static final long SPAWNING_TIME = 300;
     public static final long FLICKER_TIME = 20;
+
+    public static final Sonido BOTON = new Sonido("Resourses/sonidos/boton.wav");
+    public static final Sonido CANCION1 = new Sonido("Resourses/sonidos/MusicaIntro.wav");
+
+    public static final String BOTONPAUSA = "/imagenes/menu/pausa.png";
+    public static final String BOTONPAUSACONMOUSE = "/imagenes/menu/pausaConMouse.png";
+    public static final String BOTONSALIR = "/imagenes/menu/salir.png";
+    public static final String BOTONSALIRCONMOUSE = "/imagenes/menu/salirConMouse.png";
+    public final static BufferedImage IMAGENFONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/menuInicial.png");
+    public final static BufferedImage FONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondo.png");
+    public final static BufferedImage INICIOPARTIDA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartida.png");
+    public final static BufferedImage INICIOPARTIDACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartidaConMouse.png");
+    public final static BufferedImage CARGARPARTIDA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/cargarPartida.png");
+    public final static BufferedImage CARGARPARTIDACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/cargarPartidaConMouse.png");
+    public final static BufferedImage CARGARSONPARTIDA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/cargarSinPartida.png");
+    public final static BufferedImage CONFIGURACION = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/configuracion.png");
+    public final static BufferedImage CONFIGURACIONCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/configuracionConMouse.png");
+    public final static BufferedImage SALIRMENU = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/salirMenu.png");
+    public final static BufferedImage SALIRMENUCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/salirMenuConMouse.png");
+    public final static BufferedImage QUIERESALIR = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/quiereSalir.png");
+    public final static BufferedImage QUIERESALIRSI = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/si.png");
+    public final static BufferedImage QUIERESALIRNO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/no.png");
+    public final static BufferedImage QUIERESALIRSICONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/siConMouse.png");
+    public final static BufferedImage QUIERESALIRNOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/noConMouse.png");
+    public final static BufferedImage GAMEOVER = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/iconos/GameOver.png");
+    public final static BufferedImage VOLVERALJUEGO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volverAlJuego.png");
+    public final static BufferedImage VOLVERALJUEGOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volverAlJuegoConMouse.png");
+    public final static BufferedImage IDIOMA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/idioma.png");
+    public final static BufferedImage SONIDO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/sonido.png");
+    public final static BufferedImage DIFICULTAD = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/dificultad.png");
+    public final static BufferedImage DIFICULTADCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/dificultadConMouse.png");
+    public final static BufferedImage CREDITOS = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/creditos.png");
+    public final static BufferedImage CREDITOSCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/creditosConMouse.png");
+    public final static BufferedImage MUSICA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/musica.png");
+    public final static BufferedImage MUSICACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/musicaConMouse.png");
 }

@@ -52,7 +52,6 @@ public class MenuInventario extends PlantillaMenu {
     public void dibujar(Graphics g, SuperficieDibujo sd) {
         dibujarLimiteCapacidad(g);
         dibujarElementosInventario(g);
-        dibujarPaginador(g, formaMenu);
         //Es necesario escalar la barra de peso para comprobar con el raton, porque ya esta escalado
         if (sd.getRaton().getPosicionRectangulo().intersects(EscaladorElementos.escalarRectanguloArriba(barraCapacidad))) {
             //Nueva fuente para el texto porque no dejaba poner porcentaje (%)
@@ -94,18 +93,6 @@ public class MenuInventario extends PlantillaMenu {
                         puntoInicial.y + 31, Color.WHITE);
             }
         }
-    }
-
-    //Hacer saltos de pagina para ver mas elementos de inventario
-    private void dibujarPaginador(final Graphics g, FormaMenu fm) {
-        final int anchoBoton = 32;
-        final int altoBoton = 16;
-        final Rectangle anterior = new Rectangle(fm.CENTRAL.x + fm.CENTRAL.width - margenGeneral * 2 - anchoBoton * 2 + 1, fm.CENTRAL.y + fm.CENTRAL.height
-                - margenGeneral - altoBoton, anchoBoton, altoBoton);
-        final Rectangle siguente = new Rectangle(anterior.x + anterior.width + margenGeneral, anterior.y, anchoBoton, altoBoton);
-        g.setColor(Color.red);
-        DibujoOpciones.dibujarRectRelleno(g, anterior);
-        DibujoOpciones.dibujarRectRelleno(g, siguente);
     }
 
 }

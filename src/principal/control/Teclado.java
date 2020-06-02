@@ -34,9 +34,6 @@ public class Teclado implements KeyListener {
             case KeyEvent.VK_D:
                 right.teclaPulsada();
                 break;
-            case KeyEvent.VK_ESCAPE:
-                System.exit(0);
-                break;
             case KeyEvent.VK_SHIFT:
                 run = true;
                 break;

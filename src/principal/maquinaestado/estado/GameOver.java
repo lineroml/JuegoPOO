@@ -2,33 +2,134 @@ package principal.maquinaestado.estado;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
-import principal.herramientas.CargadorRecursos;
+import principal.graficos.SuperficieDibujo;
 import principal.herramientas.DibujoOpciones;
+import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
+import principal.sonido.Sonido;
 
 public class GameOver implements EstadoJuego {
 
-    private final BufferedImage gameOver = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/iconos/GameOver.png");
-    private int num;
+    private final SuperficieDibujo sd;
 
-    public GameOver() {
-        num = 700;
+    private final BufferedImage gameOver = Constantes.GAMEOVER;
+    private final BufferedImage volverAlJuego = Constantes.VOLVERALJUEGO;
+    private final BufferedImage volverAlJuegoConMouse = Constantes.VOLVERALJUEGOCONMOUSE;
+    private final BufferedImage salir = Constantes.SALIRMENU;
+    private final BufferedImage salirConMouse = Constantes.SALIRMENUCONMOUSE;
+    private BufferedImage quiereSalir = Constantes.QUIERESALIR;
+    private BufferedImage salirSi = Constantes.QUIERESALIRSI;
+    private BufferedImage salirNo = Constantes.QUIERESALIRNO;
+    private BufferedImage salirSiConMouse = Constantes.QUIERESALIRSICONMOUSE;
+    private BufferedImage salirNoConMouse = Constantes.QUIERESALIRNOCONMOUSE;
+
+    private BufferedImage volverActual;
+    private BufferedImage salirActual;
+    private BufferedImage siActual;
+    private BufferedImage noActual;
+
+    private final Rectangle volverAlJuegoR;
+    private final Rectangle salirR;
+
+    private Rectangle si = null;
+    private Rectangle no = null;
+    private boolean seguroSalir = false;
+
+    private final Sonido boton = new Sonido("Resourses/sonidos/boton.wav");
+
+    private Rectangle r;
+
+    private int tiempoEspera;
+
+    public GameOver(final SuperficieDibujo sd) {
+        this.sd = sd;
+
+        volverAlJuegoR = new Rectangle(Constantes.CENTRO_VENTANA_X - volverAlJuego.getWidth() / 2, 180, volverAlJuego.getWidth(), volverAlJuego.getHeight());
+        salirR = new Rectangle(volverAlJuegoR.x, volverAlJuegoR.y + 40, salir.getWidth(), salir.getHeight());
+
+        volverActual = volverAlJuego;
+        salirActual = salir;
+
+        tiempoEspera = 0;
+    }
+
+    @Override
+    public void actualizar() {
+        r = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
+                EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
+
+        if (seguroSalir) {
+            if (r.intersects(no)) {
+                noActual = salirNoConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    tiempoEspera = 5;
+                    seguroSalir = false;
+                }
+            } else {
+                noActual = salirNo;
+            }
+            if (r.intersects(si)) {
+                siActual = salirSiConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    GestorPrincipal.ge.cambiarEstadoActual(0);
+                }
+            } else {
+                siActual = salirSi;
+            }
+            return;
+        }
+        if (tiempoEspera > 0) {
+            tiempoEspera--;
+            return;
+        }
+        if (r.intersects(salirR)) {
+            boton.reproducir();
+            salirActual = salirConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                seguroSalir = true;
+                asignarSeguroSalir();
+            }
+        } else {
+            salirActual = salir;
+        }
+        if (r.intersects(volverAlJuegoR)) {
+            volverActual = volverAlJuegoConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                ElementosPrincipales.jugador.renacer();
+                GestorPrincipal.ge.cambiarEstadoActual(1);
+            }
+        } else {
+            volverActual = volverAlJuego;
+        }
+    }
+
+    private void asignarSeguroSalir() {
+        si = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 40, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
+                salirSi.getWidth(), salirSi.getHeight());
+        no = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
+                salirNo.getWidth(), salirNo.getHeight());
     }
 
     @Override
     public void dibujar(Graphics g) {
         DibujoOpciones.dibujarImagen(g, gameOver, new Point(0, 0));
-    }
 
-    @Override
-    public void actualizar() {
-        num--;
-        if (num == 0) {
-            ElementosPrincipales.jugador.renacer();
-            GestorPrincipal.ge.cambiarEstadoActual(1);
+        DibujoOpciones.dibujarImagen(g, volverActual, new Point(volverAlJuegoR.x, volverAlJuegoR.y));
+        DibujoOpciones.dibujarImagen(g, salirActual, new Point(salirR.x, salirR.y));
+
+        if (seguroSalir) {
+            DibujoOpciones.dibujarImagen(g, quiereSalir, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2,
+                    Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2);
+            DibujoOpciones.dibujarImagen(g, siActual, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 40,
+                    Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50);
+            DibujoOpciones.dibujarImagen(g, noActual, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90,
+                    Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50);
         }
     }
+
 }

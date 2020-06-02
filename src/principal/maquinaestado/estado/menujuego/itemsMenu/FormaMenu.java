@@ -27,7 +27,7 @@ public class FormaMenu {
         COLOR_LATERAL = Color.DARK_GRAY;
         COLOR_CENTRAL = Color.LIGHT_GRAY;
 
-        SUPERIOR = new Rectangle(0, 0, Constantes.ANCHO_JUEGO, 20);
+        SUPERIOR = new Rectangle(0, 0, Constantes.ANCHO_JUEGO, 30);
         LATERAL = new Rectangle(0, SUPERIOR.height, 140, Constantes.ALTO_JUEGO - SUPERIOR.height);
         CENTRAL = new Rectangle(LATERAL.width, SUPERIOR.height, Constantes.ANCHO_JUEGO - LATERAL.width, Constantes.ALTO_JUEGO - SUPERIOR.height);
 

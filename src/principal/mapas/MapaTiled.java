@@ -3,6 +3,7 @@ package principal.mapas;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -13,12 +14,14 @@ import org.json.simple.parser.ParseException;
 import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
+import static principal.GestorPrincipal.sd;
 import principal.control.GestorControles;
 import principal.entes.Enemigo;
 import principal.entes.RegistroEnemigos;
 import principal.herramientas.CalcularDistancia;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
+import principal.herramientas.EscaladorElementos;
 import principal.inventario.Objeto;
 import principal.inventario.ObjetoSuelto;
 import principal.inventario.RegistroObjetos;
@@ -43,9 +46,15 @@ public class MapaTiled {
     private final ArrayList<ObjetoSuelto> objetoSueltos;
     private final ArrayList<Enemigo> enemigos;
 
+    private final BufferedImage pausaSinMouse = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.BOTONPAUSA);
+    private final BufferedImage pausaConMouse = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.BOTONPAUSACONMOUSE);
+    private BufferedImage pausaActual;
+    private final Rectangle recPausa = new Rectangle(2, 2, pausaSinMouse.getWidth(), pausaSinMouse.getHeight());
+    Rectangle posicionRaton = new Rectangle();
+
     private int contZombies;
 
-    public MapaTiled(final String ruta) {
+    public MapaTiled(final String ruta, final boolean enemigosMetodo) {
         //Leer archivo de texto
         String contenido = CargadorRecursos.leerArchivoTexto(ruta);
         //Convertir a Json el texto
@@ -87,8 +96,11 @@ public class MapaTiled {
         //Obtener enemigos en el mapa
         enemigos = new ArrayList();
         contZombies = 0;
-//        JSONArray coleccionEnemigos = getArrayJSON(todoJSON.get("enemigos").toString());
-//        getEnemigosMapa(coleccionEnemigos);
+        if (enemigosMetodo) {
+            JSONArray coleccionEnemigos = getArrayJSON(todoJSON.get("enemigos").toString());
+            getEnemigosMapa(coleccionEnemigos);
+        }
+        pausaActual = pausaSinMouse;
     }
 
     public void actualizar() {
@@ -100,6 +112,13 @@ public class MapaTiled {
         if (contZombies == 180) {
             contZombies = 0;
             getZombiesMapa();
+        }
+        posicionRaton = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
+                EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
+        if (posicionRaton.intersects(recPausa)) {
+            pausaActual = pausaConMouse;
+        } else {
+            pausaActual = pausaSinMouse;
         }
     }
 
@@ -232,13 +251,13 @@ public class MapaTiled {
             }
             enemigo.dibujar(g, puntoX, puntoY);
         }
+        DibujoOpciones.dibujarImagen(g, pausaActual, 2, 2);
     }
 
     private void getZombiesMapa() {
         Random num = new Random();
         int xEnemigo = num.nextInt(2208) + 1;
         int yEnemigo = num.nextInt(2208) + 1;
-        System.out.println(xEnemigo + ", " + yEnemigo);
         Point posicionEnemigo = new Point(xEnemigo, yEnemigo);
         Enemigo enemigo = RegistroEnemigos.getEnemigo(1);
         enemigo.setPosicion(posicionEnemigo.x, posicionEnemigo.y);

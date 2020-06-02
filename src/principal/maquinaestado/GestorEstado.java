@@ -2,10 +2,12 @@
 package principal.maquinaestado;
 
 import java.awt.Graphics;
+import principal.Constantes;
 import principal.graficos.SuperficieDibujo;
 import principal.maquinaestado.estado.GameOver;
 import principal.maquinaestado.estado.juego.GestorJuego;
 import principal.maquinaestado.estado.menuinicial.MenuInicio;
+import principal.maquinaestado.estado.menuinicial.itemsMenu.Ajustes;
 import principal.maquinaestado.estado.menujuego.GestorMenu;
 
 public class GestorEstado {
@@ -21,11 +23,12 @@ public class GestorEstado {
 
     private void iniciarEstados(final SuperficieDibujo sd) {
 
-        estados = new EstadoJuego[4];
+        estados = new EstadoJuego[5];
         estados[0] = new MenuInicio(sd);
         estados[1] = new GestorJuego();
         estados[2] = new GestorMenu(sd);
-        estados[3] = new GameOver();
+        estados[3] = new GameOver(sd);
+        estados[4] = new Ajustes(sd);
         //Añadir e iniciar los demas estados a medida que los creemos
     }
 
@@ -43,7 +46,13 @@ public class GestorEstado {
     }
 
     public void cambiarEstadoActual(final int nuevoEstado) {
-
+        if (estadoActual instanceof GameOver) {
+            if (estados[nuevoEstado] instanceof MenuInicio) {
+                MenuInicio mi = (MenuInicio) estados[nuevoEstado];
+                mi.setTiempoEspera(5);
+                mi.setCancion(Constantes.CANCION1);
+            }
+        }
         estadoActual = estados[nuevoEstado];
     }
 

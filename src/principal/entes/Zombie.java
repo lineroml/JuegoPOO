@@ -46,24 +46,24 @@ public class Zombie extends Enemigo {
     @Override
     public void actualizar(ArrayList<Enemigo> enemigos) {
         super.actualizar(enemigos);
-        if (animacion < 32767) {
+        if (animacion < Integer.MAX_VALUE) {
+            sonidoContador++;
             animacion++;
         } else {
             animacion = 0;
         }
         for (Enemigo enemigo : enemigos) {
             if (enemigo.getArea().intersects(ElementosPrincipales.jugador.getArea())) {
-                if (sonidoContador % 200 == 0 && !ElementosPrincipales.jugador.isMuerto()) {
+                if (sonidoContador == 400 && !ElementosPrincipales.jugador.isMuerto()) {
+                    ataque.detenerSonido();
                     Random r = new Random();
                     int num = r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
+                    System.out.println(num);
                     ElementosPrincipales.jugador.setVida(num);
                     ataque.reproducir();
+                    sonidoContador = 0;
                 }
-                sonidoContador++;
             }
-        }
-        if (sonidoContador == Integer.MAX_VALUE - 1) {
-            sonidoContador = 0;
         }
         animar();
     }

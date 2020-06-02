@@ -5,9 +5,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import principal.Constantes;
+import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
 import principal.graficos.SuperficieDibujo;
-import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
@@ -16,53 +16,109 @@ import principal.sonido.Sonido;
 
 public class MenuInicio implements EstadoJuego {
 
-    private final BufferedImage imagenFondo = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/menuInicial.png");
-    private final BufferedImage inicioPartida = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartida.png");
-    private final BufferedImage inicioPartidaConMouse = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartidaConMouse.png");
-    private final BufferedImage cargarPartida = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/cargarPartida.png");
-    private final BufferedImage cargarPartidaConMouse = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/cargarPartidaConMouse.png");
-    private final BufferedImage cargarSinPartida = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/cargarSinPartida.png");
-    private final BufferedImage configuracion = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/configuracion.png");
-    private final BufferedImage configuracionConMouse = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/configuracionConMouse.png");
+    private final BufferedImage imagenFondo = Constantes.IMAGENFONDO;
+    private final BufferedImage inicioPartida = Constantes.INICIOPARTIDA;
+    private final BufferedImage inicioPartidaConMouse = Constantes.INICIOPARTIDACONMOUSE;
+    private final BufferedImage cargarPartida = Constantes.CARGARPARTIDA;
+    private final BufferedImage cargarPartidaConMouse = Constantes.CARGARPARTIDACONMOUSE;
+    private final BufferedImage cargarSinPartida = Constantes.CARGARSONPARTIDA;
+    private final BufferedImage configuracion = Constantes.CONFIGURACION;
+    private final BufferedImage configuracionConMouse = Constantes.CONFIGURACIONCONMOUSE;
+    private final BufferedImage salirMenu = Constantes.SALIRMENU;
+    private final BufferedImage salirMenuConMouse = Constantes.SALIRMENUCONMOUSE;
+    private BufferedImage quiereSalir = Constantes.QUIERESALIR;
+    private BufferedImage salirSi = Constantes.QUIERESALIRSI;
+    private BufferedImage salirNo = Constantes.QUIERESALIRNO;
+    private BufferedImage salirSiConMouse = Constantes.QUIERESALIRSICONMOUSE;
+    private BufferedImage salirNoConMouse = Constantes.QUIERESALIRNOCONMOUSE;
 
     private final Rectangle inicioPartidaR;
     private final Rectangle cargarPartidaR;
     private final Rectangle configuracionR;
+    private final Rectangle salirR;
 
-    final SuperficieDibujo sd;
+    private final SuperficieDibujo sd;
 
     private BufferedImage inicioPartidaActual;
     private BufferedImage cargarSinPartidaActual;
     private BufferedImage configuracionActual;
+    private BufferedImage salirActual;
+    private BufferedImage siActual;
+    private BufferedImage noActual;
 
     private CargarPartida partida;
-    private final Sonido sonidoIntro = new Sonido("Resourses/sonidos/MusicaIntro.wav");
-    private final Sonido boton = new Sonido("Resourses/sonidos/boton.wav");
+    private Sonido sonidoIntro = Constantes.CANCION1;
+    private final Sonido boton = Constantes.BOTON;
+
+    private Rectangle si = null;
+    private Rectangle no = null;
+    private boolean seguroSalir = false;
+
+    private Rectangle r;
+    private int tiempoEspera;
 
     public MenuInicio(final SuperficieDibujo sd) {
         this.sd = sd;
         this.partida = new CargarPartida();
 
-        inicioPartidaR = new Rectangle(Constantes.CENTRO_VENTANA_X - inicioPartida.getWidth() / 2, 200, inicioPartida.getWidth(), inicioPartida.getHeight());
+        inicioPartidaR = new Rectangle(Constantes.CENTRO_VENTANA_X - inicioPartida.getWidth() / 2, 180, inicioPartida.getWidth(), inicioPartida.getHeight());
         cargarPartidaR = new Rectangle(inicioPartidaR.x, inicioPartidaR.y + 40, cargarPartida.getWidth(), cargarPartida.getHeight());
         configuracionR = new Rectangle(cargarPartidaR.x, cargarPartidaR.y + 40, configuracion.getWidth(), configuracion.getHeight());
+        salirR = new Rectangle(configuracionR.x, configuracionR.y + 40, salirMenu.getWidth(), salirMenu.getHeight());
 
         inicioPartidaActual = inicioPartida;
         cargarSinPartidaActual = cargarSinPartida;
         configuracionActual = configuracion;
+        salirActual = salirMenu;
 
         sonidoIntro.reproducirBucle();
+        tiempoEspera = 0;
     }
 
     @Override
     public void actualizar() {
-        Rectangle r = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
+        r = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
                 EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
 
+        if (seguroSalir) {
+            if (r.intersects(no)) {
+                noActual = salirNoConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    tiempoEspera = 5;
+                    seguroSalir = false;
+                }
+            } else {
+                noActual = salirNo;
+            }
+            if (r.intersects(si)) {
+                siActual = salirSiConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    System.exit(0);
+                }
+            } else {
+                siActual = salirSi;
+            }
+            return;
+        }
+        if (tiempoEspera > 0) {
+            tiempoEspera--;
+            return;
+        }
+        if (r.intersects(salirR)) {
+            boton.reproducir();
+            salirActual = salirMenuConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                seguroSalir = true;
+                asignarSeguroSalir();
+            }
+        } else {
+            salirActual = salirMenu;
+        }
         if (r.intersects(inicioPartidaR)) {
             boton.reproducir();
             inicioPartidaActual = inicioPartidaConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                ElementosPrincipales.jugador.renacer();
                 GestorPrincipal.ge.cambiarEstadoActual(1);
                 sonidoIntro.detenerSonido();
             }
@@ -80,22 +136,51 @@ public class MenuInicio implements EstadoJuego {
         if (r.intersects(configuracionR)) {
             boton.reproducir();
             configuracionActual = configuracionConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                GestorPrincipal.ge.cambiarEstadoActual(4);
+            }
         } else {
             configuracionActual = configuracion;
         }
+    }
+
+    private void asignarSeguroSalir() {
+        si = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 40, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
+                salirSi.getWidth(), salirSi.getHeight());
+        no = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
+                salirNo.getWidth(), salirNo.getHeight());
     }
 
     @Override
     public void dibujar(Graphics g) {
 
         DibujoOpciones.dibujarImagen(g, imagenFondo, new Point(0, 0));
-        DibujoOpciones.dibujarImagen(g, inicioPartidaActual, new Point(Constantes.CENTRO_VENTANA_X - inicioPartida.getWidth() / 2, 200));
-        DibujoOpciones.dibujarImagen(g, cargarSinPartidaActual, new Point(Constantes.CENTRO_VENTANA_X - inicioPartida.getWidth() / 2, 240));
-        DibujoOpciones.dibujarImagen(g, configuracionActual, new Point(Constantes.CENTRO_VENTANA_X - inicioPartida.getWidth() / 2, 280));
+        DibujoOpciones.dibujarImagen(g, inicioPartidaActual, new Point(inicioPartidaR.x, inicioPartidaR.y));
+        DibujoOpciones.dibujarImagen(g, cargarSinPartidaActual, new Point(cargarPartidaR.x, cargarPartidaR.y));
+        DibujoOpciones.dibujarImagen(g, configuracionActual, new Point(configuracionR.x, configuracionR.y));
+        DibujoOpciones.dibujarImagen(g, salirActual, new Point(salirR.x, salirR.y));
 
+        if (seguroSalir) {
+            DibujoOpciones.dibujarImagen(g, quiereSalir, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2,
+                    Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2);
+            DibujoOpciones.dibujarImagen(g, siActual, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 40,
+                    Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50);
+            DibujoOpciones.dibujarImagen(g, noActual, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90,
+                    Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50);
+        }
 //        DibujoOpciones.dibujarRectBorde(g, inicioPartidaR, Color.red);
 //        DibujoOpciones.dibujarRectBorde(g, cargarPartidaR, Color.red);
 //        DibujoOpciones.dibujarRectBorde(g, configuracionR, Color.red);
+    }
+
+    public void setTiempoEspera(int tiempoEspera) {
+        this.tiempoEspera = tiempoEspera;
+    }
+
+    public void setCancion(Sonido cancion) {
+        sonidoIntro.detenerSonido();
+        sonidoIntro = cancion;
+        sonidoIntro.reproducirBucle();
     }
 
 }
