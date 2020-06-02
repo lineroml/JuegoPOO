@@ -7,7 +7,7 @@ import principal.maquinaestado.GestorEstado;
 public class GestorPrincipal {
 
     //Indicara si el bucle principal esta funcionando
-    private boolean enFuncionamiento = false;
+    private static boolean enFuncionamiento = false;
     //Titulo de nuestro juego
     private final String titulo;
     //Dimensiones de la ventana
@@ -39,7 +39,7 @@ public class GestorPrincipal {
         //Mejora el rendimineto con graficos transparentes
         //System.setProperty("sun.java2d.transaccel", "True");
         //Creamos un gestor principal
-        GestorPrincipal gp = new GestorPrincipal("Dysaca", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
+        GestorPrincipal gp = new GestorPrincipal("ForgottenHistory", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
 
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
@@ -129,4 +129,7 @@ public class GestorPrincipal {
         return fps;
     }
 
+    public static boolean isEnFuncionamiento() {
+        return enFuncionamiento;
+    }
 }
