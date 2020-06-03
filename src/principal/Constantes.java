@@ -56,6 +56,8 @@ public class Constantes {
     public static final String BOTONSALIR = "/imagenes/menu/salir.png";
     public static final String BOTONSALIRCONMOUSE = "/imagenes/menu/salirConMouse.png";
     
+    public static final BufferedImage MUJER = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/Mujer.png");
+    
     public final static BufferedImage IMAGENFONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/menuInicial.png");
     public final static BufferedImage FONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondo.png");
     public final static BufferedImage INICIOPARTIDA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartida.png");
