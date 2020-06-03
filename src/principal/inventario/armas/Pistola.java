@@ -15,7 +15,7 @@ public class Pistola extends Arma {
     public ArrayList<Rectangle> getAlcance(final Jugador jugador) {
         final ArrayList<Rectangle> alcance = new ArrayList();
         final Rectangle alcancePistola = new Rectangle();
-        final int alcanceMaximo = 6;
+        final int alcanceMaximo = 3;
 
         //Saber a donde esta mirando el jugador
         //0 abajo, 1 arriba, 2 derecha, 3 izquierda

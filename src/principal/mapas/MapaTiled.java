@@ -22,9 +22,7 @@ import principal.herramientas.CalcularDistancia;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
-import principal.inventario.Objeto;
-import principal.inventario.ObjetoSuelto;
-import principal.inventario.RegistroObjetos;
+import principal.inventario.ContenedorObjetos;
 import principal.inventario.armas.DesArmado;
 import principal.maquinaestado.estado.juego.GestorJuego;
 import principal.sprites.HojaSprites;
@@ -43,7 +41,7 @@ public class MapaTiled {
     private ArrayList<Rectangle> areasColisionActualizado;
     private final Sprite[] paletaSprite;
 
-    private final ArrayList<ObjetoSuelto> objetoSueltos;
+    private final ArrayList<ContenedorObjetos> contendoresObjetos;
     private final ArrayList<Enemigo> enemigos;
 
     private final BufferedImage pausaSinMouse = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.BOTONPAUSA);
@@ -91,8 +89,8 @@ public class MapaTiled {
         asignarSprites(coleccionSprites);
 
         //Obtener objetos en el mapa
-        objetoSueltos = new ArrayList();
-        JSONArray coleccionObjetos = getArrayJSON(todoJSON.get("objetos").toString());
+        contendoresObjetos = new ArrayList();
+        JSONArray coleccionObjetos = getArrayJSON(todoJSON.get("contenedores").toString());
         getObjetosMapa(coleccionObjetos);
 
         //Obtener enemigos en el mapa
@@ -124,18 +122,18 @@ public class MapaTiled {
 
     private void actualizarRecogidaObjetos() {
         //Saber su en el mapa hay objetos por recoger
-        if (!objetoSueltos.isEmpty()) {
+        if (!contendoresObjetos.isEmpty()) {
             //rectangulos que rodenan al contenedor y al jugador
             final Rectangle areaJugador = new Rectangle(ElementosPrincipales.jugador.getPosicionXINT(), ElementosPrincipales.jugador.getPosicionYINT(), Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
-            for (int i = 0; i < objetoSueltos.size(); i++) {
-                final ObjetoSuelto objetoActual = objetoSueltos.get(i);
-                final Rectangle posicionObjetoActual = new Rectangle(objetoActual.getPosicion().x,
-                        objetoActual.getPosicion().y, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE / 2);
+            for (int i = 0; i < contendoresObjetos.size(); i++) {
+                final ContenedorObjetos contenedor = contendoresObjetos.get(i);
+                final Rectangle posicionObjetoActual = new Rectangle(contenedor.getPosicion().x,
+                        contenedor.getPosicion().y, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE / 2);
 
                 if (areaJugador.intersects(posicionObjetoActual) && GestorControles.teclado.recoger
-                        && GestorPrincipal.ge.getEstadoActual() instanceof GestorJuego) {
-                    ElementosPrincipales.inventario.recogerObjetos(objetoActual);
-                    objetoSueltos.remove(i);
+                        && GestorPrincipal.ge.getEstadoActual() instanceof GestorJuego && !contenedor.recogido()) {
+                    ElementosPrincipales.inventario.recogerObjetos(contenedor);
+                    contendoresObjetos.get(i).setCofre();
                 }
             }
         }
@@ -228,16 +226,16 @@ public class MapaTiled {
             }
         }
 
-        for (int i = 0; i < objetoSueltos.size(); i++) {
-            ObjetoSuelto objetoActual = objetoSueltos.get(i);
-            int puntoX = objetoActual.getPosicion().x - ElementosPrincipales.jugador.getPosicionXINT() + Constantes.MARGEN_X;
-            int puntoY = objetoActual.getPosicion().y - ElementosPrincipales.jugador.getPosicionYINT() + Constantes.MARGEN_Y;
+        for (int i = 0; i < contendoresObjetos.size(); i++) {
+            ContenedorObjetos contenedor = contendoresObjetos.get(i);
+            int puntoX = contenedor.getPosicion().x - ElementosPrincipales.jugador.getPosicionXINT() + Constantes.MARGEN_X;
+            int puntoY = contenedor.getPosicion().y - ElementosPrincipales.jugador.getPosicionYINT() + Constantes.MARGEN_Y;
 
             if (puntoX < -Constantes.LADO_SPRITE || puntoX > Constantes.ANCHO_JUEGO
                     || puntoY < -Constantes.LADO_SPRITE || puntoY > Constantes.ALTO_JUEGO - 55) {
                 continue;
             }
-            DibujoOpciones.dibujarImagen(g, objetoActual.getObjeto().getSprite().getImagen(), puntoX, puntoY);
+            contenedor.dibujar(g, puntoX + 8, puntoY + 8);
         }
 
         for (int i = 0; i < enemigos.size(); i++) {
@@ -260,7 +258,7 @@ public class MapaTiled {
         int yEnemigo = num.nextInt(2208) + 1;
         Point posicionEnemigo = new Point(xEnemigo, yEnemigo);
         Rectangle r = new Rectangle(xEnemigo, yEnemigo, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
-        for (Rectangle rectangle : areasColisionActualizado) {
+        for (Rectangle rectangle : areasColisionLectura) {
             if (!(r.intersects(rectangle))) {
                 Enemigo enemigo = RegistroEnemigos.getEnemigo(1);
                 enemigo.setPosicion(posicionEnemigo.x, posicionEnemigo.y);
@@ -286,16 +284,16 @@ public class MapaTiled {
     private void getObjetosMapa(JSONArray coleccionObjetos) {
         for (int i = 0; i < coleccionObjetos.size(); i++) {
             JSONObject datosObjeto = getObjetoJSON(coleccionObjetos.get(i).toString());
-            int idObjeto = getIntDelJSON(datosObjeto, "id");
-            int cantidadObjeto = getIntDelJSON(datosObjeto, "cantidad");
             int xObjeto = getIntDelJSON(datosObjeto, "x");
             int yObjeto = getIntDelJSON(datosObjeto, "y");
-
-            Point posicionObjeto = new Point(xObjeto, yObjeto);
-            Objeto objeto = RegistroObjetos.getObjeto(idObjeto);
-            objeto.aumentarCantidad(cantidadObjeto);
-            ObjetoSuelto objetoSuelto = new ObjetoSuelto(posicionObjeto, objeto);
-            objetoSueltos.add(objetoSuelto);
+            int[] idObjetos = new int[3];
+            int[] cantidadObjetos = new int[3];
+            for (int j = 1; j <= 3; j++) {
+                idObjetos[j - 1] = getIntDelJSON(datosObjeto, ("id" + j));
+                cantidadObjetos[j - 1] = getIntDelJSON(datosObjeto, ("cantidad" + j));
+            }
+            ContenedorObjetos contenedor = new ContenedorObjetos(new Point(xObjeto, yObjeto), idObjetos, cantidadObjetos);
+            contendoresObjetos.add(contenedor);
         }
     }
 

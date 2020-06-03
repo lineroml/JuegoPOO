@@ -53,13 +53,16 @@ public class Ajustes implements EstadoJuego {
     private Rectangle dificultadExperto;
     private boolean newDificultad;
 
+    private int tiempoEspera;
+    private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
+
     public Ajustes(final SuperficieDibujo sd) {
         this.sd = sd;
 
-        dificultadR = new Rectangle(Constantes.CENTRO_VENTANA_X - dificultad.getWidth() / 2, 140, dificultad.getWidth(), dificultad.getHeight());
-        musicaR = new Rectangle(dificultadR.x, dificultadR.y + 40, musica.getWidth(), musica.getHeight());
-        creditosR = new Rectangle(musicaR.x, musicaR.y + 40, creditos.getWidth(), creditos.getHeight());
-        volverR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
+        dificultadR = new Rectangle(Constantes.CENTRO_VENTANA_X - dificultad.getWidth() / 2, 40, dificultad.getWidth(), dificultad.getHeight());
+        musicaR = new Rectangle(dificultadR.x, dificultadR.y + 60, musica.getWidth(), musica.getHeight());
+        creditosR = new Rectangle(musicaR.x, musicaR.y + 60, creditos.getWidth(), creditos.getHeight());
+        volverR = volverNormalR;
 
         dificultadActual = dificultad;
         musicaActual = musica;
@@ -71,6 +74,8 @@ public class Ajustes implements EstadoJuego {
         dificultadProfesional = new Rectangle();
         dificultadExperto = new Rectangle();
         newDificultad = false;
+
+        tiempoEspera = 0;
     }
 
     @Override
@@ -96,36 +101,42 @@ public class Ajustes implements EstadoJuego {
             if (r.intersects(volverR)) {
                 volverActual = volverConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
+                    tiempoEspera = 5;
                     newDificultad = false;
+                    volverR = volverNormalR;
                 }
             } else {
                 volverActual = volver;
             }
             return;
         }
-
+        if (tiempoEspera > 0) {
+            tiempoEspera--;
+            return;
+        }
         if (r.intersects(dificultadR)) {
-            boton.reproducir();
             dificultadActual = dificultadConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
                 mensajeDificultad();
             }
         } else {
             dificultadActual = dificultad;
         }
         if (r.intersects(musicaR)) {
-            boton.reproducir();
             musicaActual = musicaConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
                 setMusica();
             }
         } else {
             musicaActual = musica;
         }
         if (r.intersects(creditosR)) {
-            boton.reproducir();
             creditosActual = creditosConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
                 setCreditos();
             }
         } else {
@@ -134,6 +145,7 @@ public class Ajustes implements EstadoJuego {
         if (r.intersects(volverR)) {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(0);
             }
         } else {
@@ -147,8 +159,8 @@ public class Ajustes implements EstadoJuego {
         DibujoOpciones.dibujarImagen(g, dificultadActual, new Point(dificultadR.x, dificultadR.y));
         DibujoOpciones.dibujarImagen(g, musicaActual, new Point(musicaR.x, musicaR.y));
         DibujoOpciones.dibujarImagen(g, creditosActual, new Point(creditosR.x, creditosR.y));
-        DibujoOpciones.dibujarImagen(g, idioma, new Point(creditosR.x, creditosR.y + idioma.getHeight() + 5));
-        DibujoOpciones.dibujarImagen(g, sonido, new Point(creditosR.x, creditosR.y + sonido.getHeight() + 45));
+        DibujoOpciones.dibujarImagen(g, idioma, new Point(creditosR.x, creditosR.y + idioma.getHeight() + 25));
+        DibujoOpciones.dibujarImagen(g, sonido, new Point(creditosR.x, creditosR.y + sonido.getHeight() + 85));
 
         if (newDificultad) {
             DibujoOpciones.dibujarImagen(g, imagenDificultad, Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2,

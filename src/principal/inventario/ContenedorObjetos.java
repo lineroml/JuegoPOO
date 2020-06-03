@@ -12,6 +12,7 @@ public class ContenedorObjetos {
 
     private Point posicion;
     private Objeto[] objetos;
+    private boolean recogido;
 
     public ContenedorObjetos(final Point posicion, final int[] objetos, final int[] cantidades) {
         this.posicion = posicion;
@@ -20,7 +21,7 @@ public class ContenedorObjetos {
             this.objetos[i] = RegistroObjetos.getObjeto(objetos[i]);
             this.objetos[i].aumentarCantidad(cantidades[i]);
         }
-
+        recogido = false;
     }
 
     public void dibujar(final Graphics g, final int puntoX, final int puntoY) {
@@ -37,6 +38,11 @@ public class ContenedorObjetos {
 
     public void setCofre() {
         sprite = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/CofreAbierto.png");
+        recogido = true;
+    }
+
+    public boolean recogido() {
+        return recogido;
     }
 
 }

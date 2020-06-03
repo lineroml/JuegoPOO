@@ -26,11 +26,11 @@ public class MenuInicio implements EstadoJuego {
     private final BufferedImage configuracionConMouse = Constantes.CONFIGURACIONCONMOUSE;
     private final BufferedImage salirMenu = Constantes.SALIRMENU;
     private final BufferedImage salirMenuConMouse = Constantes.SALIRMENUCONMOUSE;
-    private BufferedImage quiereSalir = Constantes.QUIERESALIR;
-    private BufferedImage salirSi = Constantes.QUIERESALIRSI;
-    private BufferedImage salirNo = Constantes.QUIERESALIRNO;
-    private BufferedImage salirSiConMouse = Constantes.QUIERESALIRSICONMOUSE;
-    private BufferedImage salirNoConMouse = Constantes.QUIERESALIRNOCONMOUSE;
+    private final BufferedImage quiereSalir = Constantes.QUIERESALIR;
+    private final BufferedImage salirSi = Constantes.QUIERESALIRSI;
+    private final BufferedImage salirNo = Constantes.QUIERESALIRNO;
+    private final BufferedImage salirSiConMouse = Constantes.QUIERESALIRSICONMOUSE;
+    private final BufferedImage salirNoConMouse = Constantes.QUIERESALIRNOCONMOUSE;
 
     private final Rectangle inicioPartidaR;
     private final Rectangle cargarPartidaR;
@@ -46,7 +46,7 @@ public class MenuInicio implements EstadoJuego {
     private BufferedImage siActual;
     private BufferedImage noActual;
 
-    private CargarPartida partida;
+    private final CargarPartida partida;
     private Sonido sonidoIntro = Constantes.CANCION1;
     private final Sonido boton = Constantes.BOTON;
 
@@ -84,6 +84,7 @@ public class MenuInicio implements EstadoJuego {
             if (r.intersects(no)) {
                 noActual = salirNoConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
                     tiempoEspera = 5;
                     seguroSalir = false;
                 }
@@ -93,6 +94,7 @@ public class MenuInicio implements EstadoJuego {
             if (r.intersects(si)) {
                 siActual = salirSiConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
                     System.exit(0);
                 }
             } else {
@@ -105,9 +107,9 @@ public class MenuInicio implements EstadoJuego {
             return;
         }
         if (r.intersects(salirR)) {
-            boton.reproducir();
             salirActual = salirMenuConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
                 seguroSalir = true;
                 asignarSeguroSalir();
             }
@@ -115,9 +117,9 @@ public class MenuInicio implements EstadoJuego {
             salirActual = salirMenu;
         }
         if (r.intersects(inicioPartidaR)) {
-            boton.reproducir();
             inicioPartidaActual = inicioPartidaConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
                 ElementosPrincipales.jugador.renacer();
                 GestorPrincipal.ge.cambiarEstadoActual(1);
                 sonidoIntro.detenerSonido();
@@ -134,9 +136,9 @@ public class MenuInicio implements EstadoJuego {
             cargarSinPartidaActual = cargarPartida;
         }
         if (r.intersects(configuracionR)) {
-            boton.reproducir();
             configuracionActual = configuracionConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(4);
             }
         } else {

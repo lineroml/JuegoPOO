@@ -58,7 +58,6 @@ public class Zombie extends Enemigo {
                     ataque.detenerSonido();
                     Random r = new Random();
                     int num = r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
-                    System.out.println(num);
                     ElementosPrincipales.jugador.setVida(num);
                     ataque.reproducir();
                     sonidoContador = 0;
