@@ -28,6 +28,8 @@ public class Jugador {
     private int direccion;
 
     private HojaSprites hs;
+    private HojaSprites hojaPoder;
+    private boolean cambio;
     private BufferedImage imagenActual;
 
     private final int anchoJugador = 16;
@@ -81,6 +83,7 @@ public class Jugador {
         direccion = 0;
 
         this.hs = new HojaSprites(Constantes.RUTA_PERSONAJE, Constantes.LADO_SPRITE, false);
+        this.hojaPoder = new HojaSprites(Constantes.RUTA_PERSONAJEMEGAPODER, Constantes.LADO_SPRITE, false);
 
         imagenActual = hs.getSprite(direccion, 0).getImagen();
         animacion = 0;
@@ -93,6 +96,7 @@ public class Jugador {
         vida = 1000;
         visible = true;
         muerto = false;
+        cambio = false;
     }
 
     public void actualizar() {
@@ -150,7 +154,8 @@ public class Jugador {
 
     private void cambiarHojaSprite() {
         if (ae.getArma() instanceof Arma && !(ae.getArma() instanceof DesArmado)) {
-            hs = new HojaSprites(Constantes.RUTA_PERSONAJEARMADO, Constantes.LADO_SPRITE, false);
+            hs = new HojaSprites(Constantes.RUTA_PERSONAJEPODER, Constantes.LADO_SPRITE, false);
+            cambio = true;
         }
     }
 
@@ -377,7 +382,7 @@ public class Jugador {
     private void animar() {
 
         if (enMovimiento) {
-            GestorControles.teclado.dance = false;
+            GestorControles.teclado.poder = false;
             if (animacion % 10 == 0) {
                 a++;
                 if (a >= 4) {
@@ -399,23 +404,27 @@ public class Jugador {
                     break;
             }
         } else {
-            if (!GestorControles.teclado.dance) {
-                a = 0;
-                d = 4;
-            }
-            if (GestorControles.teclado.dance) {
-                if (animacion % 13 == 0) {
-                    a++;
-                    if (a >= 3) {
-                        a = 0;
-                        d++;
-                        if (d >= 7) {
-                            d = 4;
+            if (cambio) {
+                if (!GestorControles.teclado.poder) {
+                    a = 0;
+                    d = 0;
+                }
+                if (GestorControles.teclado.poder) {
+                    if (animacion % 13 == 0) {
+                        a++;
+                        if (a >= 3) {
+                            a = 0;
+                            d++;
+                            if (d >= 3) {
+                                d = 0;
+                            }
                         }
                     }
+                    imagenActual = hojaPoder.getSprite(d, a).getImagen();
+                    direccion = 0;
+                } else {
+                    imagenActual = hs.getSprite(direccion, 0).getImagen();
                 }
-                imagenActual = hs.getSprite(d, a).getImagen();
-                direccion = 0;
             } else {
                 imagenActual = hs.getSprite(direccion, 0).getImagen();
             }

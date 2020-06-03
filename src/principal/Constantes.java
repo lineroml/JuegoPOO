@@ -32,8 +32,9 @@ public class Constantes {
 
     public static String RUTA_MAPA = "/mapas/mapa1";
     public static String RUTA_ICONO_RATON = "/imagenes/iconos/iconoCursor.png";
-    public static String RUTA_PERSONAJE = "/imagenes/hojas_Personajes/1.png";
-    public static String RUTA_PERSONAJEARMADO = "/imagenes/hojas_Personajes/2.png";
+    public static String RUTA_PERSONAJE = "/imagenes/hojas_Personajes/Santana.png";
+    public static String RUTA_PERSONAJEPODER = "/imagenes/hojas_Personajes/SantanaPoder.png";
+    public static String RUTA_PERSONAJEMEGAPODER = "/imagenes/hojas_Personajes/SantanaMegaPoder.png";
     public static String RUTA_ZOMBIE = "/imagenes/hojas_de_enemigos/";
     public static String RUTA_ICONO_VENTANA = "/imagenes/iconos/iconV.png";
     public static String RUTA_LOGOTIPO = "/imagenes/iconos/logo.png";
@@ -81,4 +82,6 @@ public class Constantes {
     public final static BufferedImage CREDITOSCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/creditosConMouse.png");
     public final static BufferedImage MUSICA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/musica.png");
     public final static BufferedImage MUSICACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/musicaConMouse.png");
+    public final static BufferedImage VOLVER = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/volver.png");
+    public final static BufferedImage VOLVERCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/volverConMouse.png");
 }

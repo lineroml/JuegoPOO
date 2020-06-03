@@ -6,6 +6,8 @@ import principal.inventario.consumible.Consumible;
 
 public class RegistroObjetos {
 
+    private static int dificultad = 0;
+
     public static Objeto getObjeto(int idObjeto) {
         Objeto objeto = null;
         switch (idObjeto) {
@@ -34,12 +36,16 @@ public class RegistroObjetos {
                 break;
             //Armas
             case 500:
-                objeto = new Pistola(idObjeto, "Pistola", "Sin descripcion", 12, 20, false, true, 0.7);
+                objeto = new Pistola(idObjeto, "Pistola", "Sin descripcion", 12 - dificultad, 20 - dificultad, false, true, 0.7);
                 break;
             case 599:
                 objeto = new DesArmado(idObjeto, "manos", "Sin descripcion", 1, 1, false, false, 0);
                 break;
         }
         return objeto;
+    }
+
+    public static void setDificultad(final int i) {
+        dificultad = i;
     }
 }

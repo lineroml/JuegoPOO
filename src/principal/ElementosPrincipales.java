@@ -6,7 +6,7 @@ import principal.mapas.MapaTiled;
 
 public class ElementosPrincipales {
 
-    public static MapaTiled mapa = new MapaTiled("/mapas/apocalypse.json", false);
+    public static MapaTiled mapa = new MapaTiled("/mapas/apocalypse.json");
 
 //    public static Mapa mapa = new Mapa("/mapas/mapa-apocaliptico.json");
 //    public static Mapa mapa = new Mapa(Constantes.RUTA_MAPA);

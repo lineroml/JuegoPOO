@@ -52,9 +52,11 @@ public class MapaTiled {
     private final Rectangle recPausa = new Rectangle(2, 2, pausaSinMouse.getWidth(), pausaSinMouse.getHeight());
     Rectangle posicionRaton = new Rectangle();
 
+    private int dificultad = 0;
+
     private int contZombies;
 
-    public MapaTiled(final String ruta, final boolean enemigosMetodo) {
+    public MapaTiled(final String ruta) {
         //Leer archivo de texto
         String contenido = CargadorRecursos.leerArchivoTexto(ruta);
         //Convertir a Json el texto
@@ -96,10 +98,8 @@ public class MapaTiled {
         //Obtener enemigos en el mapa
         enemigos = new ArrayList();
         contZombies = 0;
-        if (enemigosMetodo) {
-            JSONArray coleccionEnemigos = getArrayJSON(todoJSON.get("enemigos").toString());
-            getEnemigosMapa(coleccionEnemigos);
-        }
+        JSONArray coleccionEnemigos = getArrayJSON(todoJSON.get("enemigos").toString());
+        getEnemigosMapa(coleccionEnemigos);
         pausaActual = pausaSinMouse;
     }
 
@@ -109,7 +109,7 @@ public class MapaTiled {
         actualizarEnemigos();
         actualizarAtaques();
         contZombies++;
-        if (contZombies == 180) {
+        if (contZombies == 480 - dificultad) {
             contZombies = 0;
             getZombiesMapa();
         }
@@ -259,9 +259,15 @@ public class MapaTiled {
         int xEnemigo = num.nextInt(2208) + 1;
         int yEnemigo = num.nextInt(2208) + 1;
         Point posicionEnemigo = new Point(xEnemigo, yEnemigo);
-        Enemigo enemigo = RegistroEnemigos.getEnemigo(1);
-        enemigo.setPosicion(posicionEnemigo.x, posicionEnemigo.y);
-        enemigos.add(enemigo);
+        Rectangle r = new Rectangle(xEnemigo, yEnemigo, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+        for (Rectangle rectangle : areasColisionActualizado) {
+            if (!(r.intersects(rectangle))) {
+                Enemigo enemigo = RegistroEnemigos.getEnemigo(1);
+                enemigo.setPosicion(posicionEnemigo.x, posicionEnemigo.y);
+                enemigos.add(enemigo);
+                return;
+            }
+        }
     }
 
     private void getEnemigosMapa(JSONArray coleccionEnemigos) {
@@ -427,6 +433,10 @@ public class MapaTiled {
         int altoRectangulo = this.altoMapaTiled * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.getAltoJugador() * 2;
 
         return new Rectangle(x, y, anchoRectangulo, altoRectangulo);
+    }
+
+    public void setDificultad(final int dificultad) {
+        this.dificultad = dificultad;
     }
 
 }

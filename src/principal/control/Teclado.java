@@ -13,7 +13,7 @@ public class Teclado implements KeyListener {
     public boolean recoger = false;
     public boolean run = false;
     public boolean opciones = false;
-    public boolean dance = false;
+    public boolean poder = false;
     public boolean inventario = false;
 
     public boolean ataque = false;
@@ -47,7 +47,7 @@ public class Teclado implements KeyListener {
                 opciones = !opciones;
                 break;
             case KeyEvent.VK_ENTER:
-                dance = !dance;
+                poder = !poder;
                 break;
             case KeyEvent.VK_I:
                 inventario = !inventario;
