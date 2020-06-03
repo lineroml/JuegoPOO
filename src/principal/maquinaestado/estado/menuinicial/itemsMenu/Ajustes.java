@@ -10,6 +10,7 @@ import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
 import principal.entes.RegistroEnemigos;
 import principal.graficos.SuperficieDibujo;
+import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.inventario.RegistroObjetos;
@@ -19,6 +20,9 @@ import principal.sonido.Sonido;
 public class Ajustes implements EstadoJuego {
 
     private final SuperficieDibujo sd;
+
+    private final BufferedImage mujer = Constantes.MUJER;
+    private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
 
     private final BufferedImage imagenFondo = Constantes.FONDO;
     private final BufferedImage dificultad = Constantes.DIFICULTAD;
@@ -61,7 +65,7 @@ public class Ajustes implements EstadoJuego {
 
         dificultadR = new Rectangle(Constantes.CENTRO_VENTANA_X - dificultad.getWidth() / 2, 40, dificultad.getWidth(), dificultad.getHeight());
         musicaR = new Rectangle(dificultadR.x, dificultadR.y + 60, musica.getWidth(), musica.getHeight());
-        creditosR = new Rectangle(musicaR.x, musicaR.y + 60, creditos.getWidth(), creditos.getHeight());
+        creditosR = new Rectangle(musicaR.x, musicaR.y + 180, creditos.getWidth(), creditos.getHeight());
         volverR = volverNormalR;
 
         dificultadActual = dificultad;
@@ -158,9 +162,12 @@ public class Ajustes implements EstadoJuego {
         DibujoOpciones.dibujarImagen(g, imagenFondo, new Point(0, 0));
         DibujoOpciones.dibujarImagen(g, dificultadActual, new Point(dificultadR.x, dificultadR.y));
         DibujoOpciones.dibujarImagen(g, musicaActual, new Point(musicaR.x, musicaR.y));
+        DibujoOpciones.dibujarImagen(g, idioma, new Point(musicaR.x, musicaR.y + idioma.getHeight() + 25));
+        DibujoOpciones.dibujarImagen(g, sonido, new Point(musicaR.x, musicaR.y + sonido.getHeight() + 85));
         DibujoOpciones.dibujarImagen(g, creditosActual, new Point(creditosR.x, creditosR.y));
-        DibujoOpciones.dibujarImagen(g, idioma, new Point(creditosR.x, creditosR.y + idioma.getHeight() + 25));
-        DibujoOpciones.dibujarImagen(g, sonido, new Point(creditosR.x, creditosR.y + sonido.getHeight() + 85));
+
+        DibujoOpciones.dibujarImagen(g, mujer, Constantes.ANCHO_JUEGO - mujer.getWidth(), 0);
+        DibujoOpciones.dibujarImagen(g, logo, 5, 5);
 
         if (newDificultad) {
             DibujoOpciones.dibujarImagen(g, imagenDificultad, Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2,
