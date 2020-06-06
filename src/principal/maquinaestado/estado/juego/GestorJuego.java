@@ -46,6 +46,9 @@ public class GestorJuego implements EstadoJuego {
         if (GestorControles.teclado.inventario) {
             ge.cambiarEstadoActual(2);
         }
+        if (GestorControles.teclado.menuAjustes) {
+            ge.cambiarEstadoActual(4);
+        }
     }
 
     @Override

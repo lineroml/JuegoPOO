@@ -115,6 +115,10 @@ public class MapaTiled {
                 EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
         if (posicionRaton.intersects(recPausa)) {
             pausaActual = pausaConMouse;
+            //Muestra el menu de pausa
+            if (sd.getRaton().isClickIzquierdo()) {
+                GestorPrincipal.ge.cambiarEstadoActual(4);
+            }
         } else {
             pausaActual = pausaSinMouse;
         }

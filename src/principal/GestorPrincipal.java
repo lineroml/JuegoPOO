@@ -39,7 +39,7 @@ public class GestorPrincipal {
         //Mejora el rendimineto con graficos transparentes
         //System.setProperty("sun.java2d.transaccel", "True");
         //Creamos un gestor principal
-        GestorPrincipal gp = new GestorPrincipal("Dysaca", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
+        GestorPrincipal gp = new GestorPrincipal("Forgotten History", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
 
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
