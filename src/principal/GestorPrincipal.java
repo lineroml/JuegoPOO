@@ -35,7 +35,7 @@ public class GestorPrincipal {
 
         //Para Windows
 //        System.setProperty("sun.java2d.d3d", "True");
-        // System.setProperty("sun.java2d.ddforcevram", "True");
+         System.setProperty("sun.java2d.ddforcevram", "True");
         //Mejora el rendimineto con graficos transparentes
         //System.setProperty("sun.java2d.transaccel", "True");
         //Creamos un gestor principal

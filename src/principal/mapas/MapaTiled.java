@@ -105,7 +105,7 @@ public class MapaTiled {
         actualizarAreasColision();
         actualizarRecogidaObjetos();
         actualizarEnemigos();
-        actualizarAtaques();
+//        actualizarAtaques();
         contZombies++;
         if (contZombies == 480 - dificultad) {
             contZombies = 0;
@@ -161,49 +161,51 @@ public class MapaTiled {
         }
     }
 
-    private void actualizarAtaques() {
-        if (enemigos.isEmpty() || ElementosPrincipales.jugador.getAlcanceArma().isEmpty() || ElementosPrincipales.jugador.getAlmacenEquipo().getArma() instanceof DesArmado) {
-            return;
-        }
-        if (GestorControles.teclado.ataque) {
-            ArrayList<Enemigo> enemigosAlcanzados = new ArrayList();
-            if (ElementosPrincipales.jugador.getAlmacenEquipo().getArma().isPenetrante()) {
-                for (Enemigo enemigo : enemigos) {
-                    if (ElementosPrincipales.jugador.getAlcanceArma().get(0).intersects(enemigo.getArea())) {
-                        enemigosAlcanzados.add(enemigo);
-                    }
-                }
-            } else {
-                Enemigo enemigoCerca = null;
-                Double distanciaCerca = null;
-                for (Enemigo enemigo : enemigos) {
-                    if (ElementosPrincipales.jugador.getAlcanceArma().get(0).intersects(enemigo.getAreaDisparo())) {
-                        Point puntoJugador = new Point(ElementosPrincipales.jugador.getPosicionXINT() / Constantes.LADO_SPRITE, ElementosPrincipales.jugador.getPosicionYINT() / Constantes.LADO_SPRITE);
-                        Point puntoEnemigo = new Point((int) enemigo.getPosicionX(), (int) enemigo.getPosicionY());
-                        double distancia = CalcularDistancia.getDistanciaEntrePuntos(puntoJugador, puntoEnemigo);
-                        if (distanciaCerca == null) {
-                            distanciaCerca = distancia;
-                            enemigoCerca = enemigo;
-                        } else {
-                            if (distancia < distanciaCerca) {
-                                distanciaCerca = distancia;
-                                enemigoCerca = enemigo;
-                            }
-                        }
-                    }
-                }
-                enemigosAlcanzados.add(enemigoCerca);
-            }
-            ElementosPrincipales.jugador.getAlmacenEquipo().getArma().atacar(enemigosAlcanzados);
-        }
-        Iterator<Enemigo> iterador = enemigos.iterator();
-        while (iterador.hasNext()) {
-            Enemigo enemigo = iterador.next();
-            if (enemigo.getVidaActual() <= 0) {
-                iterador.remove();
-            }
-        }
-    }
+//    private void actualizarAtaques() {
+//        if (enemigos.isEmpty() || ElementosPrincipales.jugador.getAlcanceArma().isEmpty() || ElementosPrincipales.jugador.getAlmacenEquipo().getArma() instanceof DesArmado) {
+//            return;
+//        }
+//        if (GestorControles.teclado.ataque) {
+//            ArrayList<Enemigo> enemigosAlcanzados = new ArrayList();
+//            if (ElementosPrincipales.jugador.getAlmacenEquipo().getArma().isPenetrante()) {
+//
+//                for (Enemigo enemigo : enemigos) {
+//                    if (ElementosPrincipales.jugador.getAlcanceArma().get(0).intersects(enemigo.getArea())) {
+//                        enemigosAlcanzados.add(enemigo);
+//                    }
+//                }
+//            } else {
+//                Enemigo enemigoCerca = null;
+//                Double distanciaCerca = null;
+//                for (Enemigo enemigo : enemigos) {
+//                    if (ElementosPrincipales.jugador.getAlcanceArma().get(0).intersects(enemigo.getAreaDisparo())) {
+//                        Point puntoJugador = new Point(ElementosPrincipales.jugador.getPosicionXINT() / Constantes.LADO_SPRITE, ElementosPrincipales.jugador.getPosicionYINT() / Constantes.LADO_SPRITE);
+//                        Point puntoEnemigo = new Point((int) enemigo.getPosicionX(), (int) enemigo.getPosicionY());
+//                        double distancia = CalcularDistancia.getDistanciaEntrePuntos(puntoJugador, puntoEnemigo);
+//                        if (distanciaCerca == null) {
+//                            distanciaCerca = distancia;
+//                            enemigoCerca = enemigo;
+//                        } else {
+//                            if (distancia < distanciaCerca) {
+//                                distanciaCerca = distancia;
+//                                enemigoCerca = enemigo;
+//                            }
+//                        }
+//                    }
+//                }
+//                enemigosAlcanzados.add(enemigoCerca);
+//            }
+//            ElementosPrincipales.jugador.getAlmacenEquipo().getArma().atacar(ElementosPrincipales.jugador.atacar(enemigos));
+//            ElementosPrincipales.jugador.getAlmacenEquipo().getArma().atacar(enemigosAlcanzados);
+//        }
+//        Iterator<Enemigo> iterador = enemigos.iterator();
+//        while (iterador.hasNext()) {
+//            Enemigo enemigo = iterador.next();
+//            if (enemigo.getVidaActual() <= 0) {
+//                iterador.remove();
+//            }
+//        }
+//    }
 
     public void dibujar(final Graphics g) {
         for (int i = 0; i < capaSprites.size(); i++) {
@@ -435,6 +437,10 @@ public class MapaTiled {
 
     public void setDificultad(final int dificultad) {
         this.dificultad = dificultad;
+    }
+    
+    public ArrayList<Enemigo> getEnemigos(){
+        return enemigos;
     }
 
 }

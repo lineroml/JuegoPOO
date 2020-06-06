@@ -35,6 +35,7 @@ public class Constantes {
     public static String RUTA_PERSONAJE = "/imagenes/hojas_Personajes/Santana.png";
     public static String RUTA_PERSONAJEPODER = "/imagenes/hojas_Personajes/SantanaPoder.png";
     public static String RUTA_PERSONAJEMEGAPODER = "/imagenes/hojas_Personajes/SantanaMegaPoder.png";
+    public static String RUTA_PERSONAJEDISPARO = "/imagenes/hojas_Personajes/SantanaDisparo.png";
     public static String RUTA_ZOMBIE = "/imagenes/hojas_de_enemigos/";
     public static String RUTA_ICONO_VENTANA = "/imagenes/iconos/iconV.png";
     public static String RUTA_LOGOTIPO = "/imagenes/iconos/logo.png";

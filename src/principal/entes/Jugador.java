@@ -1,6 +1,8 @@
 package principal.entes;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -9,12 +11,20 @@ import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
 import principal.control.GestorControles;
 import principal.herramientas.DibujoOpciones;
+import principal.herramientas.EscaladorElementos;
 import principal.inventario.RegistroObjetos;
 import principal.inventario.armas.Arma;
 import principal.inventario.armas.DesArmado;
 import principal.sprites.HojaSprites;
+import principal.sprites.Sprite;
 
 public class Jugador {
+
+    private static ArrayList<Point> puntoDisparo;
+    private static ArrayList<Integer> direcciones;
+    private static ArrayList<Sprite> tiro;
+    private int tiempoSpriteDisparo;
+    private boolean disparando;
 
     private double posicionX;
     private double posicionY;
@@ -29,6 +39,7 @@ public class Jugador {
 
     private HojaSprites hs;
     private HojaSprites hojaPoder;
+    private HojaSprites disparo;
     private boolean cambio;
     private BufferedImage imagenActual;
 
@@ -41,7 +52,7 @@ public class Jugador {
     private final Rectangle LIMITE_DERECHA = new Rectangle(Constantes.CENTRO_VENTANA_X - 9, Constantes.CENTRO_VENTANA_Y - altoJugador - 2, 1, altoJugador - 7);
 
     private int resistencia = 300;
-    private int resistenciaTotal = 300;
+    private final int resistenciaTotal = 300;
     private int recuperacion = 100;
     private boolean recuperado = true;
 
@@ -77,6 +88,11 @@ public class Jugador {
 
     public Jugador() {
 
+        puntoDisparo = new ArrayList();
+        direcciones = new ArrayList();
+        tiempoSpriteDisparo = 60;
+        disparando = false;
+
         this.posicionX = ElementosPrincipales.mapa.getCoordenadaInicial().getX();
         this.posicionY = ElementosPrincipales.mapa.getCoordenadaInicial().getY();
         this.enMovimiento = false;
@@ -84,6 +100,7 @@ public class Jugador {
 
         this.hs = new HojaSprites(Constantes.RUTA_PERSONAJE, Constantes.LADO_SPRITE, false);
         this.hojaPoder = new HojaSprites(Constantes.RUTA_PERSONAJEMEGAPODER, Constantes.LADO_SPRITE, false);
+        this.disparo = new HojaSprites(Constantes.RUTA_PERSONAJEDISPARO, Constantes.LADO_SPRITE, false);
 
         imagenActual = hs.getSprite(direccion, 0).getImagen();
         animacion = 0;
@@ -136,7 +153,103 @@ public class Jugador {
         determinarDireccion();
         animar();
         actualizarArma();
+        actualizarAtaques();
+        actualizarEnemigosAlcanzados(ElementosPrincipales.mapa.getEnemigos());
         cambiarHojaSprite();
+        actualizarSpriteDisparo();
+    }
+
+    public void actualizarSpriteDisparo() {
+        int i = 0;
+        for (Point p : puntoDisparo) {
+            switch (direcciones.get(i)) {
+                case 0:
+                    if (direccion == 1) {
+                        if (GestorControles.teclado.run && resistencia > 0) {
+                            p.y += 2;
+                        }
+                        p.y += 1.5;
+                    } else {
+                        p.y += 1;
+                    }
+                    break;
+                case 1:
+                    if (direccion == 0) {
+                        if (GestorControles.teclado.run && resistencia > 0) {
+                            p.y -= 2;
+                        }
+                        p.y -= 1.5;
+                    } else {
+                        p.y -= 1;
+                    }
+                    break;
+                case 2:
+                    if (direccion == 3) {
+                        if (GestorControles.teclado.run && resistencia > 0) {
+                            p.x += 2;
+                        }
+                        p.x += 1.5;
+                    } else {
+                        p.x += 1;
+                    }
+                    break;
+                case 3:
+                    if (direccion == 2) {
+                        if (GestorControles.teclado.run && resistencia > 0) {
+                            p.x -= 2;
+                        }
+                        p.x -= 1.5;
+                    } else {
+                        p.x -= 1;
+                    }
+                    break;
+            }
+            i++;
+        }
+    }
+
+    public void actualizarEnemigosAlcanzados(ArrayList<Enemigo> enemigos) {
+
+    }
+
+    public void actualizarAtaques() {
+        if (ElementosPrincipales.jugador.getAlcanceArma().isEmpty() || ElementosPrincipales.jugador.getAlmacenEquipo().getArma() instanceof DesArmado) {
+            return;
+        }
+        if (GestorControles.teclado.ataque) {
+            if (tiempoSpriteDisparo >= 50) {
+                disparando = true;
+                switch (direccion) {
+                    case 0:
+                        imagenActual = disparo.getSprite(direccion, 0).getImagen();
+                        break;
+                    case 1:
+                        imagenActual = disparo.getSprite(0, direccion).getImagen();
+                        break;
+                    case 2:
+                        imagenActual = disparo.getSprite(1, 0).getImagen();
+                        break;
+                    case 3:
+                        imagenActual = disparo.getSprite(1, 1).getImagen();
+                        break;
+                }
+                if (tiempoSpriteDisparo == 60) {
+                    final int centroX = Constantes.ANCHO_JUEGO / 2 - Constantes.LADO_SPRITE;
+                    final int centroY = Constantes.ALTO_JUEGO / 2 - Constantes.LADO_SPRITE;
+                    puntoDisparo.add(new Point(centroX, centroY));
+                    direcciones.add(direccion);
+                }
+            }
+
+        }
+
+        if (disparando) {
+            tiempoSpriteDisparo--;
+            if (tiempoSpriteDisparo == 0) {
+                disparando = false;
+                tiempoSpriteDisparo = 60;
+            }
+        }
     }
 
     private void actualizarArma() {
@@ -502,6 +615,25 @@ public class Jugador {
 //        g.drawRect(LIMITE_ABAJO.x, LIMITE_ABAJO.y, LIMITE_ABAJO.width, LIMITE_ABAJO.height);
 //        g.drawRect(LIMITE_IZQUIERDA.x, LIMITE_IZQUIERDA.y, LIMITE_IZQUIERDA.width, LIMITE_IZQUIERDA.height);
 //        g.drawRect(LIMITE_DERECHA.x, LIMITE_DERECHA.y, LIMITE_DERECHA.width, LIMITE_DERECHA.height);
+
+        int i = 0;
+        for (Point p : puntoDisparo) {
+            switch (direcciones.get(i)) {
+                case 0:
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(2, 0).getImagen(), p);
+                    break;
+                case 1:
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(2, 1).getImagen(), p);
+                    break;
+                case 2:
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(3, 0).getImagen(), p);
+                    break;
+                case 3:
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(3, 1).getImagen(), p);
+                    break;
+            }
+            i++;
+        }
     }
 
     public void setPosicionX(double posicionX) {

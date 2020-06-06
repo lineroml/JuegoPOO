@@ -71,7 +71,7 @@ public class MenuInicio implements EstadoJuego {
         configuracionActual = configuracion;
         salirActual = salirMenu;
 
-//        sonidoIntro.reproducirBucle();
+        sonidoIntro.reproducirBucle();
         tiempoEspera = 0;
     }
 
