@@ -16,7 +16,7 @@ public abstract class Arma extends Objeto {
     public static HojaSprites hojaArmas = new HojaSprites(Constantes.RUTA_ARMAS, 32, false);
 
     public Sonido disparo;
-    
+
     protected int ataqueMin;
     protected int ataqueMax;
 
@@ -37,7 +37,7 @@ public abstract class Arma extends Objeto {
         this.penetrante = penetrante;
         this.ataquePorSegundo = ataquePorSegundo;
         tiempoProximoAtaque = 0;
-        
+
         disparo = new Sonido(rutaDisparo);
     }
 
@@ -49,23 +49,15 @@ public abstract class Arma extends Objeto {
         }
     }
 
-    public void atacar(final ArrayList<Enemigo> enemigos) {
+    public void atacar(final Enemigo enemigo) {
         if (tiempoProximoAtaque > 0) {
             return;
         }
         tiempoProximoAtaque = (int) (ataquePorSegundo * 60);
-        
-        //Reproducir sonido
-        disparo.reproducir();
-        
-        if (enemigos.isEmpty()) {
-            return;
-        }
-        
+
         float ataqueAtual = getAtaqueMedio();
-        for (Enemigo enemigo : enemigos) {
-            enemigo.quitarVida(ataqueAtual);
-        }
+
+        enemigo.quitarVida(ataqueAtual);
     }
 
     @Override
@@ -75,6 +67,7 @@ public abstract class Arma extends Objeto {
 
     protected int getAtaqueMedio() {
         Random r = new Random();
+        System.out.println(r.nextInt(ataqueMax - ataqueMin) + ataqueMin);
         return r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
     }
 
@@ -85,7 +78,9 @@ public abstract class Arma extends Objeto {
     public boolean isPenetrante() {
         return penetrante;
     }
-    
-    
+
+    public void sonidoDisparo() {
+        disparo.reproducir();
+    }
 
 }

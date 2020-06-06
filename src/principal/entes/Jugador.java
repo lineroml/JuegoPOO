@@ -6,25 +6,26 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
 import principal.control.GestorControles;
 import principal.herramientas.DibujoOpciones;
-import principal.herramientas.EscaladorElementos;
 import principal.inventario.RegistroObjetos;
 import principal.inventario.armas.Arma;
 import principal.inventario.armas.DesArmado;
 import principal.sprites.HojaSprites;
-import principal.sprites.Sprite;
 
 public class Jugador {
 
-    private static ArrayList<Point> puntoDisparo;
-    private static ArrayList<Integer> direcciones;
-    private static ArrayList<Sprite> tiro;
+    private ArrayList<Double> puntoX;
+    private ArrayList<Double> puntoY;
+    private ArrayList<Integer> direcciones;
+    private ArrayList<Rectangle> rectanguloDisparo;
     private int tiempoSpriteDisparo;
     private boolean disparando;
+    private int ultimoDisparo;
 
     private double posicionX;
     private double posicionY;
@@ -87,9 +88,11 @@ public class Jugador {
     //    }
 
     public Jugador() {
-
-        puntoDisparo = new ArrayList();
+        ultimoDisparo = 0;
+        puntoX = new ArrayList();
+        puntoY = new ArrayList();
         direcciones = new ArrayList();
+        rectanguloDisparo = new ArrayList();
         tiempoSpriteDisparo = 60;
         disparando = false;
 
@@ -117,6 +120,13 @@ public class Jugador {
     }
 
     public void actualizar() {
+        ultimoDisparo++;
+        if (ultimoDisparo == 500) {
+            puntoX = new ArrayList();
+            puntoY = new ArrayList();
+            direcciones = new ArrayList();
+            rectanguloDisparo = new ArrayList();
+        }
 
         if (vida == 0) {
             muerto = true;
@@ -152,64 +162,111 @@ public class Jugador {
         enMovimiento = false;
         determinarDireccion();
         animar();
-        actualizarArma();
         actualizarAtaques();
-        actualizarEnemigosAlcanzados(ElementosPrincipales.mapa.getEnemigos());
+        actualizarArma();
         cambiarHojaSprite();
         actualizarSpriteDisparo();
     }
 
-    public void actualizarSpriteDisparo() {
+    private void comprobarTiro() {
+        for (Rectangle rectangle : rectanguloDisparo) {
+            for (Enemigo enemigo : ElementosPrincipales.mapa.getEnemigos()) {
+                if (rectangle.intersects(enemigo.getAreaDisparo())) {
+                    ElementosPrincipales.jugador.getAlmacenEquipo().getArma().atacar(enemigo);
+                }
+            }
+        }
+        Iterator<Enemigo> iterador = ElementosPrincipales.mapa.getEnemigos().iterator();
+        while (iterador.hasNext()) {
+            Enemigo enemigo = iterador.next();
+            if (enemigo.getVidaActual() <= 0) {
+                iterador.remove();
+            }
+        }
+    }
+
+    private void actualizarRectangulosDisparo() {
         int i = 0;
-        for (Point p : puntoDisparo) {
+        for (Rectangle rectangle : rectanguloDisparo) {
+            double numY = puntoY.get(i);
+            double numX = puntoX.get(i);
             switch (direcciones.get(i)) {
                 case 0:
-                    if (direccion == 1) {
-                        if (GestorControles.teclado.run && resistencia > 0) {
-                            p.y += 2;
-                        }
-                        p.y += 1.5;
-                    } else {
-                        p.y += 1;
-                    }
+                    rectanguloDisparo.set(i, new Rectangle((int) numX + 11, (int) numY + 26, 5, 7));
                     break;
                 case 1:
-                    if (direccion == 0) {
-                        if (GestorControles.teclado.run && resistencia > 0) {
-                            p.y -= 2;
-                        }
-                        p.y -= 1.5;
-                    } else {
-                        p.y -= 1;
-                    }
+                    rectanguloDisparo.set(i, new Rectangle((int) numX + 17, (int) numY, 5, 7));
                     break;
                 case 2:
-                    if (direccion == 3) {
-                        if (GestorControles.teclado.run && resistencia > 0) {
-                            p.x += 2;
-                        }
-                        p.x += 1.5;
-                    } else {
-                        p.x += 1;
-                    }
+                    rectanguloDisparo.set(i, new Rectangle((int) numX + 20, (int) numY + 23, 7, 5));
                     break;
                 case 3:
-                    if (direccion == 2) {
-                        if (GestorControles.teclado.run && resistencia > 0) {
-                            p.x -= 2;
-                        }
-                        p.x -= 1.5;
-                    } else {
-                        p.x -= 1;
-                    }
+                    rectanguloDisparo.set(i, new Rectangle((int) numX + 4, (int) numY + 21, 7, 5));
                     break;
             }
             i++;
         }
     }
 
-    public void actualizarEnemigosAlcanzados(ArrayList<Enemigo> enemigos) {
-
+    public void actualizarSpriteDisparo() {
+        int i = 0;
+        for (double p : puntoX) {
+            double numY = puntoY.get(i);
+            double numX = puntoX.get(i);
+            switch (direcciones.get(i)) {
+                case 0:
+                    if (direccion == 1 && enMovimiento) {
+                        numY += 1 + velocidadMovimiento;
+                    } else {
+                        numY += 1;
+                    }
+                    if (direccion == 2 && enMovimiento) {
+                        numX -= velocidadMovimiento;
+                    } else if (direccion == 3 && enMovimiento) {
+                        numX += velocidadMovimiento;
+                    }
+                    break;
+                case 1:
+                    if (direccion == 0 && enMovimiento) {
+                        numY -= 1 + velocidadMovimiento;
+                    } else {
+                        numY -= 1;
+                    }
+                    if (direccion == 2 && enMovimiento) {
+                        numX -= velocidadMovimiento;
+                    } else if (direccion == 3 && enMovimiento) {
+                        numX += velocidadMovimiento;
+                    }
+                    break;
+                case 2:
+                    if (direccion == 3 && enMovimiento) {
+                        numX += 1 + velocidadMovimiento;
+                    } else {
+                        numX += 1;
+                    }
+                    if (direccion == 0 && enMovimiento) {
+                        numY -= velocidadMovimiento;
+                    } else if (direccion == 1 && enMovimiento) {
+                        numY += velocidadMovimiento;
+                    }
+                    break;
+                case 3:
+                    if (direccion == 2 && enMovimiento) {
+                        numX -= 1 + velocidadMovimiento;
+                    } else {
+                        numX -= 1;
+                    }
+                    if (direccion == 0 && enMovimiento) {
+                        numY -= velocidadMovimiento;
+                    } else if (direccion == 1 && enMovimiento) {
+                        numY += velocidadMovimiento;
+                    }
+                    break;
+            }
+            puntoY.set(i, numY);
+            puntoX.set(i, numX);
+            i++;
+        }
     }
 
     public void actualizarAtaques() {
@@ -234,14 +291,34 @@ public class Jugador {
                         break;
                 }
                 if (tiempoSpriteDisparo == 60) {
-                    final int centroX = Constantes.ANCHO_JUEGO / 2 - Constantes.LADO_SPRITE;
-                    final int centroY = Constantes.ALTO_JUEGO / 2 - Constantes.LADO_SPRITE;
-                    puntoDisparo.add(new Point(centroX, centroY));
+                    ultimoDisparo = 0;
+                    final double centroX = Constantes.ANCHO_JUEGO / 2 - Constantes.LADO_SPRITE;
+                    final double centroY = Constantes.ALTO_JUEGO / 2 - Constantes.LADO_SPRITE;
+                    puntoX.add(centroX);
+                    puntoY.add(centroY);
                     direcciones.add(direccion);
+                    ElementosPrincipales.jugador.getAlmacenEquipo().getArma().sonidoDisparo();
+                    double numY = puntoY.get(puntoY.size() - 1);
+                    double numX = puntoX.get(puntoX.size() - 1);
+                    switch (direcciones.get(direcciones.size() - 1)) {
+                        case 0:
+                            rectanguloDisparo.add(new Rectangle((int) numX + 11, (int) numY + 26, 5, 7));
+                            break;
+                        case 1:
+                            rectanguloDisparo.add(new Rectangle((int) numX + 17, (int) numY, 5, 7));
+                            break;
+                        case 2:
+                            rectanguloDisparo.add(new Rectangle((int) numX + 20, (int) numY + 23, 7, 5));
+                            break;
+                        case 3:
+                            rectanguloDisparo.add(new Rectangle((int) numX + 4, (int) numY + 21, 7, 5));
+                            break;
+                    }
                 }
             }
-
         }
+        comprobarTiro();
+        actualizarRectangulosDisparo();
 
         if (disparando) {
             tiempoSpriteDisparo--;
@@ -401,6 +478,7 @@ public class Jugador {
             final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_ARRIBA.intersects(areaFutura)) {
+                enMovimiento = false;
                 return true;
             }
         }
@@ -418,6 +496,7 @@ public class Jugador {
             final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_ABAJO.intersects(areaFutura)) {
+                enMovimiento = false;
                 return true;
             }
         }
@@ -435,6 +514,7 @@ public class Jugador {
             final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_IZQUIERDA.intersects(areaFutura)) {
+                enMovimiento = false;
                 return true;
             }
         }
@@ -452,6 +532,7 @@ public class Jugador {
             final Rectangle areaFutura = new Rectangle(origenX, origenY, area.width, area.height);
 
             if (LIMITE_DERECHA.intersects(areaFutura)) {
+                enMovimiento = false;
                 return true;
             }
         }
@@ -617,19 +698,21 @@ public class Jugador {
 //        g.drawRect(LIMITE_DERECHA.x, LIMITE_DERECHA.y, LIMITE_DERECHA.width, LIMITE_DERECHA.height);
 
         int i = 0;
-        for (Point p : puntoDisparo) {
+        for (double p : puntoX) {
+            double numY = puntoY.get(i);
+            int y = (int) numY;
             switch (direcciones.get(i)) {
                 case 0:
-                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(2, 0).getImagen(), p);
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(2, 0).getImagen(), (int) p, y);
                     break;
                 case 1:
-                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(2, 1).getImagen(), p);
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(2, 1).getImagen(), (int) p, y);
                     break;
                 case 2:
-                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(3, 0).getImagen(), p);
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(3, 0).getImagen(), (int) p, y);
                     break;
                 case 3:
-                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(3, 1).getImagen(), p);
+                    DibujoOpciones.dibujarImagen(g, disparo.getSprite(3, 1).getImagen(), (int) p, y);
                     break;
             }
             i++;
