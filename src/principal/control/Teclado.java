@@ -15,7 +15,7 @@ public class Teclado implements KeyListener {
     public boolean opciones = false;
     public boolean poder = false;
     public boolean inventario = false;
-    public boolean menuAjustes = false;
+    public boolean menuPausa = false;
 
     public boolean ataque = false;
 
@@ -54,7 +54,7 @@ public class Teclado implements KeyListener {
                 inventario = !inventario;
                 break;
             case KeyEvent.VK_ESCAPE:
-                menuAjustes = !menuAjustes;
+                menuPausa = !menuPausa;
                 break;
         }
     }
