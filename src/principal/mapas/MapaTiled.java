@@ -116,7 +116,7 @@ public class MapaTiled {
             pausaActual = pausaConMouse;
             //Muestra el menu de pausa
             if (sd.getRaton().isClickIzquierdo()) {
-                GestorPrincipal.ge.cambiarEstadoActual(4);
+                GestorPrincipal.ge.cambiarEstadoActual(5);
             }
         } else {
             pausaActual = pausaSinMouse;

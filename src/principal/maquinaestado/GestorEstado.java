@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import principal.Constantes;
 import principal.graficos.SuperficieDibujo;
 import principal.maquinaestado.estado.GameOver;
+import principal.maquinaestado.estado.Logro;
+import principal.maquinaestado.estado.Pausa;
 import principal.maquinaestado.estado.juego.GestorJuego;
 import principal.maquinaestado.estado.menuinicial.MenuInicio;
 import principal.maquinaestado.estado.menuinicial.itemsMenu.Ajustes;
@@ -23,12 +25,14 @@ public class GestorEstado {
 
     private void iniciarEstados(final SuperficieDibujo sd) {
 
-        estados = new EstadoJuego[5];
+        estados = new EstadoJuego[7];
         estados[0] = new MenuInicio(sd);
         estados[1] = new GestorJuego();
         estados[2] = new GestorMenu(sd);
         estados[3] = new GameOver(sd);
         estados[4] = new Ajustes(sd);
+        estados[5] = new Pausa(sd);
+        estados[6] = new Logro(sd);
         //Añadir e iniciar los demas estados a medida que los creemos
     }
 
