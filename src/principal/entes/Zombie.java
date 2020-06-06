@@ -1,5 +1,6 @@
 package principal.entes;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Zombie extends Enemigo {
     private static HojaSprites hojaZombie;
 
     private int animacion;
-    private static int sonidoContador;
+    private static int contadorAtaque;
     private int a;
     private int d;
 
@@ -36,7 +37,7 @@ public class Zombie extends Enemigo {
         ataque = new Sonido("Resourses/sonidos/Golpe.wav");
 
         animacion = 0;
-        sonidoContador = 0;
+        contadorAtaque = 0;
         a = 0;
         d = 4;
 
@@ -47,22 +48,22 @@ public class Zombie extends Enemigo {
     public void actualizar(ArrayList<Enemigo> enemigos) {
         super.actualizar(enemigos);
         if (animacion < Integer.MAX_VALUE) {
-            sonidoContador++;
             animacion++;
         } else {
             animacion = 0;
         }
-        for (Enemigo enemigo : enemigos) {
-            if (enemigo.getArea().intersects(ElementosPrincipales.jugador.getArea())) {
-                if (sonidoContador == 400 && !ElementosPrincipales.jugador.isMuerto()) {
-                    ataque.detenerSonido();
-                    Random r = new Random();
-                    int num = r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
-                    ElementosPrincipales.jugador.setVida(num);
-                    ataque.reproducir();
-                    sonidoContador = 0;
-                }
+        if (getAreaDisparo().intersects(ElementosPrincipales.jugador.getArea())) {
+            if (contadorAtaque == 0 && !ElementosPrincipales.jugador.isMuerto()) {
+                ataque.detenerSonido();
+                Random r = new Random();
+                int num = r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
+                ElementosPrincipales.jugador.setVida(num);
+                ataque.reproducir();
+                contadorAtaque = 200;
             }
+        }
+        if (contadorAtaque > 0) {
+            contadorAtaque--;
         }
         animar();
     }
