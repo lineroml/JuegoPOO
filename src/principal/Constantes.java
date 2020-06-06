@@ -40,7 +40,7 @@ public class Constantes {
     public static String RUTA_ICONO_VENTANA = "/imagenes/iconos/iconV.png";
     public static String RUTA_LOGOTIPO = "/imagenes/iconos/logo.png";
     public static String RUTA_OBJETOS = "/imagenes/hojas_de_objetos/1.png";
-    public static String RUTA_ARMAS = "/imagenes/hojas_de_objetos/armas.png";
+    public static String RUTA_ARMAS = "/imagenes/hojas_de_objetos/arma.png";
     public static Font FUENTE_PIXEL = CargadorRecursos.cargarFuente("/fuentes/Crumbled-Pixels.ttf");
 
     public static Color COLOR_VERDE_CLARO = new Color(0x2ff40a);

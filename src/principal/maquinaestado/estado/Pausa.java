@@ -1,19 +1,15 @@
 package principal.maquinaestado.estado;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import principal.Constantes;
-import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
-import principal.entes.RegistroEnemigos;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
-import principal.inventario.RegistroObjetos;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.Sonido;
 
