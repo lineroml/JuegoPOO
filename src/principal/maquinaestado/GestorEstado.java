@@ -50,13 +50,8 @@ public class GestorEstado {
     }
 
     public void cambiarEstadoActual(final int nuevoEstado) {
-        if (estadoActual instanceof GameOver) {
+        if (estadoActual instanceof GameOver || estadoActual instanceof Ajustes) {
             if (estados[nuevoEstado] instanceof MenuInicio) {
-                MenuInicio mi = (MenuInicio) estados[nuevoEstado];
-                mi.setTiempoEspera(5);
-                mi.setCancion(Constantes.CANCION1);
-            }
-            if (estadoActual instanceof Ajustes) {
                 MenuInicio mi = (MenuInicio) estados[nuevoEstado];
                 mi.setTiempoEspera(5);
             }

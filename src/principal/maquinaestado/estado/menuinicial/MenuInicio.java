@@ -47,7 +47,6 @@ public class MenuInicio implements EstadoJuego {
     private BufferedImage noActual;
 
     private final CargarPartida partida;
-    private Sonido sonidoIntro = Constantes.CANCION1;
     private final Sonido boton = Constantes.BOTON;
 
     private Rectangle si = null;
@@ -71,7 +70,6 @@ public class MenuInicio implements EstadoJuego {
         configuracionActual = configuracion;
         salirActual = salirMenu;
 
-        sonidoIntro.reproducirBucle();
         tiempoEspera = 0;
     }
 
@@ -122,7 +120,6 @@ public class MenuInicio implements EstadoJuego {
                 boton.reproducir();
                 ElementosPrincipales.jugador.renacer();
                 GestorPrincipal.ge.cambiarEstadoActual(1);
-                sonidoIntro.detenerSonido();
             }
         } else {
             inicioPartidaActual = inicioPartida;
@@ -177,12 +174,6 @@ public class MenuInicio implements EstadoJuego {
 
     public void setTiempoEspera(int tiempoEspera) {
         this.tiempoEspera = tiempoEspera;
-    }
-
-    public void setCancion(Sonido cancion) {
-        sonidoIntro.detenerSonido();
-        sonidoIntro = cancion;
-        sonidoIntro.reproducirBucle();
     }
 
 }
