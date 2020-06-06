@@ -21,9 +21,21 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * Contiene los métodos estaticos para cargar recursos
+ * multimedia como audios, imagenes, textos, fuentes etc...
+ * @author Luis Evilla
+ */
 public class CargadorRecursos {
 
-    //Cargar una imagen desde una ruta
+    /**
+     * Carga una imagen multimedia desde la ruta asignada y la hace solida(no
+     * puede ser atravesada por el jugador".
+     *
+     * @param ruta ruta de la imagen ej:
+     * "/imagenes/hojas_Personajes/Santana.png"
+     * @return imagen en forma de buffer (BufferedImage)
+     */
     public static BufferedImage cargarImagenCompatibleOpaca(final String ruta) {
 
         Image imagen = null;
@@ -47,6 +59,13 @@ public class CargadorRecursos {
         return imagenAcelerada;
     }
 
+    /**
+     * Carga una imagen multimedia desde la ruta asignada y hace que el jugador
+     * pueda atravesarla
+     *
+     * @param ruta ruta de la imagen ej: "/imagenes/iconos/iconoCursor.png"
+     * @return imagen en forma de buffer (BufferedImage)
+     */
     public static BufferedImage cargarImagenCompatibleTranslucida(final String ruta) {
 
         Image imagen = null;
@@ -69,7 +88,12 @@ public class CargadorRecursos {
         return imagenAcelerada;
     }
 
-    //Leer el texto para poder hacer los mapas
+    /**
+     * Leer el texto para poder hacer los mapas
+     *
+     * @param ruta ruta del archivo ej: "/mapas/mapa1".
+     * @return la información del mapa en forma de string.
+     */
     public static String leerArchivoTexto(final String ruta) {
 
         String contenido = "";
@@ -100,6 +124,13 @@ public class CargadorRecursos {
         return contenido;
     }
 
+    /**
+     * Carga una fuente desde un archivo
+     *
+     * @param ruta ruta del archivo de la fuente ej: "/fuentes/Crumbled-Pixels.ttf"
+     * /fuentes/Crumbled-Pixels.ttf
+     * @return La fuente.
+     */
     public static Font cargarFuente(final String ruta) {
 
         Font fuente = null;
@@ -116,6 +147,13 @@ public class CargadorRecursos {
         return fuente;
     }
 
+    /**
+     * Carga un audio desde un archivo
+     *
+     * @param ruta ruta del archivo del archivo de audio ej "Resourses/sonidos/MusicaIntro.wav":
+     * /fuentes/Crumbled-Pixels.ttf
+     * @return La fuente.
+     */
     public static Clip cargarSonido(final String ruta) {
         Clip clip = null;
         try {

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
+import principal.control.GestorControles;
 import principal.entes.RegistroEnemigos;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;
@@ -121,6 +122,8 @@ public class Pausa implements EstadoJuego {
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(1);
+                GestorControles.teclado.menuPausa = false;
+                GestorPrincipal.ge.cambiarEstadoActual(1);
             }
         } else {
             volverActual = volver;
@@ -147,7 +150,6 @@ public class Pausa implements EstadoJuego {
 //                    dificultadExperto.y + 20);
 //            return;
 //        }
-
         DibujoOpciones.dibujarImagen(g, volverActual, 2, Constantes.ALTO_JUEGO - volver.getHeight() - 2);
     }
 
