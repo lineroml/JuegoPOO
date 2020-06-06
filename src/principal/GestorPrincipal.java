@@ -14,7 +14,14 @@ public class GestorPrincipal {
     private final int ancho;
     private final int alto;
 
+    /**
+     * Canvas sobre el cual se dibujara todo
+     */
     public static SuperficieDibujo sd;
+    
+    /**
+     * JFrame sobre el cual va a habitar el programa
+     */
     private Ventana ventana;
     public static GestorEstado ge;
 
@@ -35,7 +42,7 @@ public class GestorPrincipal {
 
         //Para Windows
 //        System.setProperty("sun.java2d.d3d", "True");
-         System.setProperty("sun.java2d.ddforcevram", "True");
+        System.setProperty("sun.java2d.ddforcevram", "True");
         //Mejora el rendimineto con graficos transparentes
         //System.setProperty("sun.java2d.transaccel", "True");
         //Creamos un gestor principal
@@ -51,6 +58,9 @@ public class GestorPrincipal {
         inicializar();
     }
 
+    /**
+     * Realiza el setup inicial del juego
+     */
     private void inicializar() {
 
         sd = new SuperficieDibujo(ancho, alto);
@@ -58,6 +68,12 @@ public class GestorPrincipal {
         ge = new GestorEstado(sd);
     }
 
+    /**
+     * Llama al método actualizar cada NS_POR_SEGUNDO / APS_OBJETO, asegurandose
+     * de que el juego se actualice APS_OBJETO veces cada segundo
+     *
+     * @see actualizar()
+     */
     private void iniciarBuclePrincipal() {
 
         int actualizacionesAcumuladas = 0, framesAcumulados = 0;
@@ -110,6 +126,9 @@ public class GestorPrincipal {
         }
     }
 
+    /**
+     * actualiza la información y los frames del juego
+     */
     private void actualizar() {
 
         ge.actualizar();
