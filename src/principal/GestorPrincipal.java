@@ -3,6 +3,7 @@ package principal;
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaestado.GestorEstado;
+import principal.sonido.Sonido;
 
 public class GestorPrincipal {
 
@@ -27,6 +28,8 @@ public class GestorPrincipal {
 
     private static int aps = 0;
     private static int fps = 0;
+    
+    private static Sonido sonidoIntro = Constantes.CANCION1;
 
     private GestorPrincipal(final String titulo, final int ancho, final int alto) {
 
@@ -36,6 +39,7 @@ public class GestorPrincipal {
     }
 
     public static void main(String[] args) {
+        sonidoIntro.reproducirBucle();
         //Usar la tarjeta grafica en vez de el procesador para dibujar
         //Para OpenGl mac/linux
         // System.setProperty("sun.java2d.opengl", "True");
@@ -146,6 +150,20 @@ public class GestorPrincipal {
 
     public static int getFps() {
         return fps;
+    }
+
+    public static void setCancion(Sonido cancion) {
+        sonidoIntro.detenerSonido();
+        sonidoIntro = cancion;
+        sonidoIntro.reproducirBucle();
+    }
+
+    public static void detenerCancion() {
+        sonidoIntro.detenerSonido();
+    }
+    
+    public static void reproducirCancion(){
+        sonidoIntro.reproducir();
     }
 
 }

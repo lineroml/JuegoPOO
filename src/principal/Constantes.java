@@ -40,7 +40,7 @@ public class Constantes {
     public static String RUTA_ICONO_VENTANA = "/imagenes/iconos/iconV.png";
     public static String RUTA_LOGOTIPO = "/imagenes/iconos/logo.png";
     public static String RUTA_OBJETOS = "/imagenes/hojas_de_objetos/1.png";
-    public static String RUTA_ARMAS = "/imagenes/hojas_de_objetos/armas.png";
+    public static String RUTA_ARMAS = "/imagenes/hojas_de_objetos/arma.png";
     public static Font FUENTE_PIXEL = CargadorRecursos.cargarFuente("/fuentes/Crumbled-Pixels.ttf");
 
     public static Color COLOR_VERDE_CLARO = new Color(0x2ff40a);
@@ -60,6 +60,7 @@ public class Constantes {
     public static final BufferedImage MUJER = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/Mujer.png");
     
     public final static BufferedImage IMAGENFONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/menuInicial.png");
+    public final static BufferedImage IMAGENFONDOPAUSA = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondoPausa.png");
     public final static BufferedImage FONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondo.png");
     public final static BufferedImage INICIOPARTIDA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartida.png");
     public final static BufferedImage INICIOPARTIDACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartidaConMouse.png");

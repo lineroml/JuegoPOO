@@ -1,6 +1,7 @@
 package principal.maquinaestado.estado;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -14,6 +15,7 @@ import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
+import principal.herramientas.GeneradorComentario;
 import principal.inventario.RegistroObjetos;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.Sonido;
@@ -22,10 +24,9 @@ public class Pausa implements EstadoJuego {
 
     private final SuperficieDibujo sd;
 
-    private final BufferedImage mujer = Constantes.MUJER;
     private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
 
-    private final BufferedImage imagenFondo = Constantes.FONDO;
+    private final BufferedImage imagenFondo = Constantes.IMAGENFONDOPAUSA;
     private final BufferedImage logros = Constantes.DIFICULTAD;
     private final BufferedImage logrosConMouse = Constantes.DIFICULTADCONMOUSE;
     private final BufferedImage musica = Constantes.MUSICA;
@@ -50,7 +51,7 @@ public class Pausa implements EstadoJuego {
     private final Rectangle salirR;
     private BufferedImage siActual;
     private BufferedImage noActual;
-    
+
     private Rectangle volverR;
 
     private boolean seguroSalir = false;
@@ -63,11 +64,12 @@ public class Pausa implements EstadoJuego {
 
     private int tiempoEspera;
     private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
+    private boolean mostrarMensaje;
 
     public Pausa(final SuperficieDibujo sd) {
         this.sd = sd;
 
-        logroR = new Rectangle(Constantes.CENTRO_VENTANA_X - logros.getWidth() / 2, 40, logros.getWidth(), logros.getHeight());
+        logroR = new Rectangle(Constantes.CENTRO_VENTANA_X / 2 - logros.getWidth() / 2, 100, logros.getWidth(), logros.getHeight());
         musicaR = new Rectangle(logroR.x, logroR.y + 60, musica.getWidth(), musica.getHeight());
         salirR = new Rectangle(musicaR.x, musicaR.y + 60, salir.getWidth(), salir.getHeight());
         volverR = volverNormalR;
@@ -78,6 +80,7 @@ public class Pausa implements EstadoJuego {
         volverActual = volver;
 
         tiempoEspera = 0;
+        mostrarMensaje = false;
     }
 
     @Override
@@ -148,13 +151,23 @@ public class Pausa implements EstadoJuego {
             logroActual = logros;
         }
         if (r.intersects(musicaR)) {
-            musicaActual = musicaConMouse;
+            mostrarMensaje = true;
             if (sd.getRaton().isClickIzquierdo()) {
-                boton.reproducir();
-                setMusica();
+                if (musicaActual == musicaConMouse) {
+                    musicaActual = musica;
+                    GestorPrincipal.detenerCancion();
+                    boton.reproducir();
+                    tiempoEspera = 5;
+                } else {
+                    musicaActual = musicaConMouse;
+                    GestorPrincipal.reproducirCancion();
+                    boton.reproducir();
+                    tiempoEspera = 5;
+                }
             }
         } else {
             musicaActual = musica;
+            mostrarMensaje = false;
         }
         if (r.intersects(salirR)) {
             salirActual = salirConMouse;
@@ -186,7 +199,6 @@ public class Pausa implements EstadoJuego {
         DibujoOpciones.dibujarImagen(g, musicaActual, new Point(musicaR.x, musicaR.y));
         DibujoOpciones.dibujarImagen(g, salirActual, new Point(salirR.x, salirR.y));
 
-        DibujoOpciones.dibujarImagen(g, mujer, Constantes.ANCHO_JUEGO - mujer.getWidth(), 0);
         DibujoOpciones.dibujarImagen(g, logo, 5, 5);
 
         if (seguroSalir) {
@@ -197,7 +209,7 @@ public class Pausa implements EstadoJuego {
             DibujoOpciones.dibujarImagen(g, noActual, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90,
                     Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50);
         }
-        
+
 //        if (newDificultad) {
 //            DibujoOpciones.dibujarImagen(g, imagenLogro, Constantes.CENTRO_VENTANA_X - imagenLogro.getWidth() / 2,
 //                    Constantes.CENTRO_VENTANA_Y - imagenLogro.getHeight() / 2);
@@ -210,11 +222,22 @@ public class Pausa implements EstadoJuego {
 //            return;
 //        }
         DibujoOpciones.dibujarImagen(g, volverActual, 2, Constantes.ALTO_JUEGO - volver.getHeight() - 2);
+        
+          if (mostrarMensaje) {
+            Font font = new Font("Agency FB", Font.BOLD, 7);
+            g.setFont(font);
+            if (musicaActual == musicaConMouse) {
+                GeneradorComentario.dibujarComentario(g, sd, "Quitar la musica");
+            } else {
+                GeneradorComentario.dibujarComentario(g, sd, "Poner la musica");
+            }
+
+        }
     }
 
-    private void setMusica() {
-
-    }
+  
+      
+    
 
     private void asignarSeguroSalir() {
         si = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 40, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
