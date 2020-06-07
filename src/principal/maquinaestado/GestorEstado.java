@@ -56,6 +56,12 @@ public class GestorEstado {
                 mi.setTiempoEspera(5);
             }
         }
+        if (estadoActual instanceof Logro) {
+            if (estados[nuevoEstado] instanceof Pausa) {
+                Pausa p = (Pausa)estados[nuevoEstado];
+                p.setTiempoEspera();
+            }
+        }
         estadoActual = estados[nuevoEstado];
     }
 

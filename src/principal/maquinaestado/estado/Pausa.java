@@ -45,7 +45,6 @@ public class Pausa implements EstadoJuego {
     private final Sonido boton = Constantes.BOTON;
 
     private int tiempoEspera;
-    private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
     private boolean mostrarMensaje;
 
     public Pausa(final SuperficieDibujo sd) {
@@ -53,7 +52,7 @@ public class Pausa implements EstadoJuego {
 
         logroR = new Rectangle(Constantes.CENTRO_VENTANA_X / 2 - logros.getWidth() / 2, 100, logros.getWidth(), logros.getHeight());
         musicaR = new Rectangle(logroR.x, logroR.y + 60, musica.getWidth(), musica.getHeight());
-        volverR = volverNormalR;
+        volverR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
 
         logroActual = logros;
         musicaActual = musicaConMouse;
@@ -132,11 +131,12 @@ public class Pausa implements EstadoJuego {
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(1);
-                GestorControles.teclado.menuPausa = false;
-                GestorPrincipal.ge.cambiarEstadoActual(1);
             }
         } else {
             volverActual = volver;
+        }
+        if (GestorControles.teclado.menuPausa) {
+            GestorPrincipal.ge.cambiarEstadoActual(1);
         }
     }
 
@@ -170,5 +170,9 @@ public class Pausa implements EstadoJuego {
             }
             
         }
+    }
+    
+    public void setTiempoEspera(){
+        tiempoEspera = 5;
     }
 }
