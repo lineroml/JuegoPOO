@@ -51,6 +51,7 @@ public class Pausa implements EstadoJuego {
     private final Rectangle salirR;
     private BufferedImage siActual;
     private BufferedImage noActual;
+
     private Rectangle volverR;
 
     private boolean seguroSalir = false;
@@ -62,6 +63,7 @@ public class Pausa implements EstadoJuego {
     private final Sonido boton = Constantes.BOTON;
 
     private int tiempoEspera;
+    private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
     private boolean mostrarMensaje;
 
     public Pausa(final SuperficieDibujo sd) {
@@ -78,6 +80,7 @@ public class Pausa implements EstadoJuego {
         volverActual = volver;
 
         tiempoEspera = 0;
+        mostrarMensaje = false;
     }
 
     @Override
@@ -163,8 +166,11 @@ public class Pausa implements EstadoJuego {
                 }
             }
         } else {
+            musicaActual = musica;
             mostrarMensaje = false;
+
         }
+        
         if (r.intersects(salirR)) {
             salirActual = salirConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -175,16 +181,7 @@ public class Pausa implements EstadoJuego {
         } else {
             salirActual = salir;
         }
-        if (r.intersects(salirR)) {
-            salirActual = salirConMouse;
-            if (sd.getRaton().isClickIzquierdo()) {
-                boton.reproducir();
-                seguroSalir = true;
-                asignarSeguroSalir();
-            }
-        } else {
-            salirActual = salir;
-        }
+        
         if (r.intersects(volverR)) {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -229,6 +226,7 @@ public class Pausa implements EstadoJuego {
 //            return;
 //        }
         DibujoOpciones.dibujarImagen(g, volverActual, 2, Constantes.ALTO_JUEGO - volver.getHeight() - 2);
+
         if (mostrarMensaje) {
             Font font = new Font("Agency FB", Font.BOLD, 7);
             g.setFont(font);
@@ -237,7 +235,6 @@ public class Pausa implements EstadoJuego {
             } else {
                 GeneradorComentario.dibujarComentario(g, sd, "Poner la música");
             }
-
         }
     }
 
