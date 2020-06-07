@@ -58,6 +58,10 @@ public class Ajustes implements EstadoJuego {
     private final Sonido boton = Constantes.BOTON;
 
     private BufferedImage imagenDificultad;
+    private BufferedImage imagenDificultadFacil;
+    private BufferedImage imagenDificultadIntermedio;
+    private BufferedImage imagenDificultadProfesional;
+    private BufferedImage imagenDificultadExtremo;
     private Rectangle dificultadFacil;
     private Rectangle dificultadIntermedia;
     private Rectangle dificultadProfesional;
@@ -151,15 +155,31 @@ public class Ajustes implements EstadoJuego {
         if (newDificultad) {
             if (sd.getRaton().isClickIzquierdo()) {
                 if (r.intersects(dificultadFacil)) {
+                    imagenDificultadFacil = Constantes.DIFICULTADFACILCONMOUSE;
+                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
                     setDificultad(0, 0, 0);
                 }
                 if (r.intersects(dificultadIntermedia)) {
+                    imagenDificultadFacil = Constantes.DIFICULTADFACIL;
+                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIOCONMOUSE;
+                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
                     setDificultad(60, 0, 100);
                 }
                 if (r.intersects(dificultadProfesional)) {
+                    imagenDificultadFacil = Constantes.DIFICULTADFACIL;
+                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONALCONMOUSE;
+                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
                     setDificultad(100, 4, 200);
                 }
                 if (r.intersects(dificultadExperto)) {
+                    imagenDificultadFacil = Constantes.DIFICULTADFACIL;
+                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMOCONMOUSE;
                     setDificultad(160, 5, 300);
                 }
             }
@@ -271,7 +291,19 @@ public class Ajustes implements EstadoJuego {
         DibujoOpciones.dibujarImagen(g, mujer, Constantes.ANCHO_JUEGO - mujer.getWidth(), 0);
         DibujoOpciones.dibujarImagen(g, logo, 5, 5);
 
-        if (newDificultad || cambioCancion) {
+        if (newDificultad) {
+            DibujoOpciones.dibujarImagen(g, imagenDificultad, Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2,
+                    Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2);
+            DibujoOpciones.dibujarImagen(g, imagenDificultadFacil, Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2 + 20,
+                    Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2 + 40);
+            DibujoOpciones.dibujarImagen(g, imagenDificultadIntermedio, dificultadFacil.x, dificultadFacil.y + 20);
+            DibujoOpciones.dibujarImagen(g, imagenDificultadProfesional, dificultadIntermedia.x, dificultadIntermedia.y + 20);
+            DibujoOpciones.dibujarImagen(g, imagenDificultadExtremo, dificultadProfesional.x, dificultadProfesional.y + 20);
+            DibujoOpciones.dibujarImagen(g, volverActual, Constantes.CENTRO_VENTANA_X + imagenDificultad.getWidth() / 2 - volver.getWidth() - 5,
+                    Constantes.CENTRO_VENTANA_Y + imagenDificultad.getHeight() / 2 - volver.getHeight() - 5);
+            return;
+        }
+        if (cambioCancion) {
             DibujoOpciones.dibujarImagen(g, imagenDificultad, Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2,
                     Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2);
             DibujoOpciones.dibujarRectBorde(g, dificultadFacil, Color.red);
@@ -299,14 +331,19 @@ public class Ajustes implements EstadoJuego {
 
     private void mensajeDificultad() {
         newDificultad = true;
-        imagenDificultad = Constantes.QUIERESALIR;
+        imagenDificultad = Constantes.DIFICULTADPANEL;
+        imagenDificultadFacil = Constantes.DIFICULTADFACILCONMOUSE;
+        imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+        imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+        imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
+
         dificultadFacil = new Rectangle(Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2 + 20,
-                Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2 + 40, imagenDificultad.getWidth() - 40, 15);
-        dificultadIntermedia = new Rectangle(dificultadFacil.x, dificultadFacil.y + 20, imagenDificultad.getWidth() - 40, 15);
-        dificultadProfesional = new Rectangle(dificultadIntermedia.x, dificultadIntermedia.y + 20, imagenDificultad.getWidth() - 40, 15);
-        dificultadExperto = new Rectangle(dificultadProfesional.x, dificultadProfesional.y + 20, imagenDificultad.getWidth() - 40, 15);
-        volverR = new Rectangle(dificultadExperto.x + dificultadExperto.width / 2 - volver.getWidth() / 2,
-                dificultadExperto.y + 20, volver.getWidth(), volver.getHeight());
+                Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2 + 40, imagenDificultadFacil.getWidth(), imagenDificultadFacil.getHeight());
+        dificultadIntermedia = new Rectangle(dificultadFacil.x, dificultadFacil.y + 20, imagenDificultadIntermedio.getWidth(), imagenDificultadIntermedio.getHeight());
+        dificultadProfesional = new Rectangle(dificultadIntermedia.x, dificultadIntermedia.y + 20, imagenDificultadProfesional.getWidth(), imagenDificultadProfesional.getHeight());
+        dificultadExperto = new Rectangle(dificultadProfesional.x, dificultadProfesional.y + 20, imagenDificultadExtremo.getWidth(), imagenDificultadExtremo.getHeight());
+        volverR = new Rectangle(Constantes.CENTRO_VENTANA_X + imagenDificultad.getWidth() / 2 - volver.getWidth() - 5,
+                Constantes.CENTRO_VENTANA_Y + imagenDificultad.getHeight() / 2 - volver.getHeight() - 5, volver.getWidth(), volver.getHeight());
     }
 
     private void setDificultad(final int vidaZombies, final int dañoPoder, final int cantidadZombies) {
@@ -317,7 +354,7 @@ public class Ajustes implements EstadoJuego {
 
     private void setMusica() {
         cambioCancion = true;
-        imagenDificultad = Constantes.QUIERESALIR;
+        imagenDificultad = Constantes.DIFICULTADPANEL;
         dificultadFacil = new Rectangle(Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2 + 20,
                 Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2 + 40, imagenDificultad.getWidth() - 40, 15);
         dificultadIntermedia = new Rectangle(dificultadFacil.x, dificultadFacil.y + 20, imagenDificultad.getWidth() - 40, 15);
@@ -343,7 +380,7 @@ public class Ajustes implements EstadoJuego {
                 Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 10, flechaAbajo.getWidth(), flechaAbajo.getHeight());
 
         volverR = new Rectangle(Constantes.CENTRO_VENTANA_X - menuSonido.getWidth() / 2 + 2, Constantes.CENTRO_VENTANA_Y + menuSonido.getHeight() / 2 - volver.getHeight(),
-                 volver.getWidth(), volver.getHeight());
+                volver.getWidth(), volver.getHeight());
     }
 
     private void setCreditos() {

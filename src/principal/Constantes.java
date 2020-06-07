@@ -103,4 +103,13 @@ public class Constantes {
     public final static BufferedImage FlECHAARRIBACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaArribaConMouse.png");
     public final static BufferedImage VOLVERGRANDE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volver.png");
     public final static BufferedImage VOLVERCONMOUSEGRANDE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volverConMouse.png");
+    public final static BufferedImage DIFICULTADPANEL = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadPanel.png");
+    public final static BufferedImage DIFICULTADFACIL = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadFacil.png");
+    public final static BufferedImage DIFICULTADFACILCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadFacilConMouse.png");
+    public final static BufferedImage DIFICULTADINTERMEDIO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadIntermedio.png");
+    public final static BufferedImage DIFICULTADINTERMEDIOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadIntermedioConMouse.png");
+    public final static BufferedImage DIFICULTADPROFESIONAL = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadProfesional.png");
+    public final static BufferedImage DIFICULTADPROFESIONALCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadProfesionalConMouse.png");
+    public final static BufferedImage DIFICULTADEXTREMO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremo.png");
+    public final static BufferedImage DIFICULTADEXTREMOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremoConMouse.png");
 }
