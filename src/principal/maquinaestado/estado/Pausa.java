@@ -24,7 +24,6 @@ public class Pausa implements EstadoJuego {
 
     private final SuperficieDibujo sd;
 
-    private final BufferedImage mujer = Constantes.MUJER;
     private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
 
     private final BufferedImage imagenFondo = Constantes.IMAGENFONDOPAUSA;
@@ -73,7 +72,7 @@ public class Pausa implements EstadoJuego {
         logroR = new Rectangle(Constantes.CENTRO_VENTANA_X / 2 - logros.getWidth() / 2, 100, logros.getWidth(), logros.getHeight());
         musicaR = new Rectangle(logroR.x, logroR.y + 60, musica.getWidth(), musica.getHeight());
         salirR = new Rectangle(musicaR.x, musicaR.y + 60, salir.getWidth(), salir.getHeight());
-        volverR = volverNormalR;
+        volverR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
 
         logroActual = logros;
         musicaActual = musicaConMouse;
@@ -169,7 +168,9 @@ public class Pausa implements EstadoJuego {
         } else {
             musicaActual = musica;
             mostrarMensaje = false;
+
         }
+        
         if (r.intersects(salirR)) {
             salirActual = salirConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -180,16 +181,18 @@ public class Pausa implements EstadoJuego {
         } else {
             salirActual = salir;
         }
+        
         if (r.intersects(volverR)) {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(1);
-                GestorControles.teclado.menuPausa = false;
-                GestorPrincipal.ge.cambiarEstadoActual(1);
             }
         } else {
             volverActual = volver;
+        }
+        if (GestorControles.teclado.menuPausa) {
+            GestorPrincipal.ge.cambiarEstadoActual(1);
         }
     }
 
@@ -200,7 +203,6 @@ public class Pausa implements EstadoJuego {
         DibujoOpciones.dibujarImagen(g, musicaActual, new Point(musicaR.x, musicaR.y));
         DibujoOpciones.dibujarImagen(g, salirActual, new Point(salirR.x, salirR.y));
 
-        DibujoOpciones.dibujarImagen(g, mujer, Constantes.ANCHO_JUEGO - mujer.getWidth(), 0);
         DibujoOpciones.dibujarImagen(g, logo, 5, 5);
 
         if (seguroSalir) {
@@ -233,7 +235,6 @@ public class Pausa implements EstadoJuego {
             } else {
                 GeneradorComentario.dibujarComentario(g, sd, "Poner la musica");
             }
-
         }
     }
 
@@ -242,5 +243,9 @@ public class Pausa implements EstadoJuego {
                 salirSi.getWidth(), salirSi.getHeight());
         no = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
                 salirNo.getWidth(), salirNo.getHeight());
+    }
+
+    public void setTiempoEspera() {
+        tiempoEspera = 5;
     }
 }
