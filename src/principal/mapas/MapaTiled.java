@@ -245,9 +245,9 @@ public class MapaTiled {
             JSONObject datosObjeto = getObjetoJSON(coleccionObjetos.get(i).toString());
             int xObjeto = getIntDelJSON(datosObjeto, "x");
             int yObjeto = getIntDelJSON(datosObjeto, "y");
-            int[] idObjetos = new int[3];
-            int[] cantidadObjetos = new int[3];
-            for (int j = 1; j <= 3; j++) {
+            int[] idObjetos = new int[2];
+            int[] cantidadObjetos = new int[2];
+            for (int j = 1; j <= 2; j++) {
                 idObjetos[j - 1] = getIntDelJSON(datosObjeto, ("id" + j));
                 cantidadObjetos[j - 1] = getIntDelJSON(datosObjeto, ("cantidad" + j));
             }

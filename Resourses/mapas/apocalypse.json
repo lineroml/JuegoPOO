@@ -1072,8 +1072,6 @@
             "cantidad1": 1,
             "id2": 0,
             "cantidad2": 20,
-            "id3": 1,
-            "cantidad3": 10,
         },
         {
             "x": 384,
@@ -1082,8 +1080,6 @@
             "cantidad1": 1,
             "id2": 0,
             "cantidad2": 3,
-            "id3": 1,
-            "cantidad3": 5,
         }
     ],
     "enemigos": [

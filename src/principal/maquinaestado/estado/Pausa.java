@@ -27,8 +27,8 @@ public class Pausa implements EstadoJuego {
     private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
 
     private final BufferedImage imagenFondo = Constantes.IMAGENFONDOPAUSA;
-    private final BufferedImage logros = Constantes.DIFICULTAD;
-    private final BufferedImage logrosConMouse = Constantes.DIFICULTADCONMOUSE;
+    private final BufferedImage logros = Constantes.LOGRO;
+    private final BufferedImage logrosConMouse = Constantes.LOGROCONMOUSE;
     private final BufferedImage musica = Constantes.MUSICA;
     private final BufferedImage musicaConMouse = Constantes.MUSICACONMOUSE;
     private final BufferedImage salir = Constantes.SALIRMENU;
@@ -233,9 +233,9 @@ public class Pausa implements EstadoJuego {
             Font font = new Font("Agency FB", Font.BOLD, 7);
             g.setFont(font);
             if (musicaActual == musicaConMouse) {
-                GeneradorComentario.dibujarComentario(g, sd, "Quitar la musica");
+                GeneradorComentario.dibujarComentario(g, sd, "Quitar la música");
             } else {
-                GeneradorComentario.dibujarComentario(g, sd, "Poner la musica");
+                GeneradorComentario.dibujarComentario(g, sd, "Poner la música");
             }
 
         }

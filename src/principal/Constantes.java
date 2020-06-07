@@ -7,6 +7,8 @@ import principal.herramientas.CargadorRecursos;
 import principal.sonido.Sonido;
 
 public class Constantes {
+    
+    public static float VOLUMEN = (float) 0.03;
 
     public static final int LADO_SPRITE = 32;
     public static final int LADO_TILE = 32;
@@ -81,6 +83,7 @@ public class Constantes {
     public final static BufferedImage VOLVERALJUEGOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volverAlJuegoConMouse.png");
     public final static BufferedImage IDIOMA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/idioma.png");
     public final static BufferedImage SONIDO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/sonido.png");
+    public final static BufferedImage SONIDOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/sonido.png");
     public final static BufferedImage DIFICULTAD = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/dificultad.png");
     public final static BufferedImage DIFICULTADCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/dificultadConMouse.png");
     public final static BufferedImage CREDITOS = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/creditos.png");
@@ -89,4 +92,11 @@ public class Constantes {
     public final static BufferedImage MUSICACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/musicaConMouse.png");
     public final static BufferedImage VOLVER = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/volver.png");
     public final static BufferedImage VOLVERCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/volverConMouse.png");
+    public final static BufferedImage LOGRO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/logro.png");
+    public final static BufferedImage LOGROCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/logroConMouse.png");
+    public final static BufferedImage MENUSONIDO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/configurarVolumen.png");
+    public final static BufferedImage FlECHAABAJO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaAbajo.png");
+    public final static BufferedImage FlECHAABAJOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaAbajoConMouse.png");
+    public final static BufferedImage FlECHAARRIBA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaArriba.png");
+    public final static BufferedImage FlECHAARRIBACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaArribaConMouse.png");
 }

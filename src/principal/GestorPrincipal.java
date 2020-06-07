@@ -19,7 +19,7 @@ public class GestorPrincipal {
      * Canvas sobre el cual se dibujara todo
      */
     public static SuperficieDibujo sd;
-    
+
     /**
      * JFrame sobre el cual va a habitar el programa
      */
@@ -28,7 +28,7 @@ public class GestorPrincipal {
 
     private static int aps = 0;
     private static int fps = 0;
-    
+
     private static Sonido sonidoIntro = Constantes.CANCION1;
 
     private GestorPrincipal(final String titulo, final int ancho, final int alto) {
@@ -161,9 +161,13 @@ public class GestorPrincipal {
     public static void detenerCancion() {
         sonidoIntro.detenerSonido();
     }
-    
-    public static void reproducirCancion(){
+
+    public static void reproducirCancion() {
         sonidoIntro.reproducir();
+    }
+
+    public static void setVolumen(float vol) {
+        sonidoIntro.aumentarVolumen(sonidoIntro.getVolumen() + vol);
     }
 
 }
