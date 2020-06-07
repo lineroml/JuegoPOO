@@ -66,7 +66,6 @@ public class SuperficieDibujo extends Canvas {
         DibujoOpciones.reiniciarObjetosDibujados();
 
         g.setFont(Constantes.FUENTE_PIXEL);
-
         DibujoOpciones.dibujarRectRelleno(g, 0, 0, Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA, Color.BLACK);
 
         //Hacer pantalla completa

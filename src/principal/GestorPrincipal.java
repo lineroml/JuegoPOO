@@ -8,7 +8,7 @@ import principal.sonido.Sonido;
 public class GestorPrincipal {
 
     //Indicara si el bucle principal esta funcionando
-    private boolean enFuncionamiento = false;
+    private static boolean enFuncionamiento = false;
     //Titulo de nuestro juego
     private final String titulo;
     //Dimensiones de la ventana
@@ -156,6 +156,9 @@ public class GestorPrincipal {
         sonidoIntro.aumentarVolumen(sonidoIntro.getVolumen() + vol);
     }
 
+    public static boolean isEnFuncionamiento() {
+        return enFuncionamiento;
+    }
 }
 
 

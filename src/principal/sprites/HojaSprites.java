@@ -16,7 +16,7 @@ public class HojaSprites {
 
     private Sprite[] sprites;
 
-    //Con srites cuadrados
+    //Con sprites cuadrados
     public HojaSprites(final String ruta, final int tamSprites, final boolean hojaOpaca) {
 
         final BufferedImage imagen;
