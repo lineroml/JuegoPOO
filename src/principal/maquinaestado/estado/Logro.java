@@ -15,7 +15,7 @@ import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.herramientas.GeneradorComentario;
 import principal.maquinaestado.EstadoJuego;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class Logro implements EstadoJuego {
 
@@ -52,7 +52,7 @@ public class Logro implements EstadoJuego {
 
     private String nombre;
 
-    private final Sonido boton = Constantes.BOTON;
+    private final GestorSonido boton = Constantes.BOTON;
 
     public Logro(final SuperficieDibujo sd) {
         this.sd = sd;

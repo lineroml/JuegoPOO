@@ -15,7 +15,7 @@ import principal.maquinaestado.estado.menujuego.itemsMenu.FormaMenu;
 import principal.maquinaestado.estado.menujuego.itemsMenu.MenuEquipo;
 import principal.maquinaestado.estado.menujuego.itemsMenu.MenuInventario;
 import principal.maquinaestado.estado.menujuego.itemsMenu.PlantillaMenu;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class GestorMenu implements EstadoJuego {
 
@@ -32,7 +32,7 @@ public class GestorMenu implements EstadoJuego {
     private final Rectangle recSalir = new Rectangle(Constantes.ANCHO_JUEGO - salirSinMouse.getWidth() - 2, 2, salirSinMouse.getWidth(),
             salirSinMouse.getHeight());
     Rectangle posicionRaton = new Rectangle();
-    private Sonido boton = Constantes.BOTON;
+    private GestorSonido boton = Constantes.BOTON;
 
     public GestorMenu(final SuperficieDibujo sd) {
         this.sd = sd;

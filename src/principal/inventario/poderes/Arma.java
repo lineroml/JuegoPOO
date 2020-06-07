@@ -7,7 +7,7 @@ import principal.Constantes;
 import principal.entes.Enemigo;
 import principal.entes.Jugador;
 import principal.inventario.Objeto;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
@@ -15,7 +15,7 @@ public abstract class Arma extends Objeto {
 
     public static HojaSprites hojaArmas = new HojaSprites(Constantes.RUTA_ARMAS, 32, false);
 
-    public Sonido disparo;
+    public GestorSonido disparo;
 
     protected int ataqueMin;
     protected int ataqueMax;
@@ -38,7 +38,7 @@ public abstract class Arma extends Objeto {
         this.ataquePorSegundo = ataquePorSegundo;
         tiempoProximoAtaque = 0;
 
-        disparo = new Sonido(rutaDisparo);
+        disparo = new GestorSonido(rutaDisparo);
     }
 
     public abstract ArrayList<Rectangle> getAlcance(final Jugador jugador);

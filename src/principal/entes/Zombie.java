@@ -8,7 +8,7 @@ import java.util.Random;
 import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.herramientas.DibujoOpciones;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 import principal.sprites.HojaSprites;
 
 public class Zombie extends Enemigo {
@@ -20,7 +20,7 @@ public class Zombie extends Enemigo {
     private int a;
     private int d;
 
-    Sonido ataque;
+    GestorSonido ataque;
 
     private int anchoZombie = 16;
     private int altoZombie = 32;
@@ -34,7 +34,7 @@ public class Zombie extends Enemigo {
             hojaZombie = new HojaSprites(Constantes.RUTA_ZOMBIE + id + ".png", Constantes.LADO_SPRITE, false);
         }
 
-        ataque = new Sonido("Resourses/sonidos/Golpe.wav");
+        ataque = new GestorSonido("Resourses/sonidos/Golpe.wav");
 
         animacion = 0;
         contadorAtaque = 0;

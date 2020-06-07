@@ -9,11 +9,11 @@ import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.herramientas.CalcularDistancia;
 import principal.herramientas.DibujoOpciones;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public abstract class Enemigo {
 
-    private final Sonido lamento;
+    private final GestorSonido lamento;
     private final long duracionLamento;
     private long lamentoSiguinete = 0;
 
@@ -42,7 +42,7 @@ public abstract class Enemigo {
         this.posicionY = 0;
         this.radioDistancia = radioDistancia;
 
-        this.lamento = new Sonido(rutaLamento);
+        this.lamento = new GestorSonido(rutaLamento);
         this.duracionLamento = lamento.getDuracion();
 
         enMovimiento = false;

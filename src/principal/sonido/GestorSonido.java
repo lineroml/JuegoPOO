@@ -5,12 +5,13 @@ import javax.sound.sampled.FloatControl;
 import principal.Constantes;
 import principal.herramientas.CargadorRecursos;
 
-public final class Sonido {
+public final class GestorSonido {
 
     private final Clip sonido;
     public static float volumen = Constantes.VOLUMEN;
-
-    public Sonido(final String ruta) {
+    public static boolean musica = true;
+    
+    public GestorSonido(final String ruta) {
         sonido = CargadorRecursos.cargarSonido(ruta);
         setVolumen(volumen);
     }
@@ -55,9 +56,9 @@ public final class Sonido {
 
     public void aumentarVolumen(float volumen) {
         if (volumen < 0) {
-            Sonido.volumen = 0;
+            GestorSonido.volumen = 0;
         } else {
-            Sonido.volumen = volumen;
+            GestorSonido.volumen = volumen;
         }
         setVolumen(volumen);
     }

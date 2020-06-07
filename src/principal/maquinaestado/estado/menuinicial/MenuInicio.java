@@ -12,7 +12,7 @@ import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
 import principal.maquinaestado.estado.menuinicial.itemsMenu.CargarPartida;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class MenuInicio implements EstadoJuego {
 
@@ -47,7 +47,7 @@ public class MenuInicio implements EstadoJuego {
     private BufferedImage noActual;
 
     private final CargarPartida partida;
-    private final Sonido boton = Constantes.BOTON;
+    private final GestorSonido boton = Constantes.BOTON;
 
     private Rectangle si = null;
     private Rectangle no = null;

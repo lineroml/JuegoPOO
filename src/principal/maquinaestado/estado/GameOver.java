@@ -11,7 +11,7 @@ import principal.graficos.SuperficieDibujo;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class GameOver implements EstadoJuego {
 
@@ -40,7 +40,7 @@ public class GameOver implements EstadoJuego {
     private Rectangle no = null;
     private boolean seguroSalir = false;
 
-    private final Sonido boton = new Sonido("Resourses/sonidos/boton.wav");
+    private final GestorSonido boton = new GestorSonido("Resourses/sonidos/boton.wav");
 
     private Rectangle r;
 
@@ -67,7 +67,7 @@ public class GameOver implements EstadoJuego {
             if (r.intersects(no)) {
                 noActual = salirNoConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
-                    tiempoEspera = 5;
+                    tiempoEspera = 10;
                     seguroSalir = false;
                 }
             } else {

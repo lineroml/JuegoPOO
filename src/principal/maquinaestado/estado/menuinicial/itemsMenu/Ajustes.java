@@ -16,7 +16,7 @@ import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.inventario.RegistroObjetos;
 import principal.maquinaestado.EstadoJuego;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class Ajustes implements EstadoJuego {
 
@@ -55,7 +55,7 @@ public class Ajustes implements EstadoJuego {
 
     private Rectangle r;
 
-    private final Sonido boton = Constantes.BOTON;
+    private final GestorSonido boton = Constantes.BOTON;
 
     private BufferedImage imagenDificultad;
     private BufferedImage imagenDificultadFacil;

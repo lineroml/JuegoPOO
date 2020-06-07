@@ -18,7 +18,7 @@ import principal.herramientas.EscaladorElementos;
 import principal.herramientas.GeneradorComentario;
 import principal.inventario.RegistroObjetos;
 import principal.maquinaestado.EstadoJuego;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class Pausa implements EstadoJuego {
 
@@ -60,7 +60,7 @@ public class Pausa implements EstadoJuego {
 
     private Rectangle r;
 
-    private final Sonido boton = Constantes.BOTON;
+    private final GestorSonido boton = Constantes.BOTON;
 
     private int tiempoEspera;
     private boolean mostrarMensaje;
@@ -136,10 +136,12 @@ public class Pausa implements EstadoJuego {
 //            }
 //            return;
 //        }
+
         if (tiempoEspera > 0) {
             tiempoEspera--;
             return;
         }
+        
         if (r.intersects(logroR)) {
             logroActual = logrosConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -149,25 +151,18 @@ public class Pausa implements EstadoJuego {
         } else {
             logroActual = logros;
         }
+        
         if (r.intersects(musicaR)) {
             mostrarMensaje = true;
+            musicaActual = musicaConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
-                if (musicaActual == musicaConMouse) {
-                    musicaActual = musica;
-                    GestorPrincipal.detenerCancion();
-                    boton.reproducir();
-                    tiempoEspera = 5;
-                } else {
-                    musicaActual = musicaConMouse;
-                    GestorPrincipal.reproducirCancion();
-                    boton.reproducir();
-                    tiempoEspera = 5;
-                }
+                toggleMusica();
             }
-        }else{
+        } else {
             mostrarMensaje = false;
+            musicaActual = musica;
         }
-        
+
         if (r.intersects(salirR)) {
             salirActual = salirConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -178,7 +173,7 @@ public class Pausa implements EstadoJuego {
         } else {
             salirActual = salir;
         }
-        
+
         if (r.intersects(volverR)) {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -229,7 +224,7 @@ public class Pausa implements EstadoJuego {
         if (mostrarMensaje) {
             Font font = new Font("Agency FB", Font.BOLD, 7);
             g.setFont(font);
-            if (musicaActual == musicaConMouse) {
+            if (GestorSonido.musica) {
                 GeneradorComentario.dibujarComentario(g, sd, "Quitar la música");
             } else {
                 GeneradorComentario.dibujarComentario(g, sd, "Poner la música");
@@ -242,6 +237,22 @@ public class Pausa implements EstadoJuego {
                 salirSi.getWidth(), salirSi.getHeight());
         no = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
                 salirNo.getWidth(), salirNo.getHeight());
+    }
+
+    public void toggleMusica() {
+        if (GestorSonido.musica) {
+            System.out.println("Desactivar musica");
+            GestorPrincipal.detenerCancion();
+            GestorSonido.musica = false;
+            boton.reproducir();
+            tiempoEspera = 10;
+        } else {
+            System.out.println("Activar música");
+            GestorPrincipal.reproducirCancion();
+            GestorSonido.musica = true;
+            boton.reproducir();
+            tiempoEspera = 10;
+        }
     }
 
     public void setTiempoEspera() {

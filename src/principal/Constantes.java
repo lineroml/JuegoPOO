@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import principal.herramientas.CargadorRecursos;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class Constantes {
     
@@ -51,8 +51,8 @@ public class Constantes {
     public static final long SPAWNING_TIME = 200;
     public static final long FLICKER_TIME = 20;
 
-    public static final Sonido BOTON = new Sonido("Resourses/sonidos/boton.wav");
-    public static final Sonido CANCION1 = new Sonido("Resourses/sonidos/MusicaIntro.wav");
+    public static final GestorSonido BOTON = new GestorSonido("Resourses/sonidos/boton.wav");
+    public static final GestorSonido CANCION1 = new GestorSonido("Resourses/sonidos/MusicaIntro.wav");
 //    public static final Sonido CANCION2 = new Sonido("Resourses/sonidos/MusicaIntro2.wav");
 //    public static final Sonido CANCION3 = new Sonido("Resourses/sonidos/MusicaIntro3.wav");
 

@@ -3,7 +3,7 @@ package principal;
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaestado.GestorEstado;
-import principal.sonido.Sonido;
+import principal.sonido.GestorSonido;
 
 public class GestorPrincipal {
 
@@ -14,7 +14,6 @@ public class GestorPrincipal {
     //Dimensiones de la ventana
     private final int ancho;
     private final int alto;
-
     public static SuperficieDibujo sd;
 
     /**
@@ -26,7 +25,7 @@ public class GestorPrincipal {
     private static int aps = 0;
     private static int fps = 0;
 
-    private static Sonido sonidoIntro = Constantes.CANCION1;
+    private static GestorSonido sonidoIntro = Constantes.CANCION1;
 
     private GestorPrincipal(final String titulo, final int ancho, final int alto) {
 
@@ -137,7 +136,7 @@ public class GestorPrincipal {
         return fps;
     }
 
-    public static void setCancion(Sonido cancion) {
+    public static void setCancion(GestorSonido cancion) {
         sonidoIntro.detenerSonido();
         sonidoIntro = cancion;
         sonidoIntro.reproducirBucle();
