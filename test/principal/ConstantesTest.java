@@ -47,7 +47,6 @@ public class ConstantesTest {
         assertThat("La ruta del icono de la ventana es erronea", Constantes.RUTA_ICONO_VENTANA, is("/imagenes/iconos/iconV.png"));
         assertThat("La ruta de la imagen del logopito es erronea", Constantes.RUTA_LOGOTIPO, is("/imagenes/iconos/logo.png"));
         assertThat("La ruta del spreedSheet de los objetos es erronea", Constantes.RUTA_OBJETOS, is("/imagenes/hojas_de_objetos/1.png"));
-        assertThat("La ruta del spreedSheet de las armas es erronea", Constantes.RUTA_ARMAS, is("/imagenes/hojas_de_objetos/armas.png"));
         assertEquals("La ruta de la fuente de tipografia es erronea", Constantes.FUENTE_PIXEL,CargadorRecursos.cargarFuente("/fuentes/Crumbled-Pixels.ttf"));
     }
     
