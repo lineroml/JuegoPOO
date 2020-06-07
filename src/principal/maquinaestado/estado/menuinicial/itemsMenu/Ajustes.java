@@ -36,12 +36,15 @@ public class Ajustes implements EstadoJuego {
     private final BufferedImage idioma = Constantes.IDIOMA;
     private final BufferedImage volver = Constantes.VOLVER;
     private final BufferedImage volverConMouse = Constantes.VOLVERCONMOUSE;
+    private final BufferedImage volverGrande = Constantes.VOLVERGRANDE;
+    private final BufferedImage volverConMouseGrande = Constantes.VOLVERCONMOUSEGRANDE;
 
     private BufferedImage dificultadActual;
     private BufferedImage musicaActual;
     private BufferedImage sonidoActual;
     private BufferedImage creditosActual;
     private BufferedImage volverActual;
+    private BufferedImage volverGrandeActual;
 
     private final Rectangle dificultadR;
     private final Rectangle musicaR;
@@ -72,7 +75,7 @@ public class Ajustes implements EstadoJuego {
     private boolean cambioSonido;
 
     private int tiempoEspera;
-    private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
+    private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volverGrande.getHeight() - 2, volverGrande.getWidth(), volverGrande.getHeight());
 
     public Ajustes(final SuperficieDibujo sd) {
         this.sd = sd;
@@ -204,13 +207,13 @@ public class Ajustes implements EstadoJuego {
             creditosActual = creditos;
         }
         if (r.intersects(volverR)) {
-            volverActual = volverConMouse;
+            volverGrandeActual = volverConMouseGrande;
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(0);
             }
         } else {
-            volverActual = volver;
+            volverGrandeActual = volverGrande;
         }
         if (r.intersects(sonidoR)) {
             sonidoActual = sonidoConMouse;
@@ -259,7 +262,7 @@ public class Ajustes implements EstadoJuego {
             return;
         }
 
-        DibujoOpciones.dibujarImagen(g, volverActual, 2, Constantes.ALTO_JUEGO - volver.getHeight() - 2);
+        DibujoOpciones.dibujarImagen(g, volverGrandeActual, 2, Constantes.ALTO_JUEGO - volverGrande.getHeight() - 2);
     }
 
     private void mensajeDificultad() {

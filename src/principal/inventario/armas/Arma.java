@@ -67,7 +67,6 @@ public abstract class Arma extends Objeto {
 
     protected int getAtaqueMedio() {
         Random r = new Random();
-        System.out.println(r.nextInt(ataqueMax - ataqueMin) + ataqueMin);
         return r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
     }
 

@@ -38,8 +38,8 @@ public class Pausa implements EstadoJuego {
     private final BufferedImage salirSi = Constantes.QUIERESALIRSI;
     private final BufferedImage salirSiConMouse = Constantes.QUIERESALIRSICONMOUSE;
     private final BufferedImage quiereSalir = Constantes.QUIERESALIR;
-    private final BufferedImage volver = Constantes.VOLVER;
-    private final BufferedImage volverConMouse = Constantes.VOLVERCONMOUSE;
+    private final BufferedImage volver = Constantes.VOLVERGRANDE;
+    private final BufferedImage volverConMouse = Constantes.VOLVERCONMOUSEGRANDE;
 
     private BufferedImage logroActual;
     private BufferedImage musicaActual;
@@ -63,7 +63,6 @@ public class Pausa implements EstadoJuego {
     private final Sonido boton = Constantes.BOTON;
 
     private int tiempoEspera;
-    private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
     private boolean mostrarMensaje;
 
     public Pausa(final SuperficieDibujo sd) {

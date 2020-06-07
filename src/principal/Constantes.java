@@ -53,6 +53,8 @@ public class Constantes {
 
     public static final Sonido BOTON = new Sonido("Resourses/sonidos/boton.wav");
     public static final Sonido CANCION1 = new Sonido("Resourses/sonidos/MusicaIntro.wav");
+    public static final Sonido CANCION2 = new Sonido("Resourses/sonidos/MusicaIntro2.wav");
+    public static final Sonido CANCION3 = new Sonido("Resourses/sonidos/MusicaIntro3.wav");
 
     public static final String BOTONPAUSA = "/imagenes/menu/pausa.png";
     public static final String BOTONPAUSACONMOUSE = "/imagenes/menu/pausaConMouse.png";
@@ -99,4 +101,6 @@ public class Constantes {
     public final static BufferedImage FlECHAABAJOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaAbajoConMouse.png");
     public final static BufferedImage FlECHAARRIBA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaArriba.png");
     public final static BufferedImage FlECHAARRIBACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/flechaArribaConMouse.png");
+    public final static BufferedImage VOLVERGRANDE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volver.png");
+    public final static BufferedImage VOLVERCONMOUSEGRANDE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volverConMouse.png");
 }

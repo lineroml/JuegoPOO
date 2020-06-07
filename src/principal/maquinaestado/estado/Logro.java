@@ -22,8 +22,8 @@ public class Logro implements EstadoJuego {
     private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
 
     private final BufferedImage imagenFondo = Constantes.IMAGENFONDOPAUSA;
-    private final BufferedImage volver = Constantes.VOLVER;
-    private final BufferedImage volverConMouse = Constantes.VOLVERCONMOUSE;
+    private final BufferedImage volver = Constantes.VOLVERGRANDE;
+    private final BufferedImage volverConMouse = Constantes.VOLVERCONMOUSEGRANDE;
 
     private BufferedImage volverActual;
 
