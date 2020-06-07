@@ -1,8 +1,9 @@
 package principal.inventario;
 
 import java.util.ArrayList;
-import principal.inventario.armas.Arma;
+import principal.inventario.poderes.Arma;
 import principal.inventario.consumible.Consumible;
+import principal.inventario.elementosMujeres.Elemento;
 
 public class Inventario {
 
@@ -54,6 +55,16 @@ public class Inventario {
             }
         }
         return consumibles;
+    }
+    
+    public ArrayList<Objeto> getObjetosElementos() {
+        ArrayList<Objeto> elementos = new ArrayList();
+        for (Objeto objeto : objetos) {
+            if (objeto instanceof Elemento) {
+                elementos.add(objeto);
+            }
+        }
+        return elementos;
     }
 
     public ArrayList<Objeto> getObjetosArmas() {

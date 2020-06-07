@@ -85,7 +85,7 @@ public class Constantes {
     public final static BufferedImage VOLVERALJUEGOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/volverAlJuegoConMouse.png");
     public final static BufferedImage IDIOMA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/idioma.png");
     public final static BufferedImage SONIDO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/sonido.png");
-    public final static BufferedImage SONIDOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/sonido.png");
+    public final static BufferedImage SONIDOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/sonidoConMouse.png");
     public final static BufferedImage DIFICULTAD = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/dificultad.png");
     public final static BufferedImage DIFICULTADCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/dificultadConMouse.png");
     public final static BufferedImage CREDITOS = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/creditos.png");

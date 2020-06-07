@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.herramientas.DibujoOpciones;
+import principal.herramientas.MedidorString;
+import principal.inventario.Objeto;
 
 public class MenuInferior {
 
@@ -35,6 +37,7 @@ public class MenuInferior {
         dibujarBarraVida(g);
         dibujarBarraResistencia(g);
         dibujarRanurasObjetos(g);
+        dibujarElementos(g);
     }
 
     private void dibujarAreaInventario(final Graphics g) {
@@ -72,7 +75,6 @@ public class MenuInferior {
     }
 
     private void dibujarRanurasObjetos(final Graphics g) {
-
         final int anchoRanura = 32;
         final int numeroRanuras = 10;
         final int espacioEntreRanuras = 10;
@@ -88,6 +90,22 @@ public class MenuInferior {
             Rectangle ranura = new Rectangle(xActual, areaInventario.y + 4, anchoRanura, anchoRanura);
             DibujoOpciones.dibujarRectRelleno(g, ranura);
             DibujoOpciones.dibujarString(g, (i + 1) + "", xActual + 13, areaInventario.y + 48);
+        }
+    }
+
+    private void dibujarElementos(final Graphics g) {
+        final int espacioEntreRanuras = 10;
+        final int numeroRanuras = 10;
+        final int anchoTotal = Constantes.LADO_SPRITE * numeroRanuras + espacioEntreRanuras * numeroRanuras;
+        final int xInicial = Constantes.ANCHO_JUEGO - anchoTotal;
+        final int anchoRanurasYespacio = Constantes.LADO_SPRITE + espacioEntreRanuras;
+
+        for (int i = 0; i < ElementosPrincipales.inventario.getObjetosElementos().size(); i++) {
+            int idObjeto = ElementosPrincipales.inventario.getObjetosElementos().get(i).getId();
+            Objeto objeto = ElementosPrincipales.inventario.getObjeto(idObjeto);
+            
+            int xActual = xInicial + anchoRanurasYespacio * i;
+            DibujoOpciones.dibujarImagen(g, objeto.getSprite().getImagen(), xActual, areaInventario.y + 4);
         }
     }
 }

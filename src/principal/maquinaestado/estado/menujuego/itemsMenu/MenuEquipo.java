@@ -12,8 +12,8 @@ import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.herramientas.MedidorString;
 import principal.inventario.Objeto;
-import principal.inventario.armas.Arma;
-import principal.inventario.armas.DesArmado;
+import principal.inventario.poderes.Arma;
+import principal.inventario.poderes.DesArmado;
 
 public class MenuEquipo extends PlantillaMenu {
 

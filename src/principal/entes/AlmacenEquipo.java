@@ -1,6 +1,6 @@
 package principal.entes;
 
-import principal.inventario.armas.Arma;
+import principal.inventario.poderes.Arma;
 
 public class AlmacenEquipo {
 

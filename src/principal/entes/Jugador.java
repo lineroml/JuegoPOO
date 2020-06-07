@@ -13,8 +13,8 @@ import principal.GestorPrincipal;
 import principal.control.GestorControles;
 import principal.herramientas.DibujoOpciones;
 import principal.inventario.RegistroObjetos;
-import principal.inventario.armas.Arma;
-import principal.inventario.armas.DesArmado;
+import principal.inventario.poderes.Arma;
+import principal.inventario.poderes.DesArmado;
 import principal.sprites.HojaSprites;
 
 public class Jugador {

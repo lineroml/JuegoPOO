@@ -1,13 +1,13 @@
-package principal.inventario.armas;
+package principal.inventario.poderes;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import principal.Constantes;
 import principal.entes.Jugador;
 
-public class Pistola extends Arma {
+public class Poder extends Arma {
 
-    public Pistola(int id, String nombre, String descripcion, int ataqueMin, int ataqueMax, boolean automatica, boolean penetrante, double ataquePorSegundo) {
+    public Poder(int id, String nombre, String descripcion, int ataqueMin, int ataqueMax, boolean automatica, boolean penetrante, double ataquePorSegundo) {
         super(id, nombre, descripcion, ataqueMin, ataqueMax, automatica, penetrante, ataquePorSegundo, "Resourses/sonidos/Pelea.wav");
     }
 

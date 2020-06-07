@@ -1,8 +1,9 @@
 package principal.inventario;
 
-import principal.inventario.armas.DesArmado;
-import principal.inventario.armas.Pistola;
+import principal.inventario.poderes.DesArmado;
+import principal.inventario.poderes.Poder;
 import principal.inventario.consumible.Consumible;
+import principal.inventario.elementosMujeres.Elemento;
 
 public class RegistroObjetos {
 
@@ -17,26 +18,27 @@ public class RegistroObjetos {
 
             //Consumibles
             case 0:
-                objeto = new Consumible(idObjeto, "Manzana roja", "Sin descripcion");
+                objeto = new Consumible(idObjeto, "Libro", "Sin descripcion");
                 break;
             case 1:
-                objeto = new Consumible(idObjeto, "Manzana Amarilla", "Sin descripcion");
+                objeto = new Consumible(idObjeto, "Botiquin", "Sin descripcion");
                 break;
+            //Elementos mujeres
             case 2:
-                objeto = new Consumible(idObjeto, "Zanahoria", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Zanahoria", "Sin descripcion");
                 break;
             case 3:
-                objeto = new Consumible(idObjeto, "Galleta", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Galleta", "Sin descripcion");
                 break;
             case 4:
-                objeto = new Consumible(idObjeto, "Bola dragon", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Bola dragon", "Sin descripcion");
                 break;
             case 5:
-                objeto = new Consumible(idObjeto, "Bola verde", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Bola verde", "Sin descripcion");
                 break;
             //Armas
             case 500:
-                objeto = new Pistola(idObjeto, "Pistola", "Sin descripcion", 12 - dificultad, 20 - dificultad, false, true, 0.7);
+                objeto = new Poder(idObjeto, "Cetro de Poder", "Sin descripcion", 12 - dificultad, 20 - dificultad, false, true, 0.7);
                 break;
             case 599:
                 objeto = new DesArmado(idObjeto, "manos", "Sin descripcion", 1, 1, false, false, 0);

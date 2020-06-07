@@ -23,7 +23,7 @@ import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.inventario.ContenedorObjetos;
-import principal.inventario.armas.DesArmado;
+import principal.inventario.poderes.DesArmado;
 import principal.maquinaestado.estado.juego.GestorJuego;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;

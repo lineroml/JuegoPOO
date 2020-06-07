@@ -1,4 +1,4 @@
-package principal.inventario.armas;
+package principal.inventario.poderes;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
