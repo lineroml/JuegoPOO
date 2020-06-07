@@ -22,14 +22,6 @@ public class Inventario {
         }
     }
 
-    public void recogerObjetos(final ObjetoSuelto o) {
-        if (objetoExiste(o.getObjeto())) {
-            aumentarCantidadObjeto(o.getObjeto(), o.getObjeto().getCantidad());
-        } else {
-            objetos.add(o.getObjeto());
-        }
-    }
-
     public boolean aumentarCantidadObjeto(final Objeto objeto, final int cantidad) {
         boolean incrementado = false;
 

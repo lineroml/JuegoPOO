@@ -164,10 +164,8 @@ public class Pausa implements EstadoJuego {
                     tiempoEspera = 5;
                 }
             }
-        } else {
-            musicaActual = musica;
+        }else{
             mostrarMensaje = false;
-
         }
         
         if (r.intersects(salirR)) {
@@ -186,12 +184,14 @@ public class Pausa implements EstadoJuego {
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(1);
+                GestorControles.teclado.menuPausa = false;
             }
         } else {
             volverActual = volver;
         }
         if (!GestorControles.teclado.menuPausa) {
             GestorPrincipal.ge.cambiarEstadoActual(1);
+            GestorControles.teclado.menuPausa = false;
         }
     }
 

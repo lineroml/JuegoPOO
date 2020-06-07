@@ -117,6 +117,7 @@ public class MapaTiled {
             //Muestra el menu de pausa
             if (sd.getRaton().isClickIzquierdo()) {
                 GestorPrincipal.ge.cambiarEstadoActual(5);
+                GestorControles.teclado.menuPausa = true;
             }
         } else {
             pausaActual = pausaSinMouse;

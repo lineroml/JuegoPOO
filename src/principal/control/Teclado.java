@@ -4,8 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Gestiona la información de las 
- * teclas que se presionan en el teclado
+ * Gestiona la información de las teclas que se presionan en el teclado
  */
 public class Teclado implements KeyListener {
 
@@ -22,11 +21,12 @@ public class Teclado implements KeyListener {
     public boolean menuPausa = false;
 
     public boolean ataque = false;
-    
+
     /**
-     * se lanza cada vez que se mateniene presionada una tecla 
-     * @param e variable la cual permite obtener 
-     * información del evento de la tecla que está siendo presionada
+     * se lanza cada vez que se mateniene presionada una tecla
+     *
+     * @param e variable la cual permite obtener información del evento de la
+     * tecla que está siendo presionada
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -69,8 +69,9 @@ public class Teclado implements KeyListener {
 
     /**
      * Se lanza cada vez que se deja de presionar una tecla
-     * @param e variable la cual permite obtener 
-     * información del evento de la que fue tecla presionada
+     *
+     * @param e variable la cual permite obtener información del evento de la
+     * que fue tecla presionada
      */
     @Override
     public void keyReleased(KeyEvent e) {

@@ -48,6 +48,7 @@ public class GestorJuego implements EstadoJuego {
         }
         if (GestorControles.teclado.menuPausa) {
             ge.cambiarEstadoActual(5);
+            GestorControles.teclado.menuPausa = true;
         }
     }
 
