@@ -24,6 +24,7 @@ public class Pausa implements EstadoJuego {
 
     private final SuperficieDibujo sd;
 
+    private final BufferedImage mujer = Constantes.MUJER;
     private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
 
     private final BufferedImage imagenFondo = Constantes.IMAGENFONDOPAUSA;
@@ -75,7 +76,7 @@ public class Pausa implements EstadoJuego {
         volverR = volverNormalR;
 
         logroActual = logros;
-        musicaActual = musica;
+        musicaActual = musicaConMouse;
         salirActual = salir;
         volverActual = volver;
 
@@ -199,6 +200,7 @@ public class Pausa implements EstadoJuego {
         DibujoOpciones.dibujarImagen(g, musicaActual, new Point(musicaR.x, musicaR.y));
         DibujoOpciones.dibujarImagen(g, salirActual, new Point(salirR.x, salirR.y));
 
+        DibujoOpciones.dibujarImagen(g, mujer, Constantes.ANCHO_JUEGO - mujer.getWidth(), 0);
         DibujoOpciones.dibujarImagen(g, logo, 5, 5);
 
         if (seguroSalir) {
@@ -222,8 +224,8 @@ public class Pausa implements EstadoJuego {
 //            return;
 //        }
         DibujoOpciones.dibujarImagen(g, volverActual, 2, Constantes.ALTO_JUEGO - volver.getHeight() - 2);
-        
-          if (mostrarMensaje) {
+
+        if (mostrarMensaje) {
             Font font = new Font("Agency FB", Font.BOLD, 7);
             g.setFont(font);
             if (musicaActual == musicaConMouse) {
@@ -234,10 +236,6 @@ public class Pausa implements EstadoJuego {
 
         }
     }
-
-  
-      
-    
 
     private void asignarSeguroSalir() {
         si = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 40, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
