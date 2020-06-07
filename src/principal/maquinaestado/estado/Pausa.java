@@ -190,7 +190,7 @@ public class Pausa implements EstadoJuego {
         } else {
             volverActual = volver;
         }
-        if (GestorControles.teclado.menuPausa) {
+        if (!GestorControles.teclado.menuPausa) {
             GestorPrincipal.ge.cambiarEstadoActual(1);
         }
     }
