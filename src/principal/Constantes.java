@@ -112,4 +112,15 @@ public class Constantes {
     public final static BufferedImage DIFICULTADPROFESIONALCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadProfesionalConMouse.png");
     public final static BufferedImage DIFICULTADEXTREMO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremo.png");
     public final static BufferedImage DIFICULTADEXTREMOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremoConMouse.png");
+    
+    public final static BufferedImage MUJER1 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
+    public final static BufferedImage MUJER1ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
+    public final static BufferedImage MUJER2 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
+    public final static BufferedImage MUJER2ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
+    public final static BufferedImage MUJER3 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
+    public final static BufferedImage MUJER3ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
+    public final static BufferedImage MUJER4 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
+    public final static BufferedImage MUJER4ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
+    public final static BufferedImage MUJER5 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
+    public final static BufferedImage MUJER5ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
 }
