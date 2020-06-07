@@ -73,12 +73,11 @@ public class Pausa implements EstadoJuego {
         volverR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
 
         logroActual = logros;
-        musicaActual = musica;
+        musicaActual = musicaConMouse;
         salirActual = salir;
         volverActual = volver;
 
         tiempoEspera = 0;
-        mostrarMensaje = false;
     }
 
     @Override
@@ -176,6 +175,16 @@ public class Pausa implements EstadoJuego {
         } else {
             salirActual = salir;
         }
+        if (r.intersects(salirR)) {
+            salirActual = salirConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                seguroSalir = true;
+                asignarSeguroSalir();
+            }
+        } else {
+            salirActual = salir;
+        }
         if (r.intersects(volverR)) {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -230,10 +239,6 @@ public class Pausa implements EstadoJuego {
             }
 
         }
-    }
-
-    private void setMusica() {
-
     }
 
     private void asignarSeguroSalir() {
