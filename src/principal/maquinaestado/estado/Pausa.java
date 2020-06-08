@@ -100,7 +100,7 @@ public class Pausa implements EstadoJuego {
                 siActual = salirSiConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
                     boton.reproducir();
-                    System.exit(0);
+                    GestorPrincipal.ge.cambiarEstadoActual(0);
                 }
             } else {
                 siActual = salirSi;

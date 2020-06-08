@@ -102,7 +102,7 @@ public class GestorEstado {
     }
 
     public void cambiarEstadoActual(final int nuevoEstado) {
-        if (estadoActual instanceof GameOver || estadoActual instanceof Ajustes) {
+        if (estadoActual instanceof GameOver || estadoActual instanceof Ajustes || estadoActual instanceof Pausa) {
             if (estados[nuevoEstado] instanceof MenuInicio) {
                 MenuInicio mi = (MenuInicio) estados[nuevoEstado];
                 mi.setTiempoEspera(5);
