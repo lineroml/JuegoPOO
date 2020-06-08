@@ -25,19 +25,19 @@ public class RegistroObjetos {
                 break;
             //Elementos mujeres
             case 2:
-                objeto = new Elemento(idObjeto, "Zanahoria", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Rosalind Franklin", "Sin descripcion");
                 break;
             case 3:
-                objeto = new Elemento(idObjeto, "Galleta", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Jocelyn Bell", "Sin descripcion");
                 break;
             case 4:
-                objeto = new Elemento(idObjeto, "Bola dragon", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Equipo Computadoras Humanas", "Sin descripcion");
                 break;
             case 5:
-                objeto = new Elemento(idObjeto, "Bola verde", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Ada Lovelace", "Sin descripcion");
                 break;
             case 6:
-                objeto = new Elemento(idObjeto, "Bola verde", "Sin descripcion");
+                objeto = new Elemento(idObjeto, "Huelga en Islandia", "Sin descripcion");
                 break;
             //Armas
             case 500:
