@@ -174,7 +174,7 @@ public class Ajustes implements EstadoJuego {
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
                 tiempoEspera = 5;
-                newDificultad = false;
+                cambioCancion = false;
                 volverR = volverNormalR;
             }
         } else {

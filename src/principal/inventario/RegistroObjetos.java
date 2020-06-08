@@ -36,6 +36,9 @@ public class RegistroObjetos {
             case 5:
                 objeto = new Elemento(idObjeto, "Bola verde", "Sin descripcion");
                 break;
+            case 6:
+                objeto = new Elemento(idObjeto, "Bola verde", "Sin descripcion");
+                break;
             //Armas
             case 500:
                 objeto = new Poder(idObjeto, "Cetro de Poder", "Sin descripcion", 12 - dificultad, 20 - dificultad, false, true, 0.7);
