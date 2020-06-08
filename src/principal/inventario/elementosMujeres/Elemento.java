@@ -17,10 +17,10 @@ public class Elemento extends Objeto {
 
     public void asignarMujer(final Mujer mujer) {
         if (nombre.equals("Rosalind Franklin")) {
-            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+            mujer.setImagenBiografia(Constantes.BIOGRAFIAROSALIND);
         }
         if (nombre.equals("Jocelyn Bell")) {
-            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+            mujer.setImagenBiografia(Constantes.BIOGRAFIAJOCELYN);
         }
         if (nombre.equals("Equipo Computadoras Humanas")) {
             mujer.setImagenBiografia(Constantes.BIOGRAFIAE_C_U);
@@ -29,9 +29,9 @@ public class Elemento extends Objeto {
             mujer.setImagenBiografia(Constantes.BIOGRAFIAADA_LOVELACE);
         }
         if (nombre.equals("Huelga en Islandia")) {
-            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+            mujer.setImagenBiografia(Constantes.BIOGRAFIAISLANDIA);
         }
-       
+
     }
 
     public void cambiarEstado() {

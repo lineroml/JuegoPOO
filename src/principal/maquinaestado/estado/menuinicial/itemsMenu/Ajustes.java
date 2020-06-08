@@ -92,6 +92,9 @@ public class Ajustes implements EstadoJuego {
     private BufferedImage cancion3;
     private BufferedImage cancion4;
 
+    private BufferedImage imagenCreditos;
+    private boolean enCreditos;
+
     private int tiempoEspera;
     private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volverGrande.getHeight() - 2, volverGrande.getWidth(), volverGrande.getHeight());
 
@@ -124,8 +127,8 @@ public class Ajustes implements EstadoJuego {
         flechaAbajoRGeneral = new Rectangle();
 
         cambioSonido = false;
-
         cambioCancion = false;
+        enCreditos = false;
 
         tiempoEspera = 0;
     }
@@ -154,7 +157,26 @@ public class Ajustes implements EstadoJuego {
             return;
         }
 
+        if (enCreditos) {
+            mensajeCreditos();
+            return;
+        }
+
         comprobarBotones();
+    }
+
+    private void mensajeCreditos() {
+        if (r.intersects(volverR)) {
+            volverActual = volverConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 5;
+                enCreditos = false;
+                volverR = volverNormalR;
+            }
+        } else {
+            volverActual = volver;
+        }
     }
 
     private void cambiarCancion() {
@@ -430,8 +452,17 @@ public class Ajustes implements EstadoJuego {
             DibujoOpciones.dibujarImagen(g, flechaArribaJuegoActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
                     Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 65);
 
-            DibujoOpciones.dibujarImagen(g, volverActual, Constantes.CENTRO_VENTANA_X - menuSonido.getWidth() / 2 + 2, Constantes.CENTRO_VENTANA_Y + menuSonido.getHeight() / 2 - volver.getHeight());
+            DibujoOpciones.dibujarImagen(g, volverActual, Constantes.CENTRO_VENTANA_X - menuSonido.getWidth() / 2 + 2,
+                    Constantes.CENTRO_VENTANA_Y + menuSonido.getHeight() / 2 - volver.getHeight());
 
+            return;
+        }
+
+        if (enCreditos) {
+            DibujoOpciones.dibujarImagen(g, imagenCreditos, Constantes.CENTRO_VENTANA_X - imagenCreditos.getWidth() / 2,
+                    Constantes.CENTRO_VENTANA_Y - imagenCreditos.getHeight() / 2);
+            DibujoOpciones.dibujarImagen(g, volverActual, Constantes.CENTRO_VENTANA_X + imagenCreditos.getWidth() / 2 + 2 - volver.getWidth() - 4,
+                    Constantes.CENTRO_VENTANA_Y + imagenCreditos.getHeight() / 2 - volver.getHeight());
             return;
         }
 
@@ -513,6 +544,14 @@ public class Ajustes implements EstadoJuego {
 
     private void setCreditos() {
 
+        enCreditos = true;
+        imagenCreditos = Constantes.IMAGENCREDITOS;
+        volverR = new Rectangle(Constantes.CENTRO_VENTANA_X + imagenCreditos.getWidth() / 2 + 2 - volver.getWidth() - 4, Constantes.CENTRO_VENTANA_Y
+                + imagenCreditos.getHeight() / 2 - volver.getHeight(), volver.getWidth(), volver.getHeight());
+    }
+
+    public void setTiempoEspera() {
+        tiempoEspera = 10;
     }
 
 }

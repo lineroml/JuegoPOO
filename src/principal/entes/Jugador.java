@@ -730,7 +730,7 @@ public class Jugador {
             vida -= bajoVida;
         }
     }
-    
+
     public void aumentarVida(final int subeVida) {
         if (vida + subeVida > 1000) {
             vida = 1000;

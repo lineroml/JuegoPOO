@@ -7,7 +7,7 @@ import principal.herramientas.CargadorRecursos;
 import principal.sonido.GestorSonido;
 
 public class Constantes {
-    
+
     public static float VOLUMENMUSICA = (float) 0.06;
     public static float VOLUMENJUEGO = (float) 0.20;
 
@@ -62,9 +62,9 @@ public class Constantes {
     public static final String BOTONPAUSACONMOUSE = "/imagenes/menu/pausaConMouse.png";
     public static final String BOTONSALIR = "/imagenes/menu/salir.png";
     public static final String BOTONSALIRCONMOUSE = "/imagenes/menu/salirConMouse.png";
-    
+
     public static final BufferedImage MUJER = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/Mujer.png");
-    
+
     public final static BufferedImage IMAGENFONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/menuInicial.png");
     public final static BufferedImage IMAGENFONDOPAUSA = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondoPausa.png");
     public final static BufferedImage FONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondo.png");
@@ -114,7 +114,7 @@ public class Constantes {
     public final static BufferedImage DIFICULTADPROFESIONALCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadProfesionalConMouse.png");
     public final static BufferedImage DIFICULTADEXTREMO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremo.png");
     public final static BufferedImage DIFICULTADEXTREMOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremoConMouse.png");
-    
+
     public final static BufferedImage CANCIONPANEL = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/menuCancion.png");
     public final static BufferedImage INFOCANCION1 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion1.png");
     public final static BufferedImage INFOCANCION1CONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion1ConMouse.png");
@@ -124,7 +124,8 @@ public class Constantes {
     public final static BufferedImage INFOCANCION3CONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion3ConMouse.png");
     public final static BufferedImage INFOCANCION4 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion4.png");
     public final static BufferedImage INFOCANCION4CONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion4ConMouse.png");
-    
+    public final static BufferedImage IMAGENCREDITOS = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/creditos.png");
+
     public final static BufferedImage MUJER1 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
     public final static BufferedImage MUJER1ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
     public final static BufferedImage MUJER2 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
@@ -135,7 +136,10 @@ public class Constantes {
     public final static BufferedImage MUJER4ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
     public final static BufferedImage MUJER5 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
     public final static BufferedImage MUJER5ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
-    
+
     public final static BufferedImage BIOGRAFIAADA_LOVELACE = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Ada_Lovelace.png");
     public final static BufferedImage BIOGRAFIAE_C_U = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Equipo_Computadoras_Humanas.png");
+    public final static BufferedImage BIOGRAFIAJOCELYN = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Jocelyn_Bell.png");
+    public final static BufferedImage BIOGRAFIAROSALIND = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Rosalind_Franklin.png");
+    public final static BufferedImage BIOGRAFIAISLANDIA = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/islandia.png");
 }
