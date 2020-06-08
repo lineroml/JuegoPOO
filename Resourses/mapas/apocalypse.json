@@ -1112,6 +1112,30 @@
             "cantidad1": 1,
             "id2": 1,
             "cantidad2": 1,
+        },
+        {
+            "x": 128,
+            "y": 1248,
+            "id1": 1,
+            "cantidad1": 1,
+            "id2": 1,
+            "cantidad2": 1,
+        },
+        {
+            "x": 960,
+            "y": 480,
+            "id1": 1,
+            "cantidad1": 1,
+            "id2": 1,
+            "cantidad2": 1,
+        },
+        {
+            "x": 1120,
+            "y": 1760,
+            "id1": 1,
+            "cantidad1": 1,
+            "id2": 1,
+            "cantidad2": 1,
         }
     ],
     "enemigos": [

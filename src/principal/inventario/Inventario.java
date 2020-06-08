@@ -56,7 +56,7 @@ public class Inventario {
         }
         return consumibles;
     }
-    
+
     public ArrayList<Objeto> getObjetosElementos() {
         ArrayList<Objeto> elementos = new ArrayList();
         for (Objeto objeto : objetos) {
@@ -65,6 +65,16 @@ public class Inventario {
             }
         }
         return elementos;
+    }
+
+    public Objeto getObjetoElemento(final int i) {
+        ArrayList<Objeto> elementos = new ArrayList();
+        for (Objeto objeto : objetos) {
+            if (objeto instanceof Elemento) {
+                elementos.add(objeto);
+            }
+        }
+        return elementos.get(i);
     }
 
     public ArrayList<Objeto> getObjetosArmas() {

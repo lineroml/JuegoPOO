@@ -14,6 +14,7 @@ import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.herramientas.GeneradorComentario;
+import principal.inventario.Objeto;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
@@ -51,7 +52,13 @@ public class Logro implements EstadoJuego {
     private boolean activa4;
     private boolean activa5;
 
-    private String nombre;
+    private String nombre1;
+    private String nombre2;
+    private String nombre3;
+    private String nombre4;
+    private String nombre5;
+
+    private String nombreActual;
 
     private final GestorSonido boton = Constantes.BOTON;
 
@@ -71,7 +78,13 @@ public class Logro implements EstadoJuego {
         activa4 = false;
         activa5 = false;
 
-        nombre = "";
+        nombre1 = "";
+        nombre2 = "";
+        nombre3 = "";
+        nombre4 = "";
+        nombre5 = "";
+
+        nombreActual = "";
 
         volverActual = volver;
     }
@@ -82,6 +95,24 @@ public class Logro implements EstadoJuego {
         if (!ElementosPrincipales.inventario.getObjetosElementos().isEmpty()) {
             if (ultimoTamanho != ElementosPrincipales.inventario.getObjetosElementos().size()) {
                 setMujer(ElementosPrincipales.inventario.getObjetosElementos().size());
+                Objeto objeto = ElementosPrincipales.inventario.getObjetoElemento(ElementosPrincipales.inventario.getObjetosElementos().size() -1);
+                switch (ElementosPrincipales.inventario.getObjetosElementos().size()) {
+                    case 1:
+                        nombre1 = objeto.getNombre();
+                        break;
+                    case 2:
+                        nombre2 = objeto.getNombre();
+                        break;
+                    case 3:
+                        nombre3 = objeto.getNombre();
+                        break;
+                    case 4:
+                        nombre4 = objeto.getNombre();
+                        break;
+                    case 5:
+                        nombre5 = objeto.getNombre();
+                        break;
+                }
                 ultimoTamanho = ElementosPrincipales.inventario.getObjetosElementos().size();
             }
         }
@@ -99,22 +130,22 @@ public class Logro implements EstadoJuego {
             volverActual = volver;
         }
 
-        activa1 = interseccionRecuadro(mujer1, Constantes.MUJER1ACTIVA, r, mujer1R);
-        activa2 = interseccionRecuadro(mujer2, Constantes.MUJER2ACTIVA, r, mujer2R);
-        activa3 = interseccionRecuadro(mujer3, Constantes.MUJER3ACTIVA, r, mujer3R);
-        activa4 = interseccionRecuadro(mujer4, Constantes.MUJER4ACTIVA, r, mujer4R);
-        activa5 = interseccionRecuadro(mujer5, Constantes.MUJER5ACTIVA, r, mujer5R);
+        activa1 = interseccionRecuadro(mujer1, Constantes.MUJER1ACTIVA, r, mujer1R, nombre1);
+        activa2 = interseccionRecuadro(mujer2, Constantes.MUJER2ACTIVA, r, mujer2R, nombre2);
+        activa3 = interseccionRecuadro(mujer3, Constantes.MUJER3ACTIVA, r, mujer3R, nombre3);
+        activa4 = interseccionRecuadro(mujer4, Constantes.MUJER4ACTIVA, r, mujer4R, nombre4);
+        activa5 = interseccionRecuadro(mujer5, Constantes.MUJER5ACTIVA, r, mujer5R, nombre5);
 
     }
 
-    private boolean interseccionRecuadro(final BufferedImage mujer, final BufferedImage comparar, final Rectangle r, final Rectangle mujerR) {
+    private boolean interseccionRecuadro(final BufferedImage mujer, final BufferedImage comparar, final Rectangle r, final Rectangle mujerR, final String nombre) {
         boolean activa = false;
         if (r.intersects(mujerR)) {
             activa = true;
             if (mujer == comparar) {
-                nombre = "Nombre Mujer 1";
+                nombreActual = nombre;
             } else {
-                nombre = "";
+                nombreActual = "";
             }
         }
         return activa;
@@ -156,12 +187,12 @@ public class Logro implements EstadoJuego {
     }
 
     private void mostrarMensaje(final Graphics g, final int num) {
-        Font font = new Font("Agency FB", Font.BOLD, 7);
+        Font font = new Font("Arial", Font.BOLD, 7);
         g.setFont(font);
-        if (nombre.equals("")) {
+        if (nombreActual.equals("")) {
             GeneradorComentario.dibujarComentario(g, sd, "Primero rescara a la mujer");
         } else {
-            GeneradorComentario.dibujarComentario(g, sd, "Presiona el número " + num + ", para ver a " + nombre);
+            GeneradorComentario.dibujarComentario(g, sd, "Presiona el número " + num + ", para ver a " + nombreActual);
         }
     }
 
