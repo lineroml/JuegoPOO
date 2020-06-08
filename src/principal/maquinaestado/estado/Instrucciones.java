@@ -67,12 +67,13 @@ public class Instrucciones implements EstadoJuego {
         DibujoOpciones.dibujarString(g, "INSTRUCCIONES", new Point(220, 64), Color.WHITE);
         Font font = new Font("Agency FB", Font.BOLD, 15);
         g.setFont(font);
-        DibujoOpciones.dibujarString(g, "Te mueves con las \"w\", \"s\", \"d\", \"a\"", new Point(130, 96), Color.WHITE);
+        DibujoOpciones.dibujarString(g, "Te mueves con las teclas \"w\", \"s\", \"d\", \"a\"", new Point(130, 96), Color.WHITE);
         DibujoOpciones.dibujarString(g, "Lanza tu poder con la tecla de \"Espacio\"", new Point(130, 128), Color.WHITE);
         DibujoOpciones.dibujarString(g, "Recorre todo el mapa eliminando a los enemigos que no te permiten avanzar", new Point(130, 160), Color.WHITE);
         DibujoOpciones.dibujarString(g, "Recolecta los items para no olvidar a las mujeres del pasado", new Point(130, 192), Color.WHITE);
         DibujoOpciones.dibujarString(g, "Después de recolectar los items puedes ver tus logros con los números en tu teclado", new Point(130, 224), Color.WHITE);
         DibujoOpciones.dibujarString(g, "Recuerda que tienes una habilidad especial, encuentrala", new Point(130, 256), Color.WHITE);
+        DibujoOpciones.dibujarString(g, "Con la tecla \"Shift\" puedes correr", new Point(130, 288), Color.WHITE);
     }
 
 }
