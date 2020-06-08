@@ -462,7 +462,7 @@ public class Ajustes implements EstadoJuego {
             DibujoOpciones.dibujarImagen(g, imagenCreditos, Constantes.CENTRO_VENTANA_X - imagenCreditos.getWidth() / 2,
                     Constantes.CENTRO_VENTANA_Y - imagenCreditos.getHeight() / 2);
             DibujoOpciones.dibujarImagen(g, volverActual, Constantes.CENTRO_VENTANA_X + imagenCreditos.getWidth() / 2 + 2 - volver.getWidth() - 4,
-                    Constantes.CENTRO_VENTANA_Y + imagenCreditos.getHeight() / 2 - volver.getHeight() - 4);
+                    Constantes.CENTRO_VENTANA_Y + imagenCreditos.getHeight() / 2 - volver.getHeight());
             return;
         }
 
@@ -547,7 +547,7 @@ public class Ajustes implements EstadoJuego {
         enCreditos = true;
         imagenCreditos = Constantes.IMAGENCREDITOS;
         volverR = new Rectangle(Constantes.CENTRO_VENTANA_X + imagenCreditos.getWidth() / 2 + 2 - volver.getWidth() - 4, Constantes.CENTRO_VENTANA_Y
-                + imagenCreditos.getHeight() / 2 - volver.getHeight() - 4, volver.getWidth(), volver.getHeight());
+                + imagenCreditos.getHeight() / 2 - volver.getHeight(), volver.getWidth(), volver.getHeight());
     }
 
     public void setTiempoEspera() {
