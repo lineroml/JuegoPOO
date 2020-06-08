@@ -54,8 +54,9 @@ public class Constantes {
 
     public static final GestorSonido BOTON = new GestorSonido("Resourses/sonidos/boton.wav");
     public static final GestorSonido CANCION1 = new GestorSonido("Resourses/sonidos/MusicaIntro.wav");
-//    public static final Sonido CANCION2 = new Sonido("Resourses/sonidos/MusicaIntro2.wav");
-//    public static final Sonido CANCION3 = new Sonido("Resourses/sonidos/MusicaIntro3.wav");
+    public static final GestorSonido CANCION2 = new GestorSonido("Resourses/sonidos/MusicaIntro2.wav");
+    public static final GestorSonido CANCION3 = new GestorSonido("Resourses/sonidos/MusicaIntro3.wav");
+    public static final GestorSonido CANCION4 = new GestorSonido("Resourses/sonidos/MusicaIntro4.wav");
 
     public static final String BOTONPAUSA = "/imagenes/menu/pausa.png";
     public static final String BOTONPAUSACONMOUSE = "/imagenes/menu/pausaConMouse.png";

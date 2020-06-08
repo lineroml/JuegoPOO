@@ -160,13 +160,13 @@ public class Ajustes implements EstadoJuego {
                 GestorPrincipal.setCancion(Constantes.CANCION1);
             }
             if (r.intersects(dificultadIntermedia)) {
-//                    GestorPrincipal.setCancion(Constantes.CANCION2);
+                    GestorPrincipal.setCancion(Constantes.CANCION2);
             }
             if (r.intersects(dificultadProfesional)) {
-//                    GestorPrincipal.setCancion(Constantes.CANCION3);
+                    GestorPrincipal.setCancion(Constantes.CANCION3);
             }
             if (r.intersects(dificultadExperto)) {
-                setDificultad(160, 5, 300);
+                GestorPrincipal.setCancion(Constantes.CANCION4);
             }
         }
         if (r.intersects(volverR)) {
