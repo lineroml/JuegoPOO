@@ -16,18 +16,22 @@ public class Elemento extends Objeto {
     }
 
     public void asignarMujer(final Mujer mujer) {
-        if (nombre.equals("Galleta")) {
+        if (nombre.equals("Rosalind Franklin")) {
             mujer.setImagenBiografia(Constantes.IMAGENFONDO);
         }
-        if (nombre.equals("Zanahoria")) {
-//            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+        if (nombre.equals("Jocelyn Bell")) {
+            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
         }
-        if (nombre.equals("Bola dragon")) {
-//            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+        if (nombre.equals("Equipo Computadoras Humanas")) {
+            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
         }
-        if (nombre.equals("Bola verde")) {
-//            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+        if (nombre.equals("Ada Lovelace")) {
+            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
         }
+        if (nombre.equals("Huelga en Islandia")) {
+            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+        }
+       
     }
 
     public void cambiarEstado() {

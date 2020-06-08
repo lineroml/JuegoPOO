@@ -8,8 +8,8 @@ import principal.sonido.GestorSonido;
 
 public class Constantes {
     
-    public static float VOLUMENMUSICA = (float) 0.13;
-    public static float VOLUMENJUEGO = (float) 0.06;
+    public static float VOLUMENMUSICA = (float) 0.06;
+    public static float VOLUMENJUEGO = (float) 0.20;
 
     public static final int LADO_SPRITE = 32;
     public static final int LADO_TILE = 32;
