@@ -59,7 +59,7 @@ public class Guardian extends Enemigo {
                 int num = r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
                 ElementosPrincipales.jugador.reducirVida(num);
                 ataque.reproducir();
-                contadorAtaque = 400;
+                contadorAtaque = 500;
             }
         }
         if (contadorAtaque > 0) {
