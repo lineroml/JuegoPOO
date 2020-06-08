@@ -115,6 +115,16 @@ public class Constantes {
     public final static BufferedImage DIFICULTADEXTREMO = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremo.png");
     public final static BufferedImage DIFICULTADEXTREMOCONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/dificultadExtremoConMouse.png");
     
+    public final static BufferedImage CANCIONPANEL = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/menuCancion.png");
+    public final static BufferedImage INFOCANCION1 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion1.png");
+    public final static BufferedImage INFOCANCION1CONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion1ConMouse.png");
+    public final static BufferedImage INFOCANCION2 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion2.png");
+    public final static BufferedImage INFOCANCION2CONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion2ConMouse.png");
+    public final static BufferedImage INFOCANCION3 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion3.png");
+    public final static BufferedImage INFOCANCION3CONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion3ConMouse.png");
+    public final static BufferedImage INFOCANCION4 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion4.png");
+    public final static BufferedImage INFOCANCION4CONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu2/cancion4ConMouse.png");
+    
     public final static BufferedImage MUJER1 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");
     public final static BufferedImage MUJER1ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
     public final static BufferedImage MUJER2 = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1.png");

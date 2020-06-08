@@ -88,6 +88,11 @@ public class Ajustes implements EstadoJuego {
     private boolean cambioSonido;
 
     private boolean cambioCancion;
+    private BufferedImage imagenCancion;
+    private BufferedImage cancion1;
+    private BufferedImage cancion2;
+    private BufferedImage cancion3;
+    private BufferedImage cancion4;
 
     private int tiempoEspera;
     private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volverGrande.getHeight() - 2, volverGrande.getWidth(), volverGrande.getHeight());
@@ -158,15 +163,31 @@ public class Ajustes implements EstadoJuego {
         if (sd.getRaton().isClickIzquierdo()) {
             if (r.intersects(dificultadFacil)) {
                 GestorPrincipal.setCancion(Constantes.CANCION1);
+                cancion1 = Constantes.INFOCANCION1CONMOUSE;
+                cancion2 = Constantes.INFOCANCION2;
+                cancion3 = Constantes.INFOCANCION3;
+                cancion4 = Constantes.INFOCANCION4;
             }
             if (r.intersects(dificultadIntermedia)) {
-                    GestorPrincipal.setCancion(Constantes.CANCION2);
+                GestorPrincipal.setCancion(Constantes.CANCION2);
+                cancion1 = Constantes.INFOCANCION1;
+                cancion2 = Constantes.INFOCANCION2CONMOUSE;
+                cancion3 = Constantes.INFOCANCION3;
+                cancion4 = Constantes.INFOCANCION4;
             }
             if (r.intersects(dificultadProfesional)) {
-                    GestorPrincipal.setCancion(Constantes.CANCION3);
+                GestorPrincipal.setCancion(Constantes.CANCION3);
+                cancion1 = Constantes.INFOCANCION1;
+                cancion2 = Constantes.INFOCANCION2;
+                cancion3 = Constantes.INFOCANCION3CONMOUSE;
+                cancion4 = Constantes.INFOCANCION4;
             }
             if (r.intersects(dificultadExperto)) {
                 GestorPrincipal.setCancion(Constantes.CANCION4);
+                cancion1 = Constantes.INFOCANCION1;
+                cancion2 = Constantes.INFOCANCION2;
+                cancion3 = Constantes.INFOCANCION3;
+                cancion4 = Constantes.INFOCANCION4CONMOUSE;
             }
         }
         if (r.intersects(volverR)) {
@@ -382,13 +403,13 @@ public class Ajustes implements EstadoJuego {
             return;
         }
         if (cambioCancion) {
-            DibujoOpciones.dibujarImagen(g, imagenDificultad, Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2,
-                    Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2);
-            DibujoOpciones.dibujarRectBorde(g, dificultadFacil, Color.red);
-            DibujoOpciones.dibujarRectBorde(g, dificultadIntermedia, Color.red);
-            DibujoOpciones.dibujarRectBorde(g, dificultadProfesional, Color.red);
-            DibujoOpciones.dibujarRectBorde(g, dificultadExperto, Color.red);
-            DibujoOpciones.dibujarImagen(g, volverActual, dificultadExperto.x + dificultadExperto.width / 2 - volver.getWidth() / 2,
+            DibujoOpciones.dibujarImagen(g, imagenCancion, Constantes.CENTRO_VENTANA_X - imagenCancion.getWidth() / 2,
+                    Constantes.CENTRO_VENTANA_Y - imagenCancion.getHeight() / 2);
+            DibujoOpciones.dibujarImagen(g, cancion1, dificultadFacil.x, dificultadFacil.y);
+            DibujoOpciones.dibujarImagen(g, cancion2, dificultadIntermedia.x, dificultadIntermedia.y);
+            DibujoOpciones.dibujarImagen(g, cancion3, dificultadProfesional.x, dificultadProfesional.y);
+            DibujoOpciones.dibujarImagen(g, cancion4, dificultadExperto.x, dificultadExperto.y);
+            DibujoOpciones.dibujarImagen(g, volverActual, dificultadExperto.x + dificultadExperto.width / 2,
                     dificultadExperto.y + 20);
             return;
         }
@@ -444,13 +465,18 @@ public class Ajustes implements EstadoJuego {
 
     private void setMusica() {
         cambioCancion = true;
-        imagenDificultad = Constantes.DIFICULTADPANEL;
-        dificultadFacil = new Rectangle(Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2 + 20,
-                Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2 + 40, imagenDificultad.getWidth() - 40, 15);
-        dificultadIntermedia = new Rectangle(dificultadFacil.x, dificultadFacil.y + 20, imagenDificultad.getWidth() - 40, 15);
-        dificultadProfesional = new Rectangle(dificultadIntermedia.x, dificultadIntermedia.y + 20, imagenDificultad.getWidth() - 40, 15);
-        dificultadExperto = new Rectangle(dificultadProfesional.x, dificultadProfesional.y + 20, imagenDificultad.getWidth() - 40, 15);
-        volverR = new Rectangle(dificultadExperto.x + dificultadExperto.width / 2 - volver.getWidth() / 2,
+        imagenCancion = Constantes.CANCIONPANEL;
+        cancion1 = Constantes.INFOCANCION1CONMOUSE;
+        cancion2 = Constantes.INFOCANCION2;
+        cancion3 = Constantes.INFOCANCION3;
+        cancion4 = Constantes.INFOCANCION4;
+
+        dificultadFacil = new Rectangle(Constantes.CENTRO_VENTANA_X - imagenCancion.getWidth() / 2 + 20,
+                Constantes.CENTRO_VENTANA_Y - imagenCancion.getHeight() / 2 + 30, cancion1.getWidth(), cancion1.getHeight());
+        dificultadIntermedia = new Rectangle(dificultadFacil.x, dificultadFacil.y + 20, cancion2.getWidth(), cancion2.getHeight());
+        dificultadProfesional = new Rectangle(dificultadIntermedia.x, dificultadIntermedia.y + 20, cancion3.getWidth(), cancion3.getHeight());
+        dificultadExperto = new Rectangle(dificultadProfesional.x, dificultadProfesional.y + 20, cancion4.getWidth(), cancion4.getHeight());
+        volverR = new Rectangle(dificultadExperto.x + dificultadExperto.width / 2,
                 dificultadExperto.y + 20, volver.getWidth(), volver.getHeight());
     }
 
