@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import principal.Constantes;
 import principal.ElementosPrincipales;
+import principal.GestorPrincipal;
 import static principal.GestorPrincipal.sd;
 import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
@@ -22,46 +23,58 @@ public class MenuInventario extends PlantillaMenu {
     private int capacidadMaxima = ElementosPrincipales.jugador.limitePeso;
     //Cantidad de items que lleva le personaje actualmente
     private int capacicadActual = ElementosPrincipales.jugador.pesoActual;
-    
+
     private final Rectangle barraCapacidad;
-    
+
     private Objeto botiquin;
     private Rectangle botiquinR;
-    private Rectangle r;
-    private boolean inicializar = true;
-    private int tiempoEspera;
+    private boolean inicializarBotiquin = true;
+
+    private Objeto libro;
+    private Rectangle libroR;
+    private boolean inicializarLibro = true;
     
+    private int tiempoEspera;
+    private Rectangle r;
+
     public MenuInventario(String nombreEtiqueta, Rectangle etiqueta, FormaMenu formaMenu) {
         super(nombreEtiqueta, etiqueta, formaMenu);
-        
+
         int anchoBarra = 80;
         int altoBarra = 9;
-        
+
         botiquinR = new Rectangle();
-         tiempoEspera = 0;
-        
+        libroR = new Rectangle();
+        tiempoEspera = 0;
+
         barraCapacidad = new Rectangle(Constantes.ANCHO_JUEGO - anchoBarra - margenGeneral + 1, formaMenu.SUPERIOR.height + margenGeneral, anchoBarra, altoBarra);
     }
-    
+
     @Override
     public void actualizar() {
         actualizarPosicionesMenu();
         r = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
                 EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
-        
+
         if (tiempoEspera > 0) {
             tiempoEspera--;
             return;
         }
-        
+
         if (r.intersects(botiquinR)) {
             if (sd.getRaton().isClickIzquierdo()) {
                 botiquin.reducirCantidad(1);
                 tiempoEspera = 10;
             }
         }
+        if (r.intersects(libroR)) {
+            if (sd.getRaton().isClickIzquierdo()) {
+                GestorPrincipal.ge.cambiarEstadoActual(8);
+                tiempoEspera = 10;
+            }
+        }
     }
-    
+
     private void actualizarPosicionesMenu() {
         if (!ElementosPrincipales.inventario.getObjetosConsumibles().isEmpty()) {
             for (int i = 0; i < ElementosPrincipales.inventario.getObjetosConsumibles().size(); i++) {
@@ -72,7 +85,7 @@ public class MenuInventario extends PlantillaMenu {
             }
         }
     }
-    
+
     @Override
     public void dibujar(Graphics g, SuperficieDibujo sd) {
         dibujarLimiteCapacidad(g);
@@ -85,7 +98,7 @@ public class MenuInventario extends PlantillaMenu {
             GeneradorComentario.dibujarComentario(g, sd, (capacidadMaxima - capacicadActual) + "% de capacidad de inventario libre");
         }
     }
-    
+
     private void dibujarLimiteCapacidad(final Graphics g) {
         //Dibujar el rectangulo que dice que capacidad tenemos
         //(capacidadMaxima/capacicadActual), esto es para detectar el porcentaje de la barra que esta llena
@@ -96,21 +109,26 @@ public class MenuInventario extends PlantillaMenu {
         DibujoOpciones.dibujarRectRelleno(g, barraCapacidad, Color.DARK_GRAY);
         DibujoOpciones.dibujarRectRelleno(g, capacidad, Constantes.COLOR_VERDE_CLARO);
     }
-    
+
     private void dibujarElementosInventario(final Graphics g) {
         if (!ElementosPrincipales.inventario.getObjetosConsumibles().isEmpty()) {
             final Point puntoInicial = new Point(formaMenu.CENTRAL.x + 16, barraCapacidad.y + barraCapacidad.height + margenGeneral);
             final int lado = Constantes.LADO_SPRITE;
-            
+
             for (int i = 0; i < ElementosPrincipales.inventario.getObjetosConsumibles().size(); i++) {
                 int idObjeto = ElementosPrincipales.inventario.getObjetosConsumibles().get(i).getId();
                 Objeto objeto = ElementosPrincipales.inventario.getObjeto(idObjeto);
 
                 DibujoOpciones.dibujarImagen(g, objeto.getSprite().getImagen(), puntoInicial.x + i * (32 + margenGeneral), puntoInicial.y);
-                if (objeto.getNombre().equals("Botiquin") && inicializar) {
+                if (objeto.getNombre().equals("Botiquin") && inicializarBotiquin) {
                     botiquin = objeto;
                     botiquinR = new Rectangle(puntoInicial.x + i * (32 + margenGeneral), puntoInicial.y, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
-                    inicializar = false;
+                    inicializarBotiquin = false;
+                }
+                if (objeto.getNombre().equals("Libro") && inicializarLibro) {
+                    libro = objeto;
+                    libroR = new Rectangle(puntoInicial.x + i * (32 + margenGeneral), puntoInicial.y, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+                    inicializarLibro = false;
                 }
                 ElementosPrincipales.jugador.pesoActual += objeto.getCantidad();
                 DibujoOpciones.dibujarRectRelleno(g, puntoInicial.x + i * (32 + margenGeneral) + 20, puntoInicial.y + 24, 12, 8, Color.BLACK);
@@ -125,5 +143,5 @@ public class MenuInventario extends PlantillaMenu {
             }
         }
     }
-    
+
 }

@@ -8,6 +8,7 @@ import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.inventario.elementosMujeres.Elemento;
 import principal.maquinaestado.estado.GameOver;
+import principal.maquinaestado.estado.Instrucciones;
 import principal.maquinaestado.estado.logros.Logro;
 import principal.maquinaestado.estado.Pausa;
 import principal.maquinaestado.estado.juego.GestorJuego;
@@ -29,7 +30,7 @@ public class GestorEstado {
 
     private void iniciarEstados(final SuperficieDibujo sd) {
 
-        estados = new EstadoJuego[8];
+        estados = new EstadoJuego[9];
         estados[0] = new MenuInicio(sd);
         estados[1] = new GestorJuego();
         estados[2] = new GestorMenu(sd);
@@ -38,6 +39,7 @@ public class GestorEstado {
         estados[5] = new Pausa(sd);
         estados[6] = new Logro(sd);
         estados[7] = new Mujer(sd);
+        estados[8] = new Instrucciones();
         //Añadir e iniciar los demas estados a medida que los creemos
     }
 
@@ -74,7 +76,10 @@ public class GestorEstado {
                     estadoActual = estados[7];
                 }
                 if (GestorControles.teclado.num5) {
-
+                    Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(0);
+                    e.asignarMujer((Mujer) estados[7]);
+                    GestorControles.teclado.num5 = true;
+                    estadoActual = estados[7];
                 }
             }
         }
