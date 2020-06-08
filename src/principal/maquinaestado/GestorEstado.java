@@ -137,7 +137,7 @@ public class GestorEstado {
         if (estadoActual instanceof GameOver || estadoActual instanceof Ajustes || estadoActual instanceof Pausa) {
             if (estados[nuevoEstado] instanceof MenuInicio) {
                 MenuInicio mi = (MenuInicio) estados[nuevoEstado];
-                mi.setTiempoEspera(5);
+                mi.setTiempoEspera(10);
             }
         }
         if (estadoActual instanceof Logro) {
