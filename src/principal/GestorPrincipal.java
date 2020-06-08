@@ -152,7 +152,17 @@ public class GestorPrincipal {
 
 
     public static void setVolumen(float vol) {
-        sonidoIntro.aumentarVolumen(sonidoIntro.getVolumen() + vol);
+        sonidoIntro.aumentarVolumenMusica(sonidoIntro.getVolumenMusica() + vol);
+        Constantes.BOTON.aumentarVolumenJuego(sonidoIntro.getVolumenJuego() + vol);
+    }
+
+
+    public static void setVolumenMusica(float vol) {
+        sonidoIntro.aumentarVolumenMusica(sonidoIntro.getVolumenMusica() + vol);
+    }
+    
+    public static void setVolumenJuego(float vol) {
+        Constantes.BOTON.aumentarVolumenJuego(sonidoIntro.getVolumenJuego() + vol);
     }
 
     public static boolean isEnFuncionamiento() {

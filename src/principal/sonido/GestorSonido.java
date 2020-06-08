@@ -8,12 +8,13 @@ import principal.herramientas.CargadorRecursos;
 public final class GestorSonido {
 
     private final Clip sonido;
-    public static float volumen = Constantes.VOLUMEN;
+    public static float volumenMusica = Constantes.VOLUMENMUSICA;
+    public static float volumenJuego = Constantes.VOLUMENJUEGO;
     public static boolean musica = true;
-    
+
     public GestorSonido(final String ruta) {
         sonido = CargadorRecursos.cargarSonido(ruta);
-        setVolumen(volumen);
+        setVolumen(volumenMusica);
     }
 
     public void reproducir() {
@@ -38,6 +39,13 @@ public final class GestorSonido {
     public void setVolumen(double vol) {
         FloatControl gain = (FloatControl) sonido.getControl(FloatControl.Type.MASTER_GAIN);
         float dB = (float) (Math.log(vol) / Math.log(10) * 20);
+        if (dB < (-80)) {
+            dB = (float) (-80);
+            if (dB > 6) {
+                dB = (float) (6);
+            }
+        }
+        
         gain.setValue(dB);
     }
 
@@ -50,17 +58,29 @@ public final class GestorSonido {
         return sonido.getMicrosecondLength();
     }
 
-    public float getVolumen() {
-        return volumen;
+    public float getVolumenMusica() {
+        return volumenMusica;
     }
 
-    public void aumentarVolumen(float volumen) {
+    public float getVolumenJuego() {
+        return volumenJuego;
+    }
+
+    public void aumentarVolumenMusica(float volumen) {
         if (volumen < 0) {
-            GestorSonido.volumen = 0;
+            GestorSonido.volumenMusica = 0;
         } else {
-            GestorSonido.volumen = volumen;
+            GestorSonido.volumenMusica = volumen;
         }
-        setVolumen(volumen);
+        setVolumen(GestorSonido.volumenMusica);
     }
 
+    public void aumentarVolumenJuego(float volumen) {
+        if (volumen < 0) {
+            GestorSonido.volumenJuego = 0;
+        } else {
+            GestorSonido.volumenJuego = volumen;
+        }
+        setVolumen(GestorSonido.volumenJuego);
+    }
 }

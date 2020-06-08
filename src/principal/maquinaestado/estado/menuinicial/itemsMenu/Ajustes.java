@@ -73,10 +73,18 @@ public class Ajustes implements EstadoJuego {
     private BufferedImage flechaAbajoConMouse;
     private BufferedImage flechaArriba;
     private BufferedImage flechaArribaConMouse;
-    private BufferedImage flechaAbajoActual;
-    private BufferedImage flechaArribaActual;
-    private Rectangle flechaArribaR;
-    private Rectangle flechaAbajoR;
+    private BufferedImage flechaAbajoGeneralActual;
+    private BufferedImage flechaArribaGeneralActual;
+    private BufferedImage flechaAbajoMusicaActual;
+    private BufferedImage flechaArribaMusicaActual;
+    private BufferedImage flechaAbajoJuegoActual;
+    private BufferedImage flechaArribaJuegoActual;
+    private Rectangle flechaArribaRGeneral;
+    private Rectangle flechaAbajoRGeneral;
+    private Rectangle flechaArribaRMusica;
+    private Rectangle flechaAbajoRMusica;
+    private Rectangle flechaArribaRJUEGO;
+    private Rectangle flechaAbajoRJUEGO;
     private boolean cambioSonido;
 
     private boolean cambioCancion;
@@ -105,8 +113,13 @@ public class Ajustes implements EstadoJuego {
         dificultadExperto = new Rectangle();
         newDificultad = false;
 
-        flechaArribaR = new Rectangle();
-        flechaAbajoR = new Rectangle();
+        flechaArribaRGeneral = new Rectangle();
+        flechaAbajoRGeneral = new Rectangle();
+        flechaArribaRMusica = new Rectangle();
+        flechaAbajoRMusica = new Rectangle();
+        flechaArribaRJUEGO = new Rectangle();
+        flechaAbajoRGeneral = new Rectangle();
+
         cambioSonido = false;
 
         cambioCancion = false;
@@ -196,26 +209,72 @@ public class Ajustes implements EstadoJuego {
             }
             return;
         }
+
         if (cambioSonido) {
-            if (r.intersects(flechaAbajoR)) {
-                flechaAbajoActual = flechaAbajoConMouse;
+            if (r.intersects(flechaAbajoRGeneral)) {
+                flechaAbajoGeneralActual = flechaAbajoConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
                     boton.reproducir();
                     tiempoEspera = 3;
                     GestorPrincipal.setVolumen((float) -0.01);
                 }
             } else {
-                flechaAbajoActual = flechaAbajo;
+                flechaAbajoGeneralActual = flechaAbajo;
             }
-            if (r.intersects(flechaArribaR)) {
-                flechaArribaActual = flechaArribaConMouse;
+            
+            if (r.intersects(flechaArribaRGeneral)) {
+                flechaArribaGeneralActual = flechaArribaConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
                     boton.reproducir();
                     tiempoEspera = 3;
                     GestorPrincipal.setVolumen((float) 0.01);
                 }
             } else {
-                flechaArribaActual = flechaArriba;
+                flechaArribaGeneralActual = flechaArriba;
+            }
+            
+                if (r.intersects(flechaAbajoRMusica)) {
+                flechaAbajoMusicaActual = flechaAbajoConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
+                    tiempoEspera = 3;
+                    GestorPrincipal.setVolumenMusica((float) -0.01);
+                }
+            } else {
+                flechaAbajoMusicaActual = flechaAbajo;
+            }
+            
+            if (r.intersects(flechaArribaRMusica)) {
+                flechaArribaMusicaActual = flechaArribaConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
+                    tiempoEspera = 3;
+                    GestorPrincipal.setVolumenMusica((float) 0.01);
+                }
+            } else {
+                flechaArribaMusicaActual = flechaArriba;
+            }
+            
+               if (r.intersects(flechaAbajoRJUEGO)) {
+                flechaAbajoJuegoActual = flechaAbajoConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
+                    tiempoEspera = 3;
+                    GestorPrincipal.setVolumenJuego((float) -0.01);
+                }
+            } else {
+                flechaAbajoJuegoActual = flechaAbajo;
+            }
+            
+            if (r.intersects(flechaArribaRJUEGO)) {
+                flechaArribaJuegoActual = flechaArribaConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
+                    tiempoEspera = 3;
+                    GestorPrincipal.setVolumenJuego((float) 0.01);
+                }
+            } else {
+                flechaArribaJuegoActual = flechaArriba;
             }
             if (r.intersects(volverR)) {
                 volverActual = volverConMouse;
@@ -249,6 +308,7 @@ public class Ajustes implements EstadoJuego {
         } else {
             musicaActual = musica;
         }
+        
         if (r.intersects(creditosR)) {
             creditosActual = creditosConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -258,6 +318,7 @@ public class Ajustes implements EstadoJuego {
         } else {
             creditosActual = creditos;
         }
+        
         if (r.intersects(volverR)) {
             volverGrandeActual = volverConMouseGrande;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -267,6 +328,7 @@ public class Ajustes implements EstadoJuego {
         } else {
             volverGrandeActual = volverGrande;
         }
+        
         if (r.intersects(sonidoR)) {
             sonidoActual = sonidoConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -317,10 +379,22 @@ public class Ajustes implements EstadoJuego {
         if (cambioSonido) {
             DibujoOpciones.dibujarImagen(g, menuSonido, Constantes.CENTRO_VENTANA_X - menuSonido.getWidth() / 2,
                     Constantes.CENTRO_VENTANA_Y - menuSonido.getHeight() / 2);
-            DibujoOpciones.dibujarImagen(g, flechaAbajoActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
-                    Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 10);
-            DibujoOpciones.dibujarImagen(g, flechaArribaActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
-                    Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 10);
+            
+            DibujoOpciones.dibujarImagen(g, flechaAbajoGeneralActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
+                    Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 - 35);
+            DibujoOpciones.dibujarImagen(g, flechaArribaGeneralActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
+                    Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 - 35);
+            
+            DibujoOpciones.dibujarImagen(g, flechaAbajoMusicaActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
+                    Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 15);
+            DibujoOpciones.dibujarImagen(g, flechaArribaMusicaActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
+                    Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 15);
+            
+             DibujoOpciones.dibujarImagen(g, flechaAbajoJuegoActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
+                    Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 65);
+            DibujoOpciones.dibujarImagen(g, flechaArribaJuegoActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
+                    Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 65);
+
             DibujoOpciones.dibujarImagen(g, volverActual, Constantes.CENTRO_VENTANA_X - menuSonido.getWidth() / 2 + 2, Constantes.CENTRO_VENTANA_Y + menuSonido.getHeight() / 2 - volver.getHeight());
 
             return;
@@ -371,13 +445,27 @@ public class Ajustes implements EstadoJuego {
         flechaAbajoConMouse = Constantes.FlECHAABAJOCONMOUSE;
         flechaArriba = Constantes.FlECHAARRIBA;
         flechaArribaConMouse = Constantes.FlECHAARRIBACONMOUSE;
-        flechaAbajoActual = flechaAbajo;
-        flechaArribaActual = flechaArriba;
-
-        flechaAbajoR = new Rectangle(Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
+        flechaAbajoGeneralActual = flechaAbajo;
+        flechaArribaGeneralActual = flechaArriba;
+        flechaAbajoMusicaActual = flechaAbajo;
+        flechaArribaMusicaActual = flechaArriba;
+        flechaAbajoJuegoActual = flechaAbajo;
+        flechaArribaJuegoActual = flechaArriba;
+        
+        flechaAbajoRGeneral = new Rectangle(Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
+                Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 - 35, flechaArriba.getWidth(), flechaArriba.getHeight());
+        flechaArribaRGeneral = new Rectangle(Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
+                Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + -35, flechaAbajo.getWidth(), flechaAbajo.getHeight());
+        
+        flechaAbajoRMusica = new Rectangle(Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
                 Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 10, flechaArriba.getWidth(), flechaArriba.getHeight());
-        flechaArribaR = new Rectangle(Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
+        flechaArribaRMusica = new Rectangle(Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
                 Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 10, flechaAbajo.getWidth(), flechaAbajo.getHeight());
+        
+        flechaAbajoRJUEGO = new Rectangle(Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
+                Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 65, flechaArriba.getWidth(), flechaArriba.getHeight());
+        flechaArribaRJUEGO = new Rectangle(Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
+                Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 65, flechaAbajo.getWidth(), flechaAbajo.getHeight());
 
         volverR = new Rectangle(Constantes.CENTRO_VENTANA_X - menuSonido.getWidth() / 2 + 2, Constantes.CENTRO_VENTANA_Y + menuSonido.getHeight() / 2 - volver.getHeight(),
                 volver.getWidth(), volver.getHeight());
