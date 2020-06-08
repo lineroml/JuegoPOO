@@ -141,4 +141,5 @@ public class Constantes {
     public final static BufferedImage BIOGRAFIAE_C_U = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Equipo_Computadoras_Humanas.png");
     public final static BufferedImage BIOGRAFIAJOCELYN = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Jocelyn_Bell.png");
     public final static BufferedImage BIOGRAFIAROSALIND = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Rosalind_Franklin.png");
+    public final static BufferedImage BIOGRAFIAISLANDIA = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/islandia.png");
 }

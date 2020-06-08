@@ -29,7 +29,7 @@ public class Elemento extends Objeto {
             mujer.setImagenBiografia(Constantes.BIOGRAFIAADA_LOVELACE);
         }
         if (nombre.equals("Huelga en Islandia")) {
-            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+            mujer.setImagenBiografia(Constantes.BIOGRAFIAISLANDIA);
         }
 
     }
