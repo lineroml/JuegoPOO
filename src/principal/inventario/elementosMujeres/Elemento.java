@@ -23,7 +23,7 @@ public class Elemento extends Objeto {
             mujer.setImagenBiografia(Constantes.IMAGENFONDO);
         }
         if (nombre.equals("Equipo Computadoras Humanas")) {
-            mujer.setImagenBiografia(Constantes.IMAGENFONDO);
+            mujer.setImagenBiografia(Constantes.BIOGRAFIAE_C_U);
         }
         if (nombre.equals("Ada Lovelace")) {
             mujer.setImagenBiografia(Constantes.BIOGRAFIAADA_LOVELACE);

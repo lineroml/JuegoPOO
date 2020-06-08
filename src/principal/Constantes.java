@@ -137,4 +137,5 @@ public class Constantes {
     public final static BufferedImage MUJER5ACTIVA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/mujeres/mujer1Activa.png");
     
     public final static BufferedImage BIOGRAFIAADA_LOVELACE = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Ada_Lovelace.png");
+    public final static BufferedImage BIOGRAFIAE_C_U = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/mujeres/Equipo_Computadoras_Humanas.png");
 }
