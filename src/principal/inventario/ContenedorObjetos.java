@@ -10,8 +10,8 @@ public class ContenedorObjetos {
 
     private BufferedImage sprite = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/CofreCerrado.png");
 
-    private Point posicion;
-    private Objeto[] objetos;
+    private final Point posicion;
+    private final Objeto[] objetos;
     private boolean recogido;
 
     public ContenedorObjetos(final Point posicion, final int[] objetos, final int[] cantidades) {

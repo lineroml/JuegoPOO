@@ -30,7 +30,7 @@ public class Mujer implements EstadoJuego {
     public Mujer(final SuperficieDibujo sd) {
         this.sd = sd;
 
-        volverR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
+        volverR = new Rectangle(5, Constantes.ALTO_JUEGO - volver.getHeight() - 9, volver.getWidth(), volver.getHeight());
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Mujer implements EstadoJuego {
     @Override
     public void dibujar(Graphics g) {
         DibujoOpciones.dibujarImagen(g, imagenBiografia, new Point(0, 0));
-        DibujoOpciones.dibujarImagen(g, volverActual, 2, Constantes.ALTO_JUEGO - volver.getHeight() - 2);
+        DibujoOpciones.dibujarImagen(g, volverActual, 5, Constantes.ALTO_JUEGO - volver.getHeight() - 9);
     }
 
     public void setImagenBiografia(final BufferedImage imagenBiografia) {

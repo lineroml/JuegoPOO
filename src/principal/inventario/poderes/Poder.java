@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import principal.Constantes;
 import principal.entes.Jugador;
 
-public class Poder extends Arma {
+public class Poder extends Cetro {
 
     public Poder(int id, String nombre, String descripcion, int ataqueMin, int ataqueMax, boolean automatica, boolean penetrante, double ataquePorSegundo) {
         super(id, nombre, descripcion, ataqueMin, ataqueMax, automatica, penetrante, ataquePorSegundo, "Resourses/sonidos/Pelea.wav");

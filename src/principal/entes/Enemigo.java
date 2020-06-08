@@ -185,28 +185,11 @@ public abstract class Enemigo {
     public void dibujar(final Graphics g, final int puntoX, final int puntoY) {
         if (vidaActual > 0) {
             dibujarBarraVida(g, puntoX, puntoY);
-//            DibujoOpciones.dibujarRectBorde(g, getArea(), Color.RED);
-//            DibujoOpciones.dibujarRectBorde(g, getAreaFutura(), Color.RED);
-//            DibujoOpciones.dibujarRectBorde(g, getAreaDisparo(), Color.RED);
-//            DibujoOpciones.dibujarRectBorde(g, new Rectangle(getAreaDisparo().x, getAreaDisparo().y + 16, 16, 1), Color.RED);
-//            DibujoOpciones.dibujarRectBorde(g, new Rectangle(getAreaDisparo().x, getAreaDisparo().y + Constantes.LADO_SPRITE, 16, 1), Color.RED);
-//            DibujoOpciones.dibujarRectBorde(g, new Rectangle(getAreaDisparo().x, getAreaDisparo().y + 16, 1, Constantes.LADO_SPRITE / 2), Color.RED);
-//            DibujoOpciones.dibujarRectBorde(g, new Rectangle(getAreaDisparo().x + 16, getAreaDisparo().y + 16, 1, Constantes.LADO_SPRITE / 2), Color.RED);
-//            dibujarDistancia(g, puntoX, puntoY);
         }
     }
 
     private void dibujarBarraVida(final Graphics g, final int puntoX, final int puntoY) {
         DibujoOpciones.dibujarRectRelleno(g, puntoX + 4, puntoY - 5, (Constantes.LADO_SPRITE - 8) * (int) vidaActual / vidaMaxima, 2, Color.red);
-    }
-
-    private void dibujarDistancia(final Graphics g, final int puntoX, final int puntoY) {
-        Point puntojugador = new Point(ElementosPrincipales.jugador.getPosicionXINT(),
-                ElementosPrincipales.jugador.getPosicionYINT());
-        Point puntoEnemigo = new Point((int) posicionX, (int) posicionY);
-
-        double distancia = CalcularDistancia.getDistanciaEntrePuntos(puntojugador, puntoEnemigo);
-        DibujoOpciones.dibujarString(g, String.format("%.2f", distancia), puntoX, puntoY - 8);
     }
 
     public void quitarVida(float ataqueDado) {

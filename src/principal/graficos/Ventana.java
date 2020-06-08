@@ -11,7 +11,7 @@ public class Ventana extends JFrame {
 
     private static final long serialVersionUID = 189259498287192152L;
 
-    private String titulo;
+    private final String titulo;
     private final ImageIcon icono;
 
     public Ventana(final String titulo, final SuperficieDibujo sd) {

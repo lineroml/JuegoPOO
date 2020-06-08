@@ -1,7 +1,7 @@
 package principal.inventario;
 
 import java.util.ArrayList;
-import principal.inventario.poderes.Arma;
+import principal.inventario.poderes.Cetro;
 import principal.inventario.consumible.Consumible;
 import principal.inventario.elementosMujeres.Elemento;
 
@@ -80,7 +80,7 @@ public class Inventario {
     public ArrayList<Objeto> getObjetosArmas() {
         ArrayList<Objeto> armas = new ArrayList();
         for (Objeto objeto : objetos) {
-            if (objeto instanceof Arma) {
+            if (objeto instanceof Cetro) {
                 armas.add(objeto);
             }
         }

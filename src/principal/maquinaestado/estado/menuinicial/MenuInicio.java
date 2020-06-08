@@ -167,9 +167,7 @@ public class MenuInicio implements EstadoJuego {
             DibujoOpciones.dibujarImagen(g, noActual, Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 90,
                     Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50);
         }
-//        DibujoOpciones.dibujarRectBorde(g, inicioPartidaR, Color.red);
-//        DibujoOpciones.dibujarRectBorde(g, cargarPartidaR, Color.red);
-//        DibujoOpciones.dibujarRectBorde(g, configuracionR, Color.red);
+
     }
 
     public void setTiempoEspera(int tiempoEspera) {

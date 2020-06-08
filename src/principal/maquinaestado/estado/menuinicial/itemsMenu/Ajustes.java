@@ -1,6 +1,5 @@
 package principal.maquinaestado.estado.menuinicial.itemsMenu;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -8,7 +7,6 @@ import java.awt.image.BufferedImage;
 import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
-import principal.control.GestorControles;
 import principal.entes.RegistroEnemigos;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;

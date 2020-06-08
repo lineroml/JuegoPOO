@@ -30,24 +30,9 @@ public class GestorJuego implements EstadoJuego {
         menuInferior = new MenuInferior();
         logotipo = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.RUTA_LOGOTIPO);
     }
-
-//    private void recargarJuego() {
-//
-//        //Darle la nueva ruta del nuevo mapa para que aparezca el jugador
-//        final String rutaMapa = "/mapas/mapa" + ElementosPrincipales.mapa.getMapaSiguiente();
-//        ElementosPrincipales.mapa = new Mapa(rutaMapa);
-//        ElementosPrincipales.jugador.setPosicionX(ElementosPrincipales.mapa.getCoordenadaInicial().x);
-//        ElementosPrincipales.jugador.setPosicionY(ElementosPrincipales.mapa.getCoordenadaInicial().y);
-////        final String rutaJugador = "/imagenes/hojas_personajes/" + ElementosPrincipales.mapa.getMapaSiguiente() + ".png";
-////        ElementosPrincipales.jugador = new Jugador(rutaJugador);
-//    }
     @Override
     public void actualizar() {
 
-        //Detectar si colisiono con el rectangulo de la salida
-//        if (ElementosPrincipales.jugador.getLIMITE_ARRIBA().intersects(ElementosPrincipales.mapa.getZonaSalida())) {
-//            recargarJuego();
-//        }
         if (primeraEntrada) {
             if (contador == 1000) {
                 primeraEntrada = false;

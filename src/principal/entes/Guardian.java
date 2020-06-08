@@ -11,7 +11,7 @@ import principal.herramientas.DibujoOpciones;
 import principal.sonido.GestorSonido;
 import principal.sprites.HojaSprites;
 
-public class Zombie extends Enemigo {
+public class Guardian extends Enemigo {
 
     private static HojaSprites hojaZombie;
 
@@ -27,7 +27,7 @@ public class Zombie extends Enemigo {
 
     private BufferedImage imagenActual;
 
-    public Zombie(int id, String nombre, int vidaMaxima, final String rutaLamento) {
+    public Guardian(int id, String nombre, int vidaMaxima, final String rutaLamento) {
         super(id, nombre, vidaMaxima, rutaLamento, 6 * Constantes.LADO_SPRITE);
 
         if (hojaZombie == null) {

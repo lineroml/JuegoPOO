@@ -13,7 +13,7 @@ public class RegistroObjetos {
         Objeto objeto = null;
         switch (idObjeto) {
             //Entre el 0 y el 499 son objetos consumibles
-            //  De 500 en adelanete son armas
+            //  De 500 en adelanete son poderes
             // Esto anterior es por su id
 
             //Consumibles
@@ -39,7 +39,7 @@ public class RegistroObjetos {
             case 6:
                 objeto = new Elemento(idObjeto, "Huelga en Islandia", "Sin descripcion");
                 break;
-            //Armas
+            //Poderes
             case 500:
                 objeto = new Poder(idObjeto, "Cetro de Poder", "Sin descripcion", 12 - dificultad, 20 - dificultad, false, true, 0.7);
                 break;

@@ -3,11 +3,7 @@ package principal.herramientas;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
-import java.io.File;
-import java.io.FileReader;
-import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.Line;
 
 /**
  *

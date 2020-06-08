@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CargarPartida {
 
-    private ArrayList<File> partidas;
+    private final ArrayList<File> partidas;
 
     public CargarPartida() {
         partidas = new ArrayList();

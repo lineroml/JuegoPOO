@@ -12,7 +12,7 @@ import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.herramientas.MedidorString;
 import principal.inventario.Objeto;
-import principal.inventario.poderes.Arma;
+import principal.inventario.poderes.Cetro;
 import principal.inventario.poderes.DesArmado;
 
 public class MenuEquipo extends PlantillaMenu {
@@ -68,9 +68,9 @@ public class MenuEquipo extends PlantillaMenu {
                 }
             }
         } else if (posicionRaton.intersects(EscaladorElementos.escalarRectanguloArriba(panelArmas))) {
-            if (objetoSeleccionado != null && objetoSeleccionado instanceof Arma && GestorPrincipal.sd.getRaton().isClickIzquierdo()
+            if (objetoSeleccionado != null && objetoSeleccionado instanceof Cetro && GestorPrincipal.sd.getRaton().isClickIzquierdo()
                     && posicionRaton.intersects(EscaladorElementos.escalarRectanguloArriba(contenedorArma))) {
-                ElementosPrincipales.jugador.getAlmacenEquipo().cambiarArma((Arma) objetoSeleccionado);
+                ElementosPrincipales.jugador.getAlmacenEquipo().cambiarCetro((Cetro) objetoSeleccionado);
                 objetoSeleccionado = null;
             }
         }
@@ -129,9 +129,9 @@ public class MenuEquipo extends PlantillaMenu {
         DibujoOpciones.dibujarString(g, "Arma", new Point(etiquetaArma.x + etiquetaArma.width / 2 - MedidorString.medirAnchoPixeles(g, "Arma") / 2,
                 etiquetaArma.y + etiquetaArma.height / 2 + MedidorString.medirAltoPixeles(g, "Arma") / 2), Color.WHITE);
         //Dibujar arma equipada si la hay
-        if (!(ElementosPrincipales.jugador.getAlmacenEquipo().getArma() instanceof DesArmado)) {
+        if (!(ElementosPrincipales.jugador.getAlmacenEquipo().getCetro() instanceof DesArmado)) {
             Point coordenadaImagen = new Point(contenedorArma.x + contenedorArma.width / 2 - Constantes.LADO_SPRITE / 2, contenedorArma.y);
-            DibujoOpciones.dibujarImagen(g, ElementosPrincipales.jugador.getAlmacenEquipo().getArma().getSprite().getImagen(), coordenadaImagen);
+            DibujoOpciones.dibujarImagen(g, ElementosPrincipales.jugador.getAlmacenEquipo().getCetro().getSprite().getImagen(), coordenadaImagen);
         }
     }
 

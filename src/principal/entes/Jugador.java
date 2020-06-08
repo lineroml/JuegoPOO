@@ -1,8 +1,6 @@
 package principal.entes;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -13,7 +11,7 @@ import principal.GestorPrincipal;
 import principal.control.GestorControles;
 import principal.herramientas.DibujoOpciones;
 import principal.inventario.RegistroObjetos;
-import principal.inventario.poderes.Arma;
+import principal.inventario.poderes.Cetro;
 import principal.inventario.poderes.DesArmado;
 import principal.sprites.HojaSprites;
 
@@ -39,8 +37,8 @@ public class Jugador {
     private int direccion;
 
     private HojaSprites hs;
-    private HojaSprites hojaPoder;
-    private HojaSprites disparo;
+    private final HojaSprites hojaPoder;
+    private final HojaSprites disparo;
     private boolean cambio;
     private BufferedImage imagenActual;
 
@@ -60,7 +58,7 @@ public class Jugador {
     public int limitePeso = 100;
     public int pesoActual = 1;
 
-    private AlmacenEquipo ae;
+    private final AlmacenEquipo ae;
     private ArrayList<Rectangle> alcanceArma;
 
     private boolean spawning;
@@ -110,7 +108,7 @@ public class Jugador {
         a = 0;
         d = 4;
 
-        ae = new AlmacenEquipo((Arma) RegistroObjetos.getObjeto(599));
+        ae = new AlmacenEquipo((Cetro) RegistroObjetos.getObjeto(599));
         alcanceArma = new ArrayList();
 
         vida = 1000;
@@ -172,7 +170,7 @@ public class Jugador {
         for (Rectangle rectangle : rectanguloDisparo) {
             for (Enemigo enemigo : ElementosPrincipales.mapa.getEnemigos()) {
                 if (rectangle.intersects(enemigo.getAreaDisparo())) {
-                    ElementosPrincipales.jugador.getAlmacenEquipo().getArma().atacar(enemigo);
+                    ElementosPrincipales.jugador.getAlmacenEquipo().getCetro().atacar(enemigo);
                 }
             }
         }
@@ -270,7 +268,7 @@ public class Jugador {
     }
 
     public void actualizarAtaques() {
-        if (ElementosPrincipales.jugador.getAlcanceArma().isEmpty() || ElementosPrincipales.jugador.getAlmacenEquipo().getArma() instanceof DesArmado) {
+        if (ElementosPrincipales.jugador.getAlcanceArma().isEmpty() || ElementosPrincipales.jugador.getAlmacenEquipo().getCetro() instanceof DesArmado) {
             return;
         }
         if (GestorControles.teclado.ataque) {
@@ -297,7 +295,7 @@ public class Jugador {
                     puntoX.add(centroX);
                     puntoY.add(centroY);
                     direcciones.add(direccion);
-                    ElementosPrincipales.jugador.getAlmacenEquipo().getArma().sonidoDisparo();
+                    ElementosPrincipales.jugador.getAlmacenEquipo().getCetro().sonidoDisparo();
                     double numY = puntoY.get(puntoY.size() - 1);
                     double numX = puntoX.get(puntoX.size() - 1);
                     switch (direcciones.get(direcciones.size() - 1)) {
@@ -330,20 +328,20 @@ public class Jugador {
     }
 
     private void actualizarArma() {
-        if (!(ae.getArma() instanceof DesArmado)) {
+        if (!(ae.getCetro() instanceof DesArmado)) {
             calcularAlcance();
-            ae.getArma().actualizar();
+            ae.getCetro().actualizar();
         }
     }
 
     private void calcularAlcance() {
-        if (!(ae.getArma() instanceof DesArmado)) {
-            alcanceArma = ae.getArma().getAlcance(this);
+        if (!(ae.getCetro() instanceof DesArmado)) {
+            alcanceArma = ae.getCetro().getAlcance(this);
         }
     }
 
     private void cambiarHojaSprite() {
-        if (ae.getArma() instanceof Arma && !(ae.getArma() instanceof DesArmado)) {
+        if (ae.getCetro() instanceof Cetro && !(ae.getCetro() instanceof DesArmado)) {
             hs = new HojaSprites(Constantes.RUTA_PERSONAJEPODER, Constantes.LADO_SPRITE, false);
             cambio = true;
         }
@@ -623,51 +621,6 @@ public class Jugador {
                 imagenActual = hs.getSprite(direccion, 0).getImagen();
             }
         }
-
-//        if (direccion == 2 || direccion == 0) {
-//            if (enMovimiento) {
-//                if (animacion * velocidadMovimiento % 46 > 23) {
-//                    imagenActual = hs.getSprite(direccion + 1, 0).getImagen();
-//                } else {
-//                    imagenActual = hs.getSprite(direccion + 1, 1).getImagen();
-//                }
-//            } else {
-//                if (animacion % 180 >= 0 && animacion % 180 <= 20) {
-//                    imagenActual = hs.getSprite(direccion, 0).getImagen();
-//                } else if (animacion % 180 > 20 && animacion % 180 <= 40) {
-//                    imagenActual = hs.getSprite(direccion, 1).getImagen();
-//                } else if (animacion % 180 > 40 && animacion % 180 <= 60) {
-//                    imagenActual = hs.getSprite(direccion, 2).getImagen();
-//                } else if (animacion % 180 > 60 && animacion % 180 <= 80) {
-//                    imagenActual = hs.getSprite(direccion, 3).getImagen();
-//                } else if (animacion % 180 > 80 && animacion % 180 <= 100) {
-//                    imagenActual = hs.getSprite(direccion, 4).getImagen();
-//                } else if (animacion % 180 > 100 && animacion % 180 <= 120) {
-//                    imagenActual = hs.getSprite(direccion, 3).getImagen();
-//                } else if (animacion % 180 > 120 && animacion % 180 <= 140) {
-//                    imagenActual = hs.getSprite(direccion, 2).getImagen();
-//                } else if (animacion % 180 > 140 && animacion % 180 <= 160) {
-//                    imagenActual = hs.getSprite(direccion, 1).getImagen();
-//                } else {
-//                    imagenActual = hs.getSprite(direccion, 0).getImagen();
-//                }
-//            }
-//        }
-//        if (direccion == 4 || direccion == 5) {
-//            if (enMovimiento) {
-//                if (animacion * velocidadMovimiento % 80 >= 0 && animacion * velocidadMovimiento % 80 <= 20) {
-//                    imagenActual = hs.getSprite(direccion, 1).getImagen();
-//                } else if (animacion * velocidadMovimiento % 80 > 20 && animacion * velocidadMovimiento % 80 <= 40) {
-//                    imagenActual = hs.getSprite(direccion, 0).getImagen();
-//                } else if (animacion * velocidadMovimiento % 80 > 40 && animacion * velocidadMovimiento % 80 <= 60) {
-//                    imagenActual = hs.getSprite(direccion, 2).getImagen();
-//                } else {
-//                    imagenActual = hs.getSprite(direccion, 0).getImagen();
-//                }
-//            } else {
-//                imagenActual = hs.getSprite(direccion, 0).getImagen();
-//            }
-//        }
     }
 
     public void renacer() {
@@ -686,16 +639,7 @@ public class Jugador {
         final int centroX = Constantes.ANCHO_JUEGO / 2 - Constantes.LADO_SPRITE;
         final int centroY = Constantes.ALTO_JUEGO / 2 - Constantes.LADO_SPRITE;
 
-        //Frente y espalda
-//        g.drawRect(centroX + 7, centroY, 17, 32);
-        // Derecha e izquierda
-//        g.drawRect(centroX + 13, centroY, 6, 32);
         DibujoOpciones.dibujarImagen(g, imagenActual, centroX, centroY);
-//        DibujoOpciones.dibujarRectBorde(g, getArea(), Color.red);
-//        g.drawRect(LIMITE_ARRIBA.x, LIMITE_ARRIBA.y, LIMITE_ARRIBA.width, LIMITE_ARRIBA.height);
-//        g.drawRect(LIMITE_ABAJO.x, LIMITE_ABAJO.y, LIMITE_ABAJO.width, LIMITE_ABAJO.height);
-//        g.drawRect(LIMITE_IZQUIERDA.x, LIMITE_IZQUIERDA.y, LIMITE_IZQUIERDA.width, LIMITE_IZQUIERDA.height);
-//        g.drawRect(LIMITE_DERECHA.x, LIMITE_DERECHA.y, LIMITE_DERECHA.width, LIMITE_DERECHA.height);
 
         int i = 0;
         for (double p : puntoX) {

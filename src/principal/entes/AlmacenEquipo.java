@@ -1,20 +1,20 @@
 package principal.entes;
 
-import principal.inventario.poderes.Arma;
+import principal.inventario.poderes.Cetro;
 
 public class AlmacenEquipo {
 
-    private Arma arma;
+    private Cetro cetro;
 
-    public AlmacenEquipo(final Arma arma) {
-        this.arma = arma;
+    public AlmacenEquipo(final Cetro cetro) {
+        this.cetro = cetro;
     }
 
-    public Arma getArma() {
-        return arma;
+    public Cetro getCetro() {
+        return cetro;
     }
 
-    public void cambiarArma(final Arma arma) {
-        this.arma = arma;
+    public void cambiarCetro(final Cetro cetro) {
+        this.cetro = cetro;
     }
 }

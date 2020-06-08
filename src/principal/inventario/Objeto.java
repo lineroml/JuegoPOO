@@ -2,7 +2,6 @@ package principal.inventario;
 
 import java.awt.Rectangle;
 import principal.ElementosPrincipales;
-import principal.inventario.consumible.Consumible;
 import principal.sprites.Sprite;
 
 public abstract class Objeto {

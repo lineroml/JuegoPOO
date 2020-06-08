@@ -2,7 +2,6 @@
 package principal.maquinaestado;
 
 import java.awt.Graphics;
-import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;

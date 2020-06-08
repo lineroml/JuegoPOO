@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.herramientas.DibujoOpciones;
-import principal.herramientas.MedidorString;
 import principal.inventario.Objeto;
 
 public class MenuInferior {

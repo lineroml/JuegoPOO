@@ -11,7 +11,7 @@ import principal.sonido.GestorSonido;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
-public abstract class Arma extends Objeto {
+public abstract class Cetro extends Objeto {
 
     public static HojaSprites hojaArmas = new HojaSprites(Constantes.RUTA_ARMAS, 32, false);
 
@@ -27,7 +27,7 @@ public abstract class Arma extends Objeto {
     //Indica cuantas actualizaciones por segundo deben pasara para poder disparar de nuevo
     protected int tiempoProximoAtaque;
 
-    public Arma(int id, String nombre, String descripcion, int ataqueMin, int ataqueMax, final boolean automatica, final boolean penetrante,
+    public Cetro(int id, String nombre, String descripcion, int ataqueMin, int ataqueMax, final boolean automatica, final boolean penetrante,
             final double ataquePorSegundo, final String rutaDisparo) {
         super(id, nombre, descripcion);
 

@@ -9,7 +9,6 @@ import principal.Constantes;
 import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
 import static principal.GestorPrincipal.sd;
-import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
@@ -20,9 +19,9 @@ import principal.inventario.Objeto;
 public class MenuInventario extends PlantillaMenu {
 
     //Cantidad de items total que cabe en el inventario
-    private int capacidadMaxima = ElementosPrincipales.jugador.limitePeso;
+    private final int capacidadMaxima = ElementosPrincipales.jugador.limitePeso;
     //Cantidad de items que lleva le personaje actualmente
-    private int capacicadActual = ElementosPrincipales.jugador.pesoActual;
+    private final int capacicadActual = ElementosPrincipales.jugador.pesoActual;
 
     private final Rectangle barraCapacidad;
 
@@ -30,7 +29,6 @@ public class MenuInventario extends PlantillaMenu {
     private Rectangle botiquinR;
     private boolean inicializarBotiquin = true;
 
-    private Objeto libro;
     private Rectangle libroR;
     private boolean inicializarLibro = true;
     
@@ -126,7 +124,6 @@ public class MenuInventario extends PlantillaMenu {
                     inicializarBotiquin = false;
                 }
                 if (objeto.getNombre().equals("Libro") && inicializarLibro) {
-                    libro = objeto;
                     libroR = new Rectangle(puntoInicial.x + i * (32 + margenGeneral), puntoInicial.y, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
                     inicializarLibro = false;
                 }

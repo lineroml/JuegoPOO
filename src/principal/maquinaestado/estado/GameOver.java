@@ -22,11 +22,11 @@ public class GameOver implements EstadoJuego {
     private final BufferedImage volverAlJuegoConMouse = Constantes.VOLVERALJUEGOCONMOUSE;
     private final BufferedImage salir = Constantes.SALIRMENU;
     private final BufferedImage salirConMouse = Constantes.SALIRMENUCONMOUSE;
-    private BufferedImage quiereSalir = Constantes.QUIERESALIR;
-    private BufferedImage salirSi = Constantes.QUIERESALIRSI;
-    private BufferedImage salirNo = Constantes.QUIERESALIRNO;
-    private BufferedImage salirSiConMouse = Constantes.QUIERESALIRSICONMOUSE;
-    private BufferedImage salirNoConMouse = Constantes.QUIERESALIRNOCONMOUSE;
+    private final BufferedImage quiereSalir = Constantes.QUIERESALIR;
+    private final BufferedImage salirSi = Constantes.QUIERESALIRSI;
+    private final BufferedImage salirNo = Constantes.QUIERESALIRNO;
+    private final BufferedImage salirSiConMouse = Constantes.QUIERESALIRSICONMOUSE;
+    private final BufferedImage salirNoConMouse = Constantes.QUIERESALIRNOCONMOUSE;
 
     private BufferedImage volverActual;
     private BufferedImage salirActual;

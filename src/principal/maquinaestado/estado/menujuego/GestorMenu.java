@@ -32,7 +32,7 @@ public class GestorMenu implements EstadoJuego {
     private final Rectangle recSalir = new Rectangle(Constantes.ANCHO_JUEGO - salirSinMouse.getWidth() - 2, 2, salirSinMouse.getWidth(),
             salirSinMouse.getHeight());
     Rectangle posicionRaton = new Rectangle();
-    private GestorSonido boton = Constantes.BOTON;
+    private final GestorSonido boton = Constantes.BOTON;
 
     public GestorMenu(final SuperficieDibujo sd) {
         this.sd = sd;

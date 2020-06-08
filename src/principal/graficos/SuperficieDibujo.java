@@ -4,7 +4,6 @@ package principal.graficos;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
@@ -20,10 +19,10 @@ public class SuperficieDibujo extends Canvas {
 
     private static final long serialVersionUID = -6227038142688953660L;
 
-    private int ancho;
-    private int alto;
+    private final int ancho;
+    private final int alto;
 
-    private Raton raton;
+    private final Raton raton;
 
 
     public SuperficieDibujo(final int ancho, final int alto) {
