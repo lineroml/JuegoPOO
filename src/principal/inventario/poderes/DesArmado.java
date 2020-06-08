@@ -7,7 +7,7 @@ import principal.entes.Jugador;
 public class DesArmado extends Cetro {
 
     public DesArmado(int id, String nombre, String descripcion, int ataqueMin, int ataqueMax, boolean automatica, boolean penetrante, double ataquePorSegundo) {
-        super(id, nombre, descripcion, ataqueMin, ataqueMax, automatica, penetrante, ataquePorSegundo, "Resources/sonidos/Pelea.wav");
+        super(id, nombre, descripcion, ataqueMin, ataqueMax, automatica, penetrante, ataquePorSegundo, "/sonidos/Pelea.wav");
     }
 
     @Override

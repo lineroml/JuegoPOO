@@ -22,8 +22,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- * Contiene los métodos estaticos para cargar recursos
- * multimedia como audios, imagenes, textos, fuentes etc...
+ * Contiene los métodos estaticos para cargar recursos multimedia como audios,
+ * imagenes, textos, fuentes etc...
+ *
  * @author Luis Evilla
  */
 public class CargadorRecursos {
@@ -127,8 +128,8 @@ public class CargadorRecursos {
     /**
      * Carga una fuente desde un archivo
      *
-     * @param ruta ruta del archivo de la fuente ej: "/fuentes/Crumbled-Pixels.ttf"
-     * /fuentes/Crumbled-Pixels.ttf
+     * @param ruta ruta del archivo de la fuente ej:
+     * "/fuentes/Crumbled-Pixels.ttf" /fuentes/Crumbled-Pixels.ttf
      * @return La fuente.
      */
     public static Font cargarFuente(final String ruta) {
@@ -150,14 +151,14 @@ public class CargadorRecursos {
     /**
      * Carga un audio desde un archivo
      *
-     * @param ruta ruta del archivo del archivo de audio ej "Resources/sonidos/MusicaIntro.wav":
-     * /fuentes/Crumbled-Pixels.ttf
+     * @param ruta ruta del archivo del archivo de audio ej
+     * "/sonidos/MusicaIntro.wav": /fuentes/Crumbled-Pixels.ttf
      * @return La fuente.
      */
     public static Clip cargarSonido(final String ruta) {
         Clip clip = null;
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(ruta).getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(ClassLoader.class.getResourceAsStream(ruta));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {

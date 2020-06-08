@@ -87,7 +87,7 @@ public class CargadorRecursosTest {
     @Test
     public void testLeerArchivoTexto() {
         System.out.println("leerArchivoTexto");
-        String ruta = "/resources/texto/texto.txt";
+        String ruta = "//texto/texto.txt";
         
         String expResult = CargadorRecursos.leerArchivoTexto(ruta);
         String result = CargadorRecursos.leerArchivoTexto(ruta);
@@ -116,7 +116,7 @@ public class CargadorRecursosTest {
     @Test
     public void testCargarSonido() {
         System.out.println("cargarSonido");
-        String ruta = "Resources/sonidos/Golpe.wav";
+        String ruta = "/sonidos/Golpe.wav";
         
         Clip expResult = CargadorRecursos.cargarSonido(ruta);
         Clip result = CargadorRecursos.cargarSonido(ruta);
