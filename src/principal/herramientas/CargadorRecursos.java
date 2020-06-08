@@ -150,7 +150,7 @@ public class CargadorRecursos {
     /**
      * Carga un audio desde un archivo
      *
-     * @param ruta ruta del archivo del archivo de audio ej "Resourses/sonidos/MusicaIntro.wav":
+     * @param ruta ruta del archivo del archivo de audio ej "Resources/sonidos/MusicaIntro.wav":
      * /fuentes/Crumbled-Pixels.ttf
      * @return La fuente.
      */

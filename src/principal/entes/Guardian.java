@@ -34,7 +34,7 @@ public class Guardian extends Enemigo {
             hojaZombie = new HojaSprites(Constantes.RUTA_ZOMBIE + id + ".png", Constantes.LADO_SPRITE, false);
         }
 
-        ataque = new GestorSonido("Resourses/sonidos/Golpe.wav");
+        ataque = new GestorSonido("Resources/sonidos/Golpe.wav");
 
         animacion = 0;
         contadorAtaque = 0;

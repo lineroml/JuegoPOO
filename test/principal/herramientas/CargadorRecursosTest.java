@@ -116,7 +116,7 @@ public class CargadorRecursosTest {
     @Test
     public void testCargarSonido() {
         System.out.println("cargarSonido");
-        String ruta = "Resourses/sonidos/Golpe.wav";
+        String ruta = "Resources/sonidos/Golpe.wav";
         
         Clip expResult = CargadorRecursos.cargarSonido(ruta);
         Clip result = CargadorRecursos.cargarSonido(ruta);
