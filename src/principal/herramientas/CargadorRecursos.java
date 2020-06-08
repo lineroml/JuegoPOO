@@ -157,7 +157,7 @@ public class CargadorRecursos {
     public static Clip cargarSonido(final String ruta) {
         Clip clip = null;
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(ruta).getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(ClassLoader.getSystemResource(ruta));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {

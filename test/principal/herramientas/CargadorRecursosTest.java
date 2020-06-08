@@ -44,12 +44,11 @@ public class CargadorRecursosTest {
     public void testCargarImagenCompatibleOpaca() {
         System.out.println("cargarImagenCompatibleOpaca");
         
-        String ruta = "/imagenes/hojas_Personajes/1.png";
-        String ruta2 = "/imagenes/hojas_Personajes/2.png";
-        
+        String ruta = "/imagenes/hojas_Personajes/Santana.png";
+        String ruta2 = "/imagenes/hojas_Personajes/SantanaDisparo.png";
         BufferedImage expResult = CargadorRecursos.cargarImagenCompatibleOpaca(ruta);
         BufferedImage result = CargadorRecursos.cargarImagenCompatibleOpaca(ruta);
-        
+
         float similitud;
         similitud = ComparadorRecursos.compararImagenes(expResult, result);
         assertEquals("Error, deberia devolver la misma imagen", 100, (int) (similitud));

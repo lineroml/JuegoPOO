@@ -40,7 +40,7 @@ public class GameOver implements EstadoJuego {
     private Rectangle no = null;
     private boolean seguroSalir = false;
 
-    private final GestorSonido boton = new GestorSonido("Resourses/sonidos/boton.wav");
+    private final GestorSonido boton = new GestorSonido("sonidos/boton.wav");
 
     private Rectangle r;
 

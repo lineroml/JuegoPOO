@@ -9,7 +9,7 @@ public class RegistroEnemigos {
 
         switch (idEnemigo) {
             case 1:
-                enemigo = new Guardian(idEnemigo, "Guardian", 40 + dificultad, "Resourses/sonidos/Enemigo.wav");
+                enemigo = new Guardian(idEnemigo, "Guardian", 40 + dificultad, "sonidos/Enemigo.wav");
                 break;
             default:
                 System.out.println("No existe el enemigo");
