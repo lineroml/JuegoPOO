@@ -8,9 +8,9 @@ import principal.graficos.SuperficieDibujo;
 import principal.inventario.elementosMujeres.Elemento;
 import principal.maquinaestado.estado.GameOver;
 import principal.maquinaestado.estado.Instrucciones;
-import principal.maquinaestado.estado.logros.Logro;
 import principal.maquinaestado.estado.Pausa;
 import principal.maquinaestado.estado.juego.GestorJuego;
+import principal.maquinaestado.estado.logros.Logro;
 import principal.maquinaestado.estado.logros.Mujer;
 import principal.maquinaestado.estado.menuinicial.MenuInicio;
 import principal.maquinaestado.estado.menuinicial.itemsMenu.Ajustes;
@@ -112,6 +112,12 @@ public class GestorEstado {
             if (estados[nuevoEstado] instanceof Pausa) {
                 Pausa p = (Pausa) estados[nuevoEstado];
                 p.setTiempoEspera();
+            }
+        }
+        if (estadoActual instanceof MenuInicio) {
+            if (estados[nuevoEstado] instanceof Ajustes) {
+                Ajustes a = (Ajustes) estados[nuevoEstado];
+                a.setTiempoEspera();
             }
         }
         estadoActual = estados[nuevoEstado];
