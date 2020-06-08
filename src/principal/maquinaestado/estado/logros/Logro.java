@@ -14,13 +14,11 @@ import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.herramientas.GeneradorComentario;
-import principal.inventario.Objeto;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
 public class Logro implements EstadoJuego {
 
-    private int ultimoTamanho = 0;
     private final SuperficieDibujo sd;
 
     private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
@@ -52,11 +50,11 @@ public class Logro implements EstadoJuego {
     private boolean activa4;
     private boolean activa5;
 
-    private String nombre1;
-    private String nombre2;
-    private String nombre3;
-    private String nombre4;
-    private String nombre5;
+    private String nombre1 = "";
+    private String nombre2 = "";
+    private String nombre3 = "";
+    private String nombre4 = "";
+    private String nombre5 = "";
 
     private String nombreActual;
 
@@ -78,12 +76,6 @@ public class Logro implements EstadoJuego {
         activa4 = false;
         activa5 = false;
 
-        nombre1 = "";
-        nombre2 = "";
-        nombre3 = "";
-        nombre4 = "";
-        nombre5 = "";
-
         nombreActual = "";
 
         volverActual = volver;
@@ -91,31 +83,6 @@ public class Logro implements EstadoJuego {
 
     @Override
     public void actualizar() {
-
-        if (!ElementosPrincipales.inventario.getObjetosElementos().isEmpty()) {
-            if (ultimoTamanho != ElementosPrincipales.inventario.getObjetosElementos().size()) {
-                setMujer(ElementosPrincipales.inventario.getObjetosElementos().size());
-                Objeto objeto = ElementosPrincipales.inventario.getObjetoElemento(ElementosPrincipales.inventario.getObjetosElementos().size() -1);
-                switch (ElementosPrincipales.inventario.getObjetosElementos().size()) {
-                    case 1:
-                        nombre1 = objeto.getNombre();
-                        break;
-                    case 2:
-                        nombre2 = objeto.getNombre();
-                        break;
-                    case 3:
-                        nombre3 = objeto.getNombre();
-                        break;
-                    case 4:
-                        nombre4 = objeto.getNombre();
-                        break;
-                    case 5:
-                        nombre5 = objeto.getNombre();
-                        break;
-                }
-                ultimoTamanho = ElementosPrincipales.inventario.getObjetosElementos().size();
-            }
-        }
 
         r = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
                 EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
@@ -135,7 +102,6 @@ public class Logro implements EstadoJuego {
         activa3 = interseccionRecuadro(mujer3, Constantes.MUJER3ACTIVA, r, mujer3R, nombre3);
         activa4 = interseccionRecuadro(mujer4, Constantes.MUJER4ACTIVA, r, mujer4R, nombre4);
         activa5 = interseccionRecuadro(mujer5, Constantes.MUJER5ACTIVA, r, mujer5R, nombre5);
-
     }
 
     private boolean interseccionRecuadro(final BufferedImage mujer, final BufferedImage comparar, final Rectangle r, final Rectangle mujerR, final String nombre) {
@@ -196,7 +162,7 @@ public class Logro implements EstadoJuego {
         }
     }
 
-    private void setMujer(final int num) {
+    public void setMujer(final int num) {
         switch (num) {
             case 1:
                 this.mujer1 = Constantes.MUJER1ACTIVA;
@@ -214,6 +180,26 @@ public class Logro implements EstadoJuego {
                 this.mujer5 = Constantes.MUJER5ACTIVA;
                 break;
         }
+    }
+
+    public void setNombre1(String nombre1) {
+        this.nombre1 = nombre1;
+    }
+
+    public void setNombre2(String nombre2) {
+        this.nombre2 = nombre2;
+    }
+    
+    public void setNombre3(String nombre3) {
+        this.nombre3 = nombre3;
+    }
+
+    public void setNombre4(String nombre4) {
+        this.nombre4 = nombre4;
+    }
+
+    public void setNombre5(String nombre5) {
+        this.nombre5 = nombre5;
     }
 
 }

@@ -101,6 +101,8 @@ public class Pausa implements EstadoJuego {
                 if (sd.getRaton().isClickIzquierdo()) {
                     boton.reproducir();
                     GestorPrincipal.ge.cambiarEstadoActual(0);
+                    seguroSalir = false;
+                    GestorControles.teclado.menuPausa = false;
                 }
             } else {
                 siActual = salirSi;
