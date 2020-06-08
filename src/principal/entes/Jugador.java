@@ -58,7 +58,7 @@ public class Jugador {
     private boolean recuperado = true;
 
     public int limitePeso = 100;
-    public int pesoActual = 30;
+    public int pesoActual = 1;
 
     private AlmacenEquipo ae;
     private ArrayList<Rectangle> alcanceArma;
@@ -779,11 +779,19 @@ public class Jugador {
         return new Rectangle(Constantes.CENTRO_VENTANA_X - Constantes.LADO_SPRITE + 8, Constantes.CENTRO_VENTANA_Y - Constantes.LADO_SPRITE + 10, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE - 10);
     }
 
-    public void setVida(final int bajoVida) {
+    public void reducirVida(final int bajoVida) {
         if (vida - bajoVida < 0) {
             vida = 0;
         } else {
             vida -= bajoVida;
+        }
+    }
+    
+    public void aumentarVida(final int subeVida) {
+        if (vida + subeVida > 1000) {
+            vida = 1000;
+        } else {
+            vida += subeVida;
         }
     }
 

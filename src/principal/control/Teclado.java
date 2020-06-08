@@ -21,6 +21,11 @@ public class Teclado implements KeyListener {
     public boolean menuPausa = false;
 
     public boolean ataque = false;
+    public boolean num1 = false;
+    public boolean num2 = false;
+    public boolean num3 = false;
+    public boolean num4 = false;
+    public boolean num5 = false;
 
     /**
      * se lanza cada vez que se mateniene presionada una tecla
@@ -63,6 +68,21 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_ESCAPE:
                 menuPausa = !menuPausa;
+                break;
+            case KeyEvent.VK_1:
+                num1 = !num1;
+                break;
+            case KeyEvent.VK_2:
+                num2 = !num2;
+                break;
+            case KeyEvent.VK_3:
+                num3 = !num3;
+                break;
+            case KeyEvent.VK_4:
+                num4 = !num4;
+                break;
+            case KeyEvent.VK_5:
+                num5 = !num5;
                 break;
         }
     }

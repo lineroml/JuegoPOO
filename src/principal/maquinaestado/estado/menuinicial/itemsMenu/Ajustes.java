@@ -138,158 +138,174 @@ public class Ajustes implements EstadoJuego {
         }
 
         if (cambioCancion) {
-            if (sd.getRaton().isClickIzquierdo()) {
-                if (r.intersects(dificultadFacil)) {
-                    GestorPrincipal.setCancion(Constantes.CANCION1);
-                }
-                if (r.intersects(dificultadIntermedia)) {
-//                    GestorPrincipal.setCancion(Constantes.CANCION2);
-                }
-                if (r.intersects(dificultadProfesional)) {
-//                    GestorPrincipal.setCancion(Constantes.CANCION3);
-                }
-                if (r.intersects(dificultadExperto)) {
-                    setDificultad(160, 5, 300);
-                }
-            }
-            if (r.intersects(volverR)) {
-                volverActual = volverConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 5;
-                    newDificultad = false;
-                    volverR = volverNormalR;
-                }
-            } else {
-                volverActual = volver;
-            }
+            cambiarCancion();
             return;
         }
         if (newDificultad) {
-            if (sd.getRaton().isClickIzquierdo()) {
-                if (r.intersects(dificultadFacil)) {
-                    imagenDificultadFacil = Constantes.DIFICULTADFACILCONMOUSE;
-                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
-                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
-                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
-                    setDificultad(0, 0, 0);
-                }
-                if (r.intersects(dificultadIntermedia)) {
-                    imagenDificultadFacil = Constantes.DIFICULTADFACIL;
-                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIOCONMOUSE;
-                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
-                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
-                    setDificultad(60, 0, 100);
-                }
-                if (r.intersects(dificultadProfesional)) {
-                    imagenDificultadFacil = Constantes.DIFICULTADFACIL;
-                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
-                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONALCONMOUSE;
-                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
-                    setDificultad(100, 4, 200);
-                }
-                if (r.intersects(dificultadExperto)) {
-                    imagenDificultadFacil = Constantes.DIFICULTADFACIL;
-                    imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
-                    imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
-                    imagenDificultadExtremo = Constantes.DIFICULTADEXTREMOCONMOUSE;
-                    setDificultad(160, 5, 300);
-                }
-            }
-            if (r.intersects(volverR)) {
-                volverActual = volverConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 5;
-                    newDificultad = false;
-                    volverR = volverNormalR;
-                }
-            } else {
-                volverActual = volver;
-            }
+            cambiarDificultad();
             return;
         }
 
         if (cambioSonido) {
-            if (r.intersects(flechaAbajoRGeneral)) {
-                flechaAbajoGeneralActual = flechaAbajoConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 3;
-                    GestorPrincipal.setVolumen((float) -0.01);
-                }
-            } else {
-                flechaAbajoGeneralActual = flechaAbajo;
-            }
-            
-            if (r.intersects(flechaArribaRGeneral)) {
-                flechaArribaGeneralActual = flechaArribaConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 3;
-                    GestorPrincipal.setVolumen((float) 0.01);
-                }
-            } else {
-                flechaArribaGeneralActual = flechaArriba;
-            }
-            
-                if (r.intersects(flechaAbajoRMusica)) {
-                flechaAbajoMusicaActual = flechaAbajoConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 3;
-                    GestorPrincipal.setVolumenMusica((float) -0.01);
-                }
-            } else {
-                flechaAbajoMusicaActual = flechaAbajo;
-            }
-            
-            if (r.intersects(flechaArribaRMusica)) {
-                flechaArribaMusicaActual = flechaArribaConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 3;
-                    GestorPrincipal.setVolumenMusica((float) 0.01);
-                }
-            } else {
-                flechaArribaMusicaActual = flechaArriba;
-            }
-            
-               if (r.intersects(flechaAbajoRJUEGO)) {
-                flechaAbajoJuegoActual = flechaAbajoConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 3;
-                    GestorPrincipal.setVolumenJuego((float) -0.01);
-                }
-            } else {
-                flechaAbajoJuegoActual = flechaAbajo;
-            }
-            
-            if (r.intersects(flechaArribaRJUEGO)) {
-                flechaArribaJuegoActual = flechaArribaConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 3;
-                    GestorPrincipal.setVolumenJuego((float) 0.01);
-                }
-            } else {
-                flechaArribaJuegoActual = flechaArriba;
-            }
-            if (r.intersects(volverR)) {
-                volverActual = volverConMouse;
-                if (sd.getRaton().isClickIzquierdo()) {
-                    boton.reproducir();
-                    tiempoEspera = 5;
-                    cambioSonido = false;
-                    volverR = volverNormalR;
-                }
-            } else {
-                volverActual = volver;
-            }
+            cambiarSonido();
             return;
         }
 
+        comprobarBotones();
+    }
+
+    private void cambiarCancion() {
+        if (sd.getRaton().isClickIzquierdo()) {
+            if (r.intersects(dificultadFacil)) {
+                GestorPrincipal.setCancion(Constantes.CANCION1);
+            }
+            if (r.intersects(dificultadIntermedia)) {
+//                    GestorPrincipal.setCancion(Constantes.CANCION2);
+            }
+            if (r.intersects(dificultadProfesional)) {
+//                    GestorPrincipal.setCancion(Constantes.CANCION3);
+            }
+            if (r.intersects(dificultadExperto)) {
+                setDificultad(160, 5, 300);
+            }
+        }
+        if (r.intersects(volverR)) {
+            volverActual = volverConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 5;
+                newDificultad = false;
+                volverR = volverNormalR;
+            }
+        } else {
+            volverActual = volver;
+        }
+    }
+
+    private void cambiarDificultad() {
+        if (sd.getRaton().isClickIzquierdo()) {
+            if (r.intersects(dificultadFacil)) {
+                imagenDificultadFacil = Constantes.DIFICULTADFACILCONMOUSE;
+                imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+                imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+                imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
+                setDificultad(0, 0, 0);
+            }
+            if (r.intersects(dificultadIntermedia)) {
+                imagenDificultadFacil = Constantes.DIFICULTADFACIL;
+                imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIOCONMOUSE;
+                imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+                imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
+                setDificultad(60, 0, 100);
+            }
+            if (r.intersects(dificultadProfesional)) {
+                imagenDificultadFacil = Constantes.DIFICULTADFACIL;
+                imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+                imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONALCONMOUSE;
+                imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
+                setDificultad(100, 4, 200);
+            }
+            if (r.intersects(dificultadExperto)) {
+                imagenDificultadFacil = Constantes.DIFICULTADFACIL;
+                imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+                imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+                imagenDificultadExtremo = Constantes.DIFICULTADEXTREMOCONMOUSE;
+                setDificultad(160, 5, 300);
+            }
+        }
+        if (r.intersects(volverR)) {
+            volverActual = volverConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 5;
+                newDificultad = false;
+                volverR = volverNormalR;
+            }
+        } else {
+            volverActual = volver;
+        }
+    }
+
+    private void cambiarSonido() {
+        if (r.intersects(flechaAbajoRGeneral)) {
+            flechaAbajoGeneralActual = flechaAbajoConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 3;
+                GestorPrincipal.setVolumen((float) -0.01);
+            }
+        } else {
+            flechaAbajoGeneralActual = flechaAbajo;
+        }
+
+        if (r.intersects(flechaArribaRGeneral)) {
+            flechaArribaGeneralActual = flechaArribaConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 3;
+                GestorPrincipal.setVolumen((float) 0.01);
+            }
+        } else {
+            flechaArribaGeneralActual = flechaArriba;
+        }
+
+        if (r.intersects(flechaAbajoRMusica)) {
+            flechaAbajoMusicaActual = flechaAbajoConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 3;
+                GestorPrincipal.setVolumenMusica((float) -0.01);
+            }
+        } else {
+            flechaAbajoMusicaActual = flechaAbajo;
+        }
+
+        if (r.intersects(flechaArribaRMusica)) {
+            flechaArribaMusicaActual = flechaArribaConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 3;
+                GestorPrincipal.setVolumenMusica((float) 0.01);
+            }
+        } else {
+            flechaArribaMusicaActual = flechaArriba;
+        }
+
+        if (r.intersects(flechaAbajoRJUEGO)) {
+            flechaAbajoJuegoActual = flechaAbajoConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 3;
+                GestorPrincipal.setVolumenJuego((float) -0.01);
+            }
+        } else {
+            flechaAbajoJuegoActual = flechaAbajo;
+        }
+
+        if (r.intersects(flechaArribaRJUEGO)) {
+            flechaArribaJuegoActual = flechaArribaConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 3;
+                GestorPrincipal.setVolumenJuego((float) 0.01);
+            }
+        } else {
+            flechaArribaJuegoActual = flechaArriba;
+        }
+        if (r.intersects(volverR)) {
+            volverActual = volverConMouse;
+            if (sd.getRaton().isClickIzquierdo()) {
+                boton.reproducir();
+                tiempoEspera = 5;
+                cambioSonido = false;
+                volverR = volverNormalR;
+            }
+        } else {
+            volverActual = volver;
+        }
+    }
+
+    private void comprobarBotones() {
         if (r.intersects(dificultadR)) {
             dificultadActual = dificultadConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -308,7 +324,7 @@ public class Ajustes implements EstadoJuego {
         } else {
             musicaActual = musica;
         }
-        
+
         if (r.intersects(creditosR)) {
             creditosActual = creditosConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -318,7 +334,7 @@ public class Ajustes implements EstadoJuego {
         } else {
             creditosActual = creditos;
         }
-        
+
         if (r.intersects(volverR)) {
             volverGrandeActual = volverConMouseGrande;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -328,7 +344,7 @@ public class Ajustes implements EstadoJuego {
         } else {
             volverGrandeActual = volverGrande;
         }
-        
+
         if (r.intersects(sonidoR)) {
             sonidoActual = sonidoConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -379,18 +395,18 @@ public class Ajustes implements EstadoJuego {
         if (cambioSonido) {
             DibujoOpciones.dibujarImagen(g, menuSonido, Constantes.CENTRO_VENTANA_X - menuSonido.getWidth() / 2,
                     Constantes.CENTRO_VENTANA_Y - menuSonido.getHeight() / 2);
-            
+
             DibujoOpciones.dibujarImagen(g, flechaAbajoGeneralActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
                     Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 - 35);
             DibujoOpciones.dibujarImagen(g, flechaArribaGeneralActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
                     Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 - 35);
-            
+
             DibujoOpciones.dibujarImagen(g, flechaAbajoMusicaActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
                     Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 15);
             DibujoOpciones.dibujarImagen(g, flechaArribaMusicaActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
                     Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 15);
-            
-             DibujoOpciones.dibujarImagen(g, flechaAbajoJuegoActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
+
+            DibujoOpciones.dibujarImagen(g, flechaAbajoJuegoActual, Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
                     Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 65);
             DibujoOpciones.dibujarImagen(g, flechaArribaJuegoActual, Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
                     Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 65);
@@ -451,17 +467,17 @@ public class Ajustes implements EstadoJuego {
         flechaArribaMusicaActual = flechaArriba;
         flechaAbajoJuegoActual = flechaAbajo;
         flechaArribaJuegoActual = flechaArriba;
-        
+
         flechaAbajoRGeneral = new Rectangle(Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
                 Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 - 35, flechaArriba.getWidth(), flechaArriba.getHeight());
         flechaArribaRGeneral = new Rectangle(Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
                 Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + -35, flechaAbajo.getWidth(), flechaAbajo.getHeight());
-        
+
         flechaAbajoRMusica = new Rectangle(Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
                 Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 10, flechaArriba.getWidth(), flechaArriba.getHeight());
         flechaArribaRMusica = new Rectangle(Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,
                 Constantes.CENTRO_VENTANA_Y - flechaArriba.getHeight() / 2 + 10, flechaAbajo.getWidth(), flechaAbajo.getHeight());
-        
+
         flechaAbajoRJUEGO = new Rectangle(Constantes.CENTRO_VENTANA_X - flechaAbajo.getWidth() * 2 + 20,
                 Constantes.CENTRO_VENTANA_Y - flechaAbajo.getHeight() / 2 + 65, flechaArriba.getWidth(), flechaArriba.getHeight());
         flechaArribaRJUEGO = new Rectangle(Constantes.CENTRO_VENTANA_X + flechaArriba.getWidth() - 20,

@@ -1,6 +1,8 @@
 package principal.inventario;
 
 import java.awt.Rectangle;
+import principal.ElementosPrincipales;
+import principal.inventario.consumible.Consumible;
 import principal.sprites.Sprite;
 
 public abstract class Objeto {
@@ -48,10 +50,17 @@ public abstract class Objeto {
     public boolean reducirCantidad(final int reduccion) {
         boolean reducido = false;
 
-        if (cantidad - reduccion >= cantidad) {
+        if (this.getNombre().equals("Botiquin")) {
+            if (cantidad - reduccion >= 0 && ElementosPrincipales.jugador.getVida() < 1000) {
+                cantidad -= reduccion;
+                ElementosPrincipales.jugador.aumentarVida(100);
+                reducido = true;
+            }
+        } else if (cantidad - reduccion >= 0) {
             cantidad -= reduccion;
             reducido = true;
         }
+
         return reducido;
     }
 

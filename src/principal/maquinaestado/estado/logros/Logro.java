@@ -1,4 +1,4 @@
-package principal.maquinaestado.estado;
+package principal.maquinaestado.estado.logros;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,8 +7,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import principal.Constantes;
+import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
-import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
@@ -19,6 +19,7 @@ import principal.sonido.GestorSonido;
 
 public class Logro implements EstadoJuego {
 
+    private int ultimoTamanho = 0;
     private final SuperficieDibujo sd;
 
     private final BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/logo.png");
@@ -37,12 +38,12 @@ public class Logro implements EstadoJuego {
 
     private Rectangle r;
 
-    private Rectangle volverR;
-    private Rectangle mujer1R;
-    private Rectangle mujer2R;
-    private Rectangle mujer3R;
-    private Rectangle mujer4R;
-    private Rectangle mujer5R;
+    private final Rectangle volverR;
+    private final Rectangle mujer1R;
+    private final Rectangle mujer2R;
+    private final Rectangle mujer3R;
+    private final Rectangle mujer4R;
+    private final Rectangle mujer5R;
 
     private boolean activa1;
     private boolean activa2;
@@ -77,6 +78,13 @@ public class Logro implements EstadoJuego {
 
     @Override
     public void actualizar() {
+
+        if (!ElementosPrincipales.inventario.getObjetosElementos().isEmpty()) {
+            if (ultimoTamanho != ElementosPrincipales.inventario.getObjetosElementos().size()) {
+                setMujer(ElementosPrincipales.inventario.getObjetosElementos().size());
+                ultimoTamanho = ElementosPrincipales.inventario.getObjetosElementos().size();
+            }
+        }
 
         r = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
                 EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
@@ -157,24 +165,24 @@ public class Logro implements EstadoJuego {
         }
     }
 
-    public void setMujer1() {
-        this.mujer1 = Constantes.MUJER1ACTIVA;
-    }
-
-    public void setMujer2() {
-        this.mujer2 = Constantes.MUJER2ACTIVA;
-    }
-
-    public void setMujer3() {
-        this.mujer3 = Constantes.MUJER3ACTIVA;
-    }
-
-    public void setMujer4() {
-        this.mujer4 = Constantes.MUJER4ACTIVA;
-    }
-
-    public void setMujer5() {
-        this.mujer5 = Constantes.MUJER5ACTIVA;
+    private void setMujer(final int num) {
+        switch (num) {
+            case 1:
+                this.mujer1 = Constantes.MUJER1ACTIVA;
+                break;
+            case 2:
+                this.mujer2 = Constantes.MUJER2ACTIVA;
+                break;
+            case 3:
+                this.mujer3 = Constantes.MUJER3ACTIVA;
+                break;
+            case 4:
+                this.mujer4 = Constantes.MUJER4ACTIVA;
+                break;
+            case 5:
+                this.mujer5 = Constantes.MUJER5ACTIVA;
+                break;
+        }
     }
 
 }

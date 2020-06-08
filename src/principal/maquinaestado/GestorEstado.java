@@ -3,11 +3,15 @@ package principal.maquinaestado;
 
 import java.awt.Graphics;
 import principal.Constantes;
+import principal.ElementosPrincipales;
+import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
+import principal.inventario.elementosMujeres.Elemento;
 import principal.maquinaestado.estado.GameOver;
-import principal.maquinaestado.estado.Logro;
+import principal.maquinaestado.estado.logros.Logro;
 import principal.maquinaestado.estado.Pausa;
 import principal.maquinaestado.estado.juego.GestorJuego;
+import principal.maquinaestado.estado.logros.Mujer;
 import principal.maquinaestado.estado.menuinicial.MenuInicio;
 import principal.maquinaestado.estado.menuinicial.itemsMenu.Ajustes;
 import principal.maquinaestado.estado.menujuego.GestorMenu;
@@ -25,7 +29,7 @@ public class GestorEstado {
 
     private void iniciarEstados(final SuperficieDibujo sd) {
 
-        estados = new EstadoJuego[7];
+        estados = new EstadoJuego[8];
         estados[0] = new MenuInicio(sd);
         estados[1] = new GestorJuego();
         estados[2] = new GestorMenu(sd);
@@ -33,6 +37,7 @@ public class GestorEstado {
         estados[4] = new Ajustes(sd);
         estados[5] = new Pausa(sd);
         estados[6] = new Logro(sd);
+        estados[7] = new Mujer(sd);
         //Añadir e iniciar los demas estados a medida que los creemos
     }
 
@@ -42,6 +47,37 @@ public class GestorEstado {
 
     public void actualizar() {
         estadoActual.actualizar();
+        if (estadoActual instanceof GestorJuego || estadoActual instanceof Logro) {
+            if (!ElementosPrincipales.inventario.getObjetosElementos().isEmpty()) {
+                if (GestorControles.teclado.num1 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 1) {
+                    Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(0);
+                    e.asignarMujer((Mujer) estados[7]);
+                    GestorControles.teclado.num1 = true;
+                    estadoActual = estados[7];
+                }
+                if (GestorControles.teclado.num2 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 2) {
+                    Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(0);
+                    e.asignarMujer((Mujer) estados[7]);
+                    GestorControles.teclado.num2 = true;
+                    estadoActual = estados[7];
+                }
+                if (GestorControles.teclado.num3 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 3) {
+                    Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(0);
+                    e.asignarMujer((Mujer) estados[7]);
+                    GestorControles.teclado.num3 = true;
+                    estadoActual = estados[7];
+                }
+                if (GestorControles.teclado.num4 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 4) {
+                    Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(0);
+                    e.asignarMujer((Mujer) estados[7]);
+                    GestorControles.teclado.num4 = true;
+                    estadoActual = estados[7];
+                }
+                if (GestorControles.teclado.num5) {
+
+                }
+            }
+        }
     }
 
     public void dibujar(final Graphics g) {
@@ -58,7 +94,7 @@ public class GestorEstado {
         }
         if (estadoActual instanceof Logro) {
             if (estados[nuevoEstado] instanceof Pausa) {
-                Pausa p = (Pausa)estados[nuevoEstado];
+                Pausa p = (Pausa) estados[nuevoEstado];
                 p.setTiempoEspera();
             }
         }
@@ -66,8 +102,11 @@ public class GestorEstado {
     }
 
     public EstadoJuego getEstadoActual() {
-
         return estadoActual;
+    }
+
+    public EstadoJuego getEstado(final int i) {
+        return estados[i];
     }
 
 }

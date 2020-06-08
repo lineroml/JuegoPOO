@@ -65,6 +65,15 @@ public class Pausa implements EstadoJuego {
     private int tiempoEspera;
     private boolean mostrarMensaje;
 
+    private BufferedImage imagenCancion;
+    private Rectangle cancion1;
+    private Rectangle cancion2;
+    private Rectangle cancion3;
+    private Rectangle cancion4;
+    private boolean cambioCancion;
+
+    private final Rectangle volverNormalR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
+
     public Pausa(final SuperficieDibujo sd) {
         this.sd = sd;
 
@@ -72,6 +81,7 @@ public class Pausa implements EstadoJuego {
         musicaR = new Rectangle(logroR.x, logroR.y + 60, musica.getWidth(), musica.getHeight());
         salirR = new Rectangle(musicaR.x, musicaR.y + 60, salir.getWidth(), salir.getHeight());
         volverR = new Rectangle(2, Constantes.ALTO_JUEGO - volver.getHeight() - 2, volver.getWidth(), volver.getHeight());
+        volverR = volverNormalR;
 
         logroActual = logros;
         musicaActual = musicaConMouse;
@@ -80,6 +90,7 @@ public class Pausa implements EstadoJuego {
 
         tiempoEspera = 0;
         mostrarMensaje = false;
+        cambioCancion = false;
     }
 
     @Override
@@ -108,40 +119,41 @@ public class Pausa implements EstadoJuego {
             }
             return;
         }
-//        if (newDificultad) {
-//            if (sd.getRaton().isClickIzquierdo()) {
-//                if (r.intersects(dificultadFacil)) {
-//                    setDificultad(0, 0, 0);
-//                }
-//                if (r.intersects(dificultadIntermedia)) {
-//                    setDificultad(60, 0, 100);
-//                }
-//                if (r.intersects(dificultadProfesional)) {
-//                    setDificultad(100, 4, 200);
-//                }
-//                if (r.intersects(dificultadExperto)) {
-//                    setDificultad(160, 5, 300);
-//                }
-//            }
-//            if (r.intersects(volverR)) {
-//                volverActual = volverConMouse;
-//                if (sd.getRaton().isClickIzquierdo()) {
-//                    boton.reproducir();
-//                    tiempoEspera = 5;
-//                    newDificultad = false;
-//                    volverR = volverNormalR;
-//                }
-//            } else {
-//                volverActual = volver;
-//            }
-//            return;
-//        }
+        if (cambioCancion) {
+            if (sd.getRaton().isClickIzquierdo()) {
+                if (r.intersects(cancion1)) {
+                    GestorPrincipal.setCancion(Constantes.CANCION1);
+                }
+                if (r.intersects(cancion2)) {
+//                    GestorPrincipal.setCancion(Constantes.CANCION2);
+                }
+                if (r.intersects(cancion3)) {
+//                    GestorPrincipal.setCancion(Constantes.CANCION3);
+                }
+                if (r.intersects(cancion4)) {
+//                    GestorPrincipal.setCancion(Constantes.CANCION4);
+                }
+            }
+            if (r.intersects(volverR)) {
+                volverActual = volverConMouse;
+                if (sd.getRaton().isClickIzquierdo()) {
+                    boton.reproducir();
+                    tiempoEspera = 5;
+                    cambioCancion = false;
+                    volverR = volverNormalR;
+                }
+            } else {
+                volverActual = volver;
+            }
+            return;
+        }
 
-        if (tiempoEspera > 0) {
+        if (tiempoEspera
+                > 0) {
             tiempoEspera--;
             return;
         }
-        
+
         if (r.intersects(logroR)) {
             logroActual = logrosConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -151,16 +163,19 @@ public class Pausa implements EstadoJuego {
         } else {
             logroActual = logros;
         }
-        
+
         if (r.intersects(musicaR)) {
             mostrarMensaje = true;
-            musicaActual = musicaConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
+                if (musicaActual == musicaConMouse) {
+                    musicaActual = musica;
+                } else {
+                    musicaActual = musicaConMouse;
+                }
                 toggleMusica();
             }
         } else {
             mostrarMensaje = false;
-            musicaActual = musica;
         }
 
         if (r.intersects(salirR)) {
@@ -208,17 +223,18 @@ public class Pausa implements EstadoJuego {
                     Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50);
         }
 
-//        if (newDificultad) {
-//            DibujoOpciones.dibujarImagen(g, imagenLogro, Constantes.CENTRO_VENTANA_X - imagenLogro.getWidth() / 2,
-//                    Constantes.CENTRO_VENTANA_Y - imagenLogro.getHeight() / 2);
-//            DibujoOpciones.dibujarRectBorde(g, dificultadFacil, Color.red);
-//            DibujoOpciones.dibujarRectBorde(g, dificultadIntermedia, Color.red);
-//            DibujoOpciones.dibujarRectBorde(g, dificultadProfesional, Color.red);
-//            DibujoOpciones.dibujarRectBorde(g, dificultadExperto, Color.red);
-//            DibujoOpciones.dibujarImagen(g, volverActual, dificultadExperto.x + dificultadExperto.width / 2 - volver.getWidth() / 2,
-//                    dificultadExperto.y + 20);
-//            return;
-//        }
+        if (cambioCancion) {
+            DibujoOpciones.dibujarImagen(g, imagenCancion, Constantes.CENTRO_VENTANA_X - imagenCancion.getWidth() / 2,
+                    Constantes.CENTRO_VENTANA_Y - imagenCancion.getHeight() / 2);
+            DibujoOpciones.dibujarRectBorde(g, cancion1, Color.red);
+            DibujoOpciones.dibujarRectBorde(g, cancion2, Color.red);
+            DibujoOpciones.dibujarRectBorde(g, cancion3, Color.red);
+            DibujoOpciones.dibujarRectBorde(g, cancion4, Color.red);
+            DibujoOpciones.dibujarImagen(g, volverActual, cancion4.x + cancion4.width / 2 - volver.getWidth() / 2,
+                    cancion4.y + 20);
+            return;
+        }
+
         DibujoOpciones.dibujarImagen(g, volverActual, 2, Constantes.ALTO_JUEGO - volver.getHeight() - 2);
 
         if (mostrarMensaje) {
@@ -241,13 +257,11 @@ public class Pausa implements EstadoJuego {
 
     public void toggleMusica() {
         if (GestorSonido.musica) {
-            System.out.println("Desactivar musica");
             GestorPrincipal.detenerCancion();
             GestorSonido.musica = false;
             boton.reproducir();
             tiempoEspera = 10;
         } else {
-            System.out.println("Activar música");
             GestorPrincipal.reproducirCancion();
             GestorSonido.musica = true;
             boton.reproducir();
@@ -257,5 +271,9 @@ public class Pausa implements EstadoJuego {
 
     public void setTiempoEspera() {
         tiempoEspera = 5;
+    }
+
+    private void setCancion() {
+
     }
 }
