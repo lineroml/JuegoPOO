@@ -54,33 +54,45 @@ public class GestorEstado {
                     Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(0);
                     e.asignarMujer((Mujer) estados[7]);
                     GestorControles.teclado.num1 = true;
+                    ((Mujer) estados[7]).setNumSalida(1);
                     estadoActual = estados[7];
                 }
                 if (GestorControles.teclado.num2 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 2) {
                     Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(1);
                     e.asignarMujer((Mujer) estados[7]);
                     GestorControles.teclado.num2 = true;
+                    ((Mujer) estados[7]).setNumSalida(2);
                     estadoActual = estados[7];
                 }
                 if (GestorControles.teclado.num3 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 3) {
                     Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(2);
                     e.asignarMujer((Mujer) estados[7]);
                     GestorControles.teclado.num3 = true;
+                    ((Mujer) estados[7]).setNumSalida(3);
                     estadoActual = estados[7];
                 }
                 if (GestorControles.teclado.num4 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 4) {
                     Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(3);
                     e.asignarMujer((Mujer) estados[7]);
                     GestorControles.teclado.num4 = true;
+                    ((Mujer) estados[7]).setNumSalida(4);
                     estadoActual = estados[7];
                 }
                 if (GestorControles.teclado.num5 && ElementosPrincipales.inventario.getObjetosElementos().size() >= 5) {
                     Elemento e = (Elemento) ElementosPrincipales.inventario.getObjetosElementos().get(4);
                     e.asignarMujer((Mujer) estados[7]);
                     GestorControles.teclado.num5 = true;
+                    ((Mujer) estados[7]).setNumSalida(5);
                     estadoActual = estados[7];
                 }
             }
+        }
+        if (!(estadoActual instanceof Mujer)) {
+            GestorControles.teclado.num1 = false;
+            GestorControles.teclado.num2 = false;
+            GestorControles.teclado.num3 = false;
+            GestorControles.teclado.num4 = false;
+            GestorControles.teclado.num5 = false;
         }
     }
 

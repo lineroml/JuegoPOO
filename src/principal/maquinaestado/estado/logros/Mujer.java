@@ -18,6 +18,8 @@ public class Mujer implements EstadoJuego {
     private final SuperficieDibujo sd;
     private final GestorSonido boton = Constantes.BOTON;
 
+    private int numSalida = 0;
+
     private BufferedImage imagenBiografia;
 
     private final BufferedImage volver = Constantes.VOLVERGRANDE;
@@ -43,15 +45,76 @@ public class Mujer implements EstadoJuego {
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
                 GestorPrincipal.ge.cambiarEstadoActual(6);
-                GestorControles.teclado.num1 = false;
+                asignarValor();
             }
         } else {
             volverActual = volver;
         }
-        if (!GestorControles.teclado.num1) {
-            GestorPrincipal.ge.cambiarEstadoActual(1);
-            GestorControles.teclado.num1 = false;
+        comprobarSalida();
+
+    }
+
+    private void asignarValor() {
+        switch (numSalida) {
+            case 1:
+                todo();
+                break;
+            case 2:
+                todo();
+                break;
+            case 3:
+                todo();
+                break;
+            case 4:
+                todo();
+                break;
+            case 5:
+                todo();
+                break;
         }
+    }
+
+    private void comprobarSalida() {
+        switch (numSalida) {
+            case 1:
+                if (!GestorControles.teclado.num1) {
+                    GestorPrincipal.ge.cambiarEstadoActual(1);
+                    todo();
+                }
+                break;
+            case 2:
+                if (!GestorControles.teclado.num2) {
+                    GestorPrincipal.ge.cambiarEstadoActual(1);
+                    todo();
+                }
+                break;
+            case 3:
+                if (!GestorControles.teclado.num3) {
+                    GestorPrincipal.ge.cambiarEstadoActual(1);
+                    todo();
+                }
+                break;
+            case 4:
+                if (!GestorControles.teclado.num4) {
+                    GestorPrincipal.ge.cambiarEstadoActual(1);
+                    todo();
+                }
+                break;
+            case 5:
+                if (!GestorControles.teclado.num5) {
+                    GestorPrincipal.ge.cambiarEstadoActual(1);
+                    todo();
+                }
+                break;
+        }
+    }
+
+    private void todo() {
+        GestorControles.teclado.num1 = false;
+        GestorControles.teclado.num2 = false;
+        GestorControles.teclado.num3 = false;
+        GestorControles.teclado.num4 = false;
+        GestorControles.teclado.num5 = false;
     }
 
     @Override
@@ -62,6 +125,10 @@ public class Mujer implements EstadoJuego {
 
     public void setImagenBiografia(final BufferedImage imagenBiografia) {
         this.imagenBiografia = imagenBiografia;
+    }
+
+    public void setNumSalida(int numSalida) {
+        this.numSalida = numSalida;
     }
 
 }
