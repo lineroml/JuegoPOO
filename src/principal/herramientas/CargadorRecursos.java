@@ -10,7 +10,6 @@ import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -150,7 +149,7 @@ public class CargadorRecursos {
     /**
      * Carga un audio desde un archivo
      *
-     * @param ruta ruta del archivo del archivo de audio ej "Resources/sonidos/MusicaIntro.wav":
+     * @param ruta ruta del archivo del archivo de audio ej "/sonidos/MusicaIntro.wav":
      * /fuentes/Crumbled-Pixels.ttf
      * @return La fuente.
      */

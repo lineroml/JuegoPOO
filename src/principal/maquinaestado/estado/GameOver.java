@@ -76,8 +76,9 @@ public class GameOver implements EstadoJuego {
             if (r.intersects(si)) {
                 siActual = salirSiConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
-                    seguroSalir = false;
                     GestorPrincipal.ge.cambiarEstadoActual(0);
+                    seguroSalir = false;
+                    tiempoEspera = 5;
                 }
             } else {
                 siActual = salirSi;
