@@ -4,6 +4,11 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import principal.entes.Jugador;
 
+/**
+ * Clase que representa que el jugador no tiene cetros en su poder
+ *
+ * @author Dylan
+ */
 public class DesArmado extends Cetro {
 
     public DesArmado(int id, String nombre, String descripcion, int ataqueMin, int ataqueMax, boolean automatica, boolean penetrante, double ataquePorSegundo) {

@@ -15,6 +15,11 @@ import principal.inventario.poderes.Cetro;
 import principal.inventario.poderes.DesArmado;
 import principal.sprites.HojaSprites;
 
+/**
+ * Elemento que controla el usuario
+ *
+ * @author Dylan
+ */
 public class Jugador {
 
     private ArrayList<Double> puntoX;
@@ -69,21 +74,6 @@ public class Jugador {
 
     private int vida;
     private boolean muerto;
-//
-    //    public Jugador(String Ruta) {
-    //
-    //        this.posicionX = ElementosPrincipales.mapa.getCoordenadaInicial().getX();
-    //        this.posicionY = ElementosPrincipales.mapa.getCoordenadaInicial().getY();
-    //        this.enMovimiento = false;
-    //        direccion = 2;
-    //
-    //        this.hs = new HojaSprites(Ruta, Constantes.LADO_SPRITE, false);
-    //
-    //        imagenActual = hs.getSprite(direccion, 0).getImagen();
-    //        animacion = 0;
-    //        a = 0;
-    //        d = 3;
-    //    }
 
     public Jugador() {
         ultimoDisparo = 0;
@@ -117,9 +107,14 @@ public class Jugador {
         cambio = false;
     }
 
+    /**
+     * Renueva las "balas" del cetro Determina cuando debe estar titilando el
+     * personaje por renacer Actualiza la variable que determina que Sprite se
+     * dibujara del jugador
+     */
     public void actualizar() {
         ultimoDisparo++;
-        if (ultimoDisparo == 500) {
+        if (ultimoDisparo == 400) {
             puntoX = new ArrayList();
             puntoY = new ArrayList();
             direcciones = new ArrayList();
@@ -161,11 +156,15 @@ public class Jugador {
         determinarDireccion();
         animar();
         actualizarAtaques();
-        actualizarArma();
+        actualizarCetro();
         cambiarHojaSprite();
         actualizarSpriteDisparo();
     }
 
+    /**
+     * Comprobar si el disparo del poder colisiono con algun enemigo Elemina del
+     * mapa los enemigos que ya no tienen vida
+     */
     private void comprobarTiro() {
         for (Rectangle rectangle : rectanguloDisparo) {
             for (Enemigo enemigo : ElementosPrincipales.mapa.getEnemigos()) {
@@ -183,6 +182,10 @@ public class Jugador {
         }
     }
 
+    /**
+     * Le otorga al disparo un rectangulo que le permite luego comparar para
+     * saber si colisiono con algun enemigo
+     */
     private void actualizarRectangulosDisparo() {
         int i = 0;
         for (Rectangle rectangle : rectanguloDisparo) {
@@ -206,6 +209,9 @@ public class Jugador {
         }
     }
 
+    /**
+     * Mueve en la direccion correcta el disparo del jugador
+     */
     public void actualizarSpriteDisparo() {
         int i = 0;
         for (double p : puntoX) {
@@ -267,6 +273,9 @@ public class Jugador {
         }
     }
 
+    /**
+     * Compueba si el usuario apreto la tecla de ESPACIO para generar un disparo
+     */
     public void actualizarAtaques() {
         if (ElementosPrincipales.jugador.getAlcanceArma().isEmpty() || ElementosPrincipales.jugador.getAlmacenEquipo().getCetro() instanceof DesArmado) {
             return;
@@ -327,7 +336,10 @@ public class Jugador {
         }
     }
 
-    private void actualizarArma() {
+    /**
+     * Identificar el cetro que tiene actualmente el jugador
+     */
+    private void actualizarCetro() {
         if (!(ae.getCetro() instanceof DesArmado)) {
             calcularAlcance();
             ae.getCetro().actualizar();
@@ -340,6 +352,9 @@ public class Jugador {
         }
     }
 
+    /**
+     * Cambia la imagen del jugador si activo un centro
+     */
     private void cambiarHojaSprite() {
         if (ae.getCetro() instanceof Cetro && !(ae.getCetro() instanceof DesArmado)) {
             hs = new HojaSprites(Constantes.RUTA_PERSONAJEPODER, Constantes.LADO_SPRITE, false);
@@ -347,6 +362,9 @@ public class Jugador {
         }
     }
 
+    /**
+     * Controla la resistencia de correr del jugador
+     */
     private void gestionarVelocidadResistencia() {
 
         if (GestorControles.teclado.run && resistencia > 0) {
@@ -364,6 +382,10 @@ public class Jugador {
         }
     }
 
+    /**
+     * Determina la direccion a donde esta mirando el jugador para moverse
+     * correctamente y no de forma diagonal
+     */
     private void determinarDireccion() {
 
         final int velocidadX = getVelocidadX();
@@ -406,6 +428,11 @@ public class Jugador {
         }
     }
 
+    /**
+     * Dependiendo de la tecla presionada detecta a donde se dirigira el jugador
+     *
+     * @return direccion en x
+     */
     private int getVelocidadX() {
 
         int velocidadX = 0;
@@ -418,6 +445,11 @@ public class Jugador {
         return velocidadX;
     }
 
+    /**
+     * Dependiendo de la tecla presionada detecta a donde se dirigira el jugador
+     *
+     * @return direccion en y
+     */
     private int getVelocidadY() {
 
         int velocidadY = 0;
@@ -430,6 +462,12 @@ public class Jugador {
         return velocidadY;
     }
 
+    /**
+     * Permite el el jugador se mueva por el mapa
+     *
+     * @param velocidadX
+     * @param velocidadY
+     */
     private void mover(final int velocidadX, final int velocidadY) {
 
         enMovimiento = true;
@@ -465,6 +503,11 @@ public class Jugador {
         }
     }
 
+    /**
+     * @param velocidadY
+     * @return (booleano) si su limite superior esta en colision con algun
+     * objeto colisionable
+     */
     private boolean enColisionArriba(int velocidadY) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -483,6 +526,11 @@ public class Jugador {
         return false;
     }
 
+    /**
+     * @param velocidadY
+     * @return (booleano) si su limite inferior esta en colision con algun
+     * objeto colisionable
+     */
     private boolean enColisionAbajo(int velocidadY) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -501,6 +549,11 @@ public class Jugador {
         return false;
     }
 
+    /**
+     * @param velocidadX
+     * @return (booleano) si su limite izquierdo esta en colision con algun
+     * objeto colisionable
+     */
     private boolean enColisionIzquierda(int velocidadX) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -519,6 +572,11 @@ public class Jugador {
         return false;
     }
 
+    /**
+     * @param velocidadX
+     * @return (booleano) si su limite derecho esta en colision con algun objeto
+     * colisionable
+     */
     private boolean enColisionDerecha(int velocidadX) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -537,6 +595,10 @@ public class Jugador {
         return false;
     }
 
+    /**
+     * @param velocidadX, velocidadY
+     * @return (booleano) si el jugador va a salir del mapa
+     */
     private boolean fueraMapa(final int velocidadX, final int velocidadY) {
 
         int posicionFuturaX = (int) posicionX + velocidadX * (int) (velocidadMovimiento + 0.6);
@@ -557,6 +619,12 @@ public class Jugador {
         return FUERA;
     }
 
+    /**
+     * Detecta a donde esta mirando el jugador
+     *
+     * @param velocidadX
+     * @param velocidadY
+     */
     private void cambiarDireccion(final int velocidadX, final int velocidadY) {
 
         if (velocidadX == -1) {
@@ -571,6 +639,11 @@ public class Jugador {
         }
     }
 
+    /**
+     * Le otorga a la variable de imagenActual el valor de imagen que se debe
+     * mostrar en pantalla, con respecto a la dirección a la que mire
+     *
+     */
     private void animar() {
 
         if (enMovimiento) {
@@ -623,6 +696,9 @@ public class Jugador {
         }
     }
 
+    /**
+     * Si el jugador muere o aparece por primera vez, le otorga nueva vida
+     */
     public void renacer() {
         this.posicionX = ElementosPrincipales.mapa.getCoordenadaInicial().x;
         this.posicionY = ElementosPrincipales.mapa.getCoordenadaInicial().y;
@@ -719,10 +795,21 @@ public class Jugador {
         return alcanceArma;
     }
 
+    /**
+     * Devuelve un rectangulo que es usado para detectar las coliciones del
+     * enemigo
+     *
+     * @return rectangulo
+     */
     public Rectangle getArea() {
         return new Rectangle(Constantes.CENTRO_VENTANA_X - Constantes.LADO_SPRITE + 8, Constantes.CENTRO_VENTANA_Y - Constantes.LADO_SPRITE + 10, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE - 10);
     }
 
+    /**
+     * Reduce la vida del jugador
+     *
+     * @param bajoVida (numero de vida que se le restara al jugador )
+     */
     public void reducirVida(final int bajoVida) {
         if (vida - bajoVida < 0) {
             vida = 0;
@@ -731,6 +818,11 @@ public class Jugador {
         }
     }
 
+    /**
+     * Aumenta la vida del jugador
+     *
+     * @param subeVida (numero de vida que se le sumara al jugador )
+     */
     public void aumentarVida(final int subeVida) {
         if (vida + subeVida > 1000) {
             vida = 1000;

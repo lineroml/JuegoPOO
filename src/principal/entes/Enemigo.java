@@ -11,6 +11,11 @@ import principal.herramientas.CalcularDistancia;
 import principal.herramientas.DibujoOpciones;
 import principal.sonido.GestorSonido;
 
+/**
+ * Clase general de todos los enemigos que hay en el mapa
+ *
+ * @author Dylan
+ */
 public abstract class Enemigo {
 
     private final GestorSonido lamento;
@@ -65,6 +70,12 @@ public abstract class Enemigo {
         }
     }
 
+    /**
+     * Permite a los enemigos existentes que se muevan al rededor del mapa para
+     * obtaculizar el avance del jugador
+     *
+     * @param enemigos
+     */
     private void moverANodoSiguiente(ArrayList<Enemigo> enemigos) {
         int ultimaDireccion = -1;
         //Mirar si un enemigo no atasque otro enemigo
@@ -110,6 +121,11 @@ public abstract class Enemigo {
         enMovimiento = true;
     }
 
+    /**
+     * @param velocidadY
+     * @return (booleano) si su limite superior esta en colision con algun
+     * objeto colisionable
+     */
     private boolean enColisionArriba(int velocidadY) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -128,6 +144,11 @@ public abstract class Enemigo {
         return false;
     }
 
+    /**
+     * @param velocidadY
+     * @return (booleano) si su limite inferior esta en colision con algun
+     * objeto colisionable
+     */
     private boolean enColisionAbajo(int velocidadY) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -146,6 +167,11 @@ public abstract class Enemigo {
         return false;
     }
 
+    /**
+     * @param velocidadX
+     * @return (booleano) si su limite izquierdo esta en colision con algun
+     * objeto colisionable
+     */
     private boolean enColisionIzquierda(int velocidadX) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -164,6 +190,11 @@ public abstract class Enemigo {
         return false;
     }
 
+    /**
+     * @param velocidadX
+     * @return (booleano) si su limite derecho esta en colision con algun objeto
+     * colisionable
+     */
     private boolean enColisionDerecha(int velocidadX) {
 
         for (int r = 0; r < ElementosPrincipales.mapa.getAreasColisionJugador().size(); r++) {
@@ -188,10 +219,20 @@ public abstract class Enemigo {
         }
     }
 
+    /**
+     * Dibuja la barra de vida del enemigo
+     * @param g (graficos)
+     * @param puntoX (posicion en x del enemigo)
+     * @param puntoY (posicion en y del enemigo)
+     */
     private void dibujarBarraVida(final Graphics g, final int puntoX, final int puntoY) {
         DibujoOpciones.dibujarRectRelleno(g, puntoX + 4, puntoY - 5, (Constantes.LADO_SPRITE - 8) * (int) vidaActual / vidaMaxima, 2, Color.red);
     }
 
+    /**
+     * Disminuye la vida del enemigo
+     * @param ataqueDado (el daño que le hizo el jugador al enemigo)
+     */
     public void quitarVida(float ataqueDado) {
         //Reproducir Sonido
         if (lamentoSiguinete <= 0) {
@@ -227,16 +268,30 @@ public abstract class Enemigo {
         return vidaActual;
     }
 
+    /**
+     * Devuelve un rectangulo que es usado para detectar las coliciones del
+     * enemigo
+     *
+     * @return rectangulo
+     */
     public Rectangle getArea() {
         final int puntoX = (int) posicionX - ElementosPrincipales.jugador.getPosicionXINT() + Constantes.MARGEN_X;
         final int puntoY = (int) posicionY - ElementosPrincipales.jugador.getPosicionYINT() + Constantes.MARGEN_Y;
         return new Rectangle(puntoX + 8, puntoY, Constantes.LADO_SPRITE / 2, Constantes.LADO_SPRITE);
     }
 
+    /**
+     * Devuelve un rectangulo que es usado para detectar a otros enemigos cercanos y no superponerce
+     * @return rectangulo
+     */
     public Rectangle getAreaFutura() {
         return new Rectangle(getArea().x - 6, getArea().y - 6, getArea().width + 12, getArea().height + 10);
     }
 
+    /**
+     * Devuelve un rectangulo que es usado para detectar si un ataque del enemigo puede hacer danho al enemigo
+     * @return rectangulo
+     */
     public Rectangle getAreaDisparo() {
         return new Rectangle(getArea().x, getArea().y, getArea().width, getArea().height);
     }

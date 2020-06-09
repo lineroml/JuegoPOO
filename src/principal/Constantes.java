@@ -29,8 +29,6 @@ public class Constantes {
 
     public static int ANCHO_PANTALLA_COMPLETA = 1280;
     public static int ALTO_PANTALLA_COMPLETA = 720;
-//    public static int ANCHO_PANTALLA_COMPLETA = 1366;
-//    public static int ALTO_PANTALLA_COMPLETA = 768;
 
     public static int ANCHO_JUEGO = ANCHO_PANTALLA_COMPLETA / 2;
     public static int ALTO_JUEGO = ALTO_PANTALLA_COMPLETA / 2;

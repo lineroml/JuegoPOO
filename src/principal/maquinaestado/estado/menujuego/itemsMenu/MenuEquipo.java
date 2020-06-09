@@ -52,11 +52,11 @@ public class MenuEquipo extends PlantillaMenu {
      * Actualiza y organiza la posición de los items en el inventario.
      */
     private void actualizarPosicionesMenu() {
-        if (!ElementosPrincipales.inventario.getObjetosArmas().isEmpty()) {
-            for (int i = 0; i < ElementosPrincipales.inventario.getObjetosArmas().size(); i++) {
+        if (!ElementosPrincipales.inventario.getObjetosCetro().isEmpty()) {
+            for (int i = 0; i < ElementosPrincipales.inventario.getObjetosCetro().size(); i++) {
                 final Point puntoInicial = new Point(tituloPanelObjetos.x + margenGeneral, tituloPanelObjetos.y + tituloPanelArmas.height + margenGeneral);
                 final int lado = Constantes.LADO_SPRITE;
-                int idActual = ElementosPrincipales.inventario.getObjetosArmas().get(i).getId();
+                int idActual = ElementosPrincipales.inventario.getObjetosCetro().get(i).getId();
                 ElementosPrincipales.inventario.getObjeto(idActual).setPosicionEnMenu(new Rectangle(puntoInicial.x + i * (lado + margenGeneral), puntoInicial.y, lado, lado));
             }
         }
@@ -69,8 +69,8 @@ public class MenuEquipo extends PlantillaMenu {
         Rectangle posicionRaton = GestorPrincipal.sd.getRaton().getPosicionRectangulo();
 
         if (posicionRaton.intersects(EscaladorElementos.escalarRectanguloArriba(panelObjetos))) {
-            if (!ElementosPrincipales.inventario.getObjetosArmas().isEmpty()) {
-                for (Objeto objeto : ElementosPrincipales.inventario.getObjetosArmas()) {
+            if (!ElementosPrincipales.inventario.getObjetosCetro().isEmpty()) {
+                for (Objeto objeto : ElementosPrincipales.inventario.getObjetosCetro()) {
                     if (GestorPrincipal.sd.getRaton().isClickIzquierdo() && posicionRaton.intersects(EscaladorElementos.escalarRectanguloArriba(objeto.getPosicionEnMEnu()))) {
                         objetoSeleccionado = objeto;
                     }
@@ -104,18 +104,18 @@ public class MenuEquipo extends PlantillaMenu {
     }
 
     private void dibujarElementosEquipables(final Graphics g, final Rectangle tituloPanel) {
-        if (!ElementosPrincipales.inventario.getObjetosArmas().isEmpty()) {
+        if (!ElementosPrincipales.inventario.getObjetosCetro().isEmpty()) {
             final Point puntoInicial = new Point(tituloPanel.x + margenGeneral, tituloPanel.y + tituloPanel.height + margenGeneral);
             final int lado = Constantes.LADO_SPRITE;
 
-            for (int i = 0; i < ElementosPrincipales.inventario.getObjetosArmas().size(); i++) {
-                int idObjeto = ElementosPrincipales.inventario.getObjetosArmas().get(i).getId();
+            for (int i = 0; i < ElementosPrincipales.inventario.getObjetosCetro().size(); i++) {
+                int idObjeto = ElementosPrincipales.inventario.getObjetosCetro().get(i).getId();
                 Objeto objeto = ElementosPrincipales.inventario.getObjeto(idObjeto);
 
                 DibujoOpciones.dibujarImagen(g, objeto.getSprite().getImagen(), objeto.getPosicionEnMEnu().x, objeto.getPosicionEnMEnu().y);
                 DibujoOpciones.dibujarRectRelleno(g, puntoInicial.x + i * (lado + margenGeneral) + lado - 12, puntoInicial.y + lado - 8, 12, 8, Color.BLACK);
                 String texto = "";
-                if (ElementosPrincipales.inventario.getObjetosArmas().get(i).getCantidad() < 10) {
+                if (ElementosPrincipales.inventario.getObjetosCetro().get(i).getCantidad() < 10) {
                     texto = "0" + objeto.getCantidad();
                 } else {
                     texto = "" + objeto.getCantidad();

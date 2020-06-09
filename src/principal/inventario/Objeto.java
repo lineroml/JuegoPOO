@@ -4,6 +4,10 @@ import java.awt.Rectangle;
 import principal.ElementosPrincipales;
 import principal.sprites.Sprite;
 
+/**
+ * Calse general de objetos
+ * @author Dylan
+ */
 public abstract class Objeto {
 
     protected final int id;
@@ -36,6 +40,12 @@ public abstract class Objeto {
 
     public abstract Sprite getSprite();
 
+    /**
+     * Aumentar la cantidad del objeto
+     *
+     * @param incremento (aumento)
+     * @return (booleano) si se incremento o no correctamente
+     */
     public boolean aumentarCantidad(final int incremento) {
         boolean incrementado = false;
 
@@ -46,6 +56,12 @@ public abstract class Objeto {
         return incrementado;
     }
 
+    /**
+     * Reduce la cantidad del objeto
+     *
+     * @param reduccion (disminucion)
+     * @return (booleano) si se redujo o no correctamente
+     */
     public boolean reducirCantidad(final int reduccion) {
         boolean reducido = false;
 

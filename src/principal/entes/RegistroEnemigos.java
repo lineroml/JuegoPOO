@@ -1,5 +1,11 @@
 package principal.entes;
 
+/**
+ * La clase contene el registor de los enemigos disponibles en el juego Por
+ * ahora solo contiene uno
+ *
+ * @author Dylan
+ */
 public class RegistroEnemigos {
 
     private static int dificultad = 0;

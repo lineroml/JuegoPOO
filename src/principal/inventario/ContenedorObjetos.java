@@ -6,6 +6,12 @@ import java.awt.image.BufferedImage;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 
+/**
+ * Son aquellos cofres que se encuentran en el mapa y contienen uno o mas
+ * elementos en su interior
+ *
+ * @author Dylan
+ */
 public class ContenedorObjetos {
 
     private BufferedImage sprite = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/CofreCerrado.png");

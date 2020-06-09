@@ -42,15 +42,6 @@ public class GestorPrincipal {
 
     public static void main(String[] args) {
         sonidoIntro.reproducirBucle();
-        //Usar la tarjeta grafica en vez de el procesador para dibujar
-        //Para OpenGl mac/linux
-        // System.setProperty("sun.java2d.opengl", "True");
-
-        //Para Windows
-//        System.setProperty("sun.java2d.d3d", "True");
-//        System.setProperty("sun.java2d.ddforcevram", "True");
-        //Mejora el rendimineto con graficos transparentes
-//        //System.setProperty("sun.java2d.transaccel", "True");
         //Creamos un gestor principal
         GestorPrincipal gp = new GestorPrincipal("Forgotten History", Constantes.ANCHO_PANTALLA_COMPLETA, Constantes.ALTO_PANTALLA_COMPLETA);
 
@@ -192,7 +183,7 @@ public class GestorPrincipal {
      * Aumenta o decrementa el volumen actual del juego, tanto de los efectos,
      * como de la musica
      *
-     * @param vol
+     * @param vol (volumen)
      */
     public static void setVolumen(float vol) {
         sonidoIntro.aumentarVolumenMusica(sonidoIntro.getVolumenMusica() + vol);
@@ -202,7 +193,7 @@ public class GestorPrincipal {
     /**
      * Aumenta o decrementa el volumen actual de la música.
      *
-     * @param vol
+     * @param vol (volumen)
      */
     public static void setVolumenMusica(float vol) {
         sonidoIntro.aumentarVolumenMusica(sonidoIntro.getVolumenMusica() + vol);
@@ -212,13 +203,9 @@ public class GestorPrincipal {
      * Aumenta o decrementa el volumen actual de los efectos del juego(ataque de
      * enemigos, sonido de los botones, ataques, etc...).
      *
-     * @param vol
+     * @param vol (volumen)
      */
     public static void setVolumenJuego(float vol) {
         Constantes.BOTON.aumentarVolumenJuego(sonidoIntro.getVolumenJuego() + vol);
-    }
-
-    public static boolean isEnFuncionamiento() {
-        return enFuncionamiento;
     }
 }

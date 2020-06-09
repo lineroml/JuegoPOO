@@ -6,6 +6,11 @@ import java.awt.Rectangle;
 import principal.Constantes;
 import principal.herramientas.DibujoOpciones;
 
+/**
+ * Otorga la forma general de los menus del inventario
+ *
+ * @author Dylan
+ */
 public class FormaMenu {
 
     public final Color COLOR_SUPERIOR;

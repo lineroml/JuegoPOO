@@ -14,6 +14,11 @@ import principal.maquinaestado.EstadoJuego;
 import principal.maquinaestado.estado.menuinicial.itemsMenu.CargarPartida;
 import principal.sonido.GestorSonido;
 
+/**
+ * Vista de inicio del juego
+ *
+ * @author Dylan
+ */
 public class MenuInicio implements EstadoJuego {
 
     private final BufferedImage imagenFondo = Constantes.IMAGENFONDO;
@@ -170,6 +175,11 @@ public class MenuInicio implements EstadoJuego {
 
     }
 
+    /**
+     * Otorga un tiempo de espera de actualizacion para no ocacionar errores
+     *
+     * @param tiempoEspera para actualizar
+     */
     public void setTiempoEspera(int tiempoEspera) {
         this.tiempoEspera = tiempoEspera;
     }

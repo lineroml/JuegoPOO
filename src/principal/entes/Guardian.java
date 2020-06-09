@@ -1,6 +1,5 @@
 package principal.entes;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -11,6 +10,10 @@ import principal.herramientas.DibujoOpciones;
 import principal.sonido.GestorSonido;
 import principal.sprites.HojaSprites;
 
+/**
+ * Un tipo de enemigo en el mapa
+ * @author Dylan
+ */
 public class Guardian extends Enemigo {
 
     private static HojaSprites hojaZombie;
@@ -18,12 +21,8 @@ public class Guardian extends Enemigo {
     private int animacion;
     private static int contadorAtaque;
     private int a;
-    private int d;
 
     GestorSonido ataque;
-
-    private int anchoZombie = 16;
-    private int altoZombie = 32;
 
     private BufferedImage imagenActual;
 
@@ -39,11 +38,17 @@ public class Guardian extends Enemigo {
         animacion = 0;
         contadorAtaque = 0;
         a = 0;
-        d = 4;
 
         imagenActual = hojaZombie.getSprite(direccion, 0).getImagen();
     }
 
+    /**
+     * Actualiza la variable que determina que Sprite se dibujara del guardian
+     * Determina si el guardian esta en colision con el jugador y le permite
+     * quitarle vida
+     *
+     * @param enemigos (guardianes en el mapa)
+     */
     @Override
     public void actualizar(ArrayList<Enemigo> enemigos) {
         super.actualizar(enemigos);
@@ -74,6 +79,11 @@ public class Guardian extends Enemigo {
         DibujoOpciones.dibujarImagen(g, imagenActual, puntoX, puntoY);
     }
 
+    /**
+     * Le otorga a la variable de imagenActual el valor de imagen que se debe
+     * mostrar en pantalla, con respecto a la dirección a la que mire
+     *
+     */
     private void animar() {
 
         if (enMovimiento) {

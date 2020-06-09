@@ -8,6 +8,12 @@ import java.awt.Rectangle;
 import principal.Constantes;
 import principal.graficos.SuperficieDibujo;
 
+/**
+ * Genera y dibuja los comentarios que ocurren cuando el mouse pasa sobre un
+ * elemento
+ *
+ * @author Dylan
+ */
 public class GeneradorComentario {
 
     public static Point generarComentario(final Point puntoInicial) {

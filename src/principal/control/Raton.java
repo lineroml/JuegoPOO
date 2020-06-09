@@ -15,6 +15,11 @@ import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DatoOpcion;
 
+/**
+ * 
+ * Clase encargada de llevar el control del mouse
+ * @author Dylan
+ */
 public class Raton extends MouseAdapter {
 
     private final Cursor cursor;
@@ -41,7 +46,6 @@ public class Raton extends MouseAdapter {
     }
 
     public void actualizar(final SuperficieDibujo sd) {
-
         actualizarPosicion(sd);
     }
 
@@ -52,11 +56,13 @@ public class Raton extends MouseAdapter {
     }
 
     public Cursor getCursor() {
-
         return this.cursor;
     }
 
-    //Detectar la posicion del raton
+    /**
+     * Detectar la posicion del mouse
+     * @param sd 
+     */
     private void actualizarPosicion(final SuperficieDibujo sd) {
 
         //Detectar la localizacion del raton
@@ -67,6 +73,10 @@ public class Raton extends MouseAdapter {
         posicion.setLocation(posicionRatonInicial.getX(), posicionRatonInicial.getY());
     }
 
+    /**
+     * Convierte la posición del mouse en un rectangulo para comprobar luego si se interseca con otros rectangulos
+     * @return rectangulo
+     */
     public Rectangle getPosicionRectangulo() {
         final Rectangle area = new Rectangle(posicion.x, posicion.y, 1, 1);
         return area;
@@ -76,7 +86,11 @@ public class Raton extends MouseAdapter {
         return posicion;
     }
 
-    //Cuando se ha clicado el raton
+    /**
+     * 
+     * Detecta y envia que boton del mouse se ha clicado
+     * @param e (evento del mouse)
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
@@ -86,6 +100,11 @@ public class Raton extends MouseAdapter {
         }
     }
 
+    /**
+     * 
+     * Detecta y envia que boton del mouse se ha dejado de clicar
+     * @param e (evento del mouse)
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {

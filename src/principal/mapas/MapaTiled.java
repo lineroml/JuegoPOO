@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,16 +17,19 @@ import static principal.GestorPrincipal.sd;
 import principal.control.GestorControles;
 import principal.entes.Enemigo;
 import principal.entes.RegistroEnemigos;
-import principal.herramientas.CalcularDistancia;
 import principal.herramientas.CargadorRecursos;
 import principal.herramientas.DibujoOpciones;
 import principal.herramientas.EscaladorElementos;
 import principal.inventario.ContenedorObjetos;
-import principal.inventario.poderes.DesArmado;
 import principal.maquinaestado.estado.juego.GestorJuego;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
+/**
+ * Control mapa del juego
+ *
+ * @author Dylan
+ */
 public class MapaTiled {
 
     private final int anchoMapaTiled;
@@ -54,6 +56,11 @@ public class MapaTiled {
 
     private int contZombies;
 
+    /**
+     * Lectura de el archivo json del mapa
+     *
+     * @param ruta
+     */
     public MapaTiled(final String ruta) {
         //Leer archivo de texto
         String contenido = CargadorRecursos.leerArchivoTexto(ruta);
@@ -108,7 +115,7 @@ public class MapaTiled {
         contZombies++;
         if (contZombies == 480 - dificultad) {
             contZombies = 0;
-            getZombiesMapa();
+            getGuardianesMapa();
         }
         posicionRaton = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
                 EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).y, 1, 1);
@@ -124,6 +131,9 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Detectar y recoger objetos del mapa
+     */
     private void actualizarRecogidaObjetos() {
         //Saber su en el mapa hay objetos por recoger
         if (!contendoresObjetos.isEmpty()) {
@@ -143,6 +153,9 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Obtener las colisiones del mapa
+     */
     private void actualizarAreasColision() {
         if (!areasColisionActualizado.isEmpty()) {
             areasColisionActualizado.clear();
@@ -212,7 +225,10 @@ public class MapaTiled {
         DibujoOpciones.dibujarImagen(g, pausaActual, 2, 2);
     }
 
-    private void getZombiesMapa() {
+    /**
+     * Generar de manera aleatoria los guardianes(enemigos) en el mapa
+     */
+    private void getGuardianesMapa() {
         Random num = new Random();
         int xEnemigo = num.nextInt(2208) + 1;
         int yEnemigo = num.nextInt(2208) + 1;
@@ -228,6 +244,11 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Ubica los enemigos leidos en el mapa
+     *
+     * @param coleccionEnemigos (enemigos)
+     */
     private void getEnemigosMapa(JSONArray coleccionEnemigos) {
         for (int i = 0; i < coleccionEnemigos.size(); i++) {
             JSONObject datosEnemigo = getObjetoJSON(coleccionEnemigos.get(i).toString());
@@ -241,6 +262,11 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Ubica los objetos en el mapa
+     *
+     * @param coleccionObjetos (cofres)
+     */
     private void getObjetosMapa(JSONArray coleccionObjetos) {
         for (int i = 0; i < coleccionObjetos.size(); i++) {
             JSONObject datosObjeto = getObjetoJSON(coleccionObjetos.get(i).toString());
@@ -257,6 +283,11 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Ubica los sprites en el mapa
+     *
+     * @param coleccionSprites
+     */
     private void asignarSprites(JSONArray coleccionSprites) {
         for (int i = 0; i < coleccionSprites.size(); i++) {
             JSONObject datosGrupo = getObjetoJSON(coleccionSprites.get(i).toString());
@@ -282,6 +313,9 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Actualizar las areas del colision con respecto a la posicion del jugador
+     */
     private void establecerAreasColision() {
         for (int i = 0; i < capaColisiones.size(); i++) {
             Rectangle[] rectangulos = capaColisiones.get(i).getColisionables();
@@ -291,6 +325,11 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Inicia las capas leidas
+     *
+     * @param capas
+     */
     private void iniciarCapas(JSONArray capas) {
         for (int i = 0; i < capas.size(); i++) {
             JSONObject datosCapa = getObjetoJSON(capas.get(i).toString());
@@ -342,6 +381,12 @@ public class MapaTiled {
         }
     }
 
+    /**
+     * Lee los objetos del archivo json
+     *
+     * @param codigoJSON (codigo objetos)
+     * @return objeto
+     */
     private JSONObject getObjetoJSON(final String codigoJSON) {
         JSONParser lector = new JSONParser();
         JSONObject objetoJSON = null;
@@ -356,6 +401,12 @@ public class MapaTiled {
         return objetoJSON;
     }
 
+    /**
+     * Lee los array del archivo json
+     *
+     * @param codigoJSON (codigo arrays)
+     * @return array
+     */
     private JSONArray getArrayJSON(final String codigoJSON) {
         JSONParser lector = new JSONParser();
         JSONArray arrayJSON = null;
@@ -382,6 +433,13 @@ public class MapaTiled {
         return areasColisionActualizado;
     }
 
+    /**
+     * Obtiene los bordes o limites del mapa
+     *
+     * @param posicionX (posicion del jugador x)
+     * @param posicionY (posicion del jugador y)
+     * @return rectangulo del borde
+     */
     public Rectangle getBordes(final int posicionX, final int posicionY) {
 
         int x = Constantes.MARGEN_X - posicionX + ElementosPrincipales.jugador.getAnchoJugador();
@@ -396,8 +454,8 @@ public class MapaTiled {
     public void setDificultad(final int dificultad) {
         this.dificultad = dificultad;
     }
-    
-    public ArrayList<Enemigo> getEnemigos(){
+
+    public ArrayList<Enemigo> getEnemigos() {
         return enemigos;
     }
 
