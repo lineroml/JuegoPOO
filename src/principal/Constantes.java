@@ -7,7 +7,8 @@ import principal.herramientas.CargadorRecursos;
 import principal.sonido.GestorSonido;
 
 public class Constantes {
-
+    public static String separador = System.getProperty("file.separator");
+    
     public static float VOLUMENMUSICA = (float) 0.06;
     public static float VOLUMENJUEGO = (float) 0.20;
 
@@ -51,22 +52,22 @@ public class Constantes {
 
     public static final long SPAWNING_TIME = 200;
     public static final long FLICKER_TIME = 20;
-
-    public static final GestorSonido BOTON = new GestorSonido("/sonidos/boton.wav");
-    public static final GestorSonido CANCION1 = new GestorSonido("/sonidos/MusicaIntro.wav");
-    public static final GestorSonido CANCION2 = new GestorSonido("/sonidos/MusicaIntro2.wav");
-    public static final GestorSonido CANCION3 = new GestorSonido("/sonidos/MusicaIntro3.wav");
-    public static final GestorSonido CANCION4 = new GestorSonido("/sonidos/MusicaIntro4.wav");
+    
+    public static final GestorSonido BOTON = new GestorSonido("sonidos" + separador + "boton.wav");
+    public static final GestorSonido CANCION1 = new GestorSonido("sonidos" + separador + "MusicaIntro.wav");
+    public static final GestorSonido CANCION2 = new GestorSonido("sonidos" + separador + "MusicaIntro2.wav");
+    public static final GestorSonido CANCION3 = new GestorSonido("sonidos" + separador + "MusicaIntro3.wav");
+    public static final GestorSonido CANCION4 = new GestorSonido("sonidos" + separador + "MusicaIntro4.wav");
 
     public static final String BOTONPAUSA = "/imagenes/menu/pausa.png";
     public static final String BOTONPAUSACONMOUSE = "/imagenes/menu/pausaConMouse.png";
     public static final String BOTONSALIR = "/imagenes/menu/salir.png";
     public static final String BOTONSALIRCONMOUSE = "/imagenes/menu/salirConMouse.png";
 
-    public static final BufferedImage MUJER = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/Mujer.png");
+    public static final BufferedImage MUJER = CargadorRecursos.cargarImagenCompatibleTranslucida("imagenes" + separador + "Mujer.png");
 
-    public final static BufferedImage IMAGENFONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/menuInicial.png");
-    public final static BufferedImage IMAGENFONDOPAUSA = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondoPausa.png");
+    public final static BufferedImage IMAGENFONDO = CargadorRecursos.cargarImagenCompatibleOpaca("imagenes" + separador + "menu" + separador + "menuInicial.png");
+    public final static BufferedImage IMAGENFONDOPAUSA = CargadorRecursos.cargarImagenCompatibleOpaca("imagenes" + separador + "menu" + separador + "fondoPausa.png");
     public final static BufferedImage FONDO = CargadorRecursos.cargarImagenCompatibleOpaca("/imagenes/menu/fondo.png");
     public final static BufferedImage INICIOPARTIDA = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartida.png");
     public final static BufferedImage INICIOPARTIDACONMOUSE = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/menu/inicioPartidaConMouse.png");

@@ -87,7 +87,7 @@ public class CargadorRecursosTest {
     @Test
     public void testLeerArchivoTexto() {
         System.out.println("leerArchivoTexto");
-        String ruta = "//texto/texto.txt";
+        String ruta = "/texto/texto.txt";
         
         String expResult = CargadorRecursos.leerArchivoTexto(ruta);
         String result = CargadorRecursos.leerArchivoTexto(ruta);

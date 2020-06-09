@@ -39,8 +39,9 @@ public class GameOver implements EstadoJuego {
     private Rectangle si = null;
     private Rectangle no = null;
     private boolean seguroSalir = false;
-
-    private final GestorSonido boton = new GestorSonido("/sonidos/boton.wav");
+    private final String separador = System.getProperty("file.separator");
+    
+    private final GestorSonido boton = new GestorSonido("sonidos" + separador + "boton.wav");
 
     private Rectangle r;
 
