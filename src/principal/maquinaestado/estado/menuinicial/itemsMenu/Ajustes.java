@@ -56,10 +56,10 @@ public class Ajustes implements EstadoJuego {
     private final GestorSonido boton = Constantes.BOTON;
 
     private BufferedImage imagenDificultad;
-    private BufferedImage imagenDificultadFacil;
-    private BufferedImage imagenDificultadIntermedio;
-    private BufferedImage imagenDificultadProfesional;
-    private BufferedImage imagenDificultadExtremo;
+    private BufferedImage imagenDificultadFacil = Constantes.DIFICULTADFACILCONMOUSE;
+    private BufferedImage imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
+    private BufferedImage imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
+    private BufferedImage imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
     private Rectangle dificultadFacil;
     private Rectangle dificultadIntermedia;
     private Rectangle dificultadProfesional;
@@ -87,10 +87,10 @@ public class Ajustes implements EstadoJuego {
 
     private boolean cambioCancion;
     private BufferedImage imagenCancion;
-    private BufferedImage cancion1;
-    private BufferedImage cancion2;
-    private BufferedImage cancion3;
-    private BufferedImage cancion4;
+    private BufferedImage cancion1 = Constantes.INFOCANCION1CONMOUSE;
+    private BufferedImage cancion2 = Constantes.INFOCANCION2;
+    private BufferedImage cancion3 = Constantes.INFOCANCION3;
+    private BufferedImage cancion4 = Constantes.INFOCANCION4;
 
     private BufferedImage imagenCreditos;
     private boolean enCreditos;
@@ -472,10 +472,6 @@ public class Ajustes implements EstadoJuego {
     private void mensajeDificultad() {
         newDificultad = true;
         imagenDificultad = Constantes.DIFICULTADPANEL;
-        imagenDificultadFacil = Constantes.DIFICULTADFACILCONMOUSE;
-        imagenDificultadIntermedio = Constantes.DIFICULTADINTERMEDIO;
-        imagenDificultadProfesional = Constantes.DIFICULTADPROFESIONAL;
-        imagenDificultadExtremo = Constantes.DIFICULTADEXTREMO;
 
         dificultadFacil = new Rectangle(Constantes.CENTRO_VENTANA_X - imagenDificultad.getWidth() / 2 + 20,
                 Constantes.CENTRO_VENTANA_Y - imagenDificultad.getHeight() / 2 + 40, imagenDificultadFacil.getWidth(), imagenDificultadFacil.getHeight());
@@ -495,10 +491,6 @@ public class Ajustes implements EstadoJuego {
     private void setMusica() {
         cambioCancion = true;
         imagenCancion = Constantes.CANCIONPANEL;
-        cancion1 = Constantes.INFOCANCION1CONMOUSE;
-        cancion2 = Constantes.INFOCANCION2;
-        cancion3 = Constantes.INFOCANCION3;
-        cancion4 = Constantes.INFOCANCION4;
 
         dificultadFacil = new Rectangle(Constantes.CENTRO_VENTANA_X - imagenCancion.getWidth() / 2 + 20,
                 Constantes.CENTRO_VENTANA_Y - imagenCancion.getHeight() / 2 + 30, cancion1.getWidth(), cancion1.getHeight());
