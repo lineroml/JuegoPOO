@@ -31,7 +31,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class CargadorRecursos {
     
     public static String separador = System.getProperty("file.separator");
-    public static String BASEURL = System.getProperty("user.dir") + separador + ".." + separador + "Resources";
+    public static String BASEURL = System.getProperty("user.dir") + separador + "Resources";
     
     /**
      * Carga una imagen multimedia desde la ruta asignada y la hace solida(no
