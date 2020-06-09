@@ -18,14 +18,15 @@ import principal.maquinaestado.estado.menuinicial.itemsMenu.Ajustes;
 import principal.maquinaestado.estado.menujuego.GestorMenu;
 
 /**
- * Gestiona los estados de la aplicación, para alternar entre las diferentes vistas,
- * tales como el menú de pausa, de logoros alcanzados, menú de ajustes, o juego corriendo.<br>
- * 
- * <bold>Cuenta con un arreglo de estados predefinidos en el constructor<\bold>, los cuales son entre
- * los cuales se podra alternar el videoJuego. <br>
- * 
- * En caso de querer agregar una nueva vista, sección o menú se debe agregar esta, a la lista
- * de estados
+ * Gestiona los estados de la aplicación, para alternar entre las diferentes
+ * vistas, tales como el menú de pausa, de logoros alcanzados, menú de ajustes,
+ * o juego corriendo.<br>
+ *
+ * Cuenta con un arreglo de estados predefinidos en el constructor los cuales
+ * son entre los cuales se podra alternar el videoJuego. 
+ *
+ * En caso de querer agregar una nueva vista, sección o menú se debe agregar
+ * esta, a la lista de estados
  */
 public class GestorEstado {
 
@@ -62,10 +63,10 @@ public class GestorEstado {
     private void iniciarEstadoActual() {
         estadoActual = estados[0];
     }
-    
+
     /**
-     * Actualiza la información de la vista actual, y decide cual debe activarse,
-     * según las acciones del jugador.
+     * Actualiza la información de la vista actual, y decide cual debe
+     * activarse, según las acciones del jugador.
      */
     public void actualizar() {
         estadoActual.actualizar();
@@ -146,10 +147,10 @@ public class GestorEstado {
 
         estadoActual.dibujar(g);
     }
-    
+
     /**
      * Cambia la vista actual, y hace que el nuevoEstado se dibuje en pantalla.
-     * 
+     *
      * @param nuevoEstado Estado el cual aparecera en pantalla
      */
     public void cambiarEstadoActual(final int nuevoEstado) {

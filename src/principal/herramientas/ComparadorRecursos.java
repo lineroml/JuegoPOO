@@ -6,6 +6,7 @@ import java.awt.image.DataBuffer;
 import javax.sound.sampled.Clip;
 
 /**
+ * Comparador de recursos (imagenes, fuentes, audios)
  *
  * @author Luis Evilla
  */
@@ -81,6 +82,5 @@ public class ComparadorRecursos {
 
         return iguales;
     }
-    
-    
+
 }

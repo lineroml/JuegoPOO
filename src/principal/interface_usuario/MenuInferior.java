@@ -8,6 +8,12 @@ import principal.ElementosPrincipales;
 import principal.herramientas.DibujoOpciones;
 import principal.inventario.Objeto;
 
+/**
+ * Menu que aparece en la parte inferior que otorga informacion del juego al
+ * jugador
+ *
+ * @author Dylan
+ */
 public class MenuInferior {
 
     private final Rectangle areaInventario;
@@ -92,6 +98,11 @@ public class MenuInferior {
         }
     }
 
+    /**
+     * Dibuja en las ranuras los items que a ido recolectando el jugador
+     *
+     * @param g (graficos)
+     */
     private void dibujarElementos(final Graphics g) {
         final int espacioEntreRanuras = 10;
         final int numeroRanuras = 10;
@@ -102,7 +113,7 @@ public class MenuInferior {
         for (int i = 0; i < ElementosPrincipales.inventario.getObjetosElementos().size(); i++) {
             int idObjeto = ElementosPrincipales.inventario.getObjetosElementos().get(i).getId();
             Objeto objeto = ElementosPrincipales.inventario.getObjeto(idObjeto);
-            
+
             int xActual = xInicial + anchoRanurasYespacio * i;
             DibujoOpciones.dibujarImagen(g, objeto.getSprite().getImagen(), xActual, areaInventario.y + 4);
         }

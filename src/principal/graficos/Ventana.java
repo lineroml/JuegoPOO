@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 import principal.Constantes;
 import principal.herramientas.CargadorRecursos;
 
+/**
+ * Ventana donde se muestra el juego
+ *
+ * @author Dylan
+ */
 public class Ventana extends JFrame {
 
     private static final long serialVersionUID = 189259498287192152L;

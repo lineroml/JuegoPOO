@@ -7,18 +7,20 @@ import principal.herramientas.CargadorRecursos;
 import principal.sonido.GestorSonido;
 
 /**
- * Centraliza y facilita el manejo de las rutas o paths, hacia los recursos 
- * multimedia de los cuales hace uso el juego. Además también guarda constantes 
- * númericas necesairas para el correcto funcionamiento del juego, como el tamaño 
- * de los sprites, las dimensiones de la ventana del juego etc...
- * 
+ * Centraliza y facilita el manejo de las rutas o paths, hacia los recursos
+ * multimedia de los cuales hace uso el juego. Además también guarda constantes
+ * númericas necesairas para el correcto funcionamiento del juego, como el
+ * tamaño de los sprites, las dimensiones de la ventana del juego etc...
+ *
  * La mayoria de estas rutas son consumidas por la clase CargadorRecursos
+ *
  * @see CargadorRecursos
  */
 public class Constantes {
+
     public static String separador = System.getProperty("file.separator");
-    
-    public static float VOLUMENMUSICA = (float) 0.06;
+
+    public static float VOLUMENMUSICA = (float) 0.09;
     public static float VOLUMENJUEGO = (float) 0.20;
 
     public static final int LADO_SPRITE = 32;
@@ -27,8 +29,6 @@ public class Constantes {
 
     public static int ANCHO_PANTALLA_COMPLETA = 1280;
     public static int ALTO_PANTALLA_COMPLETA = 720;
-//    public static int ANCHO_PANTALLA_COMPLETA = 1366;
-//    public static int ALTO_PANTALLA_COMPLETA = 768;
 
     public static int ANCHO_JUEGO = ANCHO_PANTALLA_COMPLETA / 2;
     public static int ALTO_JUEGO = ALTO_PANTALLA_COMPLETA / 2;
@@ -61,7 +61,7 @@ public class Constantes {
 
     public static final long SPAWNING_TIME = 200;
     public static final long FLICKER_TIME = 20;
-    
+
     public static final GestorSonido BOTON = new GestorSonido("sonidos" + separador + "boton.wav");
     public static final GestorSonido CANCION1 = new GestorSonido("sonidos" + separador + "MusicaIntro.wav");
     public static final GestorSonido CANCION2 = new GestorSonido("sonidos" + separador + "MusicaIntro2.wav");

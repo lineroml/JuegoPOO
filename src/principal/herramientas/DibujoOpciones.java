@@ -6,6 +6,12 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+/**
+ * Clase que dibuja todo en pantalla y lleva un registro de los objetos
+ * dibujados
+ *
+ * @author Dylan
+ */
 public class DibujoOpciones {
 
     private static int objetosDibujados = 0;

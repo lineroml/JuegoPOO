@@ -5,6 +5,12 @@ import principal.inventario.poderes.Poder;
 import principal.inventario.consumible.Consumible;
 import principal.inventario.elementosMujeres.Elemento;
 
+/**
+ * Registo completo de todos los objetos que hay en el juego y se le otorga un
+ * id
+ *
+ * @author Dylan
+ */
 public class RegistroObjetos {
 
     private static int dificultad = 0;

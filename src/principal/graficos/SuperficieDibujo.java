@@ -1,4 +1,3 @@
-//Se dibujara todo lo del juego aqui
 package principal.graficos;
 
 import java.awt.Canvas;
@@ -15,6 +14,11 @@ import principal.herramientas.DatoOpcion;
 import principal.herramientas.DibujoOpciones;
 import principal.maquinaestado.GestorEstado;
 
+/**
+ * Clase encargada de dibujar todo el juego
+ *
+ * @author Dylan
+ */
 public class SuperficieDibujo extends Canvas {
 
     private static final long serialVersionUID = -6227038142688953660L;
@@ -23,7 +27,6 @@ public class SuperficieDibujo extends Canvas {
     private final int alto;
 
     private final Raton raton;
-
 
     public SuperficieDibujo(final int ancho, final int alto) {
 
@@ -50,6 +53,11 @@ public class SuperficieDibujo extends Canvas {
         raton.actualizar(this);
     }
 
+    /**
+     * Crea la variable graphics para que las demas clases puedan dibujar
+     *
+     * @param ge (clase GestorEstado, para luego comenzar el bucle de dibujo)
+     */
     public void dibujar(final GestorEstado ge) {
 
         final BufferStrategy buffer = getBufferStrategy();

@@ -1,5 +1,10 @@
 package principal.mapas;
 
+/**
+ * Control capa de tiles
+ *
+ * @author Dylan
+ */
 public abstract class CapaTiled {
 
     protected int ancho;

@@ -2,6 +2,11 @@ package principal.mapas;
 
 import java.awt.Rectangle;
 
+/**
+ * Control de capa de colisiones del mapa
+ *
+ * @author Dylan
+ */
 public class CapaColisiones extends CapaTiled {
 
     private final Rectangle[] colisionables;

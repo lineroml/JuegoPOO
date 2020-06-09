@@ -7,6 +7,12 @@ import principal.maquinaestado.estado.logros.Mujer;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
+/**
+ * Items que el jugar recolecta al rededor del mapa que representan a las
+ * mujeres y son logros
+ *
+ * @author Dylan
+ */
 public class Elemento extends Objeto {
 
     public static HojaSprites hojaConsumibles = new HojaSprites(Constantes.RUTA_OBJETOS, 32, false);

@@ -1,5 +1,10 @@
 package principal.mapas;
 
+/**
+ * Control de capas de sprites del mapa
+ *
+ * @author Dylan
+ */
 public class CapaSprites extends CapaTiled {
 
     private final int[] sprites;

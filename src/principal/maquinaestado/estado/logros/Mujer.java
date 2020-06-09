@@ -13,6 +13,11 @@ import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
+/**
+ * Biografia de las mujeres ya rescatadas
+ *
+ * @author Dylan
+ */
 public class Mujer implements EstadoJuego {
 
     private final SuperficieDibujo sd;
@@ -51,9 +56,11 @@ public class Mujer implements EstadoJuego {
             volverActual = volver;
         }
         comprobarSalida();
-
     }
 
+    /**
+     * Permite volver al menu de logros
+     */
     private void asignarValor() {
         switch (numSalida) {
             case 1:
@@ -74,6 +81,9 @@ public class Mujer implements EstadoJuego {
         }
     }
 
+    /**
+     * Permite volver al juego
+     */
     private void comprobarSalida() {
         switch (numSalida) {
             case 1:
@@ -109,6 +119,9 @@ public class Mujer implements EstadoJuego {
         }
     }
 
+    /**
+     * Verificacion de que todos las teclas de numero esten desactivadas
+     */
     private void todo() {
         GestorControles.teclado.num1 = false;
         GestorControles.teclado.num2 = false;

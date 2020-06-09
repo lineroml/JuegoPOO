@@ -11,6 +11,11 @@ import principal.sonido.GestorSonido;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
+/**
+ * Clase general de todos los cetros o poderes que hay en el juego
+ *
+ * @author Dylan
+ */
 public abstract class Cetro extends Objeto {
 
     public static HojaSprites hojaArmas = new HojaSprites(Constantes.RUTA_ARMAS, 32, false);
@@ -41,6 +46,12 @@ public abstract class Cetro extends Objeto {
         disparo = new GestorSonido(rutaDisparo);
     }
 
+    /**
+     * Cada cetro perenta un alcance
+     *
+     * @param jugador (usuario)
+     * @return rectangulo de alcance
+     */
     public abstract ArrayList<Rectangle> getAlcance(final Jugador jugador);
 
     public void actualizar() {
@@ -49,6 +60,11 @@ public abstract class Cetro extends Objeto {
         }
     }
 
+    /**
+     * Segun el danho del cetro, quita vida al enemigo afectado
+     *
+     * @param enemigo (guardian)
+     */
     public void atacar(final Enemigo enemigo) {
         if (tiempoProximoAtaque > 0) {
             return;
@@ -65,6 +81,11 @@ public abstract class Cetro extends Objeto {
         return hojaArmas.getSprite(id - 500);
     }
 
+    /**
+     * Nos proporciona un valor de ataque al azar
+     *
+     * @return valor ataque
+     */
     protected int getAtaqueMedio() {
         Random r = new Random();
         return r.nextInt(ataqueMax - ataqueMin) + ataqueMin;
@@ -74,10 +95,9 @@ public abstract class Cetro extends Objeto {
         return automatica;
     }
 
-    public boolean isPenetrante() {
-        return penetrante;
-    }
-
+    /**
+     * Reproduce el sonido del disparo del cetro
+     */
     public void sonidoDisparo() {
         disparo.reproducir();
     }

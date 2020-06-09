@@ -6,15 +6,16 @@ import principal.Constantes;
 import principal.herramientas.CargadorRecursos;
 
 /**
- * Se encarga de gestionar todos los sonidos dentro de la aplicación,
- * ya sea música ambiental o efectos del juego, como los ataques 
- * y sonidos de los botones al ser presionados <br>
- * 
- * <bold>volumenMusica:</bold> Esta variable almacena la información sobre el nivel actual
+ * Se encarga de gestionar todos los sonidos dentro de la aplicación, ya sea
+ * música ambiental o efectos del juego, como los ataques y sonidos de los
+ * botones al ser presionados <br>
+ *
+ * volumenMusica: Esta variable almacena la información sobre el nivel actual
  * del volumen de la música del juego <br>
- * <bold>VolumenJuego:</bold> Esta variable almacena la información el nivel actual del volumen
- * de todos los efectos del juego, aumentarla o disminuirla aplicara los respectivos cambios
- * a todos los efectos(botones al presionarse, ataques de enemigos, etc...)
+ * VolumenJuego: Esta variable almacena la información el nivel
+ * actual del volumen de todos los efectos del juego, aumentarla o disminuirla
+ * aplicara los respectivos cambios a todos los efectos(botones al presionarse,
+ * ataques de enemigos, etc...)
  */
 public final class GestorSonido {
 
@@ -42,10 +43,10 @@ public final class GestorSonido {
     }
 
     /**
-     * utilizado para reproducir sonidos en un bucle indefinido, hasta que se decida
-     * detenerlo. <br>
-     * 
-     * Su principal función es la de <bold>reproducir la música ambiental del juego<\bold>
+     * utilizado para reproducir sonidos en un bucle indefinido, hasta que se
+     * decida detenerlo. <br>
+     *
+     * Su principal función es la de reproducir la música ambiental del juego
      */
     public void reproducirBucle() {
         sonido.stop();
@@ -56,11 +57,12 @@ public final class GestorSonido {
         //Repetir infinitamente
         sonido.loop(Clip.LOOP_CONTINUOUSLY);
     }
-    
+
     /**
-     * procesa la variable de volumen y la convierte en decibelios, dB, que son los valores 
-     * con los que trabaja la API de Java.
-     * @param vol 
+     * procesa la variable de volumen y la convierte en decibelios, dB, que son
+     * los valores con los que trabaja la API de Java.
+     *
+     * @param vol (volumen)
      */
     public void setVolumen(double vol) {
         FloatControl gain = (FloatControl) sonido.getControl(FloatControl.Type.MASTER_GAIN);
@@ -71,7 +73,7 @@ public final class GestorSonido {
                 dB = (float) (6);
             }
         }
-        
+
         gain.setValue(dB);
     }
 

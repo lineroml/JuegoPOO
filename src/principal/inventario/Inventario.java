@@ -5,6 +5,12 @@ import principal.inventario.poderes.Cetro;
 import principal.inventario.consumible.Consumible;
 import principal.inventario.elementosMujeres.Elemento;
 
+/**
+ * Clase que representa a los elementos que ha recolectado el jugador durante el
+ * juego
+ *
+ * @author Dylan
+ */
 public class Inventario {
 
     public final ArrayList<Objeto> objetos;
@@ -23,6 +29,12 @@ public class Inventario {
         }
     }
 
+    /**
+     *
+     * @param objeto (objeto al cual se aumentara su cantidad)
+     * @param cantidad (cantidad que se aumentara)
+     * @return (booleano) si se incremento correctamente la cantidad del objeto
+     */
     public boolean aumentarCantidadObjeto(final Objeto objeto, final int cantidad) {
         boolean incrementado = false;
 
@@ -36,6 +48,11 @@ public class Inventario {
         return incrementado;
     }
 
+    /**
+     *
+     * @param objeto (objeto que se comprobara existencia en inventario)
+     * @return (booleano) determina si el objeto existe entre todos los objetos
+     */
     public boolean objetoExiste(final Objeto objeto) {
         boolean existe = false;
         for (Objeto o : objetos) {
@@ -47,6 +64,11 @@ public class Inventario {
         return existe;
     }
 
+    /**
+     * Objetos recolestados de tipo consumible
+     *
+     * @return (Array) objetos de tipo consumible
+     */
     public ArrayList<Objeto> getObjetosConsumibles() {
         ArrayList<Objeto> consumibles = new ArrayList();
         for (Objeto objeto : objetos) {
@@ -57,6 +79,11 @@ public class Inventario {
         return consumibles;
     }
 
+    /**
+     * Objetos recolestados de tipo elemento (items mujer)
+     *
+     * @return (Array) objetos de tipo elemento (item mujer)
+     */
     public ArrayList<Objeto> getObjetosElementos() {
         ArrayList<Objeto> elementos = new ArrayList();
         for (Objeto objeto : objetos) {
@@ -77,7 +104,12 @@ public class Inventario {
         return elementos.get(i);
     }
 
-    public ArrayList<Objeto> getObjetosArmas() {
+    /**
+     * Objetos recolestados de tipo cetro
+     *
+     * @return (Array) objetos de tipo cetro
+     */
+    public ArrayList<Objeto> getObjetosCetro() {
         ArrayList<Objeto> armas = new ArrayList();
         for (Objeto objeto : objetos) {
             if (objeto instanceof Cetro) {

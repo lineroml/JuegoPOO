@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import principal.Constantes;
-import principal.ElementosPrincipales;
 import principal.GestorPrincipal;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.CargadorRecursos;
@@ -107,6 +106,17 @@ public class Logro implements EstadoJuego {
         activa5 = interseccionRecuadro(mujer5, Constantes.MUJER5ACTIVA, r, mujer5R, nombre5);
     }
 
+    /**
+     * Identificar sobre que cuadro esta situado el mouse para mostrar mensaje
+     * adecuado
+     *
+     * @param mujer (Imagen de vista)
+     * @param comparar (Imagen a compararar para mostrar mensaje correcto)
+     * @param r (rectangulo del mouse)
+     * @param mujerR (rectangulo del recuedro del logro)
+     * @param nombre (nombre de la mujer o mujeres)
+     * @return
+     */
     private boolean interseccionRecuadro(final BufferedImage mujer, final BufferedImage comparar, final Rectangle r, final Rectangle mujerR, final String nombre) {
         boolean activa = false;
         if (r.intersects(mujerR)) {
@@ -165,6 +175,10 @@ public class Logro implements EstadoJuego {
         }
     }
 
+    /**
+     * Se asigna la imagen adecuada al logro
+     * @param num (orden de asignacion)
+     */
     public void setMujer(final int num) {
         switch (num) {
             case 1:
@@ -192,7 +206,7 @@ public class Logro implements EstadoJuego {
     public void setNombre2(String nombre2) {
         this.nombre2 = nombre2;
     }
-    
+
     public void setNombre3(String nombre3) {
         this.nombre3 = nombre3;
     }

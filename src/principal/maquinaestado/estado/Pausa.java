@@ -16,6 +16,11 @@ import principal.herramientas.GeneradorComentario;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
+/**
+ * Menu de pausa
+ *
+ * @author Dylan
+ */
 public class Pausa implements EstadoJuego {
 
     private final SuperficieDibujo sd;
@@ -73,7 +78,7 @@ public class Pausa implements EstadoJuego {
         volverR = volverNormalR;
 
         logroActual = logros;
-        musicaActual = musica;
+        musicaActual = musicaConMouse;
         salirActual = salir;
         volverActual = volver;
 
@@ -81,6 +86,9 @@ public class Pausa implements EstadoJuego {
         mostrarMensaje = false;
     }
 
+    /**
+     * Compueba todos los movimientos de mouse y dertermina que hacer
+     */
     @Override
     public void actualizar() {
         r = new Rectangle(EscaladorElementos.escalarPuntoAbajo(sd.getRaton().getPosicion()).x,
@@ -110,8 +118,7 @@ public class Pausa implements EstadoJuego {
             return;
         }
 
-        if (tiempoEspera
-                > 0) {
+        if (tiempoEspera > 0) {
             tiempoEspera--;
             return;
         }
@@ -126,7 +133,6 @@ public class Pausa implements EstadoJuego {
         }
 
         if (r.intersects(musicaR)) {
-            musicaActual = musicaConMouse;
             mostrarMensaje = true;
             if (sd.getRaton().isClickIzquierdo()) {
                 if (musicaActual == musicaConMouse) {
@@ -137,7 +143,6 @@ public class Pausa implements EstadoJuego {
                 toggleMusica();
             }
         } else {
-            musicaActual = musica;
             mostrarMensaje = false;
         }
 
@@ -199,6 +204,9 @@ public class Pausa implements EstadoJuego {
         }
     }
 
+    /**
+     * Permite la seleccion de salida
+     */
     private void asignarSeguroSalir() {
         si = new Rectangle(Constantes.CENTRO_VENTANA_X - quiereSalir.getWidth() / 2 + 40, Constantes.CENTRO_VENTANA_Y - quiereSalir.getHeight() / 2 + 50,
                 salirSi.getWidth(), salirSi.getHeight());
@@ -206,6 +214,10 @@ public class Pausa implements EstadoJuego {
                 salirNo.getWidth(), salirNo.getHeight());
     }
 
+    /**
+     * Dependiendo de la seleccion del usuario reproduce o detiene la cancion de
+     * fondo del juego
+     */
     public void toggleMusica() {
         if (GestorSonido.musica) {
             GestorPrincipal.detenerCancion();
@@ -220,6 +232,9 @@ public class Pausa implements EstadoJuego {
         }
     }
 
+    /**
+     * Otorga un tiempo de espera de actualizaciones para no permitir errores
+     */
     public void setTiempoEspera() {
         tiempoEspera = 5;
     }

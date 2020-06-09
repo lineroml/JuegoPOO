@@ -17,6 +17,11 @@ import principal.herramientas.MedidorString;
 import principal.interface_usuario.MenuInferior;
 import principal.maquinaestado.EstadoJuego;
 
+/**
+ * Clase de control total del juego
+ *
+ * @author Dylan
+ */
 public class GestorJuego implements EstadoJuego {
 
     BufferedImage logotipo;
@@ -30,6 +35,7 @@ public class GestorJuego implements EstadoJuego {
         menuInferior = new MenuInferior();
         logotipo = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.RUTA_LOGOTIPO);
     }
+
     @Override
     public void actualizar() {
 

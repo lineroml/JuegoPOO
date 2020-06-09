@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+/**
+ * Proporciona al usuario un conjunto de elementos importantes del juego
+ * como son los APS, FPS, algunas coordenadas
+ * Funciona cuando se preciona la letra "o" del teclado
+ * @author Dylan
+ */
 public class DatoOpcion {
 
     private static ArrayList<String> datos = new ArrayList<String>();

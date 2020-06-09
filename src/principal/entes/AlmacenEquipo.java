@@ -2,6 +2,10 @@ package principal.entes;
 
 import principal.inventario.poderes.Cetro;
 
+/**
+ * Esta clase guarda los cetros del juego, por ahora solo cuanta con uno
+ * @author Dylan
+ */
 public class AlmacenEquipo {
 
     private Cetro cetro;

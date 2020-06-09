@@ -16,6 +16,11 @@ import principal.inventario.RegistroObjetos;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
+/**
+ * Menu de ajustes, control general sobre el juego
+ *
+ * @author Dylan
+ */
 public class Ajustes implements EstadoJuego {
 
     private final SuperficieDibujo sd;
@@ -165,6 +170,9 @@ public class Ajustes implements EstadoJuego {
         comprobarBotones();
     }
 
+    /**
+     * Acciones sobre la vista de creditos
+     */
     private void mensajeCreditos() {
         if (r.intersects(volverR)) {
             volverActual = volverConMouse;
@@ -179,6 +187,10 @@ public class Ajustes implements EstadoJuego {
         }
     }
 
+    /**
+     * Acciones sobre vista de cambio de musica, permite escoger la cancion que
+     * se quiere escuchar
+     */
     private void cambiarCancion() {
         if (sd.getRaton().isClickIzquierdo()) {
             if (r.intersects(dificultadFacil)) {
@@ -223,6 +235,10 @@ public class Ajustes implements EstadoJuego {
         }
     }
 
+    /**
+     * Acciones sobre la vista de seleccion de dificultad del juego, permite
+     * escoger en que dificultad se quiere jugar
+     */
     private void cambiarDificultad() {
         if (sd.getRaton().isClickIzquierdo()) {
             if (r.intersects(dificultadFacil)) {
@@ -267,6 +283,9 @@ public class Ajustes implements EstadoJuego {
         }
     }
 
+    /**
+     * Acciones sobre la vista de aumento o disminución del volumen del juego
+     */
     private void cambiarSonido() {
         if (r.intersects(flechaAbajoRGeneral)) {
             flechaAbajoGeneralActual = flechaAbajoConMouse;
@@ -346,6 +365,9 @@ public class Ajustes implements EstadoJuego {
         }
     }
 
+    /**
+     * Comprobar si los botones han tenido interacción con el mouse
+     */
     private void comprobarBotones() {
         if (r.intersects(dificultadR)) {
             dificultadActual = dificultadConMouse;
@@ -469,6 +491,9 @@ public class Ajustes implements EstadoJuego {
         DibujoOpciones.dibujarImagen(g, volverGrandeActual, 2, Constantes.ALTO_JUEGO - volverGrande.getHeight() - 2);
     }
 
+    /**
+     * Otorga valores a las variables para mostrar el panel de dificultad
+     */
     private void mensajeDificultad() {
         newDificultad = true;
         imagenDificultad = Constantes.DIFICULTADPANEL;
@@ -482,12 +507,24 @@ public class Ajustes implements EstadoJuego {
                 Constantes.CENTRO_VENTANA_Y + imagenDificultad.getHeight() / 2 - volver.getHeight() - 5, volver.getWidth(), volver.getHeight());
     }
 
-    private void setDificultad(final int vidaZombies, final int dañoPoder, final int cantidadZombies) {
-        RegistroEnemigos.setDificultad(vidaZombies);
-        RegistroObjetos.setDificultad(dañoPoder);
-        ElementosPrincipales.mapa.setDificultad(cantidadZombies);
+    /**
+     * Asigna la dificultad escogida Dependiendo de la dificultad se asignas
+     * valores al juego
+     *
+     * @param vidaEnemigos (cantidad de vida que tendran los enemigos)
+     * @param danhoPoder (danho que hara los cetros)
+     * @param cantidadEnemigos (los enemigos se generan de manera aleatoria y
+     * con esto se generan mas rapido o mas lento)
+     */
+    private void setDificultad(final int vidaEnemigos, final int danhoPoder, final int cantidadEnemigos) {
+        RegistroEnemigos.setDificultad(vidaEnemigos);
+        RegistroObjetos.setDificultad(danhoPoder);
+        ElementosPrincipales.mapa.setDificultad(cantidadEnemigos);
     }
 
+    /**
+     * Otorga valores a las variables para mostrar el panel de musica
+     */
     private void setMusica() {
         cambioCancion = true;
         imagenCancion = Constantes.CANCIONPANEL;
@@ -501,6 +538,9 @@ public class Ajustes implements EstadoJuego {
                 dificultadExperto.y + 20, volver.getWidth(), volver.getHeight());
     }
 
+    /**
+     * Otorga valores a las variables para mostrar el panel de sonido
+     */
     private void setSonido() {
         cambioSonido = true;
         menuSonido = Constantes.MENUSONIDO;
@@ -534,6 +574,9 @@ public class Ajustes implements EstadoJuego {
                 volver.getWidth(), volver.getHeight());
     }
 
+    /**
+     * Otorga valores a las variables para mostrar el panel de creditos
+     */
     private void setCreditos() {
 
         enCreditos = true;
@@ -542,6 +585,9 @@ public class Ajustes implements EstadoJuego {
                 + imagenCreditos.getHeight() / 2 - volver.getHeight(), volver.getWidth(), volver.getHeight());
     }
 
+    /**
+     * Asigna tiempo de espera para no causar conflictos
+     */
     public void setTiempoEspera() {
         tiempoEspera = 10;
     }

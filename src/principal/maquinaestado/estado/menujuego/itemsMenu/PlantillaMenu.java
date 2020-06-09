@@ -7,6 +7,12 @@ import principal.Constantes;
 import principal.graficos.SuperficieDibujo;
 import principal.herramientas.DibujoOpciones;
 
+/**
+ * Complementa la clase plantilla otorgando forma al menu y actualizando la
+ * forma con respecto a las acciones del usuario
+ *
+ * @author Dylan
+ */
 public abstract class PlantillaMenu {
 
     protected final String nombreEtiqueta;
