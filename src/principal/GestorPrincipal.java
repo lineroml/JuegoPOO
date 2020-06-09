@@ -57,9 +57,10 @@ public class GestorPrincipal {
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
     }
-    
+
     /**
      * Llama al método inicializar y realiza el setup inicial del juego.
+     *
      * @see inicializar()
      */
     private void iniciarJuego() {
@@ -184,7 +185,7 @@ public class GestorPrincipal {
      * Reproduce la canción que está establecida actualmente
      */
     public static void reproducirCancion() {
-        sonidoIntro.reproducir();
+        sonidoIntro.reproducirBucle();
     }
 
     /**
@@ -200,16 +201,18 @@ public class GestorPrincipal {
 
     /**
      * Aumenta o decrementa el volumen actual de la música.
+     *
      * @param vol
      */
     public static void setVolumenMusica(float vol) {
         sonidoIntro.aumentarVolumenMusica(sonidoIntro.getVolumenMusica() + vol);
     }
-    
+
     /**
-     * Aumenta o decrementa el volumen actual de los efectos del juego(ataque de enemigos,
-     * sonido de los botones, ataques, etc...).
-     * @param vol 
+     * Aumenta o decrementa el volumen actual de los efectos del juego(ataque de
+     * enemigos, sonido de los botones, ataques, etc...).
+     *
+     * @param vol
      */
     public static void setVolumenJuego(float vol) {
         Constantes.BOTON.aumentarVolumenJuego(sonidoIntro.getVolumenJuego() + vol);

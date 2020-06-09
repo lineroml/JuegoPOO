@@ -73,7 +73,7 @@ public class Pausa implements EstadoJuego {
         volverR = volverNormalR;
 
         logroActual = logros;
-        musicaActual = musica;
+        musicaActual = musicaConMouse;
         salirActual = salir;
         volverActual = volver;
 
@@ -126,7 +126,6 @@ public class Pausa implements EstadoJuego {
         }
 
         if (r.intersects(musicaR)) {
-            musicaActual = musicaConMouse;
             mostrarMensaje = true;
             if (sd.getRaton().isClickIzquierdo()) {
                 if (musicaActual == musicaConMouse) {
@@ -137,7 +136,6 @@ public class Pausa implements EstadoJuego {
                 toggleMusica();
             }
         } else {
-            musicaActual = musica;
             mostrarMensaje = false;
         }
 
