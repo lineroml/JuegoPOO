@@ -13,6 +13,10 @@ import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
+/**
+ * Vista que aparece cuando muere el jugador, indicando que perdio, y brindandole
+ * la opcion de volver a jugar o salir al menú inicial.
+ */
 public class GameOver implements EstadoJuego {
 
     private final SuperficieDibujo sd;

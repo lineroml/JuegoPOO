@@ -170,7 +170,7 @@ public class Ajustes implements EstadoJuego {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
-                tiempoEspera = 5;
+                tiempoEspera = 10;
                 enCreditos = false;
                 volverR = volverNormalR;
             }
@@ -214,7 +214,7 @@ public class Ajustes implements EstadoJuego {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
-                tiempoEspera = 5;
+                tiempoEspera = 12;
                 cambioCancion = false;
                 volverR = volverNormalR;
             }
@@ -258,7 +258,7 @@ public class Ajustes implements EstadoJuego {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
-                tiempoEspera = 5;
+                tiempoEspera = 12;
                 newDificultad = false;
                 volverR = volverNormalR;
             }
@@ -337,7 +337,7 @@ public class Ajustes implements EstadoJuego {
             volverActual = volverConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
-                tiempoEspera = 5;
+                tiempoEspera = 12;
                 cambioSonido = false;
                 volverR = volverNormalR;
             }
@@ -390,7 +390,7 @@ public class Ajustes implements EstadoJuego {
             sonidoActual = sonidoConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
                 boton.reproducir();
-                tiempoEspera = 5;
+                tiempoEspera = 10;
                 setSonido();
             }
         } else {

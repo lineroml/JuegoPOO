@@ -73,7 +73,7 @@ public class Pausa implements EstadoJuego {
         volverR = volverNormalR;
 
         logroActual = logros;
-        musicaActual = musicaConMouse;
+        musicaActual = musica;
         salirActual = salir;
         volverActual = volver;
 
@@ -90,7 +90,7 @@ public class Pausa implements EstadoJuego {
                 noActual = salirNoConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
                     boton.reproducir();
-                    tiempoEspera = 5;
+                    tiempoEspera = 12;
                     seguroSalir = false;
                 }
             } else {
@@ -115,7 +115,6 @@ public class Pausa implements EstadoJuego {
             tiempoEspera--;
             return;
         }
-
         if (r.intersects(logroR)) {
             logroActual = logrosConMouse;
             if (sd.getRaton().isClickIzquierdo()) {
@@ -127,6 +126,7 @@ public class Pausa implements EstadoJuego {
         }
 
         if (r.intersects(musicaR)) {
+            musicaActual = musicaConMouse;
             mostrarMensaje = true;
             if (sd.getRaton().isClickIzquierdo()) {
                 if (musicaActual == musicaConMouse) {
@@ -137,6 +137,7 @@ public class Pausa implements EstadoJuego {
                 toggleMusica();
             }
         } else {
+            musicaActual = musica;
             mostrarMensaje = false;
         }
 

@@ -5,6 +5,12 @@ import principal.graficos.Ventana;
 import principal.maquinaestado.GestorEstado;
 import principal.sonido.GestorSonido;
 
+/**
+ * clase principal con el método main, la cual se encarga de llamar a los
+ * diferentes gestores del juego(sonido, controles, etc...) y se asegura de que
+ * estos se ejecuten el número de veces objetivo, establecido en la variable
+ * APS_OBJETO
+ */
 public class GestorPrincipal {
 
     //Indicara si el bucle principal esta funcionando
@@ -51,7 +57,11 @@ public class GestorPrincipal {
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
     }
-
+    
+    /**
+     * Llama al método inicializar y realiza el setup inicial del juego.
+     * @see inicializar()
+     */
     private void iniciarJuego() {
 
         enFuncionamiento = true;
@@ -65,6 +75,13 @@ public class GestorPrincipal {
         ge = new GestorEstado(sd);
     }
 
+    /**
+     * pone el juego en marcha, comezando un bucle infinito principal, el cual
+     * llamara al método actualizar y dibujar cada NS_POR_SEGUNDO/APS_OBJETO
+     *
+     * @see actualizar()
+     * @see dibujar()
+     */
     private void iniciarBuclePrincipal() {
 
         int actualizacionesAcumuladas = 0, framesAcumulados = 0;
@@ -117,12 +134,19 @@ public class GestorPrincipal {
         }
     }
 
+    /**
+     * Actualiza la información del juego, o partida actual
+     */
     private void actualizar() {
 
         ge.actualizar();
         sd.actualizar();
     }
 
+    /**
+     * Hace que la superficie de dibujo, muestre los elementos graficos en la
+     * pantalla.
+     */
     private void dibujar() {
 
         sd.dibujar(ge);
@@ -136,31 +160,57 @@ public class GestorPrincipal {
         return fps;
     }
 
+    /**
+     * Cambia la canción o soundtrack que se está escuchando durante la partida
+     *
+     * @param cancion Se le debe pasar una cancion o audio, que sea cargada y
+     * extraida de su archivo mediante el GestorSonido
+     * @see GestorSonido
+     */
     public static void setCancion(GestorSonido cancion) {
         sonidoIntro.detenerSonido();
         sonidoIntro = cancion;
         sonidoIntro.reproducirBucle();
     }
 
+    /**
+     * Detiene la reproducción de la canción actual
+     */
     public static void detenerCancion() {
         sonidoIntro.detenerSonido();
     }
 
+    /**
+     * Reproduce la canción que está establecida actualmente
+     */
     public static void reproducirCancion() {
         sonidoIntro.reproducir();
     }
 
-
+    /**
+     * Aumenta o decrementa el volumen actual del juego, tanto de los efectos,
+     * como de la musica
+     *
+     * @param vol
+     */
     public static void setVolumen(float vol) {
         sonidoIntro.aumentarVolumenMusica(sonidoIntro.getVolumenMusica() + vol);
         Constantes.BOTON.aumentarVolumenJuego(sonidoIntro.getVolumenJuego() + vol);
     }
 
-
+    /**
+     * Aumenta o decrementa el volumen actual de la música.
+     * @param vol
+     */
     public static void setVolumenMusica(float vol) {
         sonidoIntro.aumentarVolumenMusica(sonidoIntro.getVolumenMusica() + vol);
     }
     
+    /**
+     * Aumenta o decrementa el volumen actual de los efectos del juego(ataque de enemigos,
+     * sonido de los botones, ataques, etc...).
+     * @param vol 
+     */
     public static void setVolumenJuego(float vol) {
         Constantes.BOTON.aumentarVolumenJuego(sonidoIntro.getVolumenJuego() + vol);
     }
@@ -169,6 +219,3 @@ public class GestorPrincipal {
         return enFuncionamiento;
     }
 }
-
-
-

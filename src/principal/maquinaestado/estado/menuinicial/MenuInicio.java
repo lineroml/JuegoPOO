@@ -83,7 +83,7 @@ public class MenuInicio implements EstadoJuego {
                 noActual = salirNoConMouse;
                 if (sd.getRaton().isClickIzquierdo()) {
                     boton.reproducir();
-                    tiempoEspera = 5;
+                    tiempoEspera = 10;
                     seguroSalir = false;
                 }
             } else {

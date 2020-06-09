@@ -14,6 +14,10 @@ import principal.herramientas.EscaladorElementos;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
+/**
+ * Vista que muestra las instrucciones iniciales al jugador,
+ * acerca del juego
+ */
 public class Instrucciones implements EstadoJuego {
 
     private final GestorSonido boton = Constantes.BOTON;
@@ -67,6 +71,7 @@ public class Instrucciones implements EstadoJuego {
         DibujoOpciones.dibujarString(g, "INSTRUCCIONES", new Point(220, 64), Color.WHITE);
         Font font = new Font("Agency FB", Font.BOLD, 15);
         g.setFont(font);
+        //instrucciones iniciales.
         DibujoOpciones.dibujarString(g, "Te mueves con las teclas \"w\", \"s\", \"d\", \"a\"", new Point(130, 96), Color.WHITE);
         DibujoOpciones.dibujarString(g, "Lanza tu poder con la tecla de \"Espacio\"", new Point(130, 128), Color.WHITE);
         DibujoOpciones.dibujarString(g, "Recorre todo el mapa eliminando a los enemigos que no te permiten avanzar", new Point(130, 160), Color.WHITE);

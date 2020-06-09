@@ -15,6 +15,9 @@ import principal.inventario.Objeto;
 import principal.inventario.poderes.Cetro;
 import principal.inventario.poderes.DesArmado;
 
+/**
+ * Menú de equipo.
+ */
 public class MenuEquipo extends PlantillaMenu {
 
     final Rectangle panelObjetos = new Rectangle(formaMenu.CENTRAL.x + margenGeneral, formaMenu.SUPERIOR.height + margenGeneral,
@@ -45,6 +48,9 @@ public class MenuEquipo extends PlantillaMenu {
         actualizarObjetoSeleccionado();
     }
 
+     /**
+     * Actualiza y organiza la posición de los items en el inventario.
+     */
     private void actualizarPosicionesMenu() {
         if (!ElementosPrincipales.inventario.getObjetosArmas().isEmpty()) {
             for (int i = 0; i < ElementosPrincipales.inventario.getObjetosArmas().size(); i++) {
@@ -55,7 +61,10 @@ public class MenuEquipo extends PlantillaMenu {
             }
         }
     }
-
+    
+    /**
+     * Verifica si el usuario está presionando algun equipo con el cursor.
+     */
     private void actualizarSeleccionRaton() {
         Rectangle posicionRaton = GestorPrincipal.sd.getRaton().getPosicionRectangulo();
 

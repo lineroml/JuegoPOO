@@ -16,6 +16,9 @@ import principal.herramientas.GeneradorComentario;
 import principal.herramientas.MedidorString;
 import principal.inventario.Objeto;
 
+/**
+ * Menú de inventario.
+ */
 public class MenuInventario extends PlantillaMenu {
 
     //Cantidad de items total que cabe en el inventario
@@ -72,7 +75,10 @@ public class MenuInventario extends PlantillaMenu {
             }
         }
     }
-
+    
+    /**
+     * Actualiza y organiza la posición de los items en el inventario.
+     */
     private void actualizarPosicionesMenu() {
         if (!ElementosPrincipales.inventario.getObjetosConsumibles().isEmpty()) {
             for (int i = 0; i < ElementosPrincipales.inventario.getObjetosConsumibles().size(); i++) {

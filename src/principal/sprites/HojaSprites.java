@@ -3,6 +3,21 @@ package principal.sprites;
 import java.awt.image.BufferedImage;
 import principal.herramientas.CargadorRecursos;
 
+/**
+ * Creando una instancia de esta clase, permite extraer y almacenar la
+ * informarción de una spriteSheet, almecenando un arreglo que contiene cada uno
+ * de los sprites de la imagen.<br>
+ *
+ * su método de uso es el siguiente: <br>
+ * HojaSprite hoja = new HojaSprite("/ruta/hacia/mi/spriteSheet");<br>
+ *
+ * para extrar el sprite: <br>
+ * Sprite sprite = hoja.getSprite(posicion de mi sprite en la hoja);<br>
+ *
+ * - la posicion debe ser mayor a 0 y menor a 32.<br>
+ *
+ * @see Sprite
+ */
 public class HojaSprites {
 
     final private int anchoHojaEnPixeles;
@@ -16,7 +31,15 @@ public class HojaSprites {
 
     private Sprite[] sprites;
 
-    //Con sprites cuadrados
+    /**
+     * Constructor para spriteSheets con sprites cuyas medidas sean cuadradas, es decir
+     * su ancho y su alto son iguales ej: 32x32. 
+     *
+     * @param ruta string con la ruta hacia la hoja
+     * @param tamSprites alto del archivo
+     * @param hojaOpaca booleano que determina si las imagenes se podran
+     * atravesar o no.
+     */
     public HojaSprites(final String ruta, final int tamSprites, final boolean hojaOpaca) {
 
         final BufferedImage imagen;
@@ -41,7 +64,16 @@ public class HojaSprites {
         extraerSpritesDeLaImagen(imagen);
     }
 
-    //Con sprites no cuadrados
+    /**
+     * Constructor para spriteSheets con sprites cuyas medidas no sean cuadradas, es decir
+     * su ancho y su alto es distinto.
+     *
+     * @param ruta string con la ruta hacia la hoja
+     * @param anchoSprites ancho del archivo
+     * @param altoSprites alto del archivo
+     * @param hojaOpaca booleano que determina si las imagenes se podran
+     * atravesar o no.
+     */
     public HojaSprites(final String ruta, final int anchoSprites, final int altoSprites, final boolean hojaOpaca) {
 
         final BufferedImage imagen;

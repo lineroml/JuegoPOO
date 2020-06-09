@@ -17,6 +17,9 @@ import principal.herramientas.GeneradorComentario;
 import principal.maquinaestado.EstadoJuego;
 import principal.sonido.GestorSonido;
 
+/**
+ * Vista de los logros alcanzados por el jugador(rescate de mujeres).
+ */
 public class Logro implements EstadoJuego {
 
     private final SuperficieDibujo sd;

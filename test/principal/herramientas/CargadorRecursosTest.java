@@ -17,8 +17,10 @@ import principal.Constantes;
  * @author Luis Evilla
  */
 public class CargadorRecursosTest {
+    String separador;
     
     public CargadorRecursosTest() {
+        separador = System.getProperty("file.separator");
     }
     
     @BeforeClass
@@ -44,8 +46,8 @@ public class CargadorRecursosTest {
     public void testCargarImagenCompatibleOpaca() {
         System.out.println("cargarImagenCompatibleOpaca");
         
-        String ruta = "/imagenes/hojas_Personajes/1.png";
-        String ruta2 = "/imagenes/hojas_Personajes/2.png";
+        String ruta = separador + "imagenes" + separador + "hojas_Personajes" + separador + "Santana.png";
+        String ruta2 = separador + "imagenes" + separador + "hojas_Personajes" + separador + "SantanaDisparo.png";
         
         BufferedImage expResult = CargadorRecursos.cargarImagenCompatibleOpaca(ruta);
         BufferedImage result = CargadorRecursos.cargarImagenCompatibleOpaca(ruta);
@@ -87,7 +89,7 @@ public class CargadorRecursosTest {
     @Test
     public void testLeerArchivoTexto() {
         System.out.println("leerArchivoTexto");
-        String ruta = "/texto/texto.txt";
+        String ruta = "/mapas/apocalypse.json";
         
         String expResult = CargadorRecursos.leerArchivoTexto(ruta);
         String result = CargadorRecursos.leerArchivoTexto(ruta);

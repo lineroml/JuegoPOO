@@ -6,6 +6,15 @@ import java.awt.image.BufferedImage;
 import principal.herramientas.CargadorRecursos;
 import principal.sonido.GestorSonido;
 
+/**
+ * Centraliza y facilita el manejo de las rutas o paths, hacia los recursos 
+ * multimedia de los cuales hace uso el juego. Además también guarda constantes 
+ * númericas necesairas para el correcto funcionamiento del juego, como el tamaño 
+ * de los sprites, las dimensiones de la ventana del juego etc...
+ * 
+ * La mayoria de estas rutas son consumidas por la clase CargadorRecursos
+ * @see CargadorRecursos
+ */
 public class Constantes {
     public static String separador = System.getProperty("file.separator");
     

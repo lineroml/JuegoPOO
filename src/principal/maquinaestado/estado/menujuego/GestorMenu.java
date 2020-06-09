@@ -17,6 +17,9 @@ import principal.maquinaestado.estado.menujuego.itemsMenu.MenuInventario;
 import principal.maquinaestado.estado.menujuego.itemsMenu.PlantillaMenu;
 import principal.sonido.GestorSonido;
 
+/**
+ * Menu de del jugador(equipo e inventario).
+ */
 public class GestorMenu implements EstadoJuego {
 
     private final SuperficieDibujo sd;

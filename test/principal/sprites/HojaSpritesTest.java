@@ -19,8 +19,10 @@ public class HojaSpritesTest {
     private HojaSprites hoja2;
 
     public HojaSpritesTest() {
-        this.hoja = new HojaSprites("/imagenes/hojas_Personajes/1.png", 32, false);
-        this.hoja2 = new HojaSprites("/imagenes/hojas_Personajes/2.png", 32, false);
+        String separador = System.getProperty("file.separator");
+        
+        this.hoja = new HojaSprites(separador + "imagenes" + separador + "hojas_Personajes" + separador + "Santana.png", 32, false);
+        this.hoja2 = new HojaSprites(separador + "imagenes" + separador + "hojas_Personajes" + separador + "SantanaDisparo.png", 32, false);
     }
 
     @BeforeClass
